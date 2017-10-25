@@ -1,17 +1,118 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title text-center>StudyHub</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content>
+
+  <!-- Gray area -->
+  <div padding text-center class="m-background-2b3137 m-margin-top0">
+
+    <ion-grid>
+
+      <!-- Title -->
+      <ion-row>
+        <ion-col col-12>
+          <font class="m-color-white" style="font-size: 43px; font-weight: 300;">Built for teachers and students</font>
+        </ion-col>
+      </ion-row>
+
+      <!-- Subtitle -->
+      <ion-row>
+        <ion-col col-12>
+          <div style="font-size: 20px; font-weight: 300;color:rgba(255,255,255,0.6);">
+            StudyHub is a study platform inspired by the way you work. You can find teachers
+            <font style="color: white;">from your home</font> and talk with them directly, and manage your teachers, you can also teach other people,
+            keep it
+            <font style="color: white;">simple and fun.</font>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Start using button -->
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button color="secondary" (click)="goPage('search');">
+            <b>Start using StudyHub</b>
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+
+  <!-- White area -->
+  <div>
+    <ion-grid>
+
+      <!-- StudyHub for individuals title -->
+      <ion-row text-center style="padding-top: 15px;padding-bottom: 15px;">
+        <ion-col col-12>
+          StudyHub for individuals
+        </ion-col>
+      </ion-row>
+
+      <!-- StudyHub for individuals subtitle -->
+      <ion-row text-center>
+        <ion-col col-12>
+
+          <font style="font-size: 17px;font-weight: 300;color: #586069;">As individual user at StudyHub you can find teachers around Israel, talk with them directly at WhatsApp, rank teachers
+            and tell your opinion about them.</font>
+        </ion-col>
+      </ion-row>
+
+      <!-- StudyHub for teachers title -->
+      <ion-row text-center style="padding-top: 15px;padding-bottom: 15px;">
+        <ion-col col-12>
+          StudyHub for teachers
+        </ion-col>
+      </ion-row>
+
+      <!-- StudyHub for teachers subtitle -->
+      <ion-row text-center>
+        <ion-col col-12>
+
+          <font style="font-size: 17px;font-weight: 300;color: #586069;">
+            As individual user at StudyHub you can find teachers around Israel, talk with them directly at WhatsApp, rank teachers and
+            tell your opinion about them.
+          </font>
+        </ion-col>
+      </ion-row>
+
+      <!-- Join as teacher button -->
+      <ion-row text-center>
+        <ion-col col-12>
+          <button ion-button outline color="primary">Join as teacher</button>
+        </ion-col>
+      </ion-row>
+
+      <hr>
+
+      <ion-row>
+        <ion-col col-12>
+          <font style="font-size: 25px;">
+            <b>StudyHub - Creator</b>
+          </font>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          Moshe Binieli
+        </ion-col>
+        <ion-col col-12>
+          mmoshikoo@gmail.com
+        </ion-col>
+        <ion-col col-12>
+          Computer Science student and Full Stack developer.
+        </ion-col>
+        <ion-col col-12>
+
+          <button ion-button outline color="dark" small icon-start (click)="goPage('contactme');">
+            <ion-icon name="ios-contacts"></ion-icon>Contact me</button>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

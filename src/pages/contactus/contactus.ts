@@ -1,5 +1,6 @@
+import { ApiProvider } from './../../providers/api/api';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -14,12 +15,13 @@ export class ContactusPage {
   public message: string;
   public showErrorMessage: boolean = false;;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
   }
 
   public isFormValid() {
-    if (this.fullname == null ||
-      this.fullname === "" ||
+    if (this.fullName == null ||
+      this.fullName === "" ||
       this.email == null ||
       this.email === "" ||
       this.contactReason == null ||
@@ -41,12 +43,34 @@ export class ContactusPage {
       return;
     }
 
-    console.log("Passed");
+    let data = {
+      fullName: this.fullName,
+      email: this.email,
+      contactReason: this.contactReason,
+      message: this.message
+    };
+
+    const loading = this.loadingCtrl.create({
+      content: 'Sending information, please wait...'
+    });
+    const alert = this.alertCtrl.create({
+      title: 'Request send successfully',
+      subTitle: 'Your request to contact you sent successfully.We\'ll contact you as soon as possible, thank you.',
+      buttons: ['Ok']
+    });
+    loading.present();
+
+    this.apiProvider.httpPost('contactus/create', data)
+      .subscribe((success) => {
+        loading.dismiss();
+        alert.present();
+        this.navCtrl.pop();
+      });
   }
 
   public clearContactUsForm() {
     this.setErrorMessage(false);
-    this.fullname = "";
+    this.fullName = "";
     this.email = "";
     this.contactReason = "";
     this.message = "";

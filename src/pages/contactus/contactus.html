@@ -1,18 +1,81 @@
-<!--
-  Generated template for the ContactusPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>contactus</ion-title>
+    <ion-title text-center>Contact Us</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-grid>
+    <ion-list>
+
+      <!-- Full name -->
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label floating>Full name</ion-label>
+            <ion-input type="text" [(ngModel)]="fullName"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!-- Email -->
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" [(ngModel)]="email"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!-- Reason to contact -->
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label>Reason to contact</ion-label>
+            <ion-select [(ngModel)]="contactReason">
+              <ion-option>Suggestion</ion-option>
+              <ion-option>Investment</ion-option>
+              <ion-option>Careers</ion-option>
+              <ion-option>Complain</ion-option>
+              <ion-option>Bug report</ion-option>
+              <ion-option>Other</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!-- Message -->
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label floating>Your message</ion-label>
+            <ion-textarea type="text" [(ngModel)]="message"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+    <!-- Error message -->
+    <ion-row *ngIf="showErrorMessage">
+      <ion-col col-12>
+        <font style="color: red;">The fields are not valid.</font>
+      </ion-col>
+    </ion-row>
+
+    <!-- Buttons -->
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button outline color="primary" block (click)="sendContactUsForm();">Send</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button outline color="danger" block (click)="clearContactUsForm();">Clear</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

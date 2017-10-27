@@ -53,18 +53,18 @@ export class ContactusPage {
     const loading = this.loadingCtrl.create({
       content: 'Sending information, please wait...'
     });
-    const alert = this.alertCtrl.create({
-      title: 'Request send successfully',
-      subTitle: 'Your request to contact you sent successfully.We\'ll contact you as soon as possible, thank you.',
-      buttons: ['Ok']
-    });
     loading.present();
-
+    
     this.apiProvider.httpPost('contactus/create', data)
       .subscribe((success) => {
         loading.dismiss();
+        const alert = this.createAlert('Request send successfully', 'Your request to contact you sent successfully.We\'ll contact you as soon as possible, thank you.');
         alert.present();
         this.navCtrl.pop();
+      }, (failure) => {
+        loading.dismiss();
+        const alert = this.createAlert('Request failed to send', 'The request has been failed for some reason, please try again later.');
+        alert.present();
       });
   }
 
@@ -78,5 +78,14 @@ export class ContactusPage {
 
   private setErrorMessage(set: boolean) {
     this.showErrorMessage = set;
+  }
+
+  private createAlert(titleInput: string, subTitleInput: string) {
+    const alert = this.alertCtrl.create({
+      title: titleInput,
+      subTitle: subTitleInput,
+      buttons: ['Ok']
+    });
+    return alert;
   }
 }

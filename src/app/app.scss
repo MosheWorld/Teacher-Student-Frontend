@@ -1,5 +1,15 @@
 // http://ionicframework.com/docs/theming/
+// ion-header ion-icon.back-button-icon.icon {
+//   color: map-get($colors, white);
+// }
+ion-header ion-icon.back-button-icon.icon,
+ion-header span.back-button-text.back-button-text-ios {
+  color: white;
+}
 
+.toolbar-background {
+  background-color: #24292e;
+}
 
 // App Global Sass
 // --------------------------------------------------
@@ -14,3 +24,4 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+

@@ -1,6 +1,6 @@
-import { ContactusPage } from './../contactus/contactus';
 import { Component } from '@angular/core';
 import { NavController, Tabs } from 'ionic-angular';
+import { ContactusPage } from './../contactus/contactus';
 
 @Component({
   selector: 'page-home',
@@ -13,11 +13,10 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
   }
 
-  public goPage(page) {
+  public goPage(page: any) {
     if (page === 'search') {
       this.tabRef.select(1);
     } else if (page === 'contactme') {
-      console.log("a");
       this.navCtrl.push(ContactusPage);
     }
   }

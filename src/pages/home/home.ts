@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, Tabs } from 'ionic-angular';
+
 import { ContactusPage } from './../contactus/contactus';
+import { JointeacherPage } from './../jointeacher/jointeacher';
 
 @Component({
   selector: 'page-home',
@@ -14,10 +16,19 @@ export class HomePage {
   }
 
   public goPage(page: any) {
-    if (page === 'search') {
-      this.tabRef.select(1);
-    } else if (page === 'contactme') {
-      this.navCtrl.push(ContactusPage);
+    switch (page) {
+      case 'search':
+        this.tabRef.select(1);
+        break;
+      case 'contactme':
+        this.navCtrl.push(ContactusPage);
+        break;
+      case 'joinasteacher':
+        this.navCtrl.push(JointeacherPage);
+        break;
+      default:
+        console.log('Not found the requested page ' + page);
+        break;
     }
   }
 }

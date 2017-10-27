@@ -9,8 +9,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 export class JointeacherPage {
   public age: number; //
-  public priceTo: number;
-  public priceFrom: number;
+  public priceTo: number; //
+  public priceFrom: number; //
   public phone: string; //
   public email: string; //
   public gender: string; //
@@ -37,7 +37,7 @@ export class JointeacherPage {
   // };
 
   public test() {
-    console.log(this.email);
-    console.log(this.phone);
+    console.log(this.teachesAt);
+    console.log(this.teachesSubjects);
   }
 }

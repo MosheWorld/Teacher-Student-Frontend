@@ -132,9 +132,9 @@
             <ion-item>
               <ion-label floating>Teach at</ion-label>
               <ion-select [(ngModel)]="teachesAt" interface="popover">
-                <ion-option value="0">Student's house</ion-option>
-                <ion-option value="1">Academic institution</ion-option>
-                <ion-option value="2">Both</ion-option>
+                <ion-option value=0>Student's house</ion-option>
+                <ion-option value=1>Academic institution</ion-option>
+                <ion-option value=2>Both</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -162,8 +162,21 @@
 
       </ion-list>
 
-      <!-- Test button -->
-      <button ion-button block (click)="test();">Test Fields</button>
+      <!-- Error message -->
+      <ion-row *ngIf="showErrorMessage">
+        <ion-col col-12>
+          <font style="color: red;">The fields are not valid.</font>
+        </ion-col>
+      </ion-row>
+
+      <!-- Send form button -->
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button block (click)="createTeacher();">Make me a teacher</button>
+        </ion-col>
+      </ion-row>
+
     </ion-grid>
+
   </div>
 </ion-content>

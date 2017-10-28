@@ -58,6 +58,10 @@ export class JointeacherPage {
   }
 
   private isModelValid() {
+    if (this.priceFrom != null) { this.priceFrom = parseInt(this.priceFrom.toString()); }
+    if (this.priceTo != null) { this.priceTo = parseInt(this.priceTo.toString()); }
+    if (this.age != null) { this.age = parseInt(this.age.toString()); }
+
     if (
       this.teachesAt < 0 ||
       this.priceTo == null || this.priceTo > 1000 ||

@@ -132,9 +132,9 @@
             <ion-item>
               <ion-label floating>Teach at</ion-label>
               <ion-select [(ngModel)]="teachesAt" interface="popover">
-                <ion-option value=0>Student's house</ion-option>
-                <ion-option value=1>Academic institution</ion-option>
-                <ion-option value=2>Both</ion-option>
+                <ion-option value="0">Student's house</ion-option>
+                <ion-option value="1">Academic institution</ion-option>
+                <ion-option value="2">Both</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -142,9 +142,21 @@
             <ion-item>
               <ion-label floating>Teaches subjects</ion-label>
               <ion-select [(ngModel)]="teachesSubjects" multiple="true">
-                <ion-option value="0">A</ion-option>
-                <ion-option value="1">B</ion-option>
-                <ion-option value="2">C</ion-option>
+                <ion-option value="0">Holon Institute Of Technology</ion-option>
+                <ion-option value="1">Technion</ion-option>
+                <ion-option value="2">Tel-Aviv University</ion-option>
+                <ion-option value="4">Ben Gurion University</ion-option>
+                <ion-option value="8">Hebrew University</ion-option>
+                <ion-option value="16">Bar-Ilan University</ion-option>
+                <ion-option value="32">Tel-Aviv Jaffa Academic College</ion-option>
+                <ion-option value="64">IDC Herzliya</ion-option>
+                <ion-option value="128">Ariel University</ion-option>
+                <ion-option value="256">Haifa University</ion-option>
+                <ion-option value="512">Sapir Academic College</ion-option>
+                <ion-option value="1024">ORT Braude Collegeof Engineering</ion-option>
+                <ion-option value="2048">The Open University</ion-option>
+                <ion-option value="4096">College of Management</ion-option>
+                <ion-option value="8192">Achva Academic Campus</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -163,7 +175,7 @@
       </ion-list>
 
       <!-- Error message -->
-      <ion-row *ngIf="showErrorMessage">
+      <ion-row *ngIf="showErrorMessage" text-center>
         <ion-col col-12>
           <font style="color: red;">The fields are not valid.</font>
         </ion-col>

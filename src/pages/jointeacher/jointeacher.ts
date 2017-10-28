@@ -20,7 +20,7 @@ export class JointeacherPage {
   public firstName: string;
   public personalMessage: string;
   public teachesAt: number;
-  public teachesSubjects: number[] = [];
+  public teachesInstitutions: number[] = [];
   public showErrorMessage: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
@@ -30,6 +30,7 @@ export class JointeacherPage {
   public createTeacher() {
     this.setErrorMessage(false);
 
+    this.convertStringToInteger();
     if (!this.isModelValid()) {
       this.setErrorMessage(true);
       return;
@@ -57,14 +58,16 @@ export class JointeacherPage {
       );
   }
 
-  private isModelValid() {
+  private convertStringToInteger() {
     if (this.priceFrom != null) { this.priceFrom = parseInt(this.priceFrom.toString()); }
     if (this.priceTo != null) { this.priceTo = parseInt(this.priceTo.toString()); }
     if (this.age != null) { this.age = parseInt(this.age.toString()); }
+  }
 
+  private isModelValid() {
     if (
       this.teachesAt < 0 ||
-      this.priceTo == null || this.priceTo > 1000 ||
+      this.priceTo == null || this.priceTo > 200 ||
       this.priceFrom == null || this.priceFrom < 0 ||
       this.priceFrom > this.priceTo ||
       this.age == null || this.age < 0 || this.age > 120 ||
@@ -74,7 +77,7 @@ export class JointeacherPage {
       this.IsStringNullOrEmpty(this.lastName) ||
       this.IsStringNullOrEmpty(this.firstName) ||
       this.IsStringNullOrEmpty(this.personalMessage) ||
-      this.teachesSubjects == null || this.teachesSubjects.length === 0) {
+      this.teachesInstitutions == null || this.teachesInstitutions.length === 0) {
       return false;
     } else {
       return true;
@@ -95,8 +98,8 @@ export class JointeacherPage {
 
   private createNewTeacherDataJson() {
     this.teachesAt = parseInt(this.teachesAt.toString());
-    this.teachesSubjects.forEach((value, index) => {
-      this.teachesSubjects[index] = parseInt(value.toString());
+    this.teachesInstitutions.forEach((value, index) => {
+      this.teachesInstitutions[index] = parseInt(value.toString());
     })
 
     let newTeacher = {
@@ -110,7 +113,7 @@ export class JointeacherPage {
       firstName: this.firstName,
       personalMessage: this.personalMessage,
       teachesAt: this.teachesAt,
-      teachesSubjects: this.teachesSubjects
+      teachesInstitutions: this.teachesInstitutions
     };
     return newTeacher;
   }

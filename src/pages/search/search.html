@@ -54,6 +54,7 @@
 
   <!-- White area -->
   <div>
+
     <ion-grid>
 
       <!-- Find your next teacher title -->
@@ -62,13 +63,90 @@
           Find your next teacher
         </ion-col>
       </ion-row>
+      <ion-list>
 
-      <ion-row>
-        <ion-col>
-          Test
+        <!-- Price range -->
+        <ion-row>
+          <ion-col col-12>
+            <ion-list-header>
+              Price per hour
+              <ion-badge item-end color="dark">From: {{structure.lower}}</ion-badge>
+              <ion-badge item-end color="dark">To: {{structure.upper}}</ion-badge>
+            </ion-list-header>
+            <ion-item>
+              <ion-range dualKnobs="true" pin="true" [(ngModel)]="structure" color="dark" min="0" max="200">
+                <ion-label range-left>0</ion-label>
+                <ion-label range-right>200</ion-label>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Teach at and Teaches subjects -->
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label floating>Teach at</ion-label>
+              <ion-select [(ngModel)]="teachesAt" interface="popover">
+                <ion-option value="0">Student's house</ion-option>
+                <ion-option value="1">Academic institution</ion-option>
+                <ion-option value="2">Both</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label floating>Teaches institutions</ion-label>
+              <ion-select [(ngModel)]="teachesInstitutions">
+                <ion-option value="0">Holon Institute Of Technology</ion-option>
+                <ion-option value="1">Technion</ion-option>
+                <ion-option value="2">Tel-Aviv University</ion-option>
+                <ion-option value="4">Ben Gurion University</ion-option>
+                <ion-option value="8">Hebrew University</ion-option>
+                <ion-option value="16">Bar-Ilan University</ion-option>
+                <ion-option value="32">Tel-Aviv Jaffa Academic College</ion-option>
+                <ion-option value="64">IDC Herzliya</ion-option>
+                <ion-option value="128">Ariel University</ion-option>
+                <ion-option value="256">Haifa University</ion-option>
+                <ion-option value="512">Sapir Academic College</ion-option>
+                <ion-option value="1024">ORT Braude Collegeof Engineering</ion-option>
+                <ion-option value="2048">The Open University</ion-option>
+                <ion-option value="4096">College of Management</ion-option>
+                <ion-option value="8192">Achva Academic Campus</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Gender -->
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label floating>Prefered gender</ion-label>
+              <ion-select [(ngModel)]="gender" interface="popover">
+                <ion-option value="Male">Male</ion-option>
+                <ion-option value="Female">Female</ion-option>
+                <ion-option value="Both">Doesn't matter</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+      </ion-list>
+
+      <!-- Error message -->
+      <ion-row *ngIf="showErrorMessage" text-center>
+        <ion-col col-12>
+          <font style="color: red;">The fields are not valid.</font>
         </ion-col>
       </ion-row>
 
+      <!-- Search teachers button -->
+      <ion-row text-center>
+        <ion-col col-12>
+          <button ion-button (click)="searchTeachers()" block>Search for teacher</button>
+        </ion-col>
+      </ion-row>
     </ion-grid>
 
   </div>

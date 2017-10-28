@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { TeacherslistPage } from './../teacherslist/teacherslist';
+
 @IonicPage()
 @Component({
   selector: 'page-search',
@@ -27,11 +29,11 @@ export class SearchPage {
 
     this.convertStringToInteger();
     if (!this.isModelValid()) {
-      this.setErrorMessage(true );
+      this.setErrorMessage(true);
       return;
     }
 
-    console.log("Good");
+    this.navCtrl.push(TeacherslistPage);
   }
 
   private convertStringToInteger() {

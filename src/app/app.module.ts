@@ -14,6 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ToasterProvider } from '../providers/toaster/toaster';
 import { ContactusPage } from './../pages/contactus/contactus';
 import { JointeacherPage } from './../pages/jointeacher/jointeacher';
+import { TeacherslistPage } from './../pages/teacherslist/teacherslist';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { JointeacherPage } from './../pages/jointeacher/jointeacher';
     SearchPage,
     ContactPage,
     ContactusPage,
-    JointeacherPage
+    JointeacherPage,
+    TeacherslistPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { JointeacherPage } from './../pages/jointeacher/jointeacher';
     SearchPage,
     ContactPage,
     ContactusPage,
-    JointeacherPage
+    JointeacherPage,
+    TeacherslistPage
   ],
   providers: [
     StatusBar,

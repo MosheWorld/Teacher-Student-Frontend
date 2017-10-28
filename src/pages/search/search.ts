@@ -33,6 +33,17 @@ export class SearchPage {
       return;
     }
 
+
+    this.gender = this.gender === 'Both' ? "" : this.gender;
+
+    let searchTeacherModel = {
+      fromPrice: this.structure.lower,
+      toPrice: this.structure.upper,
+      teachesAt: this.teachesAt,
+      teachesInstitutions: this.teachesInstitutions,
+      gender: this.gender
+    };
+
     this.navCtrl.push(TeacherslistPage);
   }
 

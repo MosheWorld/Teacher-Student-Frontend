@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+
+import { SingleteacherPage } from './../singleteacher/singleteacher';
 
 @IonicPage()
 @Component({
@@ -10,11 +12,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class TeacherslistPage {
   public teachers: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     this.teachers = this.navParams.get('teacherSearchList');
   }
 
   public expandTeacherInformation(index: number) {
-    console.log(this.teachers[index]);
+    let modal = this.modalCtrl.create(SingleteacherPage, { teacher: this.teachers[index] });
+    modal.present();
   }
 }

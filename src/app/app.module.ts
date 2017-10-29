@@ -15,6 +15,7 @@ import { ToasterProvider } from '../providers/toaster/toaster';
 import { ContactusPage } from './../pages/contactus/contactus';
 import { JointeacherPage } from './../pages/jointeacher/jointeacher';
 import { TeacherslistPage } from './../pages/teacherslist/teacherslist';
+import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TeacherslistPage } from './../pages/teacherslist/teacherslist';
     ContactPage,
     ContactusPage,
     JointeacherPage,
-    TeacherslistPage
+    TeacherslistPage,
+    SingleteacherPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { TeacherslistPage } from './../pages/teacherslist/teacherslist';
     ContactPage,
     ContactusPage,
     JointeacherPage,
-    TeacherslistPage
+    TeacherslistPage,
+    SingleteacherPage
   ],
   providers: [
     StatusBar,

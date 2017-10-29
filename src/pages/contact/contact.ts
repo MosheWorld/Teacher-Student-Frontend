@@ -9,7 +9,6 @@ import { NavController } from 'ionic-angular';
 export class ContactPage {
 
   constructor(public navCtrl: NavController) {
-
   }
 
 }

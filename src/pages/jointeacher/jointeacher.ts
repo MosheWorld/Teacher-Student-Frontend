@@ -1,7 +1,7 @@
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
-import { ApiProvider } from './../../providers/api/api';
 import { Component } from '@angular/core';
+import { ApiProvider } from './../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -21,6 +21,7 @@ export class JointeacherPage {
   public personalMessage: string;
   public teachesAt: number;
   public teachesInstitutions: number[] = [];
+
   public showErrorMessage: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
@@ -71,12 +72,12 @@ export class JointeacherPage {
       this.priceFrom == null || this.priceFrom < 0 ||
       this.priceFrom > this.priceTo ||
       this.age == null || this.age < 0 || this.age > 120 ||
-      this.IsStringNullOrEmpty(this.phone) ||
-      this.IsStringNullOrEmpty(this.email) ||
-      this.IsStringNullOrEmpty(this.gender) ||
-      this.IsStringNullOrEmpty(this.lastName) ||
-      this.IsStringNullOrEmpty(this.firstName) ||
-      this.IsStringNullOrEmpty(this.personalMessage) ||
+      this.isStringNullOrEmpty(this.phone) ||
+      this.isStringNullOrEmpty(this.email) ||
+      this.isStringNullOrEmpty(this.gender) ||
+      this.isStringNullOrEmpty(this.lastName) ||
+      this.isStringNullOrEmpty(this.firstName) ||
+      this.isStringNullOrEmpty(this.personalMessage) ||
       this.teachesInstitutions == null || this.teachesInstitutions.length === 0) {
       return false;
     } else {
@@ -88,7 +89,7 @@ export class JointeacherPage {
     this.showErrorMessage = set;
   }
 
-  private IsStringNullOrEmpty(str: string) {
+  private isStringNullOrEmpty(str: string) {
     if (str == null || str === "") {
       return true;
     } else {

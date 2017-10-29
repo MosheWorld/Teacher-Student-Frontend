@@ -1,6 +1,7 @@
-import { ApiProvider } from './../../providers/api/api';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+
+import { ApiProvider } from './../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -20,15 +21,10 @@ export class ContactusPage {
   }
 
   public isFormValid() {
-    if (this.fullName == null ||
-      this.fullName === "" ||
-      this.email == null ||
-      this.email === "" ||
-      this.contactReason == null ||
-      this.contactReason === "" ||
-      this.message == null ||
-      this.message === ""
-    ) {
+    if (this.isStringNullOrEmpty(this.fullName) ||
+      this.isStringNullOrEmpty(this.email) ||
+      this.isStringNullOrEmpty(this.contactReason) ||
+      this.isStringNullOrEmpty(this.message)) {
       return false;
     }
     else {
@@ -89,5 +85,13 @@ export class ContactusPage {
       buttons: ['Ok']
     });
     return alert;
+  }
+
+  private isStringNullOrEmpty(str: string) {
+    if (str == null || str === "") {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

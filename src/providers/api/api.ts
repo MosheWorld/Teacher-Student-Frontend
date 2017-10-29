@@ -27,9 +27,9 @@ export class ApiProvider {
     return headers;
   }
 
-  private checkResultModel(res: any) {
+  private checkResultModel(result: any) {
     try {
-      let dataCovertedToJson = res.json();
+      let dataCovertedToJson = result.json();
       return dataCovertedToJson;
     } catch (ex) {
       return null;

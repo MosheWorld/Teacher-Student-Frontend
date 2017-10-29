@@ -11,5 +11,4 @@ export class TeacherslistPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { ApiProvider } from './../../providers/api/api';
 import { TeacherslistPage } from './../teacherslist/teacherslist';
 
 @IonicPage()
@@ -21,7 +22,7 @@ export class SearchPage {
 
   public showErrorMessage: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider) {
   }
 
   public searchTeachers() {
@@ -33,7 +34,6 @@ export class SearchPage {
       return;
     }
 
-
     this.gender = this.gender === 'Both' ? "" : this.gender;
 
     let searchTeacherModel = {
@@ -44,7 +44,7 @@ export class SearchPage {
       gender: this.gender
     };
 
-    this.navCtrl.push(TeacherslistPage);
+    // this.navCtrl.push(TeacherslistPage);
   }
 
   private convertStringToInteger() {

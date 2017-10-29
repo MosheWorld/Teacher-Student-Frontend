@@ -47,7 +47,7 @@ export class ContactusPage {
     };
 
     const loading = this.loadingCtrl.create({
-      content: 'Sending information, please wait...'
+      content: 'Searching for teachers, please wait...'
     });
     loading.present();
 

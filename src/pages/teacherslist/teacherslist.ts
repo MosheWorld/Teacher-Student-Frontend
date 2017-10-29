@@ -8,7 +8,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 
 export class TeacherslistPage {
+  public teachers: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.teachers = this.navParams.get('teacherSearchList');
+  }
+
+  public expandTeacherInformation(index: number) {
+    console.log(this.teachers[index]);
   }
 }

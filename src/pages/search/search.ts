@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
 import { TeacherslistPage } from './../teacherslist/teacherslist';
@@ -22,7 +22,8 @@ export class SearchPage {
 
   public showErrorMessage: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
   }
 
   public searchTeachers() {
@@ -44,7 +45,28 @@ export class SearchPage {
       gender: this.gender
     };
 
-    // this.navCtrl.push(TeacherslistPage);
+    const loading = this.loadingCtrl.create({
+      content: 'Sending information, please wait...'
+    });
+    loading.present();
+
+    this.apiProvider.httpPost('teacher/search', searchTeacherModel)
+      .subscribe(
+      (success) => {
+        loading.dismiss();
+        if (success && success.length > 0) {
+          this.navCtrl.push(TeacherslistPage, { teacherSearchList: success });
+          return;
+        }
+        const alert = this.createAlert('Couldn\'t find the teachers', 'Please make the search filters to aim to more options, the teachers you asked for doesn\'t exist yet.');
+        alert.present();
+      },
+      (failure) => {
+        loading.dismiss();
+        const alert = this.createAlert('Request failed to send', 'The request has been failed for some reason, please try again later.');
+        alert.present();
+      }
+      );
   }
 
   private convertStringToInteger() {
@@ -69,5 +91,14 @@ export class SearchPage {
 
   private setErrorMessage(set: boolean) {
     this.showErrorMessage = set;
+  }
+
+  private createAlert(titleInput: string, subTitleInput: string) {
+    const alert = this.alertCtrl.create({
+      title: titleInput,
+      subTitle: subTitleInput,
+      buttons: ['Ok']
+    });
+    return alert;
   }
 }

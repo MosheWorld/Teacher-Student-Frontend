@@ -37,6 +37,62 @@
         </ion-col>
       </ion-row>
 
+      <!-- Click on the card to expant it text -->
+      <ion-row text-center>
+        <ion-col col-12>
+          <font style="font-size: 15px; font-weight: 300;color:rgba(255,255,255,0.6);">In order to see all the details on the teacher click on the card to expand it.</font>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+  </div>
+
+  <!-- White area -->
+  <div>
+
+    <ion-grid>
+
+      <!-- The teachers you asked for title -->
+      <ion-row text-center style="padding-top: 15px;padding-bottom: 15px;">
+        <ion-col col-12>
+          The teachers you asked for
+        </ion-col>
+      </ion-row>
+
+      <!-- List of teachers -->
+
+
+      <div *ngFor="let teacher of teachers; let i = index;">
+        <ion-card (click)="expandTeacherInformation(i);">
+
+          <!-- Image -->
+          <ion-row>
+            <ion-col col-12>
+              <img style="width: 150px;" src="assets\\imgs\\imageNotFound.jpg" />
+            </ion-col>
+          </ion-row>
+
+          <!-- Content -->
+          <ion-row>
+            <ion-card-content>
+
+              <ion-col col-12>
+                <ion-card-title>
+                  <font style="font-size: 20px;">{{teacher.firstName}} {{teacher.lastName}}</font>
+                  -
+                  <i>{{teacher.gender}} {{teacher.age}}</i>
+                </ion-card-title>
+                <p>
+                  {{teacher.personalMessage}}
+                </p>
+              </ion-col>
+            </ion-card-content>
+
+          </ion-row>
+
+        </ion-card>
+      </div>
 
     </ion-grid>
 

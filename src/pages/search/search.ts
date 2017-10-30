@@ -18,7 +18,7 @@ export class SearchPage {
 
   public teachesAt: number;
   public teachesInstitutions: number;
-  public gender: string;
+  public gender: string = "Both";
 
   public showErrorMessage: boolean = false;
 

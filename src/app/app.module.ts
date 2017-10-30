@@ -13,9 +13,11 @@ import { ContactPage } from '../pages/contact/contact';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ToasterProvider } from '../providers/toaster/toaster';
 import { ContactusPage } from './../pages/contactus/contactus';
+import { TeachesAtPipe } from './../pipes/teaches-at/teaches-at';
 import { JointeacherPage } from './../pages/jointeacher/jointeacher';
 import { TeacherslistPage } from './../pages/teacherslist/teacherslist';
 import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
+import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,11 @@ import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
     SearchPage,
     ContactPage,
     ContactusPage,
+    TeachesAtPipe,
     JointeacherPage,
     TeacherslistPage,
-    SingleteacherPage
+    SingleteacherPage,
+    TeachesInstitutionsPipe
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,9 @@ import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ApiProvider,
-    ToasterProvider
+    TeachesAtPipe,
+    ToasterProvider,
+    TeachesInstitutionsPipe
   ]
 })
 export class AppModule { }

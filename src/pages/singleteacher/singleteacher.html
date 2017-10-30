@@ -14,5 +14,75 @@
 </ion-header>
 
 <ion-content padding>
-  This page is in construction- fuck off
+
+  <ion-grid>
+
+    <!-- Image -->
+    <ion-row text-center>
+      <ion-col col-12>
+        <img style="width: 150px;" src="assets\\imgs\\imageNotFound.jpg" />
+      </ion-col>
+    </ion-row>
+
+    <!-- First name and Last name -->
+    <ion-row>
+      <ion-col col-12>
+        <font style="font-size: 20px;">
+          <i>{{teacher.firstName}} {{teacher.lastName}}</i>
+        </font> -
+        <i>{{teacher.gender}}, {{teacher.age}}</i>
+      </ion-col>
+    </ion-row>
+
+    <!-- Phone -->
+    <ion-row>
+      <ion-col col-12>
+        <b>Phone: </b>
+        <i>{{teacher.phone}}</i>
+      </ion-col>
+    </ion-row>
+
+    <!-- Email -->
+    <ion-row>
+      <ion-col col-12>
+        <b>Email: </b>
+        <i>{{teacher.email}}</i>
+      </ion-col>
+    </ion-row>
+
+    <!-- Prices -->
+    <ion-row>
+      <ion-col col-12>
+        <b>Price: </b>
+        <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>
+        <font style="font-size: 10px">ILS</font>
+      </ion-col>
+    </ion-row>
+
+    <!-- Teaches At -->
+    <ion-row>
+      <ion-col col-12>
+        <b>Teaches at:</b> {{1|teachesAt}}
+      </ion-col>
+    </ion-row>
+
+    <!-- Teaches Institutions -->
+    <ion-row>
+      <ion-col col-12>
+        <b>Teaches at Institutions:</b>
+      </ion-col>
+      <ion-col col-12 *ngFor="let subject of teacher.teachesInstitutions">
+        - {{subject | teachesInstitutions}}
+      </ion-col>
+    </ion-row>
+
+    <!-- Message -->
+    <ion-row>
+      <ion-col col-12>
+        <b>Personal message: </b>{{teacher.personalMessage}}
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
 </ion-content>

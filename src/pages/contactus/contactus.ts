@@ -14,7 +14,7 @@ export class ContactusPage {
   public email: string;
   public contactReason: string;
   public message: string;
-  public showErrorMessage: boolean = false;;
+  public showErrorMessage: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController) {

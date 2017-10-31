@@ -83,6 +83,101 @@
       </ion-col>
     </ion-row>
 
+    <!-- Recommendations Text -->
+    <ion-row>
+      <ion-col col-10 text-left>
+        <b>
+          <u>Recommendations:</u>
+        </b>
+      </ion-col>
+      <ion-col col-2 text-right>
+        <ion-icon style="font-size: 30px" name="ios-add-circle-outline" (click)="toggleRecommendations()"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+
+    <div *ngIf="showRecommendationsBoolean" text-center>
+
+      <ion-list>
+
+        <!-- Add Recommendations -->
+        <ion-row>
+          <ion-col col-12>
+            <b>
+              <u>Add recommendations:</u>
+            </b>
+          </ion-col>
+        </ion-row>
+
+        <!-- Full name input -->
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label floating>Full name</ion-label>
+              <ion-input type="text" [(ngModel)]="fullName"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Email input -->
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label floating>Email</ion-label>
+              <ion-input type="email" [(ngModel)]="email"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Rate input -->
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label floating>Rate</ion-label>
+              <ion-input type="number" [(ngModel)]="rate"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Message input -->
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label floating>Message</ion-label>
+              <ion-textarea rows="4" type="email" [(ngModel)]="message"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Error message -->
+        <ion-row *ngIf="showErrorMessage">
+          <ion-col col-12>
+            <font style="color: red;">The fields are not valid.</font>
+          </ion-col>
+        </ion-row>
+
+        <!-- Add button message -->
+        <ion-row>
+          <ion-col col-12>
+            <button ion-button block outline (click)="addNewRecommend()" icon-start>
+              <ion-icon name="add"></ion-icon>Add</button>
+          </ion-col>
+        </ion-row>
+
+      </ion-list>
+
+    </div>
+
+    <!-- Recommendations List -->
+    <ion-row *ngFor="let recommend of teacher.recommendations" style="border-bottom: 1px solid #b18b22;">
+      <ion-col col-12>
+        {{recommend.fullName}} - {{recommend.rate}}
+      </ion-col>
+      <ion-col col-12>
+        - {{recommend.message}}
+      </ion-col>
+    </ion-row>
+
   </ion-grid>
 
 </ion-content>

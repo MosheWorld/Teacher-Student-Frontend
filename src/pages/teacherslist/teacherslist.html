@@ -64,8 +64,6 @@
       </ion-row>
 
       <!-- List of teachers -->
-
-
       <div *ngFor="let teacher of teachers; let i = index;">
         <ion-card (click)="expandTeacherInformation(i);">
 
@@ -76,23 +74,53 @@
             </ion-col>
           </ion-row>
 
-          <!-- Content -->
-          <ion-row>
-            <ion-card-content>
+          <!-- Content - Stars should be modified. -->
 
+          <ion-card-content>
+
+            <!-- Name and Age -->
+            <ion-row>
               <ion-col col-12>
                 <ion-card-title>
                   <font style="font-size: 20px;">{{teacher.firstName}} {{teacher.lastName}}</font>
                   -
                   <i>{{teacher.gender}} {{teacher.age}}</i>
                 </ion-card-title>
-                <p>
-                  {{teacher.personalMessage}}
-                </p>
               </ion-col>
-            </ion-card-content>
+            </ion-row>
 
-          </ion-row>
+            <!-- Price -->
+            <ion-row>
+              <ion-col col-12>
+                <u>
+                  <b>Price:</b>
+                </u>
+                <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>
+                <font style="font-size: 10px">ILS</font>
+              </ion-col>
+            </ion-row>
+
+            <!-- Rate -->
+            <ion-row>
+              <ion-col col-12>
+                <u>
+                  <b>Rating:</b>
+                </u>
+                <rating readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+              </ion-col>
+            </ion-row>
+
+            <!-- Message -->
+            <ion-row>
+              <ion-col col-12>
+                <u>
+                  <b>Message:</b>
+                </u>
+                {{teacher.personalMessage}}
+              </ion-col>
+            </ion-row>
+
+          </ion-card-content>
 
         </ion-card>
       </div>

@@ -4,6 +4,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
+import { Ionic2RatingModule } from 'ionic2-rating';
+
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ApiProvider } from '../providers/api/api';
@@ -36,7 +38,8 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

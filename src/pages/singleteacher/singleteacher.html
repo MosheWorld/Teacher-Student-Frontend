@@ -83,24 +83,27 @@
       </ion-col>
     </ion-row>
 
-    <!-- Recommendations Text -->
+    <!-- Recommendations Text and Add recommend icon -->
     <ion-row>
       <ion-col col-10 text-left>
         <b>
           <u>Recommendations:</u>
         </b>
       </ion-col>
-      <ion-col col-2 text-right>
+      <ion-col col-2 text-right *ngIf="!alreadyAddedRecommend">
         <ion-icon style="font-size: 30px" name="ios-add-circle-outline" (click)="toggleRecommendations()"></ion-icon>
+      </ion-col>
+      <ion-col col-2 text-right *ngIf="alreadyAddedRecommend">
+        <ion-icon style="font-size: 30px" name="md-done-all"></ion-icon>
       </ion-col>
     </ion-row>
 
-
+    <!-- Show recommendation -->
     <div *ngIf="showRecommendationsBoolean" text-center>
 
       <ion-list>
 
-        <!-- Add Recommendations -->
+        <!-- Add Recommendations text -->
         <ion-row>
           <ion-col col-12>
             <b>
@@ -132,10 +135,8 @@
         <!-- Rate input -->
         <ion-row>
           <ion-col col-12>
-            <ion-item>
-              <ion-label floating>Rate</ion-label>
-              <ion-input type="number" [(ngModel)]="rate"></ion-input>
-            </ion-item>
+            <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+              nullable="false"></rating>
           </ion-col>
         </ion-row>
 

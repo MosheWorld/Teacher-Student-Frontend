@@ -1,6 +1,7 @@
-import { ApiProvider } from './../../providers/api/api';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
+
+import { ApiProvider } from './../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -14,10 +15,11 @@ export class SingleteacherPage {
   public fullName: string;
   public email: string;
   public message: string;
-  public rate: number;
+  public rate: number = 3;
 
   public showErrorMessage: boolean = false;
   public showRecommendationsBoolean: boolean = false;
+  public alreadyAddedRecommend: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
     public apiProvider: ApiProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
@@ -56,17 +58,20 @@ export class SingleteacherPage {
     loading.present();
 
     this.apiProvider.httpPost('teacher/addrecommend', newRecommendData)
-    .subscribe(
-    (success) => {
-      loading.dismiss();
-      const alert = this.createAlert('Your recommendation has been added', 'Thank you for posting recommendation for this teacher, thanks for making our community better.');
-      alert.present();
-    },
-    (failure) => {
-      loading.dismiss();
-      const alert = this.createAlert('Failed to add recommendation', 'The request has been failed for some reason, please try again later.');
-      alert.present();
-    });
+      .subscribe(
+      (success) => {
+        loading.dismiss();
+        const alert = this.createAlert('Your recommendation has been added', 'Thank you for posting recommendation for this teacher, thanks for making our community better.');
+        alert.present();
+        this.alreadyAddedRecommend = true;
+        this.showRecommendationsBoolean = false;
+        this.teacher.recommendations.push(newRecommendData.recommendData);
+      },
+      (failure) => {
+        loading.dismiss();
+        const alert = this.createAlert('Failed to add recommendation', 'The request has been failed for some reason, please try again later.');
+        alert.present();
+      });
   }
 
   private isModelValid() {
@@ -91,7 +96,7 @@ export class SingleteacherPage {
   }
 
   private convertRateToInteger() {
-    this.rate = parseInt(this.rate.toString());
+    if (this.rate != null) { this.rate = parseInt(this.rate.toString()); }
   }
 
   private createAlert(titleInput: string, subTitleInput: string) {

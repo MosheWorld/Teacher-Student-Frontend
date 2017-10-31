@@ -46,11 +46,36 @@ export class SearchPage {
     };
 
     const loading = this.loadingCtrl.create({
-      content: 'Sending information, please wait...'
+      content: 'Getting information, please wait...'
     });
     loading.present();
 
     this.apiProvider.httpPost('teacher/search', searchTeacherModel)
+      .subscribe(
+      (success) => {
+        loading.dismiss();
+        if (success && success.length > 0) {
+          this.navCtrl.push(TeacherslistPage, { teacherSearchList: success });
+          return;
+        }
+        const alert = this.createAlert('Couldn\'t find the teachers', 'Please make the search filters to aim to more options, the teachers you asked for doesn\'t exist yet.');
+        alert.present();
+      },
+      (failure) => {
+        loading.dismiss();
+        const alert = this.createAlert('Request failed to send', 'The request has been failed for some reason, please try again later.');
+        alert.present();
+      }
+      );
+  }
+
+  public getAllTeachers() {
+    const loading = this.loadingCtrl.create({
+      content: 'Getting information, please wait...'
+    });
+    loading.present();
+
+    this.apiProvider.httpGet('teacher/getall')
       .subscribe(
       (success) => {
         loading.dismiss();

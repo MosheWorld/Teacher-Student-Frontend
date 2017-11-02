@@ -13,6 +13,7 @@ export class HomePage {
   private tabRef: Tabs = this.navCtrl.parent;
 
   constructor(public navCtrl: NavController) {
+    console.log();
   }
 
   public goPage(page: any) {

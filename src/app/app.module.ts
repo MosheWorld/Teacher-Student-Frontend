@@ -38,8 +38,8 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
-    Ionic2RatingModule
+    Ionic2RatingModule,
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

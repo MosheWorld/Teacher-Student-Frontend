@@ -56,10 +56,21 @@
 
     <ion-grid>
 
-      <!-- The teachers you asked for title -->
-      <ion-row text-center style="padding-top: 15px;padding-bottom: 15px;">
+      <!-- Search bar -->
+      <ion-row>
         <ion-col col-12>
-          The teachers you asked for
+          <ion-toolbar color="m-darker">
+            <ion-searchbar [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" placeholder="Search for teacher first name"
+              type="text" animated="true" debounce="100">
+            </ion-searchbar>
+          </ion-toolbar>
+        </ion-col>
+      </ion-row>
+
+      <!-- Teachers wasn't found -->
+      <ion-row text-center *ngIf="teachers.length == 0">
+        <ion-col col-12>
+          <b>Not even single teacher was found, sorry.</b>
         </ion-col>
       </ion-row>
 
@@ -130,3 +141,4 @@
   </div>
 
 </ion-content>
+

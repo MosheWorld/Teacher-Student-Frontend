@@ -8,7 +8,6 @@ export class ApiProvider {
   private endPoint: string = "https://teacher-student-backend.herokuapp.com/";
 
   constructor(public http: Http) {
-
   }
 
   public httpGet(path: string) {

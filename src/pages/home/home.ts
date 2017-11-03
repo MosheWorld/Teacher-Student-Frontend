@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, Tabs } from 'ionic-angular';
 
+import { FavoritesPage } from '../favorites/favorites';
 import { ContactusPage } from './../contactus/contactus';
 import { JointeacherPage } from './../jointeacher/jointeacher';
 
@@ -27,7 +28,7 @@ export class HomePage {
         this.navCtrl.push(JointeacherPage);
         break;
       case 'favorites':
-        console.log("Test fav");
+        this.navCtrl.push(FavoritesPage);
         break;
       default:
         console.log('Not found the requested page ' + page);

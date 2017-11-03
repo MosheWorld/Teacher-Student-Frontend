@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController, LoadingController,
 
 import { ApiProvider } from './../../providers/api/api';
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
+import { ToasterProvider } from './../../providers/toaster/toaster';
 
 @IonicPage()
 @Component({
@@ -22,11 +23,11 @@ export class SingleteacherPage {
   public showRecommendationsBoolean: boolean = false;
   public alreadyAddedRecommend: boolean = false;
 
-  public isTeacherFavorited:boolean = false;
+  public isTeacherFavorited: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
     public apiProvider: ApiProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-    public favoritesManagerProvider: FavoritesManagerProvider) {
+    public favoritesManagerProvider: FavoritesManagerProvider, public toasterProvider:ToasterProvider) {
     this.teacher = this.navParams.get('teacher');
     this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
   }
@@ -82,11 +83,13 @@ export class SingleteacherPage {
   public addFavorite() {
     this.favoritesManagerProvider.addID(this.teacher._id);
     this.isTeacherFavorited = true;
+    this.toasterProvider.presentToast("Teacher has been added to favorites.");
   }
 
   public removeFavorite() {
     this.favoritesManagerProvider.removeID(this.teacher._id);
     this.isTeacherFavorited = false;
+    this.toasterProvider.presentToast("Teacher has been removed from favorites.");
   }
 
   private isModelValid() {

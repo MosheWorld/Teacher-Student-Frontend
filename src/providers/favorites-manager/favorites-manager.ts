@@ -54,7 +54,7 @@ export class FavoritesManagerProvider {
     }
   }
 
-  private getFavorites() {
+  public getFavorites() {
     let favoritesID = this.localStorage.Get('FavoritesIDs');
     return favoritesID;
   }

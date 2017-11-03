@@ -1,0 +1,76 @@
+<ion-header>
+
+  <ion-navbar text-center>
+    <ion-title>
+      <font style="color: white;">Favorites</font>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <!-- Gray area -->
+  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">
+
+    <ion-grid>
+
+      <!-- Title -->
+      <ion-row text-center>
+        <ion-col col-12>
+          <font class="m-color-white" style="font-size: 35px; font-weight: 300;">Favorites</font>
+        </ion-col>
+      </ion-row>
+
+      <!-- Subtitle -->
+      <ion-row>
+        <ion-col col-12>
+          This is all the favorites teachers you've saved, you can manage all your teachers here and save them for the future.
+        </ion-col>
+      </ion-row>
+
+      <!-- Tip -->
+      <ion-row>
+        <ion-col col-12>
+          <font style="color: orange">*Tip: </font>
+          In order to keep your teachers quickly accessed, do not remove StudyHub cache from your app.
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+  </div>
+
+  <!-- White area -->
+  <div>
+
+    <ion-grid>
+
+      <!-- No favorites case -->
+      <div *ngIf="!userHaveFavorites">
+        <!-- No teachers as favorites text -->
+        <ion-row text-center>
+          <ion-col col-12>
+            You have none in your favorite list.
+          </ion-col>
+        </ion-row>
+
+        <!-- Search for teachers button -->
+        <ion-row text-center>
+          <ion-col col-12>
+            <button ion-button icon-start outline (click)="goPage('search');">
+              <ion-icon name="ios-search"></ion-icon>
+              Search for teacher
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div *ngIf="userHaveFavorites">
+        Yup
+      </div>
+
+    </ion-grid>
+
+  </div>
+</ion-content>

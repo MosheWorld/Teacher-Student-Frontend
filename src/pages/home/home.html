@@ -3,8 +3,10 @@
     <ion-title text-center>
       <font style="color: white;">StudyHub</font>
     </ion-title>
-    <ion-buttons end icon-only style="color: yellow;">
-      <div (click)="goPage('favorites');"><ion-icon name="ios-star"></ion-icon></div>
+    <ion-buttons end icon-only style="color: #f5ae08;">
+      <div (click)="goPage('favorites');">
+        <ion-icon name="ios-star"></ion-icon>
+      </div>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -84,7 +86,8 @@
         <ion-col col-12>
 
           <font style="font-size: 17px;font-weight: 300;color: #586069;">
-            As a teacher at StudyHub you'll be shown at students searches over the app, you will have your own profile and you will be able to manage it as you wish.
+            As a teacher at StudyHub you'll be shown at students searches over the app, you will have your own profile and you will be
+            able to manage it as you wish.
           </font>
         </ion-col>
       </ion-row>
@@ -92,7 +95,10 @@
       <!-- Join as teacher button -->
       <ion-row text-center>
         <ion-col col-12>
-          <button ion-button outline color="primary" (click)="goPage('joinasteacher');">Join as teacher</button>
+          <button ion-button outline color="primary" (click)="goPage('joinasteacher');" icon-start>
+            <ion-icon name="ios-person-add-outline"></ion-icon>
+            Join as teacher
+          </button>
         </ion-col>
       </ion-row>
 

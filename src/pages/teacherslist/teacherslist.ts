@@ -57,7 +57,8 @@ export class TeacherslistPage {
 
     if (val && val.trim() !== '') {
       this.teachers = this.teachersListNotChange.filter(function (item) {
-        return item.firstName.toLowerCase().includes(val.toLowerCase());
+        let fullName = item.firstName + " " + item.lastName;
+        return fullName.toLowerCase().includes(val.toLowerCase());
       });
     }
   }

@@ -13,15 +13,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SearchPage } from './../pages/search/search';
 import { ContactPage } from '../pages/contact/contact';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FavoritesPage } from './../pages/favorites/favorites';
 import { ToasterProvider } from '../providers/toaster/toaster';
 import { ContactusPage } from './../pages/contactus/contactus';
 import { TeachesAtPipe } from './../pipes/teaches-at/teaches-at';
 import { JointeacherPage } from './../pages/jointeacher/jointeacher';
 import { TeacherslistPage } from './../pages/teacherslist/teacherslist';
 import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
-import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
 import { LocalStorageProvider } from '../providers/local-storage/local-storage';
 import { FavoritesManagerProvider } from '../providers/favorites-manager/favorites-manager';
+import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { FavoritesManagerProvider } from '../providers/favorites-manager/favorit
     SearchPage,
     ContactPage,
     ContactusPage,
+    FavoritesPage,
     TeachesAtPipe,
     JointeacherPage,
     TeacherslistPage,
@@ -54,6 +56,7 @@ import { FavoritesManagerProvider } from '../providers/favorites-manager/favorit
     TabsPage,
     SearchPage,
     ContactPage,
+    FavoritesPage,
     ContactusPage,
     JointeacherPage,
     TeacherslistPage,

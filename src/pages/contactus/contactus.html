@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title text-center>
-      <font style="color: white;">Contact Us</font>
+      <font class="m-color-white">Contact Us</font>
     </ion-title>
   </ion-navbar>
 
@@ -19,7 +19,7 @@
       <!-- Title -->
       <ion-row text-center>
         <ion-col col-12>
-          <font class="m-color-white" style="font-size: 38px; font-weight: 300;">
+          <font class="m-color-white m-font-size-38px m-font-weight-300">
             What is your opinion?
           </font>
         </ion-col>
@@ -36,13 +36,13 @@
       <!-- Direct contant -->
       <ion-row text-left>
         <ion-col col-12>
-          <font style="color: orange">You can contact the owner of this application by:</font>
+          <font class="m-color-orange">You can contact the owner of this application by:</font>
         </ion-col>
         <ion-col col-12>
-          <font style="color: rgb(194, 187, 187)">Email: mmoshikoo@gmail.com</font>
+          <font class="m-color-c2bbbb">Email: mmoshikoo@gmail.com</font>
         </ion-col>
         <ion-col col-12>
-          <font style="color: rgb(194, 187, 187)">Phone: 0542477052</font>
+          <font class="m-color-c2bbbb">Phone: 0542477052</font>
         </ion-col>
       </ion-row>
 
@@ -107,17 +107,23 @@
       <!-- Error message -->
       <ion-row *ngIf="showErrorMessage" text-center>
         <ion-col col-12>
-          <font style="color: red;">The fields are not valid.</font>
+          <font class="m-color-red">The fields are not valid.</font>
         </ion-col>
       </ion-row>
 
       <!-- Buttons -->
       <ion-row>
         <ion-col col-6>
-          <button ion-button outline color="primary" block (click)="sendContactUsForm();">Send</button>
+          <button ion-button outline icon-start color="primary" block (click)="sendContactUsForm();">
+            <ion-icon name="ios-send-outline"></ion-icon>
+            Send
+          </button>
         </ion-col>
         <ion-col col-6>
-          <button ion-button outline color="danger" block (click)="clearContactUsForm();">Clear</button>
+          <button ion-button outline icon-start color="secondary" block (click)="openWhatsApp();">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+            WhatsApp
+          </button>
         </ion-col>
       </ion-row>
     </ion-grid>

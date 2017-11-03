@@ -1,44 +1,103 @@
-// http://ionicframework.com/docs/theming/
-// ion-header ion-icon.back-button-icon.icon {
-//   color: map-get($colors, white);
-// }
-
 ion-header ion-icon.back-button-icon.icon,
 ion-header span.back-button-text.back-button-text-ios {
   color: white;
 }
 
-.toolbar-background {
-  background-color: #24292e;
+// Colors
+.m-color-white {
+  color: white;
+}
+
+.m-color-orange {
+  color: orange;
+}
+
+.m-color-red {
+  color: red;
+}
+
+.m-color-c2bbbb {
+  color: #c2bbbb;
 }
 
 .m-color-24292e {
   color: #24292e;
 }
 
+.m-color-f5ae08 {
+  color: #f5ae08;
+}
+
+.m-color-586069 {
+  color: #586069;
+}
+
+// Backgrounds
+.toolbar-background {
+  background-color: #24292e;
+}
+
 .m-background-2b3137 {
   background: #2b3137
 }
 
-.m-color-white {
-  color: white;
-}
-
+// Margins
 .m-margin-top0 {
   margin-top: 0;
 }
 
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
+// Fonts
+.m-font-size-43px {
+  font-size: 43px;
+}
 
+.m-font-size-38px {
+  font-size: 38px;
+}
+
+.m-font-size-35px {
+  font-size: 35px;
+}
+
+.m-font-size-25px {
+  font-size: 25px;
+}
+
+.m-font-size-20px {
+  font-size: 20px;
+}
+
+.m-font-size-17px {
+  font-size: 17px;
+}
+
+.m-font-size-15px {
+  font-size: 15px;
+}
+
+.m-font-size-10px {
+  font-size: 10px;
+}
+
+.m-font-weight-300 {
+  font-weight: 300;
+}
+
+// Opacity
+.m-opacity-6 {
+  opacity: 0.6;
+}
+
+// General
+.m-width-150px {
+  width: 150px;
+}
+
+// Paddings
+.m-padding-top-15px {
+  padding-top: 15px;
+}
+
+.m-padding-buttom-15px {
+  padding-bottom: 15px;
+}

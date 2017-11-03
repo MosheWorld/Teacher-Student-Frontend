@@ -5,9 +5,9 @@ import { ToastController } from 'ionic-angular';
 export class ToasterProvider {
 
   constructor(public toastCtrl: ToastController) {
-  }
+  }2000
 
-  public presentToast(message: string, time: number = 3000, location: string = "buttom") {
+  public presentToast(message: string, time: number = 2000, location: string = "buttom") {
     const toast = this.toastCtrl.create({
       message: message,
       duration: time,

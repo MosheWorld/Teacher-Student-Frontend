@@ -7,7 +7,7 @@
       </button>
     </ion-buttons>
     <ion-title text-center>
-      <font style="color: white;">{{teacher.firstName}} {{teacher.lastName}}</font>
+      <font class="m-color-white">{{teacher.firstName}} {{teacher.lastName}}</font>
     </ion-title>
   </ion-navbar>
 
@@ -97,15 +97,24 @@
 
     <!-- Recommendations Text and Add recommend icon -->
     <ion-row>
-      <ion-col col-10 text-left>
+      <ion-col col-6 text-left>
         <b>
           <u>Recommendations:</u>
         </b>
       </ion-col>
-      <ion-col col-2 text-right *ngIf="!alreadyAddedRecommend">
-        <ion-icon style="font-size: 30px" name="ios-add-circle-outline" (click)="toggleRecommendations()"></ion-icon>
+      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && !showRecommendationsBoolean">
+        <button ion-button outline icon-start small color="dark" (click)="toggleRecommendations()">
+          <ion-icon name="ios-add-outline"></ion-icon>
+          Add
+        </button>
       </ion-col>
-      <ion-col col-2 text-right *ngIf="alreadyAddedRecommend">
+      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && showRecommendationsBoolean">
+        <button ion-button outline icon-start small color="dark" (click)="toggleRecommendations()">
+          <ion-icon name="ios-close-outline"></ion-icon>
+          Close
+        </button>
+      </ion-col>
+      <ion-col col-6 text-right *ngIf="alreadyAddedRecommend">
         <ion-icon style="font-size: 30px" name="md-done-all"></ion-icon>
       </ion-col>
     </ion-row>

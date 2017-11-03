@@ -66,12 +66,8 @@ export class ContactusPage {
       });
   }
 
-  public clearContactUsForm() {
-    this.setErrorMessage(false);
-    this.fullName = "";
-    this.email = "";
-    this.contactReason = "";
-    this.message = "";
+  public openWhatsApp() {
+    window.open('https://api.whatsapp.com/send?phone=972542477052');
   }
 
   private setErrorMessage(set: boolean) {

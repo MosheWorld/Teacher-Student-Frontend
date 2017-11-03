@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title text-center>
-      <font style="color: white;">Teacher List</font>
+      <font class="m-color-white">Teacher List</font>
     </ion-title>
   </ion-navbar>
 
@@ -18,7 +18,7 @@
       <!-- Title -->
       <ion-row text-center>
         <ion-col col-12>
-          <font class="m-color-white" style="font-size: 25px; font-weight: 300;">Teachers that fits to your requirements</font>
+          <font class="m-color-white m-font-size-25px m-font-weight-300">Teachers that fits to your requirements</font>
         </ion-col>
       </ion-row>
 
@@ -33,16 +33,16 @@
       <!-- Rank and comment text -->
       <ion-row text-center>
         <ion-col col-12>
-          <font style="color: orange">The power is in your hands, rank and comment to make the community grow and be better.</font>
+          <font class="m-color-orange">The power is in your hands, rank and comment to make the community grow and be better.</font>
         </ion-col>
       </ion-row>
 
       <!-- Click on the card to expant it text -->
       <ion-row text-center>
         <ion-col col-12>
-          <font style="font-size: 15px; font-weight: 300;color:rgba(255,255,255,0.6);">
-            <font style="color: white;">*</font> In order to see all the details on the teacher click on the card to expand it
-            <font style="color: white;">*</font>
+          <font class="m-font-size-15px m-color-white m-opacity-6">
+            <font class="m-color-white">*</font> In order to see all the details on the teacher click on the card to expand it
+            <font class="m-color-white">*</font>
           </font>
         </ion-col>
       </ion-row>
@@ -81,22 +81,21 @@
           <!-- Image -->
           <ion-row>
             <ion-col col-10 text-left>
-              <img style="width: 150px;" src="assets\\imgs\\imageNotFound.jpg" />
+              <img class="m-width-150px" src="assets\\imgs\\imageNotFound.jpg" />
             </ion-col>
             <ion-col *ngIf="teacher.isTeacherFavorited" col-2 text-right>
-              <ion-icon name="ios-bookmark-outline" style="font-size: 35px;"></ion-icon>
+              <ion-icon name="ios-bookmark-outline" class="m-font-size-35px"></ion-icon>
             </ion-col>
           </ion-row>
 
           <!-- Content - Stars should be modified. -->
-
           <ion-card-content>
 
             <!-- Name and Age -->
             <ion-row>
               <ion-col col-12>
                 <ion-card-title>
-                  <font style="font-size: 20px;">{{teacher.firstName}} {{teacher.lastName}}</font>
+                  <font class="m-font-size-20px">{{teacher.firstName}} {{teacher.lastName}}</font>
                   -
                   <i>{{teacher.gender}} {{teacher.age}}</i>
                 </ion-card-title>
@@ -110,7 +109,7 @@
                   <b>Price:</b>
                 </u>
                 <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>
-                <font style="font-size: 10px">ILS</font>
+                <font class="m-font-size-10px">ILS</font>
               </ion-col>
             </ion-row>
 

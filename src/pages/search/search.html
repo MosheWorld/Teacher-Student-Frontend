@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title text-center>
-      <font style="color: white;">Search Teacher</font>
+      <font class="m-color-white">Search Teacher</font>
     </ion-title>
   </ion-navbar>
 
@@ -68,7 +68,10 @@
         <!-- Get all teachers button -->
         <ion-row>
           <ion-col col-12>
-            <button ion-button outline (click)="getAllTeachers();" small>Get all teachers</button>
+            <button ion-button outline icon-start small (click)="getAllTeachers();">
+              <ion-icon name="ios-people"></ion-icon>
+              Get all teachers
+            </button>
           </ion-col>
         </ion-row>
 

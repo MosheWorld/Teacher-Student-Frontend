@@ -23,7 +23,7 @@
     "@ionic-native/core": "4.3.2",
     "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/status-bar": "4.3.2",
-    "@ionic/storage": "2.0.1",
+    "angular-2-local-storage": "^1.0.1",
     "express": "^4.16.2",
     "ionic-angular": "3.7.1",
     "ionic2-rating": "^1.2.2",

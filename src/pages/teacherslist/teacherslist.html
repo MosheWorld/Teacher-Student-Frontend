@@ -80,8 +80,11 @@
 
           <!-- Image -->
           <ion-row>
-            <ion-col col-12>
+            <ion-col col-10 text-left>
               <img style="width: 150px;" src="assets\\imgs\\imageNotFound.jpg" />
+            </ion-col>
+            <ion-col *ngIf="teacher.isTeacherFavorited" col-2 text-right>
+              <ion-icon name="ios-bookmark-outline" style="font-size: 35px;"></ion-icon>
             </ion-col>
           </ion-row>
 
@@ -141,4 +144,3 @@
   </div>
 
 </ion-content>
-

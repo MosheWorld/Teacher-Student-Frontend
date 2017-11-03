@@ -18,9 +18,21 @@
   <ion-grid>
 
     <!-- Image -->
-    <ion-row text-center>
-      <ion-col col-12>
+    <ion-row>
+      <ion-col col-7 text-left>
         <img style="width: 150px;" src="assets\\imgs\\imageNotFound.jpg" />
+      </ion-col>
+      <ion-col *ngIf="!isTeacherFavorited" col-5 text-right>
+        <button ion-button icon-start small outline color="dark" (click)="addFavorite()">
+          <ion-icon name="star"></ion-icon>
+          Add favorite
+        </button>
+      </ion-col>
+      <ion-col *ngIf="isTeacherFavorited" col-5 text-right>
+        <button ion-button icon-start small outline color="dark" (click)="removeFavorite()">
+          <ion-icon name="star"></ion-icon>
+          Remove favorite
+        </button>
       </ion-col>
     </ion-row>
 

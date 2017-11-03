@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
+import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
 @IonicPage()
 @Component({
@@ -21,13 +22,17 @@ export class SingleteacherPage {
   public showRecommendationsBoolean: boolean = false;
   public alreadyAddedRecommend: boolean = false;
 
+  public isTeacherFavorited:boolean = false;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-    public apiProvider: ApiProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
+    public apiProvider: ApiProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
+    public favoritesManagerProvider: FavoritesManagerProvider) {
     this.teacher = this.navParams.get('teacher');
+    this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
   }
 
   public dismiss() {
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss(this.isTeacherFavorited);
   }
 
   public toggleRecommendations() {
@@ -72,6 +77,16 @@ export class SingleteacherPage {
         const alert = this.createAlert('Failed to add recommendation', 'The request has been failed for some reason, please try again later.');
         alert.present();
       });
+  }
+
+  public addFavorite() {
+    this.favoritesManagerProvider.addID(this.teacher._id);
+    this.isTeacherFavorited = true;
+  }
+
+  public removeFavorite() {
+    this.favoritesManagerProvider.removeID(this.teacher._id);
+    this.isTeacherFavorited = false;
   }
 
   private isModelValid() {

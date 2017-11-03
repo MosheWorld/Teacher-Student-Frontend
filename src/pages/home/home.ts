@@ -13,7 +13,6 @@ export class HomePage {
   private tabRef: Tabs = this.navCtrl.parent;
 
   constructor(public navCtrl: NavController) {
-    console.log();
   }
 
   public goPage(page: any) {
@@ -26,6 +25,9 @@ export class HomePage {
         break;
       case 'joinasteacher':
         this.navCtrl.push(JointeacherPage);
+        break;
+      case 'favorites':
+        console.log("Test fav");
         break;
       default:
         console.log('Not found the requested page ' + page);

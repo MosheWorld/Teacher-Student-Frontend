@@ -1,10 +1,10 @@
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
+import { Ionic2RatingModule } from 'ionic2-rating';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { LocalStorageModule } from 'angular-2-local-storage';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-
-import { Ionic2RatingModule } from 'ionic2-rating';
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -20,6 +20,8 @@ import { JointeacherPage } from './../pages/jointeacher/jointeacher';
 import { TeacherslistPage } from './../pages/teacherslist/teacherslist';
 import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
 import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
+import { LocalStorageProvider } from '../providers/local-storage/local-storage';
+import { FavoritesManagerProvider } from '../providers/favorites-manager/favorites-manager';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,11 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     BrowserModule,
     HttpModule,
     Ionic2RatingModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    LocalStorageModule.withConfig({
+      prefix: 'StudyHub',
+      storageType: 'localStorage'
+  })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +66,9 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     ApiProvider,
     TeachesAtPipe,
     ToasterProvider,
-    TeachesInstitutionsPipe
+    LocalStorageProvider,
+    TeachesInstitutionsPipe,
+    FavoritesManagerProvider
   ]
 })
 export class AppModule { }

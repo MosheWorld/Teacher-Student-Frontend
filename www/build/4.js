@@ -1,14 +1,14 @@
 webpackJsonp([4],{
 
-/***/ 288:
+/***/ 289:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FavoritesPageModule", function() { return FavoritesPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JointeacherPageModule", function() { return JointeacherPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__favorites__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__jointeacher__ = __webpack_require__(105);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var FavoritesPageModule = (function () {
-    function FavoritesPageModule() {
+var JointeacherPageModule = (function () {
+    function JointeacherPageModule() {
     }
-    return FavoritesPageModule;
+    return JointeacherPageModule;
 }());
-FavoritesPageModule = __decorate([
+JointeacherPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__favorites__["a" /* FavoritesPage */],
+            __WEBPACK_IMPORTED_MODULE_2__jointeacher__["a" /* JointeacherPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__favorites__["a" /* FavoritesPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__jointeacher__["a" /* JointeacherPage */]),
         ],
     })
-], FavoritesPageModule);
+], JointeacherPageModule);
 
-//# sourceMappingURL=favorites.module.js.map
+//# sourceMappingURL=jointeacher.module.js.map
 
 /***/ })
 

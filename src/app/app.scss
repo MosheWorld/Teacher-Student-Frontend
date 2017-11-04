@@ -1,7 +1,24 @@
+// Default - Start
 ion-header ion-icon.back-button-icon.icon,
 ion-header span.back-button-text.back-button-text-ios {
   color: white;
 }
+
+ul {
+  padding: 0px;
+ 
+  &.rating li {
+    padding: 3px 5px !important;
+    background: none;
+    color: #ffb400;
+ 
+    ion-icon {
+      font-size: 25px;
+    }
+  }
+}
+// Default - End
+
 
 // Colors
 .m-color-white {

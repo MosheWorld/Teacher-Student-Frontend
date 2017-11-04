@@ -11,8 +11,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { ApiProvider } from '../providers/api/api';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SearchPage } from './../pages/search/search';
-import { ContactPage } from '../pages/contact/contact';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SettingsPage } from './../pages/settings/settings';
 import { FavoritesPage } from './../pages/favorites/favorites';
 import { ToasterProvider } from '../providers/toaster/toaster';
 import { ContactusPage } from './../pages/contactus/contactus';
@@ -30,7 +30,7 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     HomePage,
     TabsPage,
     SearchPage,
-    ContactPage,
+    SettingsPage,
     ContactusPage,
     FavoritesPage,
     TeachesAtPipe,
@@ -55,7 +55,7 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     HomePage,
     TabsPage,
     SearchPage,
-    ContactPage,
+    SettingsPage,
     FavoritesPage,
     ContactusPage,
     JointeacherPage,

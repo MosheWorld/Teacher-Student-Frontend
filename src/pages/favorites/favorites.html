@@ -1,15 +1,13 @@
 <ion-header>
-
   <ion-navbar text-center>
     <ion-title>
       <font class="m-color-white">Favorites</font>
     </ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
+
   <!-- Gray area -->
   <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">
 
@@ -66,11 +64,39 @@
         </ion-row>
       </div>
 
+      <!-- There are teachers in favorites list -->
       <div *ngIf="userHaveFavorites">
-        Yup
+        <ion-row>
+          <ion-col col-6 *ngFor="let teacher of teachers;let i = index;">
+            <ion-card>
+              <!-- Name -->
+              <ion-card-header>
+                {{teacher.firstName}} {{teacher.lastName}}
+              </ion-card-header>
+              <ion-card-content>
+                <!-- Image -->
+                <ion-col col-12>
+                  <img src="assets\\imgs\\imageNotFound.jpg" />
+                </ion-col>
+                <!-- Price -->
+                <ion-col col-12>
+                  <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>
+                  <font class="m-font-size-10px">ILS</font>
+                </ion-col>
+                <!-- Rate -->
+                <ion-col col-12>
+                  <rating [(ngModel)]="teachers[i].rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+                    starIconName="star" nullable="false"></rating>
+                </ion-col>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
       </div>
 
     </ion-grid>
 
   </div>
+
 </ion-content>

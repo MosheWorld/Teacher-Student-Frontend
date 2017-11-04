@@ -14,6 +14,8 @@ export class FavoritesPage {
   private tabRef: Tabs = this.navCtrl.parent;
   public userHaveFavorites: boolean = false;
 
+  public teachers: any[] = [];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider,
     public apiProvider: ApiProvider) {
     let listOfTeacherID = this.favoritesManagerProvider.getFavorites();
@@ -47,8 +49,8 @@ export class FavoritesPage {
     };
     this.apiProvider.httpPost('teacher/getlistofteachersbyid', data)
       .subscribe(
-      (success) => {
-        console.log(success);
+      (teachersList) => {
+        this.teachers = teachersList;
       },
       (failure) => {
         console.log(failure);

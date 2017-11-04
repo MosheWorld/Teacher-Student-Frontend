@@ -30369,6 +30369,20 @@ ion-header span.back-button-text.back-button-text-ios {
   color: white;
 }
 
+ul {
+  padding: 0px;
+}
+
+ul.rating li {
+  padding: 3px 5px !important;
+  background: none;
+  color: #ffb400;
+}
+
+ul.rating li ion-icon {
+  font-size: 25px;
+}
+
 .m-color-white {
   color: white;
 }
@@ -30471,4 +30485,18 @@ ion-header span.back-button-text.back-button-text-ios {
 
 .m-border-bottom-1px-solid-b18b22 {
   border-bottom: 1px solid #b18b22;
+}
+
+page-favorites ul {
+  padding: 0px;
+}
+
+page-favorites ul.rating li {
+  padding: 2px 1px 0 1px !important;
+  background: none;
+  color: #ffb400;
+}
+
+page-favorites ul.rating li ion-icon {
+  font-size: 15px;
 }

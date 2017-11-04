@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
+import { FavoritesPage } from './../favorites/favorites';
 import { TeacherslistPage } from './../teacherslist/teacherslist';
 
 @IonicPage()
@@ -46,7 +47,7 @@ export class SearchPage {
     };
 
     const loading = this.loadingCtrl.create({
-      content: 'Getting information, please wait...'
+      content: 'Getting teachers, please wait...'
     });
     loading.present();
 
@@ -92,6 +93,17 @@ export class SearchPage {
         alert.present();
       }
       );
+  }
+
+  public goPage(page: any) {
+    switch (page) {
+      case 'favorites':
+        this.navCtrl.push(FavoritesPage);
+        break;
+      default:
+        console.log('Not found the requested page ' + page);
+        break;
+    }
   }
 
   private convertStringToInteger() {

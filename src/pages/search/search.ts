@@ -72,7 +72,7 @@ export class SearchPage {
 
   public getAllTeachers() {
     const loading = this.loadingCtrl.create({
-      content: 'Getting information, please wait...'
+      content: 'Getting teachers, please wait...'
     });
     loading.present();
 

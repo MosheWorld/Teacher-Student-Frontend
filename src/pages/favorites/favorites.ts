@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Tabs } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Tabs, ModalController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
+import { SingleteacherPage } from './../singleteacher/singleteacher';
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
 @IonicPage()
@@ -17,7 +18,7 @@ export class FavoritesPage {
   public teachers: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider,
-    public apiProvider: ApiProvider) {
+    public apiProvider: ApiProvider, public modalCtrl: ModalController) {
     let listOfTeacherID = this.favoritesManagerProvider.getFavorites();
     this.bootstrapFavoritePage(listOfTeacherID);
   }
@@ -32,6 +33,16 @@ export class FavoritesPage {
         console.log('Not found the requested page ' + page);
         break;
     }
+  }
+
+  public expandTeacherInformation(index: number) {
+    let modal = this.modalCtrl.create(SingleteacherPage, { teacher: this.teachers[index] });
+    modal.onDidDismiss((data) => {
+      if (data === false) {
+        this.teachers.splice(index, 1);
+      }
+    });
+    modal.present();
   }
 
   private bootstrapFavoritePage(listOfTeacherID: any) {

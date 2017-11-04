@@ -67,8 +67,8 @@
       <!-- There are teachers in favorites list -->
       <div *ngIf="userHaveFavorites">
         <ion-row>
-          <ion-col col-6 class="animated lightSpeedIn" *ngFor="let teacher of teachers;let i = index;">
-            <ion-card>
+          <ion-col col-6 class="animated zoomIn" *ngFor="let teacher of teachers;let i = index;">
+            <ion-card (click)="expandTeacherInformation(i);">
               <!-- Name -->
               <ion-card-header>
                 {{teacher.firstName}} {{teacher.lastName}}

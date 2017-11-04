@@ -30397,6 +30397,10 @@ ion-header span.back-button-text.back-button-text-ios {
   color: #586069;
 }
 
+.m-color-1ab81a {
+  color: #1ab81a;
+}
+
 .toolbar-background {
   background-color: #24292e;
 }
@@ -30419,6 +30423,10 @@ ion-header span.back-button-text.back-button-text-ios {
 
 .m-font-size-35px {
   font-size: 35px;
+}
+
+.m-font-size-30px {
+  font-size: 30px;
 }
 
 .m-font-size-25px {
@@ -30449,14 +30457,18 @@ ion-header span.back-button-text.back-button-text-ios {
   opacity: 0.6;
 }
 
-.m-width-150px {
-  width: 150px;
-}
-
 .m-padding-top-15px {
   padding-top: 15px;
 }
 
 .m-padding-buttom-15px {
   padding-bottom: 15px;
+}
+
+.m-width-150px {
+  width: 150px;
+}
+
+.m-border-bottom-1px-solid-b18b22 {
+  border-bottom: 1px solid #b18b22;
 }

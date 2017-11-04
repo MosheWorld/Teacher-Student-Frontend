@@ -114,7 +114,8 @@ export class JointeacherPage {
       firstName: this.firstName,
       personalMessage: this.personalMessage,
       teachesAt: this.teachesAt,
-      teachesInstitutions: this.teachesInstitutions
+      teachesInstitutions: this.teachesInstitutions,
+      rate: 0
     };
     return newTeacher;
   }

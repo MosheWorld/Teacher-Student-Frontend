@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-buttons start>
       <button ion-button (click)="dismiss();">
-        <font style="color: white;">Close</font>
+        <font class="m-color-white">Close</font>
       </button>
     </ion-buttons>
     <ion-title text-center>
@@ -20,7 +20,7 @@
     <!-- Image -->
     <ion-row>
       <ion-col col-7 text-left>
-        <img style="width: 150px;" src="assets\\imgs\\imageNotFound.jpg" />
+        <img class="m-width-150px" src="assets\\imgs\\imageNotFound.jpg" />
       </ion-col>
       <ion-col *ngIf="!isTeacherFavorited" col-5 text-right>
         <button ion-button icon-start small outline color="dark" (click)="addFavorite()">
@@ -39,7 +39,7 @@
     <!-- First name and Last name -->
     <ion-row>
       <ion-col col-12>
-        <font style="font-size: 20px;">
+        <font class="m-font-size-20px">
           <i>{{teacher.firstName}} {{teacher.lastName}}</i>
         </font> -
         <i>{{teacher.gender}}, {{teacher.age}}</i>
@@ -67,7 +67,7 @@
       <ion-col col-12>
         <b>Price: </b>
         <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>
-        <font style="font-size: 10px">ILS</font>
+        <font class="m-font-size-10px">ILS</font>
       </ion-col>
     </ion-row>
 
@@ -115,7 +115,7 @@
         </button>
       </ion-col>
       <ion-col col-6 text-right *ngIf="alreadyAddedRecommend">
-        <ion-icon style="font-size: 30px" name="md-done-all"></ion-icon>
+        <ion-icon class="m-font-size-30px" name="md-done-all"></ion-icon>
       </ion-col>
     </ion-row>
 
@@ -174,7 +174,7 @@
         <!-- Error message -->
         <ion-row *ngIf="showErrorMessage">
           <ion-col col-12>
-            <font style="color: red;">The fields are not valid.</font>
+            <font class="m-color-red">The fields are not valid.</font>
           </ion-col>
         </ion-row>
 
@@ -191,7 +191,7 @@
     </div>
 
     <!-- Recommendations List -->
-    <ion-row *ngFor="let recommend of teacher.recommendations" style="border-bottom: 1px solid #b18b22;">
+    <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">
       <ion-col col-12>
         {{recommend.fullName}} - {{recommend.rate}}
       </ion-col>

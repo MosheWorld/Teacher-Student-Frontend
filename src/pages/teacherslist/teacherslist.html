@@ -95,9 +95,12 @@
             <ion-row>
               <ion-col col-12>
                 <ion-card-title>
-                  <font class="m-font-size-20px">{{teacher.firstName}} {{teacher.lastName}}</font>
+                  <font class="m-font-size-25px">{{teacher.firstName}} {{teacher.lastName}}</font>
                   -
-                  <i>{{teacher.gender}} {{teacher.age}}</i>
+                  <font class="m-font-size-17px">
+                    <i>{{teacher.gender}} {{teacher.age}}</i>
+                  </font>
+
                 </ion-card-title>
               </ion-col>
             </ion-row>
@@ -119,7 +122,7 @@
                 <u>
                   <b>Rating:</b>
                 </u>
-                <rating readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                <rating [(ngModel)]="teachers[i].rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
               </ion-col>
             </ion-row>
 

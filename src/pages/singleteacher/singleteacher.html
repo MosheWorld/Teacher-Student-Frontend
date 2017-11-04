@@ -51,6 +51,7 @@
       <ion-col col-12>
         <b>Phone: </b>
         <i>{{teacher.phone}}</i>
+        <ion-icon class="m-padding-left-7px" color="secondary" name="logo-whatsapp" (click)="openWhatsApp()"></ion-icon>
       </ion-col>
     </ion-row>
 
@@ -128,7 +129,7 @@
     </ion-row>
 
     <!-- Show recommendation -->
-    <div class="animated zoomInDown" *ngIf="showRecommendationsBoolean" text-center>
+    <div class="animated bounceInDown" *ngIf="showRecommendationsBoolean" text-center>
 
       <ion-list>
 

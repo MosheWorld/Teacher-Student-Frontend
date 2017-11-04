@@ -27,7 +27,7 @@ export class SingleteacherPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
     public apiProvider: ApiProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-    public favoritesManagerProvider: FavoritesManagerProvider, public toasterProvider:ToasterProvider) {
+    public favoritesManagerProvider: FavoritesManagerProvider, public toasterProvider: ToasterProvider) {
     this.teacher = this.navParams.get('teacher');
     this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
   }
@@ -90,6 +90,17 @@ export class SingleteacherPage {
     this.favoritesManagerProvider.removeID(this.teacher._id);
     this.isTeacherFavorited = false;
     this.toasterProvider.presentToast("Teacher has been removed from favorites.");
+  }
+
+  public openWhatsApp() {
+    if (this.teacher && this.teacher.phone) {
+      if ((this.teacher.phone).indexOf("972") !== -1) {
+        window.open('https://api.whatsapp.com/send?phone=' + this.teacher.phone);
+      } else if (this.teacher.phone[0] === "0") {
+        let number = "972" + this.teacher.phone;
+        window.open('https://api.whatsapp.com/send?phone=' + number);
+      }
+    }
   }
 
   private isModelValid() {

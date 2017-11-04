@@ -30383,6 +30383,11 @@ ul.rating li ion-icon {
   font-size: 25px;
 }
 
+.swiper-pagination-bullet-active {
+  background: white;
+  opacity: 1;
+}
+
 .m-color-white {
   color: white;
 }

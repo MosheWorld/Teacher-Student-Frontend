@@ -6,20 +6,22 @@ ion-header span.back-button-text.back-button-text-ios {
 
 ul {
   padding: 0px;
- 
   &.rating li {
     padding: 3px 5px !important;
     background: none;
     color: #ffb400;
- 
     ion-icon {
       font-size: 25px;
     }
   }
 }
+
+.swiper-pagination-bullet-active {
+  background: white;
+  opacity: 1;
+}
+
 // Default - End
-
-
 // Colors
 .m-color-white {
   color: white;

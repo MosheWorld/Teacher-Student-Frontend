@@ -1,3 +1,4 @@
+import { Geolocation } from '@ionic-native/geolocation';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
@@ -71,7 +72,8 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     ToasterProvider,
     LocalStorageProvider,
     TeachesInstitutionsPipe,
-    FavoritesManagerProvider
+    FavoritesManagerProvider,
+    Geolocation
   ]
 })
 export class AppModule { }

@@ -76,7 +76,9 @@
     <ion-row>
       <ion-col col-12>
         <b>Rate: </b>
-        <i>{{teacher.rate}}</i>
+        <i>{{teacher.rate}}</i> 
+         <font *ngIf="teacher.recommendations.length === 1"><i>( {{teacher.recommendations.length}} person rated )</i></font> 
+         <font *ngIf="teacher.recommendations.length !== 1"><i>( {{teacher.recommendations.length}} people rated )</i></font> 
       </ion-col>
     </ion-row>
 

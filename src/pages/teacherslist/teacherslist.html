@@ -121,8 +121,11 @@
               <ion-col col-12>
                 <u>
                   <b>Rating:</b>
-                </u>
-                <rating [(ngModel)]="teachers[i].rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                </u> 
+                <font *ngIf="teacher.recommendations.length === 1"><i>( {{teacher.recommendations.length}} person rated )</i></font> 
+                <font *ngIf="teacher.recommendations.length !== 1"><i>( {{teacher.recommendations.length}} people rated )</i></font> 
+                <rating [(ngModel)]="teachers[i].rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+                  starIconName="star" nullable="false"></rating>
               </ion-col>
             </ion-row>
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Tabs, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Tabs, ModalController, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
 import { SingleteacherPage } from './../singleteacher/singleteacher';
@@ -18,7 +18,8 @@ export class FavoritesPage {
   public teachers: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider,
-    public apiProvider: ApiProvider, public modalCtrl: ModalController) {
+    public apiProvider: ApiProvider, public modalCtrl: ModalController, public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController) {
     let listOfTeacherID = this.favoritesManagerProvider.getFavorites();
     this.bootstrapFavoritePage(listOfTeacherID);
   }
@@ -40,6 +41,9 @@ export class FavoritesPage {
     modal.onDidDismiss((data) => {
       if (data === false) {
         this.teachers.splice(index, 1);
+        if (this.teachers.length === 0) {
+          this.userHaveFavorites = false;
+        }
       }
     });
     modal.present();
@@ -58,13 +62,30 @@ export class FavoritesPage {
     let data = {
       "listOfTeacherID": listOfTeacherID
     };
+
+    const loading = this.loadingCtrl.create({
+      content: 'Loading favorites, please wait...'
+    });
+    loading.present();
+
     this.apiProvider.httpPost('teacher/getlistofteachersbyid', data)
       .subscribe(
       (teachersList) => {
         this.teachers = teachersList;
+        loading.dismiss();
       },
       (failure) => {
-        console.log(failure);
+        const alert = this.createAlert('Couldn\'t load the favorites teachers', 'There was some problem, we couldn\'t load the favorite teachers, please try again later.');
+        alert.present();
       });
+  }
+
+  private createAlert(titleInput: string, subTitleInput: string) {
+    const alert = this.alertCtrl.create({
+      title: titleInput,
+      subTitle: subTitleInput,
+      buttons: ['Ok']
+    });
+    return alert;
   }
 }

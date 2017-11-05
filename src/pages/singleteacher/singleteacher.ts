@@ -30,6 +30,7 @@ export class SingleteacherPage {
     public favoritesManagerProvider: FavoritesManagerProvider, public toasterProvider: ToasterProvider) {
     this.teacher = this.navParams.get('teacher');
     this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
+    console.log(this.teacher);
   }
 
   public dismiss() {

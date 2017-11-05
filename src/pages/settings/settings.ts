@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
+
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { FavoritesPage } from './../favorites/favorites';
 
@@ -10,10 +11,9 @@ import { FavoritesPage } from './../favorites/favorites';
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
-public lat = 0;
-public lang = 0;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private geolocation: Geolocation) {
+  public lat;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) {
   }
 
   public goPage(page: any) {
@@ -27,12 +27,22 @@ public lang = 0;
     }
   }
 
-  public test(){
-    this.geolocation.getCurrentPosition().then((resp) => {
-      this.lat = resp.coords.latitude
-      this.lang =  resp.coords.longitude
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
+  public test() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      console.log(base64Image);
+      this.lat = base64Image
+    }, (err) => {
+      // Handle error
+    });
   }
 }

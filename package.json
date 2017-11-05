@@ -20,12 +20,12 @@
         "@angular/http": "4.4.3",
         "@angular/platform-browser": "4.4.3",
         "@angular/platform-browser-dynamic": "4.4.3",
+        "@ionic-native/camera": "^4.3.3",
         "@ionic-native/core": "4.3.2",
-        "@ionic-native/geolocation": "^4.3.3",
         "@ionic-native/splash-screen": "4.3.2",
         "@ionic-native/status-bar": "4.3.2",
         "angular-2-local-storage": "^1.0.1",
-        "cordova-plugin-geolocation": "^2.4.3",
+        "cordova-plugin-camera": "^2.4.1",
         "express": "^4.16.2",
         "ionic-angular": "3.7.1",
         "ionic2-rating": "^1.2.2",
@@ -46,9 +46,7 @@
     "description": "An Ionic project",
     "cordova": {
         "plugins": {
-            "cordova-plugin-geolocation": {
-                "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
-            }
+            "cordova-plugin-camera": {}
         }
     }
 }

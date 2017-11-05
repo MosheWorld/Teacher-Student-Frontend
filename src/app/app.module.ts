@@ -1,4 +1,4 @@
-import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
@@ -73,7 +73,7 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     LocalStorageProvider,
     TeachesInstitutionsPipe,
     FavoritesManagerProvider,
-    Geolocation
+    Camera
   ]
 })
 export class AppModule { }

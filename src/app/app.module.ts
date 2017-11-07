@@ -5,6 +5,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { Camera } from '@ionic-native/camera';
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -23,7 +24,7 @@ import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
 import { LocalStorageProvider } from '../providers/local-storage/local-storage';
 import { FavoritesManagerProvider } from '../providers/favorites-manager/favorites-manager';
 import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
-import { Camera } from '@ionic-native/camera';
+
 @NgModule({
   declarations: [
     MyApp,

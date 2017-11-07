@@ -23,7 +23,7 @@ import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
 import { LocalStorageProvider } from '../providers/local-storage/local-storage';
 import { FavoritesManagerProvider } from '../providers/favorites-manager/favorites-manager';
 import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
-
+import { Camera } from '@ionic-native/camera';
 @NgModule({
   declarations: [
     MyApp,
@@ -63,6 +63,7 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     SingleteacherPage
   ],
   providers: [
+    Camera,
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

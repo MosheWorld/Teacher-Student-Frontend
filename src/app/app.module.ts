@@ -1,12 +1,10 @@
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
-import { Facebook } from '@ionic-native/facebook';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -65,7 +63,6 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     SingleteacherPage
   ],
   providers: [
-    Facebook,
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

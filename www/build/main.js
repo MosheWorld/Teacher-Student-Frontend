@@ -1,6 +1,6 @@
 webpackJsonp([7],{
 
-/***/ 106:
+/***/ 105:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105,7 +105,7 @@ ContactusPage = __decorate([
 
 /***/ }),
 
-/***/ 107:
+/***/ 106:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -244,7 +244,7 @@ JointeacherPage = __decorate([
 
 /***/ }),
 
-/***/ 108:
+/***/ 107:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -253,7 +253,7 @@ JointeacherPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__favorites_favorites__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__teacherslist_teacherslist__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__teacherslist_teacherslist__ = __webpack_require__(108);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -395,7 +395,7 @@ SearchPage = __decorate([
 
 /***/ }),
 
-/***/ 109:
+/***/ 108:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -485,7 +485,7 @@ TeacherslistPage = __decorate([
 
 /***/ }),
 
-/***/ 110:
+/***/ 109:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -524,7 +524,7 @@ var SettingsPage = (function () {
 }());
 SettingsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  Settings page, go away, it\'s not ready!\n  Facebook tests\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
+        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  Settings page, go away, it\'s not ready!\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
 ], SettingsPage);
@@ -533,7 +533,7 @@ SettingsPage = __decorate([
 
 /***/ }),
 
-/***/ 119:
+/***/ 118:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -546,40 +546,40 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 119;
+webpackEmptyAsyncContext.id = 118;
 
 /***/ }),
 
-/***/ 161:
+/***/ 160:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/contactus/contactus.module": [
-		288,
+		287,
 		6
 	],
 	"../pages/favorites/favorites.module": [
-		289,
+		290,
 		5
 	],
 	"../pages/jointeacher/jointeacher.module": [
-		290,
+		288,
 		4
 	],
 	"../pages/search/search.module": [
-		291,
+		289,
 		3
 	],
 	"../pages/settings/settings.module": [
-		292,
+		291,
 		2
 	],
 	"../pages/singleteacher/singleteacher.module": [
-		293,
+		292,
 		1
 	],
 	"../pages/teacherslist/teacherslist.module": [
-		294,
+		293,
 		0
 	]
 };
@@ -594,18 +594,18 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 161;
+webpackAsyncContext.id = 160;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 163:
+/***/ 162:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocalStorageProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_2_local_storage__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_2_local_storage__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_2_local_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_2_local_storage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
@@ -645,7 +645,7 @@ LocalStorageProvider = __decorate([
 
 /***/ }),
 
-/***/ 166:
+/***/ 165:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -695,8 +695,8 @@ ToasterProvider = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_search__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_settings__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_search__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_settings__ = __webpack_require__(109);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -736,8 +736,8 @@ TabsPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__favorites_favorites__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contactus_contactus__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__jointeacher_jointeacher__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contactus_contactus__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__jointeacher_jointeacher__ = __webpack_require__(106);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -810,31 +810,30 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_component__ = __webpack_require__(231);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic2_rating__ = __webpack_require__(284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular_2_local_storage__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular_2_local_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_angular_2_local_storage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_home_home__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_api_api__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_search_search__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_favorites_favorites__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_toaster_toaster__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_contactus_contactus__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pipes_teaches_at_teaches_at__ = __webpack_require__(286);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_jointeacher_jointeacher__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_teacherslist_teacherslist__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_singleteacher_singleteacher__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_local_storage_local_storage__ = __webpack_require__(163);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_favorites_manager_favorites_manager__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pipes_teaches_institutions_teaches_institutions__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular_2_local_storage__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular_2_local_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angular_2_local_storage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_tabs_tabs__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_api_api__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_status_bar__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_search_search__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_settings_settings__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_favorites_favorites__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_toaster_toaster__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_contactus_contactus__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pipes_teaches_at_teaches_at__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_jointeacher_jointeacher__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_teacherslist_teacherslist__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_singleteacher_singleteacher__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_local_storage_local_storage__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_favorites_manager_favorites_manager__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pipes_teaches_institutions_teaches_institutions__ = __webpack_require__(286);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -865,72 +864,70 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
 var AppModule = (function () {
     function AppModule() {
     }
     return AppModule;
 }());
 AppModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["NgModule"])({
+    Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["NgModule"])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_8__pages_home_home__["a" /* HomePage */],
-            __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__["a" /* TabsPage */],
-            __WEBPACK_IMPORTED_MODULE_12__pages_search_search__["a" /* SearchPage */],
-            __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__["a" /* SettingsPage */],
-            __WEBPACK_IMPORTED_MODULE_17__pages_contactus_contactus__["a" /* ContactusPage */],
-            __WEBPACK_IMPORTED_MODULE_15__pages_favorites_favorites__["a" /* FavoritesPage */],
-            __WEBPACK_IMPORTED_MODULE_18__pipes_teaches_at_teaches_at__["a" /* TeachesAtPipe */],
-            __WEBPACK_IMPORTED_MODULE_19__pages_jointeacher_jointeacher__["a" /* JointeacherPage */],
-            __WEBPACK_IMPORTED_MODULE_20__pages_teacherslist_teacherslist__["a" /* TeacherslistPage */],
-            __WEBPACK_IMPORTED_MODULE_21__pages_singleteacher_singleteacher__["a" /* SingleteacherPage */],
-            __WEBPACK_IMPORTED_MODULE_24__pipes_teaches_institutions_teaches_institutions__["a" /* TeachesInstitutionsPipe */]
+            __WEBPACK_IMPORTED_MODULE_7__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_8__pages_tabs_tabs__["a" /* TabsPage */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_search_search__["a" /* SearchPage */],
+            __WEBPACK_IMPORTED_MODULE_13__pages_settings_settings__["a" /* SettingsPage */],
+            __WEBPACK_IMPORTED_MODULE_16__pages_contactus_contactus__["a" /* ContactusPage */],
+            __WEBPACK_IMPORTED_MODULE_14__pages_favorites_favorites__["a" /* FavoritesPage */],
+            __WEBPACK_IMPORTED_MODULE_17__pipes_teaches_at_teaches_at__["a" /* TeachesAtPipe */],
+            __WEBPACK_IMPORTED_MODULE_18__pages_jointeacher_jointeacher__["a" /* JointeacherPage */],
+            __WEBPACK_IMPORTED_MODULE_19__pages_teacherslist_teacherslist__["a" /* TeacherslistPage */],
+            __WEBPACK_IMPORTED_MODULE_20__pages_singleteacher_singleteacher__["a" /* SingleteacherPage */],
+            __WEBPACK_IMPORTED_MODULE_23__pipes_teaches_institutions_teaches_institutions__["a" /* TeachesInstitutionsPipe */]
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__["a" /* BrowserModule */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* HttpModule */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic2_rating__["a" /* Ionic2RatingModule */],
-            __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */], {}, {
+            __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__["a" /* Ionic2RatingModule */],
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */], {}, {
                 links: [
                     { loadChildren: '../pages/contactus/contactus.module#ContactusPageModule', name: 'ContactusPage', segment: 'contactus', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/favorites/favorites.module#FavoritesPageModule', name: 'FavoritesPage', segment: 'favorites', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/jointeacher/jointeacher.module#JointeacherPageModule', name: 'JointeacherPage', segment: 'jointeacher', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/search/search.module#SearchPageModule', name: 'SearchPage', segment: 'search', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/favorites/favorites.module#FavoritesPageModule', name: 'FavoritesPage', segment: 'favorites', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/singleteacher/singleteacher.module#SingleteacherPageModule', name: 'SingleteacherPage', segment: 'singleteacher', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/teacherslist/teacherslist.module#TeacherslistPageModule', name: 'TeacherslistPage', segment: 'teacherslist', priority: 'low', defaultHistory: [] }
                 ]
             }),
-            __WEBPACK_IMPORTED_MODULE_6_angular_2_local_storage__["LocalStorageModule"].withConfig({
+            __WEBPACK_IMPORTED_MODULE_5_angular_2_local_storage__["LocalStorageModule"].withConfig({
                 prefix: 'StudyHub',
                 storageType: 'localStorage'
             })
         ],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_7_ionic_angular__["b" /* IonicApp */]],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_6_ionic_angular__["b" /* IonicApp */]],
         entryComponents: [
             __WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_8__pages_home_home__["a" /* HomePage */],
-            __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__["a" /* TabsPage */],
-            __WEBPACK_IMPORTED_MODULE_12__pages_search_search__["a" /* SearchPage */],
-            __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__["a" /* SettingsPage */],
-            __WEBPACK_IMPORTED_MODULE_15__pages_favorites_favorites__["a" /* FavoritesPage */],
-            __WEBPACK_IMPORTED_MODULE_17__pages_contactus_contactus__["a" /* ContactusPage */],
-            __WEBPACK_IMPORTED_MODULE_19__pages_jointeacher_jointeacher__["a" /* JointeacherPage */],
-            __WEBPACK_IMPORTED_MODULE_20__pages_teacherslist_teacherslist__["a" /* TeacherslistPage */],
-            __WEBPACK_IMPORTED_MODULE_21__pages_singleteacher_singleteacher__["a" /* SingleteacherPage */]
+            __WEBPACK_IMPORTED_MODULE_7__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_8__pages_tabs_tabs__["a" /* TabsPage */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_search_search__["a" /* SearchPage */],
+            __WEBPACK_IMPORTED_MODULE_13__pages_settings_settings__["a" /* SettingsPage */],
+            __WEBPACK_IMPORTED_MODULE_14__pages_favorites_favorites__["a" /* FavoritesPage */],
+            __WEBPACK_IMPORTED_MODULE_16__pages_contactus_contactus__["a" /* ContactusPage */],
+            __WEBPACK_IMPORTED_MODULE_18__pages_jointeacher_jointeacher__["a" /* JointeacherPage */],
+            __WEBPACK_IMPORTED_MODULE_19__pages_teacherslist_teacherslist__["a" /* TeacherslistPage */],
+            __WEBPACK_IMPORTED_MODULE_20__pages_singleteacher_singleteacher__["a" /* SingleteacherPage */]
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */],
-            __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__["a" /* SplashScreen */],
-            { provide: __WEBPACK_IMPORTED_MODULE_4__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["c" /* IonicErrorHandler */] },
-            __WEBPACK_IMPORTED_MODULE_10__providers_api_api__["a" /* ApiProvider */],
-            __WEBPACK_IMPORTED_MODULE_18__pipes_teaches_at_teaches_at__["a" /* TeachesAtPipe */],
-            __WEBPACK_IMPORTED_MODULE_16__providers_toaster_toaster__["a" /* ToasterProvider */],
-            __WEBPACK_IMPORTED_MODULE_22__providers_local_storage_local_storage__["a" /* LocalStorageProvider */],
-            __WEBPACK_IMPORTED_MODULE_24__pipes_teaches_institutions_teaches_institutions__["a" /* TeachesInstitutionsPipe */],
-            __WEBPACK_IMPORTED_MODULE_23__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */]
+            __WEBPACK_IMPORTED_MODULE_10__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__["a" /* SplashScreen */],
+            { provide: __WEBPACK_IMPORTED_MODULE_3__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["c" /* IonicErrorHandler */] },
+            __WEBPACK_IMPORTED_MODULE_9__providers_api_api__["a" /* ApiProvider */],
+            __WEBPACK_IMPORTED_MODULE_17__pipes_teaches_at_teaches_at__["a" /* TeachesAtPipe */],
+            __WEBPACK_IMPORTED_MODULE_15__providers_toaster_toaster__["a" /* ToasterProvider */],
+            __WEBPACK_IMPORTED_MODULE_21__providers_local_storage_local_storage__["a" /* LocalStorageProvider */],
+            __WEBPACK_IMPORTED_MODULE_23__pipes_teaches_institutions_teaches_institutions__["a" /* TeachesInstitutionsPipe */],
+            __WEBPACK_IMPORTED_MODULE_22__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */]
         ]
     })
 ], AppModule);
@@ -946,7 +943,7 @@ AppModule = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(209);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -985,7 +982,7 @@ MyApp = __decorate([
 
 /***/ }),
 
-/***/ 286:
+/***/ 285:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1032,7 +1029,7 @@ TeachesAtPipe = __decorate([
 
 /***/ }),
 
-/***/ 287:
+/***/ 286:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1120,7 +1117,7 @@ TeachesInstitutionsPipe = __decorate([
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApiProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
@@ -1298,7 +1295,7 @@ FavoritesPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FavoritesManagerProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_local_storage_local_storage__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_local_storage_local_storage__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1384,7 +1381,7 @@ FavoritesManagerProvider = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_favorites_manager_favorites_manager__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_toaster_toaster__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_toaster_toaster__ = __webpack_require__(165);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1416,7 +1413,6 @@ var SingleteacherPage = (function () {
         this.isTeacherFavorited = false;
         this.teacher = this.navParams.get('teacher');
         this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
-        console.log(this.teacher);
     }
     SingleteacherPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss(this.isTeacherFavorited);

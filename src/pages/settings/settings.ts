@@ -9,8 +9,7 @@ import { FavoritesPage } from './../favorites/favorites';
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
-  public lat;
-
+  
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

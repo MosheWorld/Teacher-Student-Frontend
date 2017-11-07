@@ -4,7 +4,7 @@ import { JointeacherPage } from './jointeacher';
 
 @NgModule({
   declarations: [
-    JointeacherPage,
+   //JointeacherPage,
   ],
   imports: [
     IonicPageModule.forChild(JointeacherPage),

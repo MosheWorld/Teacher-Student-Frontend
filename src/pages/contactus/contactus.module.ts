@@ -4,7 +4,7 @@ import { ContactusPage } from './contactus';
 
 @NgModule({
   declarations: [
-    ContactusPage,
+    //ContactusPage
   ],
   imports: [
     IonicPageModule.forChild(ContactusPage),

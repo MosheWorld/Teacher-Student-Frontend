@@ -1,1 +1,1551 @@
-webpackJsonp([7],{104:function(l,n,u){"use strict";u.d(n,"a",function(){return d});var e=u(2),t=u(0),a=u(27),d=function(){function l(l){this.toastCtrl=l}return l.prototype.presentToast=function(l,n,u){void 0===n&&(n=2e3),void 0===u&&(u="buttom"),this.toastCtrl.create({message:l,duration:n,position:u}).present()},l}();d=Object(e.__decorate)([Object(t.Injectable)(),Object(e.__metadata)("design:paramtypes",["function"==typeof(o=void 0!==a.k&&a.k)&&o||Object])],d);var o},108:function(l,n,u){"use strict";u.d(n,"a",function(){return o});var e=u(2),t=u(0),a=u(27),d=u(28),o=function(){function l(l,n,u,e,t){this.navCtrl=l,this.navParams=n,this.apiProvider=u,this.loadingCtrl=e,this.alertCtrl=t,this.showErrorMessage=!1}return l.prototype.isFormValid=function(){return!(this.isStringNullOrEmpty(this.fullName)||this.isStringNullOrEmpty(this.email)||this.isStringNullOrEmpty(this.contactReason)||this.isStringNullOrEmpty(this.message))},l.prototype.sendContactUsForm=function(){var l=this;if(this.setErrorMessage(!1),this.isFormValid()){var n={fullName:this.fullName,email:this.email,contactReason:this.contactReason,message:this.message},u=this.loadingCtrl.create({content:"Sending the information, please wait..."});u.present(),this.apiProvider.httpPost("contactus/create",n).subscribe(function(n){u.dismiss(),l.createAlert("Request send successfully","Your request to contact you sent successfully.We'll contact you as soon as possible, thank you.").present(),l.navCtrl.pop()},function(n){u.dismiss(),l.createAlert("Request failed to send","The request has been failed for some reason, please try again later.").present()})}else this.setErrorMessage(!0)},l.prototype.openWhatsApp=function(){window.open("https://api.whatsapp.com/send?phone=972542477052")},l.prototype.setErrorMessage=function(l){this.showErrorMessage=l},l.prototype.createAlert=function(l,n){return this.alertCtrl.create({title:l,subTitle:n,buttons:["Ok"]})},l.prototype.isStringNullOrEmpty=function(l){return null==l||""===l},l}();o=Object(e.__decorate)([Object(t.Component)({selector:"page-contactus",templateUrl:"contactus.html"}),Object(e.__metadata)("design:paramtypes",["function"==typeof(i=void 0!==a.h&&a.h)&&i||Object,"function"==typeof(r=void 0!==a.i&&a.i)&&r||Object,"function"==typeof(s=void 0!==d.a&&d.a)&&s||Object,"function"==typeof(c=void 0!==a.f&&a.f)&&c||Object,"function"==typeof(g=void 0!==a.a&&a.a)&&g||Object])],o);var i,r,s,c,g},109:function(l,n,u){"use strict";u.d(n,"a",function(){return o});var e=u(2),t=u(27),a=u(0),d=u(28),o=function(){function l(l,n,u,e,t){this.navCtrl=l,this.navParams=n,this.apiProvider=u,this.loadingCtrl=e,this.alertCtrl=t,this.teachesInstitutions=[],this.showErrorMessage=!1}return l.prototype.createTeacher=function(){var l=this;if(this.setErrorMessage(!1),this.convertStringToInteger(),this.isModelValid()){var n=this.createNewTeacherDataJson(),u=this.loadingCtrl.create({content:"Sending information, please wait..."});u.present(),this.apiProvider.httpPost("teacher/create",n).subscribe(function(n){u.dismiss(),l.createAlert("Welcome new teacher","Your account has been created successfully, this is your teacher page, thank you and good luck.").present()},function(n){u.dismiss(),l.createAlert("Something went wrong","Please try again later, we have some server issues.").present()})}else this.setErrorMessage(!0)},l.prototype.convertStringToInteger=function(){null!=this.priceFrom&&(this.priceFrom=parseInt(this.priceFrom.toString())),null!=this.priceTo&&(this.priceTo=parseInt(this.priceTo.toString())),null!=this.age&&(this.age=parseInt(this.age.toString()))},l.prototype.isModelValid=function(){return!(this.teachesAt<0||null==this.priceTo||this.priceTo>200||null==this.priceFrom||this.priceFrom<0||this.priceFrom>this.priceTo||null==this.age||this.age<0||this.age>120||this.isStringNullOrEmpty(this.phone)||this.isStringNullOrEmpty(this.email)||this.isStringNullOrEmpty(this.gender)||this.isStringNullOrEmpty(this.lastName)||this.isStringNullOrEmpty(this.firstName)||this.isStringNullOrEmpty(this.personalMessage)||null==this.teachesInstitutions||0===this.teachesInstitutions.length)},l.prototype.setErrorMessage=function(l){this.showErrorMessage=l},l.prototype.isStringNullOrEmpty=function(l){return null==l||""===l},l.prototype.createNewTeacherDataJson=function(){var l=this;return this.teachesAt=parseInt(this.teachesAt.toString()),this.teachesInstitutions.forEach(function(n,u){l.teachesInstitutions[u]=parseInt(n.toString())}),{age:this.age,priceTo:this.priceTo,priceFrom:this.priceFrom,phone:this.phone,email:this.email,gender:this.gender,lastName:this.lastName,firstName:this.firstName,personalMessage:this.personalMessage,teachesAt:this.teachesAt,teachesInstitutions:this.teachesInstitutions,rate:0}},l.prototype.createAlert=function(l,n){return this.alertCtrl.create({title:l,subTitle:n,buttons:["Ok"]})},l}();o=Object(e.__decorate)([Object(a.Component)({selector:"page-jointeacher",templateUrl:"jointeacher.html"}),Object(e.__metadata)("design:paramtypes",["function"==typeof(i=void 0!==t.h&&t.h)&&i||Object,"function"==typeof(r=void 0!==t.i&&t.i)&&r||Object,"function"==typeof(s=void 0!==d.a&&d.a)&&s||Object,"function"==typeof(c=void 0!==t.f&&t.f)&&c||Object,"function"==typeof(g=void 0!==t.a&&t.a)&&g||Object])],o);var i,r,s,c,g},110:function(l,n,u){"use strict";u.d(n,"a",function(){return r});var e=u(2),t=u(0),a=u(27),d=u(28),o=u(66),i=u(111),r=function(){function l(l,n,u,e,t){this.navCtrl=l,this.navParams=n,this.apiProvider=u,this.loadingCtrl=e,this.alertCtrl=t,this.brightness=20,this.saturation=0,this.warmth=1300,this.structure={lower:30,upper:140},this.gender="Both",this.showErrorMessage=!1}return l.prototype.searchTeachers=function(){var l=this;if(this.setErrorMessage(!1),this.convertStringToInteger(),this.isModelValid()){this.gender="Both"===this.gender?"":this.gender;var n={fromPrice:this.structure.lower,toPrice:this.structure.upper,teachesAt:this.teachesAt,teachesInstitutions:this.teachesInstitutions,gender:this.gender},u=this.loadingCtrl.create({content:"Getting teachers, please wait..."});u.present(),this.apiProvider.httpPost("teacher/search",n).subscribe(function(n){u.dismiss(),n&&n.length>0?l.navCtrl.push(i.a,{teacherSearchList:n}):l.createAlert("Couldn't find the teachers","Please make the search filters to aim to more options, the teachers you asked for doesn't exist yet.").present()},function(n){u.dismiss(),l.createAlert("Request failed to send","The request has been failed for some reason, please try again later.").present()})}else this.setErrorMessage(!0)},l.prototype.getAllTeachers=function(){var l=this,n=this.loadingCtrl.create({content:"Getting teachers, please wait..."});n.present(),this.apiProvider.httpGet("teacher/getall").subscribe(function(u){n.dismiss(),u&&u.length>0?l.navCtrl.push(i.a,{teacherSearchList:u}):l.createAlert("Couldn't find the teachers","Please make the search filters to aim to more options, the teachers you asked for doesn't exist yet.").present()},function(u){n.dismiss(),l.createAlert("Request failed to send","The request has been failed for some reason, please try again later.").present()})},l.prototype.goPage=function(l){switch(l){case"favorites":this.navCtrl.push(o.a);break;default:console.log("Not found the requested page "+l)}},l.prototype.convertStringToInteger=function(){null!=this.teachesAt&&(this.teachesAt=parseInt(this.teachesAt.toString())),null!=this.teachesInstitutions&&(this.teachesInstitutions=parseInt(this.teachesInstitutions.toString()))},l.prototype.isModelValid=function(){return!(null==this.structure||null==this.gender||""===this.gender||null==this.teachesAt||this.teachesAt<0||null==this.structure.lower||this.structure.lower<0||null==this.teachesInstitutions||this.teachesInstitutions<0||null==this.structure.upper||this.structure.upper>200||this.structure.lower>this.structure.upper)},l.prototype.setErrorMessage=function(l){this.showErrorMessage=l},l.prototype.createAlert=function(l,n){return this.alertCtrl.create({title:l,subTitle:n,buttons:["Ok"]})},l}();r=Object(e.__decorate)([Object(t.Component)({selector:"page-search",templateUrl:"search.html"}),Object(e.__metadata)("design:paramtypes",["function"==typeof(s=void 0!==a.h&&a.h)&&s||Object,"function"==typeof(c=void 0!==a.i&&a.i)&&c||Object,"function"==typeof(g=void 0!==d.a&&d.a)&&g||Object,"function"==typeof(m=void 0!==a.f&&a.f)&&m||Object,"function"==typeof(h=void 0!==a.a&&a.a)&&h||Object])],r);var s,c,g,m,h},111:function(l,n,u){"use strict";u.d(n,"a",function(){return r});var e=u(2),t=u(250),a=(u.n(t),u(0)),d=u(27),o=u(77),i=u(52),r=function(){function l(l,n,u,e){this.navCtrl=l,this.navParams=n,this.modalCtrl=u,this.favoritesManagerProvider=e,this.teachersListNotChange=[],this.teachers=[];for(var a=this.navParams.get("teacherSearchList"),d=0,o=a;d<o.length;d++){var i=o[d];i.isTeacherFavorited=!!this.favoritesManagerProvider.isIDExist(i._id)}this.teachers=t.sortBy(a,[function(l){return l.firstName}]),this.teachersListNotChange=this.teachers.slice()}return l.prototype.expandTeacherInformation=function(l){var n=this,u=this.modalCtrl.create(o.a,{teacher:this.teachers[l]});u.onDidDismiss(function(u){n.teachers[l].isTeacherFavorited=u;for(var e=0,t=n.teachersListNotChange;e<t.length;e++){var a=t[e];if(a._id===n.teachers[l]._id){a.isTeacherFavorited=u;break}}}),u.present()},l.prototype.onInput=function(l){var n=l.target.value;null!=n&&""!==n?n&&""!==n.trim()&&(this.teachers=this.teachersListNotChange.filter(function(l){return(l.firstName+" "+l.lastName).toLowerCase().includes(n.toLowerCase())})):this.teachers=this.teachersListNotChange},l}();r=Object(e.__decorate)([Object(a.Component)({selector:"page-teacherslist",templateUrl:"teacherslist.html"}),Object(e.__metadata)("design:paramtypes",["function"==typeof(s=void 0!==d.h&&d.h)&&s||Object,"function"==typeof(c=void 0!==d.i&&d.i)&&c||Object,"function"==typeof(g=void 0!==d.g&&d.g)&&g||Object,"function"==typeof(m=void 0!==i.a&&i.a)&&m||Object])],r);var s,c,g,m},112:function(l,n,u){"use strict";u.d(n,"a",function(){return i});var e=u(2),t=u(0),a=u(27),d=u(66),o=u(105),i=function(){function l(l,n,u){this.navCtrl=l,this.navParams=n,this.camera=u}return l.prototype.goPage=function(l){switch(l){case"favorites":this.navCtrl.push(d.a);break;default:console.log("Not found the requested page "+l)}},l.prototype.test=function(){this.camera.getPicture({quality:100,destinationType:this.camera.DestinationType.DATA_URL,encodingType:this.camera.EncodingType.JPEG,mediaType:this.camera.MediaType.PICTURE}).then(function(l){var n="data:image/jpeg;base64,"+l;console.log(n)},function(l){})},l}();i=Object(e.__decorate)([Object(t.Component)({selector:"page-settings",templateUrl:"settings.html"}),Object(e.__metadata)("design:paramtypes",["function"==typeof(r=void 0!==a.h&&a.h)&&r||Object,"function"==typeof(s=void 0!==a.i&&a.i)&&s||Object,"function"==typeof(c=void 0!==o.a&&o.a)&&c||Object])],i);var r,s,c},150:function(l,n,u){"use strict";u.d(n,"a",function(){return o});var e=u(2),t=u(0),a=u(208),d=(u.n(a),u(131)),o=(u.n(d),function(){function l(l){this.localStorageService=l}return l.prototype.Set=function(l,n){this.localStorageService.set(l,n)},l.prototype.Get=function(l){return this.localStorageService.get(l)},l.prototype.Remove=function(l){this.localStorageService.remove(l)},l}());o=Object(e.__decorate)([Object(t.Injectable)(),Object(e.__metadata)("design:paramtypes",["function"==typeof(i=void 0!==a.LocalStorageService&&a.LocalStorageService)&&i||Object])],o);var i},154:function(l,n,u){"use strict";u.d(n,"a",function(){return a});var e=u(2),t=u(0),a=function(){function l(){}return l.prototype.transform=function(l){for(var n=[],u=1;u<arguments.length;u++)n[u-1]=arguments[u];var e="";switch(l){case 0:e="Home";break;case 1:e="Academic Institute";break;case 2:e="Both"}return e},l}();a=Object(e.__decorate)([Object(t.Pipe)({name:"teachesAt"})],a)},155:function(l,n,u){"use strict";u.d(n,"a",function(){return a});var e=u(2),t=u(0),a=function(){function l(){}return l.prototype.transform=function(l){for(var n=[],u=1;u<arguments.length;u++)n[u-1]=arguments[u];var e="";switch(l){case 0:e="Holon Institute Of Technology";break;case 1:e="Technion";break;case 2:e="Tel-Aviv University";break;case 4:e="Ben-Gurion Universit";break;case 8:e="Hebrew University";break;case 16:e="Bar-Ilan University";break;case 32:e="Tel-Aviv Jaffa Academic College";break;case 64:e="IDC Herzliya";break;case 128:e="Ariel University";break;case 256:e="Haifa University";break;case 512:e="Sapir Academic College";break;case 1024:e="ORT Braude Collegeof Engineering";break;case 2048:e="The Open University";break;case 4096:e="College of Management";break;case 8192:e="Achva Academic Campus"}return e},l}();a=Object(e.__decorate)([Object(t.Pipe)({name:"teachesInstitutions"})],a)},165:function(l,n){function u(l){return Promise.resolve().then(function(){throw new Error("Cannot find module '"+l+"'.")})}u.keys=function(){return[]},u.resolve=u,l.exports=u,u.id=165},191:function(l,n,u){function e(l){var n=t[l];return n?u.e(n[1]).then(function(){return u(n[0])}):Promise.reject(new Error("Cannot find module '"+l+"'."))}var t={"../pages/contactus/contactus.module.ngfactory":[266,6],"../pages/favorites/favorites.module.ngfactory":[267,5],"../pages/jointeacher/jointeacher.module.ngfactory":[268,4],"../pages/search/search.module.ngfactory":[269,3],"../pages/settings/settings.module.ngfactory":[270,2],"../pages/singleteacher/singleteacher.module.ngfactory":[271,1],"../pages/teacherslist/teacherslist.module.ngfactory":[272,0]};e.keys=function(){return Object.keys(t)},e.id=191,l.exports=e},221:function(l,n,u){"use strict";function e(l){return a["ɵvid"](0,[(l()(),a["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-red"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["The fields are not valid."])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "]))],null,null)}function t(l){return a["ɵvid"](0,[(l()(),a["ɵeld"](0,null,null,13,"ion-header",[],null,null,null,null,null)),a["ɵdid"](16384,null,0,i.a,[r.a,a.ElementRef,a.Renderer,[2,s.a]],null,null),(l()(),a["ɵted"](null,["\n\n  "])),(l()(),a["ɵeld"](0,null,null,9,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,c.b,c.a)),a["ɵdid"](49152,null,0,g.a,[m.a,[2,s.a],[2,h.a],r.a,a.ElementRef,a.Renderer],null,null),(l()(),a["ɵted"](3,["\n    "])),(l()(),a["ɵeld"](0,null,3,5,"ion-title",[["text-center",""]],null,null,null,f.b,f.a)),a["ɵdid"](49152,null,0,p.a,[r.a,a.ElementRef,a.Renderer,[2,v.a],[2,g.a]],null,null),(l()(),a["ɵted"](0,["\n      "])),(l()(),a["ɵeld"](0,null,0,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["Contact Us"])),(l()(),a["ɵted"](0,["\n    "])),(l()(),a["ɵted"](3,["\n  "])),(l()(),a["ɵted"](null,["\n\n"])),(l()(),a["ɵted"](null,["\n\n\n"])),(l()(),a["ɵeld"](0,null,null,235,"ion-content",[],[[2,"statusbar-padding",null],[2,"has-refresher",null]],[["window","resize"]],function(l,n,u){var e=!0;return"window:resize"===n&&(e=!1!==a["ɵnov"](l,16).resize()&&e),e},b.b,b.a)),a["ɵdid"](4374528,null,0,y.a,[r.a,R.a,C.a,a.ElementRef,a.Renderer,m.a,w.a,a.NgZone,[2,s.a],[2,h.a]],null,null),(l()(),a["ɵted"](1,["\n\n  "])),(l()(),a["ɵted"](1,["\n  "])),(l()(),a["ɵeld"](0,null,1,52,"div",[["class","m-background-2b3137 m-margin-top0 m-color-white"],["padding",""],["text-center",""]],null,null,null,null,null)),(l()(),a["ɵted"](null,["\n\n    "])),(l()(),a["ɵeld"](0,null,null,49,"ion-grid",[["class","grid"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,E.a,[],null,null),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-white m-font-size-38px m-font-weight-300"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["\n            What is your opinion?\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,6,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          You can send us anything you wish, feedback, recommendation, new ideas, bugs you've found, or even send message for fun,\n          we'll try to comment as soon as possible.\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,23,"ion-row",[["class","row"],["text-left",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-orange"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["You can contact the owner of this application by:"])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-c2bbbb"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["Email: mmoshikoo@gmail.com"])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-c2bbbb"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["Phone: 0542477052"])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n    "])),(l()(),a["ɵted"](null,["\n\n  "])),(l()(),a["ɵted"](1,["\n\n  "])),(l()(),a["ɵted"](1,["\n  "])),(l()(),a["ɵeld"](0,null,1,175,"div",[],null,null,null,null,null)),(l()(),a["ɵted"](null,["\n\n    "])),(l()(),a["ɵeld"](0,null,null,172,"ion-grid",[["class","grid"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,E.a,[],null,null),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,137,"ion-list",[],null,null,null,null,null)),a["ɵdid"](16384,null,0,k.a,[r.a,a.ElementRef,a.Renderer,R.a,I.l,C.a],null,null),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,24,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,1,{contentLabel:0}),a["ɵqud"](603979776,2,{_buttons:1}),a["ɵqud"](603979776,3,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[1,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Full name"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-input",[["type","text"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.fullName=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,24,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,4,{contentLabel:0}),a["ɵqud"](603979776,5,{_buttons:1}),a["ɵqud"](603979776,6,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[4,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Email"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-input",[["type","email"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.email=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,51,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,47,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,43,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,7,{contentLabel:0}),a["ɵqud"](603979776,8,{_buttons:1}),a["ɵqud"](603979776,9,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[],null,null,null,null,null)),a["ɵdid"](16384,[[7,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,null],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Reason to contact"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,31,"ion-select",[],[[2,"select-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"],[null,"click"],[null,"keyup.space"]],function(l,n,u){var e=!0,t=l.component;return"click"===n&&(e=!1!==a["ɵnov"](l,155)._click(u)&&e),"keyup.space"===n&&(e=!1!==a["ɵnov"](l,155)._keyup()&&e),"ngModelChange"===n&&(e=!1!==(t.contactReason=u)&&e),e},A.b,A.a)),a["ɵdid"](1228800,null,1,q.a,[m.a,P.a,r.a,a.ElementRef,a.Renderer,[2,T.a],D.a],null,null),a["ɵqud"](603979776,10,{options:1}),a["ɵprd"](1024,null,N.e,function(l){return[l]},[q.a]),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[2,N.e]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[],null,null,null,null,null)),a["ɵdid"](16384,[[10,4]],0,L.a,[a.ElementRef],null,null),(l()(),a["ɵted"](null,["Suggestion"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[],null,null,null,null,null)),a["ɵdid"](16384,[[10,4]],0,L.a,[a.ElementRef],null,null),(l()(),a["ɵted"](null,["Investment"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[],null,null,null,null,null)),a["ɵdid"](16384,[[10,4]],0,L.a,[a.ElementRef],null,null),(l()(),a["ɵted"](null,["Careers"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[],null,null,null,null,null)),a["ɵdid"](16384,[[10,4]],0,L.a,[a.ElementRef],null,null),(l()(),a["ɵted"](null,["Complain"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[],null,null,null,null,null)),a["ɵdid"](16384,[[10,4]],0,L.a,[a.ElementRef],null,null),(l()(),a["ɵted"](null,["Bug report"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[],null,null,null,null,null)),a["ɵdid"](16384,[[10,4]],0,L.a,[a.ElementRef],null,null),(l()(),a["ɵted"](null,["Other"])),(l()(),a["ɵted"](null,["\n              "])),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,24,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,11,{contentLabel:0}),a["ɵqud"](603979776,12,{_buttons:1}),a["ɵqud"](603979776,13,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[11,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Your message"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-textarea",[["rows","4"],["type","text"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.message=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵand"](16777216,null,null,1,null,e)),a["ɵdid"](16384,null,0,U.i,[a.ViewContainerRef,a.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,24,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,5,"button",[["block",""],["color","primary"],["icon-start",""],["ion-button",""],["outline",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.sendContactUsForm()&&e),e},V.b,V.a)),a["ɵdid"](1097728,null,0,H.a,[[8,""],r.a,a.ElementRef,a.Renderer],{color:[0,"color"],outline:[1,"outline"],block:[2,"block"]},null),(l()(),a["ɵted"](0,["\n            "])),(l()(),a["ɵeld"](0,null,0,1,"ion-icon",[["name","ios-send-outline"],["role","img"]],[[2,"hide",null]],null,null,null,null)),a["ɵdid"](147456,null,0,z.a,[r.a,a.ElementRef,a.Renderer],{name:[0,"name"]},null),(l()(),a["ɵted"](0,["\n            Send\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,5,"button",[["block",""],["color","secondary"],["icon-start",""],["ion-button",""],["outline",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.openWhatsApp()&&e),e},V.b,V.a)),a["ɵdid"](1097728,null,0,H.a,[[8,""],r.a,a.ElementRef,a.Renderer],{color:[0,"color"],outline:[1,"outline"],block:[2,"block"]},null),(l()(),a["ɵted"](0,["\n            "])),(l()(),a["ɵeld"](0,null,0,1,"ion-icon",[["name","logo-whatsapp"],["role","img"]],[[2,"hide",null]],null,null,null,null)),a["ɵdid"](147456,null,0,z.a,[r.a,a.ElementRef,a.Renderer],{name:[0,"name"]},null),(l()(),a["ɵted"](0,["\n            WhatsApp\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n    "])),(l()(),a["ɵted"](null,["\n\n  "])),(l()(),a["ɵted"](1,["\n\n"]))],function(l,n){var u=n.component;l(n,101,0,u.fullName);l(n,104,0,"text"),l(n,128,0,u.email);l(n,131,0,"email"),l(n,158,0,u.contactReason),l(n,209,0,u.message);l(n,212,0,"text"),l(n,220,0,u.showErrorMessage);l(n,230,0,"primary","","");l(n,233,0,"ios-send-outline");l(n,241,0,"secondary","","");l(n,244,0,"logo-whatsapp")},function(l,n){l(n,3,0,a["ɵnov"](n,4)._hidden,a["ɵnov"](n,4)._sbPadding),l(n,15,0,a["ɵnov"](n,16).statusbarPadding,a["ɵnov"](n,16)._hasRefresher),l(n,100,0,a["ɵnov"](n,103).ngClassUntouched,a["ɵnov"](n,103).ngClassTouched,a["ɵnov"](n,103).ngClassPristine,a["ɵnov"](n,103).ngClassDirty,a["ɵnov"](n,103).ngClassValid,a["ɵnov"](n,103).ngClassInvalid,a["ɵnov"](n,103).ngClassPending),l(n,127,0,a["ɵnov"](n,130).ngClassUntouched,a["ɵnov"](n,130).ngClassTouched,a["ɵnov"](n,130).ngClassPristine,a["ɵnov"](n,130).ngClassDirty,a["ɵnov"](n,130).ngClassValid,a["ɵnov"](n,130).ngClassInvalid,a["ɵnov"](n,130).ngClassPending),l(n,154,0,a["ɵnov"](n,155)._disabled,a["ɵnov"](n,160).ngClassUntouched,a["ɵnov"](n,160).ngClassTouched,a["ɵnov"](n,160).ngClassPristine,a["ɵnov"](n,160).ngClassDirty,a["ɵnov"](n,160).ngClassValid,a["ɵnov"](n,160).ngClassInvalid,a["ɵnov"](n,160).ngClassPending),l(n,208,0,a["ɵnov"](n,211).ngClassUntouched,a["ɵnov"](n,211).ngClassTouched,a["ɵnov"](n,211).ngClassPristine,a["ɵnov"](n,211).ngClassDirty,a["ɵnov"](n,211).ngClassValid,a["ɵnov"](n,211).ngClassInvalid,a["ɵnov"](n,211).ngClassPending),l(n,232,0,a["ɵnov"](n,233)._hidden),l(n,243,0,a["ɵnov"](n,244)._hidden)})}u.d(n,"a",function(){return W});var a=u(0),d=u(39),o=u(37),i=u(32),r=u(1),s=u(5),c=u(49),g=u(24),m=u(6),h=u(14),f=u(50),p=u(29),v=u(26),b=u(51),y=u(19),R=u(4),C=u(7),w=u(20),E=u(38),k=u(47),I=u(8),_=u(74),T=u(18),P=u(16),M=u(36),x=u(55),O=u(35),S=u(108),j=u(132),N=u(12),F=u(59),A=u(133),q=u(60),D=u(13),L=u(61),U=u(10),V=u(23),H=u(15),z=u(22),B=u(11),Z=u(28),$=u(48),G=u(45),J=a["ɵcrt"]({encapsulation:2,styles:[],data:{}}),W=a["ɵccf"]("page-contactus",S.a,function(l){return a["ɵvid"](0,[(l()(),a["ɵeld"](0,null,null,1,"page-contactus",[],null,null,null,t,J)),a["ɵdid"](49152,null,0,S.a,[h.a,B.a,Z.a,$.a,G.a],null,null)],null,null)},{},{},[])},222:function(l,n,u){"use strict";function e(l){return o["ɵvid"](0,[(l()(),o["ɵeld"](0,null,null,26,"div",[],null,null,null,null,null)),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵeld"](0,null,null,6,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,i.a,[],null,null),(l()(),o["ɵted"](null,["\n          "])),(l()(),o["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,r.a,[],null,null),(l()(),o["ɵted"](null,["\n            You have none in your favorite list.\n          "])),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵted"](null,["\n\n        "])),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵeld"](0,null,null,13,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,i.a,[],null,null),(l()(),o["ɵted"](null,["\n          "])),(l()(),o["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,r.a,[],null,null),(l()(),o["ɵted"](null,["\n            "])),(l()(),o["ɵeld"](0,null,null,5,"button",[["icon-start",""],["ion-button",""],["outline",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.goPage("search")&&e),e},s.b,s.a)),o["ɵdid"](1097728,null,0,c.a,[[8,""],g.a,o.ElementRef,o.Renderer],{outline:[0,"outline"]},null),(l()(),o["ɵted"](0,["\n              "])),(l()(),o["ɵeld"](0,null,0,1,"ion-icon",[["name","ios-search"],["role","img"]],[[2,"hide",null]],null,null,null,null)),o["ɵdid"](147456,null,0,m.a,[g.a,o.ElementRef,o.Renderer],{name:[0,"name"]},null),(l()(),o["ɵted"](0,["\n              Search for teacher\n            "])),(l()(),o["ɵted"](null,["\n          "])),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵted"](null,["\n      "]))],function(l,n){l(n,19,0,"");l(n,22,0,"ios-search")},function(l,n){l(n,21,0,o["ɵnov"](n,22)._hidden)})}function t(l){return o["ɵvid"](0,[(l()(),o["ɵeld"](0,null,null,45,"ion-col",[["class","animated zoomIn col"],["col-6",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,r.a,[],null,null),(l()(),o["ɵted"](null,["\n            "])),(l()(),o["ɵeld"](0,null,null,41,"ion-card",[],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.expandTeacherInformation(l.context.index)&&e),e},null,null)),o["ɵdid"](16384,null,0,h.a,[g.a,o.ElementRef,o.Renderer],null,null),(l()(),o["ɵted"](null,["\n              "])),(l()(),o["ɵted"](null,["\n              "])),(l()(),o["ɵeld"](0,null,null,2,"ion-card-header",[],null,null,null,null,null)),o["ɵdid"](16384,null,0,f.a,[g.a,o.ElementRef,o.Renderer],null,null),(l()(),o["ɵted"](null,["\n                "," ","\n              "])),(l()(),o["ɵted"](null,["\n              "])),(l()(),o["ɵeld"](0,null,null,32,"ion-card-content",[],null,null,null,null,null)),o["ɵdid"](16384,null,0,p.a,[g.a,o.ElementRef,o.Renderer],null,null),(l()(),o["ɵted"](null,["\n                "])),(l()(),o["ɵted"](null,["\n                "])),(l()(),o["ɵeld"](0,null,null,4,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,r.a,[],null,null),(l()(),o["ɵted"](null,["\n                  "])),(l()(),o["ɵeld"](0,null,null,0,"img",[["src","assets\\\\imgs\\\\imageNotFound.jpg"]],null,null,null,null,null)),(l()(),o["ɵted"](null,["\n                "])),(l()(),o["ɵted"](null,["\n                "])),(l()(),o["ɵted"](null,["\n                "])),(l()(),o["ɵeld"](0,null,null,8,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,r.a,[],null,null),(l()(),o["ɵted"](null,["\n                  "])),(l()(),o["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),o["ɵted"](null,[""," - ",""])),(l()(),o["ɵted"](null,["\n                  "])),(l()(),o["ɵeld"](0,null,null,1,"font",[["class","m-font-size-10px"]],null,null,null,null,null)),(l()(),o["ɵted"](null,["ILS"])),(l()(),o["ɵted"](null,["\n                "])),(l()(),o["ɵted"](null,["\n                "])),(l()(),o["ɵted"](null,["\n                "])),(l()(),o["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,r.a,[],null,null),(l()(),o["ɵted"](null,["\n                  "])),(l()(),o["ɵeld"](0,null,null,5,"rating",[["emptyStarIconName","star-outline"],["halfStarIconName","star-half"],["max","5"],["nullable","false"],["readOnly","false"],["starIconName","star"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.teachers[l.context.index].rate=u)&&e),e},v.b,v.a)),o["ɵdid"](114688,null,0,b.a,[],{max:[0,"max"],readOnly:[1,"readOnly"],emptyStarIconName:[2,"emptyStarIconName"],halfStarIconName:[3,"halfStarIconName"],starIconName:[4,"starIconName"],nullable:[5,"nullable"]},null),o["ɵprd"](1024,null,y.e,function(l){return[l]},[b.a]),o["ɵdid"](671744,null,0,y.h,[[8,null],[8,null],[8,null],[2,y.e]],{model:[0,"model"]},{update:"ngModelChange"}),o["ɵprd"](2048,null,y.f,null,[y.h]),o["ɵdid"](16384,null,0,y.g,[y.f],null,null),(l()(),o["ɵted"](null,["\n                "])),(l()(),o["ɵted"](null,["\n              "])),(l()(),o["ɵted"](null,["\n            "])),(l()(),o["ɵted"](null,["\n          "]))],function(l,n){var u=n.component;l(n,37,0,"5","false","star-outline","star-half","star","false"),l(n,39,0,u.teachers[n.context.index].rate)},function(l,n){l(n,9,0,n.context.$implicit.firstName,n.context.$implicit.lastName),l(n,26,0,n.context.$implicit.priceFrom,n.context.$implicit.priceTo),l(n,36,0,o["ɵnov"](n,41).ngClassUntouched,o["ɵnov"](n,41).ngClassTouched,o["ɵnov"](n,41).ngClassPristine,o["ɵnov"](n,41).ngClassDirty,o["ɵnov"](n,41).ngClassValid,o["ɵnov"](n,41).ngClassInvalid,o["ɵnov"](n,41).ngClassPending)})}function a(l){return o["ɵvid"](0,[(l()(),o["ɵeld"](0,null,null,8,"div",[],null,null,null,null,null)),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵeld"](0,null,null,5,"ion-row",[["class","row"]],null,null,null,null,null)),o["ɵdid"](16384,null,0,i.a,[],null,null),(l()(),o["ɵted"](null,["\n          "])),(l()(),o["ɵand"](16777216,null,null,1,null,t)),o["ɵdid"](802816,null,0,R.h,[o.ViewContainerRef,o.TemplateRef,o.IterableDiffers],{ngForOf:[0,"ngForOf"]},null),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵted"](null,["\n\n      "]))],function(l,n){l(n,6,0,n.component.teachers)},null)}function d(l){return o["ɵvid"](0,[(l()(),o["ɵeld"](0,null,null,13,"ion-header",[],null,null,null,null,null)),o["ɵdid"](16384,null,0,C.a,[g.a,o.ElementRef,o.Renderer,[2,w.a]],null,null),(l()(),o["ɵted"](null,["\n  "])),(l()(),o["ɵeld"](0,null,null,9,"ion-navbar",[["class","toolbar"],["text-center",""]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,E.b,E.a)),o["ɵdid"](49152,null,0,k.a,[I.a,[2,w.a],[2,_.a],g.a,o.ElementRef,o.Renderer],null,null),(l()(),o["ɵted"](3,["\n    "])),(l()(),o["ɵeld"](0,null,3,5,"ion-title",[],null,null,null,T.b,T.a)),o["ɵdid"](49152,null,0,P.a,[g.a,o.ElementRef,o.Renderer,[2,M.a],[2,k.a]],null,null),(l()(),o["ɵted"](0,["\n      "])),(l()(),o["ɵeld"](0,null,0,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),o["ɵted"](null,["Favorites"])),(l()(),o["ɵted"](0,["\n    "])),(l()(),o["ɵted"](3,["\n  "])),(l()(),o["ɵted"](null,["\n"])),(l()(),o["ɵted"](null,["\n\n"])),(l()(),o["ɵeld"](0,null,null,59,"ion-content",[],[[2,"statusbar-padding",null],[2,"has-refresher",null]],[["window","resize"]],function(l,n,u){var e=!0;return"window:resize"===n&&(e=!1!==o["ɵnov"](l,16).resize()&&e),e},x.b,x.a)),o["ɵdid"](4374528,null,0,O.a,[g.a,S.a,j.a,o.ElementRef,o.Renderer,I.a,N.a,o.NgZone,[2,w.a],[2,_.a]],null,null),(l()(),o["ɵted"](1,["\n\n  "])),(l()(),o["ɵted"](1,["\n  "])),(l()(),o["ɵeld"](0,null,1,38,"div",[["class","m-background-2b3137 m-margin-top0 m-color-white"],["padding",""],["text-center",""]],null,null,null,null,null)),(l()(),o["ɵted"](null,["\n\n    "])),(l()(),o["ɵeld"](0,null,null,35,"ion-grid",[["class","grid"]],null,null,null,null,null)),o["ɵdid"](16384,null,0,F.a,[],null,null),(l()(),o["ɵted"](null,["\n\n      "])),(l()(),o["ɵted"](null,["\n      "])),(l()(),o["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,i.a,[],null,null),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,r.a,[],null,null),(l()(),o["ɵted"](null,["\n          "])),(l()(),o["ɵeld"](0,null,null,1,"font",[["class","m-color-white m-font-size-35px m-font-weight-300"]],null,null,null,null,null)),(l()(),o["ɵted"](null,["Favorites"])),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵted"](null,["\n      "])),(l()(),o["ɵted"](null,["\n\n      "])),(l()(),o["ɵted"](null,["\n      "])),(l()(),o["ɵeld"](0,null,null,6,"ion-row",[["class","row"]],null,null,null,null,null)),o["ɵdid"](16384,null,0,i.a,[],null,null),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,r.a,[],null,null),(l()(),o["ɵted"](null,["\n          This is all the favorites teachers you've saved, you can manage all your teachers here and save them for the future.\n        "])),(l()(),o["ɵted"](null,["\n      "])),(l()(),o["ɵted"](null,["\n\n      "])),(l()(),o["ɵted"](null,["\n      "])),(l()(),o["ɵeld"](0,null,null,9,"ion-row",[["class","row"]],null,null,null,null,null)),o["ɵdid"](16384,null,0,i.a,[],null,null),(l()(),o["ɵted"](null,["\n        "])),(l()(),o["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),o["ɵdid"](16384,null,0,r.a,[],null,null),(l()(),o["ɵted"](null,["\n          "])),(l()(),o["ɵeld"](0,null,null,1,"font",[["class","m-color-orange"]],null,null,null,null,null)),(l()(),o["ɵted"](null,["*Tip: "])),(l()(),o["ɵted"](null,["\n          In order to keep your teachers quickly accessed, do not remove StudyHub cache from your app.\n        "])),(l()(),o["ɵted"](null,["\n      "])),(l()(),o["ɵted"](null,["\n\n    "])),(l()(),o["ɵted"](null,["\n\n  "])),(l()(),o["ɵted"](1,["\n\n  "])),(l()(),o["ɵted"](1,["\n  "])),(l()(),o["ɵeld"](0,null,1,13,"div",[],null,null,null,null,null)),(l()(),o["ɵted"](null,["\n\n    "])),(l()(),o["ɵeld"](0,null,null,10,"ion-grid",[["class","grid"]],null,null,null,null,null)),o["ɵdid"](16384,null,0,F.a,[],null,null),(l()(),o["ɵted"](null,["\n\n      "])),(l()(),o["ɵted"](null,["\n      "])),(l()(),o["ɵand"](16777216,null,null,1,null,e)),o["ɵdid"](16384,null,0,R.i,[o.ViewContainerRef,o.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),o["ɵted"](null,["\n\n      "])),(l()(),o["ɵted"](null,["\n      "])),(l()(),o["ɵand"](16777216,null,null,1,null,a)),o["ɵdid"](16384,null,0,R.i,[o.ViewContainerRef,o.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),o["ɵted"](null,["\n\n    "])),(l()(),o["ɵted"](null,["\n\n  "])),(l()(),o["ɵted"](1,["\n\n"]))],function(l,n){var u=n.component;l(n,67,0,!u.userHaveFavorites),l(n,71,0,u.userHaveFavorites)},function(l,n){l(n,3,0,o["ɵnov"](n,4)._hidden,o["ɵnov"](n,4)._sbPadding),l(n,15,0,o["ɵnov"](n,16).statusbarPadding,o["ɵnov"](n,16)._hasRefresher)})}u.d(n,"a",function(){return B});var o=u(0),i=u(39),r=u(37),s=u(23),c=u(15),g=u(1),m=u(22),h=u(83),f=u(124),p=u(84),v=u(152),b=u(65),y=u(12),R=u(10),C=u(32),w=u(5),E=u(49),k=u(24),I=u(6),_=u(14),T=u(50),P=u(29),M=u(26),x=u(51),O=u(19),S=u(4),j=u(7),N=u(20),F=u(38),A=u(66),q=u(11),D=u(52),L=u(28),U=u(76),V=u(48),H=u(45),z=o["ɵcrt"]({encapsulation:2,styles:[],data:{}}),B=o["ɵccf"]("page-favorites",A.a,function(l){return o["ɵvid"](0,[(l()(),o["ɵeld"](0,null,null,1,"page-favorites",[],null,null,null,d,z)),o["ɵdid"](49152,null,0,A.a,[_.a,q.a,D.a,L.a,U.a,V.a,H.a],null,null)],null,null)},{},{},[])},223:function(l,n,u){"use strict";function e(l){return a["ɵvid"](0,[(l()(),a["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-red"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["The fields are not valid."])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "]))],null,null)}function t(l){return a["ɵvid"](0,[(l()(),a["ɵeld"](0,null,null,13,"ion-header",[],null,null,null,null,null)),a["ɵdid"](16384,null,0,i.a,[r.a,a.ElementRef,a.Renderer,[2,s.a]],null,null),(l()(),a["ɵted"](null,["\n\n  "])),(l()(),a["ɵeld"](0,null,null,9,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,c.b,c.a)),a["ɵdid"](49152,null,0,g.a,[m.a,[2,s.a],[2,h.a],r.a,a.ElementRef,a.Renderer],null,null),(l()(),a["ɵted"](3,["\n    "])),(l()(),a["ɵeld"](0,null,3,5,"ion-title",[["text-center",""]],null,null,null,f.b,f.a)),a["ɵdid"](49152,null,0,p.a,[r.a,a.ElementRef,a.Renderer,[2,v.a],[2,g.a]],null,null),(l()(),a["ɵted"](0,["\n      "])),(l()(),a["ɵeld"](0,null,0,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["Join as Teacher"])),(l()(),a["ɵted"](0,["\n    "])),(l()(),a["ɵted"](3,["\n  "])),(l()(),a["ɵted"](null,["\n\n"])),(l()(),a["ɵted"](null,["\n\n"])),(l()(),a["ɵeld"](0,null,null,464,"ion-content",[],[[2,"statusbar-padding",null],[2,"has-refresher",null]],[["window","resize"]],function(l,n,u){var e=!0;return"window:resize"===n&&(e=!1!==a["ɵnov"](l,16).resize()&&e),e},b.b,b.a)),a["ɵdid"](4374528,null,0,y.a,[r.a,R.a,C.a,a.ElementRef,a.Renderer,m.a,w.a,a.NgZone,[2,s.a],[2,h.a]],null,null),(l()(),a["ɵted"](1,["\n\n  "])),(l()(),a["ɵted"](1,["\n  "])),(l()(),a["ɵeld"](0,null,1,50,"div",[["class","m-background-2b3137 m-margin-top0 m-color-white"],["padding",""],["text-center",""]],null,null,null,null,null)),(l()(),a["ɵted"](null,["\n\n    "])),(l()(),a["ɵeld"](0,null,null,47,"ion-grid",[["class","grid"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,E.a,[],null,null),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-white m-font-size-35px m-font-weight-300"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["Become a next-generation teacher"])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,6,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          In order to join as teacher you must fill all the following fields. Be specific with your information to gain more good resume\n          and comments from students. Remember, good instructor is remembered for lifetime.\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,9,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-orange"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["*Tip: "])),(l()(),a["ɵted"](null,["\n          Give full information at the relevant fields to interest more students.\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,9,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-red"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["*The price per lesson is for one hour*"])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n    "])),(l()(),a["ɵted"](null,["\n\n  "])),(l()(),a["ɵted"](1,["\n\n  "])),(l()(),a["ɵted"](1,["\n  "])),(l()(),a["ɵeld"](0,null,1,406,"div",[],null,null,null,null,null)),(l()(),a["ɵted"](null,["\n\n    "])),(l()(),a["ɵeld"](0,null,null,403,"ion-grid",[["class","grid"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,E.a,[],null,null),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,12,"ion-row",[["class","m-padding-top-15px m-padding-buttom-15px row"],["text-center",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,8,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,4,"u",[],null,null,null,null,null)),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),a["ɵted"](null,["Fill teacher form"])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵeld"](0,null,null,366,"ion-list",[],null,null,null,null,null)),a["ɵdid"](16384,null,0,k.a,[r.a,a.ElementRef,a.Renderer,R.a,I.l,C.a],null,null),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,46,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,1,{contentLabel:0}),a["ɵqud"](603979776,2,{_buttons:1}),a["ɵqud"](603979776,3,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[1,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["First name"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-input",[["type","text"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.firstName=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,4,{contentLabel:0}),a["ɵqud"](603979776,5,{_buttons:1}),a["ɵqud"](603979776,6,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[4,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Last name"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-input",[["type","text"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.lastName=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,57,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,7,{contentLabel:0}),a["ɵqud"](603979776,8,{_buttons:1}),a["ɵqud"](603979776,9,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[7,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Age"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-input",[["type","number"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.age=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,31,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,27,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,10,{contentLabel:0}),a["ɵqud"](603979776,11,{_buttons:1}),a["ɵqud"](603979776,12,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[10,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Gender"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,15,"ion-select",[["interface","popover"]],[[2,"select-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"],[null,"click"],[null,"keyup.space"]],function(l,n,u){var e=!0,t=l.component;return"click"===n&&(e=!1!==a["ɵnov"](l,186)._click(u)&&e),"keyup.space"===n&&(e=!1!==a["ɵnov"](l,186)._keyup()&&e),"ngModelChange"===n&&(e=!1!==(t.gender=u)&&e),e},A.b,A.a)),a["ɵdid"](1228800,null,1,q.a,[m.a,P.a,r.a,a.ElementRef,a.Renderer,[2,T.a],D.a],{interface:[0,"interface"]},null),a["ɵqud"](603979776,13,{options:1}),a["ɵprd"](1024,null,N.e,function(l){return[l]},[q.a]),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[2,N.e]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","Male"]],null,null,null,null,null)),a["ɵdid"](16384,[[13,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Male"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","Female"]],null,null,null,null,null)),a["ɵdid"](16384,[[13,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Female"])),(l()(),a["ɵted"](null,["\n              "])),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,46,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,14,{contentLabel:0}),a["ɵqud"](603979776,15,{_buttons:1}),a["ɵqud"](603979776,16,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[14,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Email"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-input",[["type","email"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.email=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,17,{contentLabel:0}),a["ɵqud"](603979776,18,{_buttons:1}),a["ɵqud"](603979776,19,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[17,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Phone"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-input",[["type","tel"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.phone=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,49,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,20,{contentLabel:0}),a["ɵqud"](603979776,21,{_buttons:1}),a["ɵqud"](603979776,22,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[20,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["From price"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-input",[["type","number"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.priceFrom=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,23,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,19,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,23,{contentLabel:0}),a["ɵqud"](603979776,24,{_buttons:1}),a["ɵqud"](603979776,25,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,5,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[23,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["To price\n                "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-red m-font-size-10px;"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["Max 200"])),(l()(),a["ɵted"](null,["\n              "])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-input",[["type","number"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.priceTo=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,124,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,35,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,31,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,26,{contentLabel:0}),a["ɵqud"](603979776,27,{_buttons:1}),a["ɵqud"](603979776,28,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[26,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Teach at"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,19,"ion-select",[["interface","popover"]],[[2,"select-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"],[null,"click"],[null,"keyup.space"]],function(l,n,u){var e=!0,t=l.component;return"click"===n&&(e=!1!==a["ɵnov"](l,325)._click(u)&&e),"keyup.space"===n&&(e=!1!==a["ɵnov"](l,325)._keyup()&&e),"ngModelChange"===n&&(e=!1!==(t.teachesAt=u)&&e),e},A.b,A.a)),a["ɵdid"](1228800,null,1,q.a,[m.a,P.a,r.a,a.ElementRef,a.Renderer,[2,T.a],D.a],{interface:[0,"interface"]},null),a["ɵqud"](603979776,29,{options:1}),a["ɵprd"](1024,null,N.e,function(l){return[l]},[q.a]),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[2,N.e]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","0"]],null,null,null,null,null)),a["ɵdid"](16384,[[29,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Student's house"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","1"]],null,null,null,null,null)),a["ɵdid"](16384,[[29,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Academic institution"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","2"]],null,null,null,null,null)),a["ɵdid"](16384,[[29,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Both"])),(l()(),a["ɵted"](null,["\n              "])),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,83,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,79,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,30,{contentLabel:0}),a["ɵqud"](603979776,31,{_buttons:1}),a["ɵqud"](603979776,32,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[30,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Teaches institutions"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,67,"ion-select",[["multiple","true"]],[[2,"select-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"],[null,"click"],[null,"keyup.space"]],function(l,n,u){var e=!0,t=l.component;return"click"===n&&(e=!1!==a["ɵnov"](l,362)._click(u)&&e),"keyup.space"===n&&(e=!1!==a["ɵnov"](l,362)._keyup()&&e),"ngModelChange"===n&&(e=!1!==(t.teachesInstitutions=u)&&e),e},A.b,A.a)),a["ɵdid"](1228800,null,1,q.a,[m.a,P.a,r.a,a.ElementRef,a.Renderer,[2,T.a],D.a],{multiple:[0,"multiple"]},null),a["ɵqud"](603979776,33,{options:1}),a["ɵprd"](1024,null,N.e,function(l){return[l]},[q.a]),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[2,N.e]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","0"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Holon Institute Of Technology"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","1"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Technion"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","2"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Tel-Aviv University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","4"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Ben Gurion University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","8"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Hebrew University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","16"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Bar-Ilan University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","32"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Tel-Aviv Jaffa Academic College"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","64"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["IDC Herzliya"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","128"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Ariel University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","256"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Haifa University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","512"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Sapir Academic College"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","1024"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["ORT Braude Collegeof Engineering"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","2048"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["The Open University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","4096"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["College of Management"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","8192"]],null,null,null,null,null)),a["ɵdid"](16384,[[33,4]],0,L.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Achva Academic Campus"])),(l()(),a["ɵted"](null,["\n              "])),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,24,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),a["ɵdid"](1097728,null,3,T.a,[P.a,r.a,a.ElementRef,a.Renderer,[2,M.a]],null,null),a["ɵqud"](335544320,34,{contentLabel:0}),a["ɵqud"](603979776,35,{_buttons:1}),a["ɵqud"](603979776,36,{_icons:1}),a["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[34,4]],0,O.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Personal message"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,4,"ion-textarea",[["rows","5"],["type","text"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.personalMessage=u)&&e),e},j.b,j.a)),a["ɵdid"](671744,null,0,N.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,N.f,null,[N.h]),a["ɵdid"](16384,null,0,N.g,[N.f],null,null),a["ɵdid"](5423104,null,0,F.a,[r.a,R.a,P.a,m.a,a.ElementRef,a.Renderer,[2,y.a],[2,T.a],[2,N.f],C.a],{type:[0,"type"]},null),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵand"](16777216,null,null,1,null,e)),a["ɵdid"](16384,null,0,U.i,[a.ViewContainerRef,a.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,10,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,6,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,2,"button",[["block",""],["ion-button",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.createTeacher()&&e),e},V.b,V.a)),a["ɵdid"](1097728,null,0,H.a,[[8,""],r.a,a.ElementRef,a.Renderer],{block:[0,"block"]},null),(l()(),a["ɵted"](0,["Make me a teacher"])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n    "])),(l()(),a["ɵted"](null,["\n\n  "])),(l()(),a["ɵted"](1,["\n\n"]))],function(l,n){var u=n.component;l(n,115,0,u.firstName);l(n,118,0,"text"),l(n,137,0,u.lastName);l(n,140,0,"text"),l(n,164,0,u.age);l(n,167,0,"number");l(n,186,0,"popover"),l(n,189,0,u.gender);l(n,194,0,"Male");l(n,198,0,"Female"),l(n,224,0,u.email);l(n,227,0,"email"),l(n,246,0,u.phone);l(n,249,0,"tel"),l(n,273,0,u.priceFrom);l(n,276,0,"number"),l(n,298,0,u.priceTo);l(n,301,0,"number");l(n,325,0,"popover"),l(n,328,0,u.teachesAt);l(n,333,0,"0");l(n,337,0,"1");l(n,341,0,"2");l(n,362,0,"true"),l(n,365,0,u.teachesInstitutions);l(n,370,0,"0");l(n,374,0,"1");l(n,378,0,"2");l(n,382,0,"4");l(n,386,0,"8");l(n,390,0,"16");l(n,394,0,"32");l(n,398,0,"64");l(n,402,0,"128");l(n,406,0,"256");l(n,410,0,"512");l(n,414,0,"1024");l(n,418,0,"2048");l(n,422,0,"4096");l(n,426,0,"8192"),l(n,452,0,u.personalMessage);l(n,455,0,"text"),l(n,463,0,u.showErrorMessage);l(n,473,0,"")},function(l,n){l(n,3,0,a["ɵnov"](n,4)._hidden,a["ɵnov"](n,4)._sbPadding),l(n,15,0,a["ɵnov"](n,16).statusbarPadding,a["ɵnov"](n,16)._hasRefresher),l(n,114,0,a["ɵnov"](n,117).ngClassUntouched,a["ɵnov"](n,117).ngClassTouched,a["ɵnov"](n,117).ngClassPristine,a["ɵnov"](n,117).ngClassDirty,a["ɵnov"](n,117).ngClassValid,a["ɵnov"](n,117).ngClassInvalid,a["ɵnov"](n,117).ngClassPending),l(n,136,0,a["ɵnov"](n,139).ngClassUntouched,a["ɵnov"](n,139).ngClassTouched,a["ɵnov"](n,139).ngClassPristine,a["ɵnov"](n,139).ngClassDirty,a["ɵnov"](n,139).ngClassValid,a["ɵnov"](n,139).ngClassInvalid,a["ɵnov"](n,139).ngClassPending),l(n,163,0,a["ɵnov"](n,166).ngClassUntouched,a["ɵnov"](n,166).ngClassTouched,a["ɵnov"](n,166).ngClassPristine,a["ɵnov"](n,166).ngClassDirty,a["ɵnov"](n,166).ngClassValid,a["ɵnov"](n,166).ngClassInvalid,a["ɵnov"](n,166).ngClassPending),l(n,185,0,a["ɵnov"](n,186)._disabled,a["ɵnov"](n,191).ngClassUntouched,a["ɵnov"](n,191).ngClassTouched,a["ɵnov"](n,191).ngClassPristine,a["ɵnov"](n,191).ngClassDirty,a["ɵnov"](n,191).ngClassValid,a["ɵnov"](n,191).ngClassInvalid,a["ɵnov"](n,191).ngClassPending),l(n,223,0,a["ɵnov"](n,226).ngClassUntouched,a["ɵnov"](n,226).ngClassTouched,a["ɵnov"](n,226).ngClassPristine,a["ɵnov"](n,226).ngClassDirty,a["ɵnov"](n,226).ngClassValid,a["ɵnov"](n,226).ngClassInvalid,a["ɵnov"](n,226).ngClassPending),l(n,245,0,a["ɵnov"](n,248).ngClassUntouched,a["ɵnov"](n,248).ngClassTouched,a["ɵnov"](n,248).ngClassPristine,a["ɵnov"](n,248).ngClassDirty,a["ɵnov"](n,248).ngClassValid,a["ɵnov"](n,248).ngClassInvalid,a["ɵnov"](n,248).ngClassPending),l(n,272,0,a["ɵnov"](n,275).ngClassUntouched,a["ɵnov"](n,275).ngClassTouched,a["ɵnov"](n,275).ngClassPristine,a["ɵnov"](n,275).ngClassDirty,a["ɵnov"](n,275).ngClassValid,a["ɵnov"](n,275).ngClassInvalid,a["ɵnov"](n,275).ngClassPending),l(n,297,0,a["ɵnov"](n,300).ngClassUntouched,a["ɵnov"](n,300).ngClassTouched,a["ɵnov"](n,300).ngClassPristine,a["ɵnov"](n,300).ngClassDirty,a["ɵnov"](n,300).ngClassValid,a["ɵnov"](n,300).ngClassInvalid,a["ɵnov"](n,300).ngClassPending),l(n,324,0,a["ɵnov"](n,325)._disabled,a["ɵnov"](n,330).ngClassUntouched,a["ɵnov"](n,330).ngClassTouched,a["ɵnov"](n,330).ngClassPristine,a["ɵnov"](n,330).ngClassDirty,a["ɵnov"](n,330).ngClassValid,a["ɵnov"](n,330).ngClassInvalid,a["ɵnov"](n,330).ngClassPending),l(n,361,0,a["ɵnov"](n,362)._disabled,a["ɵnov"](n,367).ngClassUntouched,a["ɵnov"](n,367).ngClassTouched,a["ɵnov"](n,367).ngClassPristine,a["ɵnov"](n,367).ngClassDirty,a["ɵnov"](n,367).ngClassValid,a["ɵnov"](n,367).ngClassInvalid,a["ɵnov"](n,367).ngClassPending),l(n,451,0,a["ɵnov"](n,454).ngClassUntouched,a["ɵnov"](n,454).ngClassTouched,a["ɵnov"](n,454).ngClassPristine,a["ɵnov"](n,454).ngClassDirty,a["ɵnov"](n,454).ngClassValid,a["ɵnov"](n,454).ngClassInvalid,a["ɵnov"](n,454).ngClassPending)})}u.d(n,"a",function(){return J});var a=u(0),d=u(39),o=u(37),i=u(32),r=u(1),s=u(5),c=u(49),g=u(24),m=u(6),h=u(14),f=u(50),p=u(29),v=u(26),b=u(51),y=u(19),R=u(4),C=u(7),w=u(20),E=u(38),k=u(47),I=u(8),_=u(74),T=u(18),P=u(16),M=u(36),x=u(55),O=u(35),S=u(109),j=u(132),N=u(12),F=u(59),A=u(133),q=u(60),D=u(13),L=u(61),U=u(10),V=u(23),H=u(15),z=u(11),B=u(28),Z=u(48),$=u(45),G=a["ɵcrt"]({encapsulation:2,styles:[],data:{}}),J=a["ɵccf"]("page-jointeacher",S.a,function(l){return a["ɵvid"](0,[(l()(),a["ɵeld"](0,null,null,1,"page-jointeacher",[],null,null,null,t,G)),a["ɵdid"](49152,null,0,S.a,[h.a,z.a,B.a,Z.a,$.a],null,null)],null,null)},{},{},[])},224:function(l,n,u){"use strict";function e(l){return a["ɵvid"](0,[(l()(),a["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-red"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["The fields are not valid."])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "]))],null,null)}function t(l){return a["ɵvid"](0,[(l()(),a["ɵeld"](0,null,null,24,"ion-header",[],null,null,null,null,null)),a["ɵdid"](16384,null,0,i.a,[r.a,a.ElementRef,a.Renderer,[2,s.a]],null,null),(l()(),a["ɵted"](null,["\n\n  "])),(l()(),a["ɵeld"](0,null,null,20,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,c.b,c.a)),a["ɵdid"](49152,null,0,g.a,[m.a,[2,s.a],[2,h.a],r.a,a.ElementRef,a.Renderer],null,null),(l()(),a["ɵted"](3,["\n    "])),(l()(),a["ɵeld"](0,null,3,5,"ion-title",[["text-center",""]],null,null,null,f.b,f.a)),a["ɵdid"](49152,null,0,p.a,[r.a,a.ElementRef,a.Renderer,[2,v.a],[2,g.a]],null,null),(l()(),a["ɵted"](0,["\n      "])),(l()(),a["ɵeld"](0,null,0,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["Search Teacher"])),(l()(),a["ɵted"](0,["\n    "])),(l()(),a["ɵted"](3,["\n    "])),(l()(),a["ɵeld"](0,null,2,9,"ion-buttons",[["class","m-color-f5ae08"],["end",""],["icon-only",""]],null,null,null,null,null)),a["ɵdid"](16384,null,1,b.a,[r.a,a.ElementRef,a.Renderer,[2,v.a],[2,g.a]],null,null),a["ɵqud"](603979776,1,{_buttons:1}),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,4,"div",[],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.goPage("favorites")&&e),e},null,null)),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,1,"ion-icon",[["name","ios-star"],["role","img"]],[[2,"hide",null]],null,null,null,null)),a["ɵdid"](147456,null,0,R.a,[r.a,a.ElementRef,a.Renderer],{name:[0,"name"]},null),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n    "])),(l()(),a["ɵted"](3,["\n  "])),(l()(),a["ɵted"](null,["\n\n"])),(l()(),a["ɵted"](null,["\n\n\n"])),(l()(),a["ɵeld"](0,null,null,333,"ion-content",[],[[2,"statusbar-padding",null],[2,"has-refresher",null]],[["window","resize"]],function(l,n,u){var e=!0;return"window:resize"===n&&(e=!1!==a["ɵnov"](l,27).resize()&&e),e},C.b,C.a)),a["ɵdid"](4374528,null,0,w.a,[r.a,E.a,k.a,a.ElementRef,a.Renderer,m.a,I.a,a.NgZone,[2,s.a],[2,h.a]],null,null),(l()(),a["ɵted"](1,["\n\n  "])),(l()(),a["ɵted"](1,["\n  "])),(l()(),a["ɵeld"](0,null,1,56,"div",[["class","m-background-2b3137 m-margin-top0 m-color-white"],["padding",""],["text-center",""]],null,null,null,null,null)),(l()(),a["ɵted"](null,["\n\n    "])),(l()(),a["ɵeld"](0,null,null,53,"ion-grid",[["class","grid"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,_.a,[],null,null),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-white m-font-weight-300 m-font-size-35px"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["Search for a teacher"])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,6,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          It's easy, it's fast, just fill the fields you want that your teacher will fit and we will find for you what you've requested.\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,15,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,11,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          We\n          "])),(l()(),a["ɵeld"](0,null,null,4,"b",[],null,null,null,null,null)),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,1,"u",[],null,null,null,null,null)),(l()(),a["ɵted"](null,["don't"])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,[" force you to talk to them in our app, take the conversation to\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-1ab81a"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["WhatsApp"])),(l()(),a["ɵted"](null,[" or other platform as you want, good luck!\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,9,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,1,"font",[["class","m-color-orange"]],null,null,null,null,null)),(l()(),a["ɵted"](null,["*Tip: "])),(l()(),a["ɵted"](null,[" Be specific with your filter details in order to get the best results.\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n\n    "])),(l()(),a["ɵted"](null,["\n\n  "])),(l()(),a["ɵted"](1,["\n\n  "])),(l()(),a["ɵted"](1,["\n  "])),(l()(),a["ɵeld"](0,null,1,269,"div",[],null,null,null,null,null)),(l()(),a["ɵted"](null,["\n\n    "])),(l()(),a["ɵeld"](0,null,null,266,"ion-grid",[["class","grid"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,_.a,[],null,null),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,6,"ion-row",[["class","m-padding-top-15px m-padding-buttom-15px row"],["text-center",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          Find your next teacher\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,236,"ion-list",[],null,null,null,null,null)),a["ɵdid"](16384,null,0,T.a,[r.a,a.ElementRef,a.Renderer,E.a,P.l,k.a],null,null),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,13,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,5,"button",[["icon-start",""],["ion-button",""],["outline",""],["small",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.getAllTeachers()&&e),e},M.b,M.a)),a["ɵdid"](1097728,null,0,x.a,[[8,""],r.a,a.ElementRef,a.Renderer],{small:[0,"small"],outline:[1,"outline"]},null),(l()(),a["ɵted"](0,["\n              "])),(l()(),a["ɵeld"](0,null,0,1,"ion-icon",[["name","ios-people"],["role","img"]],[[2,"hide",null]],null,null,null,null)),a["ɵdid"](147456,null,0,R.a,[r.a,a.ElementRef,a.Renderer],{name:[0,"name"]},null),(l()(),a["ɵted"](0,["\n              Get all teachers\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,46,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,42,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,14,"ion-list-header",[["class","item"]],null,null,null,O.b,O.a)),a["ɵdid"](1097728,null,3,S.a,[j.a,r.a,a.ElementRef,a.Renderer,[2,N.a]],null,null),a["ɵqud"](335544320,2,{contentLabel:0}),a["ɵqud"](603979776,3,{_buttons:1}),a["ɵqud"](603979776,4,{_icons:1}),a["ɵdid"](16384,null,0,F.a,[r.a,a.Renderer,a.ElementRef,[8,null]],null,null),(l()(),a["ɵted"](2,["\n              Price per hour\n              "])),(l()(),a["ɵeld"](0,null,4,2,"ion-badge",[["color","dark"],["item-end",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,A.a,[r.a,a.ElementRef,a.Renderer],{color:[0,"color"]},null),(l()(),a["ɵted"](null,["From: ",""])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,4,2,"ion-badge",[["color","dark"],["item-end",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,A.a,[r.a,a.ElementRef,a.Renderer],{color:[0,"color"]},null),(l()(),a["ɵted"](null,["To: ",""])),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,22,"ion-item",[["class","item item-block"]],null,null,null,O.b,O.a)),a["ɵdid"](1097728,null,3,S.a,[j.a,r.a,a.ElementRef,a.Renderer,[2,N.a]],null,null),a["ɵqud"](335544320,5,{contentLabel:0}),a["ɵqud"](603979776,6,{_buttons:1}),a["ɵqud"](603979776,7,{_icons:1}),a["ɵdid"](16384,null,0,q.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,14,"ion-range",[["color","dark"],["dualKnobs","true"],["max","200"],["min","0"],["pin","true"]],[[2,"range-disabled",null],[2,"range-pressed",null],[2,"range-has-pin",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.structure=u)&&e),e},D.b,D.a)),a["ɵdid"](1228800,null,0,L.a,[j.a,U.a,[2,S.a],r.a,E.a,a.ElementRef,a.Renderer,k.a,a.ChangeDetectorRef],{color:[0,"color"],min:[1,"min"],max:[2,"max"],pin:[3,"pin"],dualKnobs:[4,"dualKnobs"]},null),a["ɵprd"](1024,null,V.e,function(l){return[l]},[L.a]),a["ɵdid"](671744,null,0,V.h,[[8,null],[8,null],[8,null],[2,V.e]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,V.f,null,[V.h]),a["ɵdid"](16384,null,0,V.g,[V.f],null,null),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,0,2,"ion-label",[["range-left",""]],null,null,null,null,null)),a["ɵdid"](16384,[[5,4]],0,H.a,[r.a,a.ElementRef,a.Renderer,[8,null],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["0"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["range-right",""]],null,null,null,null,null)),a["ɵdid"](16384,[[5,4]],0,H.a,[r.a,a.ElementRef,a.Renderer,[8,null],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["200"])),(l()(),a["ɵted"](null,["\n              "])),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,124,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,35,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,31,"ion-item",[["class","item item-block"]],null,null,null,O.b,O.a)),a["ɵdid"](1097728,null,3,S.a,[j.a,r.a,a.ElementRef,a.Renderer,[2,N.a]],null,null),a["ɵqud"](335544320,8,{contentLabel:0}),a["ɵqud"](603979776,9,{_buttons:1}),a["ɵqud"](603979776,10,{_icons:1}),a["ɵdid"](16384,null,0,q.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[8,4]],0,H.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Teach at"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,19,"ion-select",[["interface","popover"]],[[2,"select-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"],[null,"click"],[null,"keyup.space"]],function(l,n,u){var e=!0,t=l.component;return"click"===n&&(e=!1!==a["ɵnov"](l,190)._click(u)&&e),"keyup.space"===n&&(e=!1!==a["ɵnov"](l,190)._keyup()&&e),"ngModelChange"===n&&(e=!1!==(t.teachesAt=u)&&e),e},z.b,z.a)),a["ɵdid"](1228800,null,1,B.a,[m.a,j.a,r.a,a.ElementRef,a.Renderer,[2,S.a],Z.a],{interface:[0,"interface"]},null),a["ɵqud"](603979776,11,{options:1}),a["ɵprd"](1024,null,V.e,function(l){return[l]},[B.a]),a["ɵdid"](671744,null,0,V.h,[[8,null],[8,null],[8,null],[2,V.e]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,V.f,null,[V.h]),a["ɵdid"](16384,null,0,V.g,[V.f],null,null),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","0"]],null,null,null,null,null)),a["ɵdid"](16384,[[11,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Student's house"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","1"]],null,null,null,null,null)),a["ɵdid"](16384,[[11,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Academic institution"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","2"]],null,null,null,null,null)),a["ɵdid"](16384,[[11,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Both"])),(l()(),a["ɵted"](null,["\n              "])),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,83,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,79,"ion-item",[["class","item item-block"]],null,null,null,O.b,O.a)),a["ɵdid"](1097728,null,3,S.a,[j.a,r.a,a.ElementRef,a.Renderer,[2,N.a]],null,null),a["ɵqud"](335544320,12,{contentLabel:0}),a["ɵqud"](603979776,13,{_buttons:1}),a["ɵqud"](603979776,14,{_icons:1}),a["ɵdid"](16384,null,0,q.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[12,4]],0,H.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Teaches institutions"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,67,"ion-select",[],[[2,"select-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"],[null,"click"],[null,"keyup.space"]],function(l,n,u){var e=!0,t=l.component;return"click"===n&&(e=!1!==a["ɵnov"](l,227)._click(u)&&e),"keyup.space"===n&&(e=!1!==a["ɵnov"](l,227)._keyup()&&e),"ngModelChange"===n&&(e=!1!==(t.teachesInstitutions=u)&&e),e},z.b,z.a)),a["ɵdid"](1228800,null,1,B.a,[m.a,j.a,r.a,a.ElementRef,a.Renderer,[2,S.a],Z.a],null,null),a["ɵqud"](603979776,15,{options:1}),a["ɵprd"](1024,null,V.e,function(l){return[l]},[B.a]),a["ɵdid"](671744,null,0,V.h,[[8,null],[8,null],[8,null],[2,V.e]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,V.f,null,[V.h]),a["ɵdid"](16384,null,0,V.g,[V.f],null,null),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","0"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Holon Institute Of Technology"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","1"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Technion"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","2"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Tel-Aviv University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","4"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Ben-Gurion University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","8"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Hebrew University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","16"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Bar-Ilan University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","32"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Tel-Aviv Jaffa Academic College"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","64"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["IDC Herzliya"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","128"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Ariel University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","256"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Haifa University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","512"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Sapir Academic College"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","1024"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["ORT Braude Collegeof Engineering"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","2048"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["The Open University"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","4096"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["College of Management"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","8192"]],null,null,null,null,null)),a["ɵdid"](16384,[[15,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Achva Academic Campus"])),(l()(),a["ɵted"](null,["\n              "])),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n        "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,39,"ion-row",[["class","row"]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,35,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n            "])),(l()(),a["ɵeld"](0,null,null,31,"ion-item",[["class","item item-block"]],null,null,null,O.b,O.a)),a["ɵdid"](1097728,null,3,S.a,[j.a,r.a,a.ElementRef,a.Renderer,[2,N.a]],null,null),a["ɵqud"](335544320,16,{contentLabel:0}),a["ɵqud"](603979776,17,{_buttons:1}),a["ɵqud"](603979776,18,{_icons:1}),a["ɵdid"](16384,null,0,q.a,[],null,null),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),a["ɵdid"](16384,[[16,4]],0,H.a,[r.a,a.ElementRef,a.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),a["ɵted"](null,["Prefered gender"])),(l()(),a["ɵted"](2,["\n              "])),(l()(),a["ɵeld"](0,null,3,19,"ion-select",[["interface","popover"]],[[2,"select-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"],[null,"click"],[null,"keyup.space"]],function(l,n,u){var e=!0,t=l.component;return"click"===n&&(e=!1!==a["ɵnov"](l,317)._click(u)&&e),"keyup.space"===n&&(e=!1!==a["ɵnov"](l,317)._keyup()&&e),"ngModelChange"===n&&(e=!1!==(t.gender=u)&&e),e},z.b,z.a)),a["ɵdid"](1228800,null,1,B.a,[m.a,j.a,r.a,a.ElementRef,a.Renderer,[2,S.a],Z.a],{interface:[0,"interface"]},null),a["ɵqud"](603979776,19,{options:1}),a["ɵprd"](1024,null,V.e,function(l){return[l]},[B.a]),a["ɵdid"](671744,null,0,V.h,[[8,null],[8,null],[8,null],[2,V.e]],{model:[0,"model"]},{update:"ngModelChange"}),a["ɵprd"](2048,null,V.f,null,[V.h]),a["ɵdid"](16384,null,0,V.g,[V.f],null,null),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","Male"]],null,null,null,null,null)),a["ɵdid"](16384,[[19,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Male"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","Female"]],null,null,null,null,null)),a["ɵdid"](16384,[[19,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Female"])),(l()(),a["ɵted"](null,["\n                "])),(l()(),a["ɵeld"](0,null,null,2,"ion-option",[["value","Both"]],null,null,null,null,null)),a["ɵdid"](16384,[[19,4]],0,$.a,[a.ElementRef],{value:[0,"value"]},null),(l()(),a["ɵted"](null,["Doesn't matter"])),(l()(),a["ɵted"](null,["\n              "])),(l()(),a["ɵted"](2,["\n            "])),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵand"](16777216,null,null,1,null,e)),a["ɵdid"](16384,null,0,G.i,[a.ViewContainerRef,a.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),a["ɵted"](null,["\n\n      "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵeld"](0,null,null,10,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,d.a,[],null,null),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵeld"](0,null,null,6,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),a["ɵdid"](16384,null,0,o.a,[],null,null),(l()(),a["ɵted"](null,["\n          "])),(l()(),a["ɵeld"](0,null,null,2,"button",[["block",""],["ion-button",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.searchTeachers()&&e),e},M.b,M.a)),a["ɵdid"](1097728,null,0,x.a,[[8,""],r.a,a.ElementRef,a.Renderer],{block:[0,"block"]},null),(l()(),a["ɵted"](0,["Search for teacher"])),(l()(),a["ɵted"](null,["\n        "])),(l()(),a["ɵted"](null,["\n      "])),(l()(),a["ɵted"](null,["\n    "])),(l()(),a["ɵted"](null,["\n\n  "])),(l()(),a["ɵted"](1,["\n\n"]))],function(l,n){var u=n.component;l(n,20,0,"ios-star");l(n,114,0,"","");l(n,117,0,"ios-people");l(n,137,0,"dark");l(n,141,0,"dark");l(n,153,0,"dark","0","200","true","true"),l(n,155,0,u.structure);l(n,190,0,"popover"),l(n,193,0,u.teachesAt);l(n,198,0,"0");l(n,202,0,"1");l(n,206,0,"2"),l(n,230,0,u.teachesInstitutions);l(n,235,0,"0");l(n,239,0,"1");l(n,243,0,"2");l(n,247,0,"4");l(n,251,0,"8");l(n,255,0,"16");l(n,259,0,"32");l(n,263,0,"64");l(n,267,0,"128");l(n,271,0,"256");l(n,275,0,"512");l(n,279,0,"1024");l(n,283,0,"2048");l(n,287,0,"4096");l(n,291,0,"8192");l(n,317,0,"popover"),l(n,320,0,u.gender);l(n,325,0,"Male");l(n,329,0,"Female");l(n,333,0,"Both"),l(n,343,0,u.showErrorMessage);l(n,353,0,"")},function(l,n){var u=n.component;l(n,3,0,a["ɵnov"](n,4)._hidden,a["ɵnov"](n,4)._sbPadding),l(n,19,0,a["ɵnov"](n,20)._hidden),l(n,26,0,a["ɵnov"](n,27).statusbarPadding,a["ɵnov"](n,27)._hasRefresher),l(n,116,0,a["ɵnov"](n,117)._hidden),l(n,138,0,u.structure.lower),l(n,142,0,u.structure.upper),l(n,152,0,a["ɵnov"](n,153)._disabled,a["ɵnov"](n,153)._pressed,a["ɵnov"](n,153)._pin,a["ɵnov"](n,157).ngClassUntouched,a["ɵnov"](n,157).ngClassTouched,a["ɵnov"](n,157).ngClassPristine,a["ɵnov"](n,157).ngClassDirty,a["ɵnov"](n,157).ngClassValid,a["ɵnov"](n,157).ngClassInvalid,a["ɵnov"](n,157).ngClassPending),l(n,189,0,a["ɵnov"](n,190)._disabled,a["ɵnov"](n,195).ngClassUntouched,a["ɵnov"](n,195).ngClassTouched,a["ɵnov"](n,195).ngClassPristine,a["ɵnov"](n,195).ngClassDirty,a["ɵnov"](n,195).ngClassValid,a["ɵnov"](n,195).ngClassInvalid,a["ɵnov"](n,195).ngClassPending),l(n,226,0,a["ɵnov"](n,227)._disabled,a["ɵnov"](n,232).ngClassUntouched,a["ɵnov"](n,232).ngClassTouched,a["ɵnov"](n,232).ngClassPristine,a["ɵnov"](n,232).ngClassDirty,a["ɵnov"](n,232).ngClassValid,a["ɵnov"](n,232).ngClassInvalid,a["ɵnov"](n,232).ngClassPending),l(n,316,0,a["ɵnov"](n,317)._disabled,a["ɵnov"](n,322).ngClassUntouched,a["ɵnov"](n,322).ngClassTouched,a["ɵnov"](n,322).ngClassPristine,a["ɵnov"](n,322).ngClassDirty,a["ɵnov"](n,322).ngClassValid,a["ɵnov"](n,322).ngClassInvalid,a["ɵnov"](n,322).ngClassPending)})}u.d(n,"a",function(){return X});var a=u(0),d=u(39),o=u(37),i=u(32),r=u(1),s=u(5),c=u(49),g=u(24),m=u(6),h=u(14),f=u(50),p=u(29),v=u(26),b=u(64),y=u(110),R=u(22),C=u(51),w=u(19),E=u(4),k=u(7),I=u(20),_=u(38),T=u(47),P=u(8),M=u(23),x=u(15),O=u(74),S=u(18),j=u(16),N=u(36),F=u(89),A=u(82),q=u(55),D=u(252),L=u(97),U=u(31),V=u(12),H=u(35),z=u(133),B=u(60),Z=u(13),$=u(61),G=u(10),J=u(11),W=u(28),Y=u(48),K=u(45),Q=a["ɵcrt"]({encapsulation:2,styles:[],data:{}}),X=a["ɵccf"]("page-search",y.a,function(l){return a["ɵvid"](0,[(l()(),a["ɵeld"](0,null,null,1,"page-search",[],null,null,null,t,Q)),a["ɵdid"](49152,null,0,y.a,[h.a,J.a,W.a,Y.a,K.a],null,null)],null,null)},{},{},[])},225:function(l,n,u){"use strict";function e(l){return t["ɵvid"](0,[(l()(),t["ɵeld"](0,null,null,24,"ion-header",[],null,null,null,null,null)),t["ɵdid"](16384,null,0,a.a,[d.a,t.ElementRef,t.Renderer,[2,o.a]],null,null),(l()(),t["ɵted"](null,["\n  "])),(l()(),t["ɵeld"](0,null,null,20,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,i.b,i.a)),t["ɵdid"](49152,null,0,r.a,[s.a,[2,o.a],[2,c.a],d.a,t.ElementRef,t.Renderer],null,null),(l()(),t["ɵted"](3,["\n    "])),(l()(),t["ɵeld"](0,null,3,5,"ion-title",[["text-center",""]],null,null,null,g.b,g.a)),t["ɵdid"](49152,null,0,m.a,[d.a,t.ElementRef,t.Renderer,[2,h.a],[2,r.a]],null,null),(l()(),t["ɵted"](0,["\n      "])),(l()(),t["ɵeld"](0,null,0,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),t["ɵted"](null,["Settings"])),(l()(),t["ɵted"](0,["\n    "])),(l()(),t["ɵted"](3,["\n    "])),(l()(),t["ɵeld"](0,null,2,9,"ion-buttons",[["class","m-color-f5ae08"],["end",""],["icon-only",""]],null,null,null,null,null)),t["ɵdid"](16384,null,1,f.a,[d.a,t.ElementRef,t.Renderer,[2,h.a],[2,r.a]],null,null),t["ɵqud"](603979776,1,{_buttons:1}),(l()(),t["ɵted"](null,["\n      "])),(l()(),t["ɵeld"](0,null,null,4,"div",[],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.goPage("favorites")&&e),e},null,null)),(l()(),t["ɵted"](null,["\n        "])),(l()(),t["ɵeld"](0,null,null,1,"ion-icon",[["name","ios-star"],["role","img"]],[[2,"hide",null]],null,null,null,null)),t["ɵdid"](147456,null,0,v.a,[d.a,t.ElementRef,t.Renderer],{name:[0,"name"]},null),(l()(),t["ɵted"](null,["\n      "])),(l()(),t["ɵted"](null,["\n    "])),(l()(),t["ɵted"](3,["\n  "])),(l()(),t["ɵted"](null,["\n"])),(l()(),t["ɵted"](null,["\n\n"])),(l()(),t["ɵeld"](0,null,null,6,"ion-content",[["padding",""]],[[2,"statusbar-padding",null],[2,"has-refresher",null]],[["window","resize"]],function(l,n,u){var e=!0;return"window:resize"===n&&(e=!1!==t["ɵnov"](l,27).resize()&&e),e},b.b,b.a)),t["ɵdid"](4374528,null,0,y.a,[d.a,R.a,C.a,t.ElementRef,t.Renderer,s.a,w.a,t.NgZone,[2,o.a],[2,c.a]],null,null),(l()(),t["ɵted"](1,["\n  Settings page, go away, it's not ready!\n  "])),(l()(),t["ɵeld"](0,null,1,2,"button",[["ion-button",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.test()&&e),e},E.b,E.a)),t["ɵdid"](1097728,null,0,k.a,[[8,""],d.a,t.ElementRef,t.Renderer],null,null),(l()(),t["ɵted"](0,["Test"])),(l()(),t["ɵted"](1,["\n"]))],function(l,n){l(n,20,0,"ios-star")},function(l,n){l(n,3,0,t["ɵnov"](n,4)._hidden,t["ɵnov"](n,4)._sbPadding),l(n,19,0,t["ɵnov"](n,20)._hidden),l(n,26,0,t["ɵnov"](n,27).statusbarPadding,t["ɵnov"](n,27)._hasRefresher)})}u.d(n,"a",function(){return P});var t=u(0),a=u(32),d=u(1),o=u(5),i=u(49),r=u(24),s=u(6),c=u(14),g=u(50),m=u(29),h=u(26),f=u(64),p=u(112),v=u(22),b=u(51),y=u(19),R=u(4),C=u(7),w=u(20),E=u(23),k=u(15),I=u(11),_=u(105),T=t["ɵcrt"]({encapsulation:2,styles:[],data:{}}),P=t["ɵccf"]("page-settings",p.a,function(l){return t["ɵvid"](0,[(l()(),t["ɵeld"](0,null,null,1,"page-settings",[],null,null,null,e,T)),t["ɵdid"](49152,null,0,p.a,[c.a,I.a,_.a],null,null)],null,null)},{},{},[])},226:function(l,n,u){"use strict";function e(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-5",""],["text-right",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,5,"button",[["color","dark"],["icon-start",""],["ion-button",""],["outline",""],["small",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.addFavorite()&&e),e},v.b,v.a)),f["ɵdid"](1097728,null,0,b.a,[[8,""],y.a,f.ElementRef,f.Renderer],{color:[0,"color"],small:[1,"small"],outline:[2,"outline"]},null),(l()(),f["ɵted"](0,["\n          "])),(l()(),f["ɵeld"](0,null,0,1,"ion-icon",[["name","star"],["role","img"]],[[2,"hide",null]],null,null,null,null)),f["ɵdid"](147456,null,0,R.a,[y.a,f.ElementRef,f.Renderer],{name:[0,"name"]},null),(l()(),f["ɵted"](0,["\n          Add favorite\n        "])),(l()(),f["ɵted"](null,["\n      "]))],function(l,n){l(n,4,0,"dark","","");l(n,7,0,"star")},function(l,n){l(n,6,0,f["ɵnov"](n,7)._hidden)})}function t(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-5",""],["text-right",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,5,"button",[["color","dark"],["icon-start",""],["ion-button",""],["outline",""],["small",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.removeFavorite()&&e),e},v.b,v.a)),f["ɵdid"](1097728,null,0,b.a,[[8,""],y.a,f.ElementRef,f.Renderer],{color:[0,"color"],small:[1,"small"],outline:[2,"outline"]},null),(l()(),f["ɵted"](0,["\n          "])),(l()(),f["ɵeld"](0,null,0,1,"ion-icon",[["name","star"],["role","img"]],[[2,"hide",null]],null,null,null,null)),f["ɵdid"](147456,null,0,R.a,[y.a,f.ElementRef,f.Renderer],{name:[0,"name"]},null),(l()(),f["ɵted"](0,["\n          Remove favorite\n        "])),(l()(),f["ɵted"](null,["\n      "]))],function(l,n){l(n,4,0,"dark","","");l(n,7,0,"star")},function(l,n){l(n,6,0,f["ɵnov"](n,7)._hidden)})}function a(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,2,"font",[],null,null,null,null,null)),(l()(),f["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["( "," person rated )"]))],null,function(l,n){l(n,2,0,n.component.teacher.recommendations.length)})}function d(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,2,"font",[],null,null,null,null,null)),(l()(),f["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["( "," people rated )"]))],null,function(l,n){l(n,2,0,n.component.teacher.recommendations.length)})}function o(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,3,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        - ","\n      "])),f["ɵppd"](1)],null,function(l,n){l(n,2,0,f["ɵunv"](n,2,0,l(n,3,0,f["ɵnov"](n.parent,1),n.context.$implicit)))})}function i(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-6",""],["text-right",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,5,"button",[["color","dark"],["icon-start",""],["ion-button",""],["outline",""],["small",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.toggleRecommendations()&&e),e},v.b,v.a)),f["ɵdid"](1097728,null,0,b.a,[[8,""],y.a,f.ElementRef,f.Renderer],{color:[0,"color"],small:[1,"small"],outline:[2,"outline"]},null),(l()(),f["ɵted"](0,["\n          "])),(l()(),f["ɵeld"](0,null,0,1,"ion-icon",[["name","ios-add-outline"],["role","img"]],[[2,"hide",null]],null,null,null,null)),f["ɵdid"](147456,null,0,R.a,[y.a,f.ElementRef,f.Renderer],{name:[0,"name"]},null),(l()(),f["ɵted"](0,["\n          Add\n        "])),(l()(),f["ɵted"](null,["\n      "]))],function(l,n){l(n,4,0,"dark","","");l(n,7,0,"ios-add-outline")},function(l,n){l(n,6,0,f["ɵnov"](n,7)._hidden)})}function r(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-6",""],["text-right",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,5,"button",[["color","dark"],["icon-start",""],["ion-button",""],["outline",""],["small",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.toggleRecommendations()&&e),e},v.b,v.a)),f["ɵdid"](1097728,null,0,b.a,[[8,""],y.a,f.ElementRef,f.Renderer],{color:[0,"color"],small:[1,"small"],outline:[2,"outline"]},null),(l()(),f["ɵted"](0,["\n          "])),(l()(),f["ɵeld"](0,null,0,1,"ion-icon",[["name","ios-close-outline"],["role","img"]],[[2,"hide",null]],null,null,null,null)),f["ɵdid"](147456,null,0,R.a,[y.a,f.ElementRef,f.Renderer],{name:[0,"name"]},null),(l()(),f["ɵted"](0,["\n          Close\n        "])),(l()(),f["ɵted"](null,["\n      "]))],function(l,n){l(n,4,0,"dark","","");l(n,7,0,"ios-close-outline")},function(l,n){l(n,6,0,f["ɵnov"](n,7)._hidden)})}function s(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-6",""],["text-right",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"ion-icon",[["class","m-font-size-30px"],["name","md-done-all"],["role","img"]],[[2,"hide",null]],null,null,null,null)),f["ɵdid"](147456,null,0,R.a,[y.a,f.ElementRef,f.Renderer],{name:[0,"name"]},null),(l()(),f["ɵted"](null,["\n      "]))],function(l,n){l(n,4,0,"md-done-all")},function(l,n){l(n,3,0,f["ɵnov"](n,4)._hidden)})}function c(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,9,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n            "])),(l()(),f["ɵeld"](0,null,null,1,"font",[["class","m-color-red"]],null,null,null,null,null)),(l()(),f["ɵted"](null,["The fields are not valid."])),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵted"](null,["\n        "]))],null,null)}function g(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,137,"div",[["class","animated bounceInDown"],["text-center",""]],null,null,null,null,null)),(l()(),f["ɵted"](null,["\n\n      "])),(l()(),f["ɵeld"](0,null,null,134,"ion-list",[],null,null,null,null,null)),f["ɵdid"](16384,null,0,w.a,[y.a,f.ElementRef,f.Renderer,E.a,k.l,I.a],null,null),(l()(),f["ɵted"](null,["\n\n        "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,12,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵeld"](0,null,null,8,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n            "])),(l()(),f["ɵeld"](0,null,null,4,"b",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["\n              "])),(l()(),f["ɵeld"](0,null,null,1,"u",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["Add recommendations:"])),(l()(),f["ɵted"](null,["\n            "])),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵted"](null,["\n\n        "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,24,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n            "])),(l()(),f["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),f["ɵdid"](1097728,null,3,T.a,[P.a,y.a,f.ElementRef,f.Renderer,[2,M.a]],null,null),f["ɵqud"](335544320,2,{contentLabel:0}),f["ɵqud"](603979776,3,{_buttons:1}),f["ɵqud"](603979776,4,{_icons:1}),f["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),f["ɵted"](2,["\n              "])),(l()(),f["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),f["ɵdid"](16384,[[2,4]],0,O.a,[y.a,f.ElementRef,f.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),f["ɵted"](null,["Full name"])),(l()(),f["ɵted"](2,["\n              "])),(l()(),f["ɵeld"](0,null,3,4,"ion-input",[["type","text"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.fullName=u)&&e),e},S.b,S.a)),f["ɵdid"](671744,null,0,j.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),f["ɵprd"](2048,null,j.f,null,[j.h]),f["ɵdid"](16384,null,0,j.g,[j.f],null,null),f["ɵdid"](5423104,null,0,N.a,[y.a,E.a,P.a,F.a,f.ElementRef,f.Renderer,[2,A.a],[2,T.a],[2,j.f],I.a],{type:[0,"type"]},null),(l()(),f["ɵted"](2,["\n            "])),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵted"](null,["\n\n        "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,24,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n            "])),(l()(),f["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),f["ɵdid"](1097728,null,3,T.a,[P.a,y.a,f.ElementRef,f.Renderer,[2,M.a]],null,null),f["ɵqud"](335544320,5,{contentLabel:0}),f["ɵqud"](603979776,6,{_buttons:1}),f["ɵqud"](603979776,7,{_icons:1}),f["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),f["ɵted"](2,["\n              "])),(l()(),f["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),f["ɵdid"](16384,[[5,4]],0,O.a,[y.a,f.ElementRef,f.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),f["ɵted"](null,["Email"])),(l()(),f["ɵted"](2,["\n              "])),(l()(),f["ɵeld"](0,null,3,4,"ion-input",[["type","email"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.email=u)&&e),e},S.b,S.a)),f["ɵdid"](671744,null,0,j.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),f["ɵprd"](2048,null,j.f,null,[j.h]),f["ɵdid"](16384,null,0,j.g,[j.f],null,null),f["ɵdid"](5423104,null,0,N.a,[y.a,E.a,P.a,F.a,f.ElementRef,f.Renderer,[2,A.a],[2,T.a],[2,j.f],I.a],{type:[0,"type"]},null),(l()(),f["ɵted"](2,["\n            "])),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵted"](null,["\n\n        "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,13,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n            "])),(l()(),f["ɵeld"](0,null,null,5,"rating",[["emptyStarIconName","star-outline"],["halfStarIconName","star-half"],["max","5"],["nullable","false"],["readOnly","false"],["starIconName","star"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.rate=u)&&e),e},q.b,q.a)),f["ɵdid"](114688,null,0,D.a,[],{max:[0,"max"],readOnly:[1,"readOnly"],emptyStarIconName:[2,"emptyStarIconName"],halfStarIconName:[3,"halfStarIconName"],starIconName:[4,"starIconName"],nullable:[5,"nullable"]},null),f["ɵprd"](1024,null,j.e,function(l){return[l]},[D.a]),f["ɵdid"](671744,null,0,j.h,[[8,null],[8,null],[8,null],[2,j.e]],{model:[0,"model"]},{update:"ngModelChange"}),f["ɵprd"](2048,null,j.f,null,[j.h]),f["ɵdid"](16384,null,0,j.g,[j.f],null,null),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵted"](null,["\n\n        "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,24,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵeld"](0,null,null,20,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n            "])),(l()(),f["ɵeld"](0,null,null,16,"ion-item",[["class","item item-block"]],null,null,null,_.b,_.a)),f["ɵdid"](1097728,null,3,T.a,[P.a,y.a,f.ElementRef,f.Renderer,[2,M.a]],null,null),f["ɵqud"](335544320,8,{contentLabel:0}),f["ɵqud"](603979776,9,{_buttons:1}),f["ɵqud"](603979776,10,{_icons:1}),f["ɵdid"](16384,null,0,x.a,[],null,null),(l()(),f["ɵted"](2,["\n              "])),(l()(),f["ɵeld"](0,null,1,2,"ion-label",[["floating",""]],null,null,null,null,null)),f["ɵdid"](16384,[[8,4]],0,O.a,[y.a,f.ElementRef,f.Renderer,[8,""],[8,null],[8,null],[8,null]],null,null),(l()(),f["ɵted"](null,["Message"])),(l()(),f["ɵted"](2,["\n              "])),(l()(),f["ɵeld"](0,null,3,4,"ion-textarea",[["rows","4"],["type","email"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.message=u)&&e),e},S.b,S.a)),f["ɵdid"](671744,null,0,j.h,[[8,null],[8,null],[8,null],[8,null]],{model:[0,"model"]},{update:"ngModelChange"}),f["ɵprd"](2048,null,j.f,null,[j.h]),f["ɵdid"](16384,null,0,j.g,[j.f],null,null),f["ɵdid"](5423104,null,0,N.a,[y.a,E.a,P.a,F.a,f.ElementRef,f.Renderer,[2,A.a],[2,T.a],[2,j.f],I.a],{type:[0,"type"]},null),(l()(),f["ɵted"](2,["\n            "])),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵted"](null,["\n\n        "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵand"](16777216,null,null,1,null,c)),f["ɵdid"](16384,null,0,L.i,[f.ViewContainerRef,f.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),f["ɵted"](null,["\n\n        "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,13,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n            "])),(l()(),f["ɵeld"](0,null,null,5,"button",[["block",""],["icon-start",""],["ion-button",""],["outline",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.addNewRecommend()&&e),e},v.b,v.a)),f["ɵdid"](1097728,null,0,b.a,[[8,""],y.a,f.ElementRef,f.Renderer],{outline:[0,"outline"],block:[1,"block"]},null),(l()(),f["ɵted"](0,["\n              "])),(l()(),f["ɵeld"](0,null,0,1,"ion-icon",[["name","add"],["role","img"]],[[2,"hide",null]],null,null,null,null)),f["ɵdid"](147456,null,0,R.a,[y.a,f.ElementRef,f.Renderer],{name:[0,"name"]},null),(l()(),f["ɵted"](0,["Add"])),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵted"](null,["\n\n      "])),(l()(),f["ɵted"](null,["\n\n    "]))],function(l,n){var u=n.component;l(n,39,0,u.fullName);l(n,42,0,"text"),l(n,66,0,u.email);l(n,69,0,"email");l(n,82,0,"5","false","star-outline","star-half","star","false"),l(n,84,0,u.rate),l(n,109,0,u.message);l(n,112,0,"email"),l(n,119,0,u.showErrorMessage);l(n,129,0,"","");l(n,132,0,"add")},function(l,n){l(n,38,0,f["ɵnov"](n,41).ngClassUntouched,f["ɵnov"](n,41).ngClassTouched,f["ɵnov"](n,41).ngClassPristine,f["ɵnov"](n,41).ngClassDirty,f["ɵnov"](n,41).ngClassValid,f["ɵnov"](n,41).ngClassInvalid,f["ɵnov"](n,41).ngClassPending),l(n,65,0,f["ɵnov"](n,68).ngClassUntouched,f["ɵnov"](n,68).ngClassTouched,f["ɵnov"](n,68).ngClassPristine,f["ɵnov"](n,68).ngClassDirty,f["ɵnov"](n,68).ngClassValid,f["ɵnov"](n,68).ngClassInvalid,f["ɵnov"](n,68).ngClassPending),l(n,81,0,f["ɵnov"](n,86).ngClassUntouched,f["ɵnov"](n,86).ngClassTouched,f["ɵnov"](n,86).ngClassPristine,f["ɵnov"](n,86).ngClassDirty,f["ɵnov"](n,86).ngClassValid,f["ɵnov"](n,86).ngClassInvalid,f["ɵnov"](n,86).ngClassPending),l(n,108,0,f["ɵnov"](n,111).ngClassUntouched,f["ɵnov"](n,111).ngClassTouched,f["ɵnov"](n,111).ngClassPristine,f["ɵnov"](n,111).ngClassDirty,f["ɵnov"](n,111).ngClassValid,f["ɵnov"](n,111).ngClassInvalid,f["ɵnov"](n,111).ngClassPending),l(n,131,0,f["ɵnov"](n,132)._hidden)})}function m(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,10,"ion-row",[["class","m-border-bottom-1px-solid-b18b22 row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "," - ","\n      "])),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        - ","\n      "])),(l()(),f["ɵted"](null,["\n    "]))],null,function(l,n){l(n,5,0,n.context.$implicit.fullName,n.context.$implicit.rate),l(n,9,0,n.context.$implicit.message)})}function h(l){return f["ɵvid"](0,[f["ɵpid"](0,U.a,[]),f["ɵpid"](0,V.a,[]),(l()(),f["ɵeld"](0,null,null,25,"ion-header",[],null,null,null,null,null)),f["ɵdid"](16384,null,0,H.a,[y.a,f.ElementRef,f.Renderer,[2,z.a]],null,null),(l()(),f["ɵted"](null,["\n\n  "])),(l()(),f["ɵeld"](0,null,null,21,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,B.b,B.a)),f["ɵdid"](49152,null,0,Z.a,[F.a,[2,z.a],[2,$.a],y.a,f.ElementRef,f.Renderer],null,null),(l()(),f["ɵted"](3,["\n    "])),(l()(),f["ɵeld"](0,null,1,10,"ion-buttons",[["start",""]],null,null,null,null,null)),f["ɵdid"](16384,null,1,G.a,[y.a,f.ElementRef,f.Renderer,[2,J.a],[2,Z.a]],null,null),f["ɵqud"](603979776,1,{_buttons:1}),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,5,"button",[["ion-button",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.dismiss()&&e),e},v.b,v.a)),f["ɵdid"](1097728,[[1,4]],0,b.a,[[8,""],y.a,f.ElementRef,f.Renderer],null,null),(l()(),f["ɵted"](0,["\n        "])),(l()(),f["ɵeld"](0,null,0,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),f["ɵted"](null,["Close"])),(l()(),f["ɵted"](0,["\n      "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](3,["\n    "])),(l()(),f["ɵeld"](0,null,3,5,"ion-title",[["text-center",""]],null,null,null,Y.b,Y.a)),f["ɵdid"](49152,null,0,K.a,[y.a,f.ElementRef,f.Renderer,[2,J.a],[2,Z.a]],null,null),(l()(),f["ɵted"](0,["\n      "])),(l()(),f["ɵeld"](0,null,0,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),f["ɵted"](null,[""," ",""])),(l()(),f["ɵted"](0,["\n    "])),(l()(),f["ɵted"](3,["\n  "])),(l()(),f["ɵted"](null,["\n\n"])),(l()(),f["ɵted"](null,["\n\n"])),(l()(),f["ɵeld"](0,null,null,185,"ion-content",[["padding",""]],[[2,"statusbar-padding",null],[2,"has-refresher",null]],[["window","resize"]],function(l,n,u){var e=!0;return"window:resize"===n&&(e=!1!==f["ɵnov"](l,30).resize()&&e),e},Q.b,Q.a)),f["ɵdid"](4374528,null,0,A.a,[y.a,E.a,I.a,f.ElementRef,f.Renderer,F.a,X.a,f.NgZone,[2,z.a],[2,$.a]],null,null),(l()(),f["ɵted"](1,["\n\n  "])),(l()(),f["ɵeld"](0,null,1,181,"ion-grid",[["class","grid"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,ll.a,[],null,null),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵeld"](0,null,null,14,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,4,"ion-col",[["class","col"],["col-7",""],["text-left",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,0,"img",[["class","m-width-150px"],["src","assets\\\\imgs\\\\imageNotFound.jpg"]],null,null,null,null,null)),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵand"](16777216,null,null,1,null,e)),f["ɵdid"](16384,null,0,L.i,[f.ViewContainerRef,f.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵand"](16777216,null,null,1,null,t)),f["ɵdid"](16384,null,0,L.i,[f.ViewContainerRef,f.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵeld"](0,null,null,15,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,11,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,4,"font",[["class","m-font-size-20px"]],null,null,null,null,null)),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),f["ɵted"](null,[""," ",""])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵted"](null,[" -\n        "])),(l()(),f["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["",", ",""])),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵeld"](0,null,null,15,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,11,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["Phone: "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["",""])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"ion-icon",[["class","m-padding-left-7px"],["color","secondary"],["name","logo-whatsapp"],["role","img"]],[[2,"hide",null]],[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.openWhatsApp()&&e),e},null,null)),f["ɵdid"](147456,null,0,R.a,[y.a,f.ElementRef,f.Renderer],{color:[0,"color"],name:[1,"name"]},null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵeld"](0,null,null,12,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,8,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["Email: "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["",""])),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵeld"](0,null,null,15,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,11,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["Price: "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),f["ɵted"](null,[""," - ",""])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"font",[["class","m-font-size-10px"]],null,null,null,null,null)),(l()(),f["ɵted"](null,["ILS"])),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵeld"](0,null,null,18,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,14,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["Rate: "])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["",""])),(l()(),f["ɵted"](null,[" \n         "])),(l()(),f["ɵand"](16777216,null,null,1,null,a)),f["ɵdid"](16384,null,0,L.i,[f.ViewContainerRef,f.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),f["ɵted"](null,[" \n         "])),(l()(),f["ɵand"](16777216,null,null,1,null,d)),f["ɵdid"](16384,null,0,L.i,[f.ViewContainerRef,f.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),f["ɵted"](null,[" \n      "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵeld"](0,null,null,10,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,6,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["Teaches at:"])),(l()(),f["ɵted"](null,[" ","\n      "])),f["ɵppd"](1),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵeld"](0,null,null,12,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["Teaches at Institutions:"])),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵand"](16777216,null,null,1,null,o)),f["ɵdid"](802816,null,0,L.h,[f.ViewContainerRef,f.TemplateRef,f.IterableDiffers],{ngForOf:[0,"ngForOf"]},null),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵeld"](0,null,null,9,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["Personal message: "])),(l()(),f["ɵted"](null,["","\n      "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵeld"](0,null,null,21,"ion-row",[["class","row"]],null,null,null,null,null)),f["ɵdid"](16384,null,0,C.a,[],null,null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵeld"](0,null,null,8,"ion-col",[["class","col"],["col-6",""],["text-left",""]],null,null,null,null,null)),f["ɵdid"](16384,null,0,p.a,[],null,null),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵeld"](0,null,null,4,"b",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["\n          "])),(l()(),f["ɵeld"](0,null,null,1,"u",[],null,null,null,null,null)),(l()(),f["ɵted"](null,["Recommendations:"])),(l()(),f["ɵted"](null,["\n        "])),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵand"](16777216,null,null,1,null,i)),f["ɵdid"](16384,null,0,L.i,[f.ViewContainerRef,f.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵand"](16777216,null,null,1,null,r)),f["ɵdid"](16384,null,0,L.i,[f.ViewContainerRef,f.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),f["ɵted"](null,["\n      "])),(l()(),f["ɵand"](16777216,null,null,1,null,s)),f["ɵdid"](16384,null,0,L.i,[f.ViewContainerRef,f.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵand"](16777216,null,null,1,null,g)),f["ɵdid"](16384,null,0,L.i,[f.ViewContainerRef,f.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),f["ɵted"](null,["\n\n    "])),(l()(),f["ɵted"](null,["\n    "])),(l()(),f["ɵand"](16777216,null,null,1,null,m)),f["ɵdid"](802816,null,0,L.h,[f.ViewContainerRef,f.TemplateRef,f.IterableDiffers],{ngForOf:[0,"ngForOf"]},null),(l()(),f["ɵted"](null,["\n\n  "])),(l()(),f["ɵted"](1,["\n\n"]))],function(l,n){var u=n.component;l(n,46,0,!u.isTeacherFavorited),l(n,49,0,u.isTeacherFavorited);l(n,84,0,"secondary","logo-whatsapp"),l(n,135,0,1===u.teacher.recommendations.length),l(n,138,0,1!==u.teacher.recommendations.length),l(n,167,0,u.teacher.teachesInstitutions),l(n,197,0,!u.alreadyAddedRecommend&&!u.showRecommendationsBoolean),l(n,200,0,!u.alreadyAddedRecommend&&u.showRecommendationsBoolean),l(n,203,0,u.alreadyAddedRecommend),l(n,208,0,u.showRecommendationsBoolean),l(n,212,0,u.teacher.recommendations)},function(l,n){var u=n.component;l(n,5,0,f["ɵnov"](n,6)._hidden,f["ɵnov"](n,6)._sbPadding),l(n,24,0,u.teacher.firstName,u.teacher.lastName),l(n,29,0,f["ɵnov"](n,30).statusbarPadding,f["ɵnov"](n,30)._hasRefresher),l(n,62,0,u.teacher.firstName,u.teacher.lastName),l(n,66,0,u.teacher.gender,u.teacher.age),l(n,81,0,u.teacher.phone),l(n,83,0,f["ɵnov"](n,84)._hidden),l(n,99,0,u.teacher.email),l(n,114,0,u.teacher.priceFrom,u.teacher.priceTo),l(n,132,0,u.teacher.rate),l(n,151,0,f["ɵunv"](n,151,0,l(n,152,0,f["ɵnov"](n,0),1))),l(n,179,0,u.teacher.personalMessage)})}u.d(n,"a",function(){return il});var f=u(0),p=u(37),v=u(23),b=u(15),y=u(1),R=u(22),C=u(39),w=u(47),E=u(4),k=u(8),I=u(7),_=u(74),T=u(18),P=u(16),M=u(36),x=u(55),O=u(35),S=u(132),j=u(12),N=u(59),F=u(6),A=u(19),q=u(152),D=u(65),L=u(10),U=u(154),V=u(155),H=u(32),z=u(5),B=u(49),Z=u(24),$=u(14),G=u(64),J=u(26),W=u(77),Y=u(50),K=u(29),Q=u(51),X=u(20),ll=u(38),nl=u(11),ul=u(28),el=u(48),tl=u(45),al=u(52),dl=u(104),ol=f["ɵcrt"]({encapsulation:2,styles:[],data:{}}),il=f["ɵccf"]("page-singleteacher",W.a,function(l){return f["ɵvid"](0,[(l()(),f["ɵeld"](0,null,null,1,"page-singleteacher",[],null,null,null,h,ol)),f["ɵdid"](49152,null,0,W.a,[$.a,nl.a,z.a,ul.a,el.a,tl.a,al.a,dl.a],null,null)],null,null)},{},{},[])},227:function(l,n,u){"use strict";function e(l){return r["ɵvid"](0,[(l()(),r["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n          "])),(l()(),r["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["Not even single teacher was found, sorry."])),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵted"](null,["\n      "]))],null,null)}function t(l){return r["ɵvid"](0,[(l()(),r["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-2",""],["text-right",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n              "])),(l()(),r["ɵeld"](0,null,null,1,"ion-icon",[["class","m-font-size-35px"],["name","ios-bookmark-outline"],["role","img"]],[[2,"hide",null]],null,null,null,null)),r["ɵdid"](147456,null,0,g.a,[m.a,r.ElementRef,r.Renderer],{name:[0,"name"]},null),(l()(),r["ɵted"](null,["\n            "]))],function(l,n){l(n,4,0,"ios-bookmark-outline")},function(l,n){l(n,3,0,r["ɵnov"](n,4)._hidden)})}function a(l){return r["ɵvid"](0,[(l()(),r["ɵeld"](0,null,null,2,"font",[],null,null,null,null,null)),(l()(),r["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["( "," person rated )"]))],null,function(l,n){l(n,2,0,n.parent.context.$implicit.recommendations.length)})}function d(l){return r["ɵvid"](0,[(l()(),r["ɵeld"](0,null,null,2,"font",[],null,null,null,null,null)),(l()(),r["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["( "," people rated )"]))],null,function(l,n){l(n,2,0,n.parent.context.$implicit.recommendations.length)})}function o(l){return r["ɵvid"](0,[(l()(),r["ɵeld"](0,null,null,110,"div",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵeld"](0,null,null,107,"ion-card",[],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.expandTeacherInformation(l.context.index)&&e),e},null,null)),r["ɵdid"](16384,null,0,h.a,[m.a,r.ElementRef,r.Renderer],null,null),(l()(),r["ɵted"](null,["\n\n          "])),(l()(),r["ɵted"](null,["\n          "])),(l()(),r["ɵeld"](0,null,null,11,"ion-row",[["class","row"]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵeld"](0,null,null,4,"ion-col",[["class","col"],["col-10",""],["text-left",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n              "])),(l()(),r["ɵeld"](0,null,null,0,"img",[["class","m-width-150px"],["src","assets\\\\imgs\\\\imageNotFound.jpg"]],null,null,null,null,null)),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵand"](16777216,null,null,1,null,t)),r["ɵdid"](16384,null,0,f.i,[r.ViewContainerRef,r.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),r["ɵted"](null,["\n          "])),(l()(),r["ɵted"](null,["\n\n          "])),(l()(),r["ɵted"](null,["\n          "])),(l()(),r["ɵeld"](0,null,null,88,"ion-card-content",[],null,null,null,null,null)),r["ɵdid"](16384,null,0,p.a,[m.a,r.ElementRef,r.Renderer],null,null),(l()(),r["ɵted"](null,["\n\n            "])),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵeld"](0,null,null,19,"ion-row",[["class","row"]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n              "])),(l()(),r["ɵeld"](0,null,null,15,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n                "])),(l()(),r["ɵeld"](0,null,null,11,"ion-card-title",[],null,null,null,null,null)),r["ɵdid"](16384,null,0,v.a,[m.a,r.ElementRef,r.Renderer],null,null),(l()(),r["ɵted"](null,["\n                  "])),(l()(),r["ɵeld"](0,null,null,1,"font",[["class","m-font-size-25px"]],null,null,null,null,null)),(l()(),r["ɵted"](null,[""," ",""])),(l()(),r["ɵted"](null,["\n                  -\n                  "])),(l()(),r["ɵeld"](0,null,null,4,"font",[["class","m-font-size-17px"]],null,null,null,null,null)),(l()(),r["ɵted"](null,["\n                    "])),(l()(),r["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),r["ɵted"](null,[""," ",""])),(l()(),r["ɵted"](null,["\n                  "])),(l()(),r["ɵted"](null,["\n\n                "])),(l()(),r["ɵted"](null,["\n              "])),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵted"](null,["\n\n            "])),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵeld"](0,null,null,18,"ion-row",[["class","row"]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n              "])),(l()(),r["ɵeld"](0,null,null,14,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n                "])),(l()(),r["ɵeld"](0,null,null,4,"u",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["\n                  "])),(l()(),r["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["Price:"])),(l()(),r["ɵted"](null,["\n                "])),(l()(),r["ɵted"](null,["\n                "])),(l()(),r["ɵeld"](0,null,null,1,"i",[],null,null,null,null,null)),(l()(),r["ɵted"](null,[""," - ",""])),(l()(),r["ɵted"](null,["\n                "])),(l()(),r["ɵeld"](0,null,null,1,"font",[["class","m-font-size-10px"]],null,null,null,null,null)),(l()(),r["ɵted"](null,["ILS"])),(l()(),r["ɵted"](null,["\n              "])),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵted"](null,["\n\n            "])),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵeld"](0,null,null,25,"ion-row",[["class","row"]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n              "])),(l()(),r["ɵeld"](0,null,null,21,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n                "])),(l()(),r["ɵeld"](0,null,null,4,"u",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["\n                  "])),(l()(),r["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["Rating:"])),(l()(),r["ɵted"](null,["\n                "])),(l()(),r["ɵted"](null,[" \n                "])),(l()(),r["ɵand"](16777216,null,null,1,null,a)),r["ɵdid"](16384,null,0,f.i,[r.ViewContainerRef,r.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),r["ɵted"](null,[" \n                "])),(l()(),r["ɵand"](16777216,null,null,1,null,d)),r["ɵdid"](16384,null,0,f.i,[r.ViewContainerRef,r.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),r["ɵted"](null,[" \n                "])),(l()(),r["ɵeld"](0,null,null,5,"rating",[["emptyStarIconName","star-outline"],["halfStarIconName","star-half"],["max","5"],["nullable","false"],["readOnly","true"],["starIconName","star"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngModelChange"]],function(l,n,u){var e=!0;return"ngModelChange"===n&&(e=!1!==(l.component.teachers[l.context.index].rate=u)&&e),e},b.b,b.a)),r["ɵdid"](114688,null,0,y.a,[],{max:[0,"max"],readOnly:[1,"readOnly"],emptyStarIconName:[2,"emptyStarIconName"],halfStarIconName:[3,"halfStarIconName"],starIconName:[4,"starIconName"],nullable:[5,"nullable"]},null),r["ɵprd"](1024,null,R.e,function(l){return[l]},[y.a]),r["ɵdid"](671744,null,0,R.h,[[8,null],[8,null],[8,null],[2,R.e]],{model:[0,"model"]},{update:"ngModelChange"}),r["ɵprd"](2048,null,R.f,null,[R.h]),r["ɵdid"](16384,null,0,R.g,[R.f],null,null),(l()(),r["ɵted"](null,["\n              "])),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵted"](null,["\n\n            "])),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵeld"](0,null,null,12,"ion-row",[["class","row"]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n              "])),(l()(),r["ɵeld"](0,null,null,8,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n                "])),(l()(),r["ɵeld"](0,null,null,4,"u",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["\n                  "])),(l()(),r["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["Message:"])),(l()(),r["ɵted"](null,["\n                "])),(l()(),r["ɵted"](null,["\n                ","\n              "])),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵted"](null,["\n\n          "])),(l()(),r["ɵted"](null,["\n\n        "])),(l()(),r["ɵted"](null,["\n      "]))],function(l,n){var u=n.component;l(n,16,0,n.context.$implicit.isTeacherFavorited),l(n,80,0,1===n.context.$implicit.recommendations.length),l(n,83,0,1!==n.context.$implicit.recommendations.length);l(n,86,0,"5","true","star-outline","star-half","star","false"),l(n,88,0,u.teachers[n.context.index].rate)},function(l,n){l(n,34,0,n.context.$implicit.firstName,n.context.$implicit.lastName),l(n,39,0,n.context.$implicit.gender,n.context.$implicit.age),l(n,59,0,n.context.$implicit.priceFrom,n.context.$implicit.priceTo),l(n,85,0,r["ɵnov"](n,90).ngClassUntouched,r["ɵnov"](n,90).ngClassTouched,r["ɵnov"](n,90).ngClassPristine,r["ɵnov"](n,90).ngClassDirty,r["ɵnov"](n,90).ngClassValid,r["ɵnov"](n,90).ngClassInvalid,r["ɵnov"](n,90).ngClassPending),l(n,106,0,n.context.$implicit.personalMessage)})}function i(l){return r["ɵvid"](0,[(l()(),r["ɵeld"](0,null,null,13,"ion-header",[],null,null,null,null,null)),r["ɵdid"](16384,null,0,C.a,[m.a,r.ElementRef,r.Renderer,[2,w.a]],null,null),(l()(),r["ɵted"](null,["\n\n  "])),(l()(),r["ɵeld"](0,null,null,9,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,E.b,E.a)),r["ɵdid"](49152,null,0,k.a,[I.a,[2,w.a],[2,_.a],m.a,r.ElementRef,r.Renderer],null,null),(l()(),r["ɵted"](3,["\n    "])),(l()(),r["ɵeld"](0,null,3,5,"ion-title",[["text-center",""]],null,null,null,T.b,T.a)),r["ɵdid"](49152,null,0,P.a,[m.a,r.ElementRef,r.Renderer,[2,M.a],[2,k.a]],null,null),(l()(),r["ɵted"](0,["\n      "])),(l()(),r["ɵeld"](0,null,0,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),r["ɵted"](null,["Teacher List"])),(l()(),r["ɵted"](0,["\n    "])),(l()(),r["ɵted"](3,["\n  "])),(l()(),r["ɵted"](null,["\n\n"])),(l()(),r["ɵted"](null,["\n\n"])),(l()(),r["ɵeld"](0,null,null,94,"ion-content",[],[[2,"statusbar-padding",null],[2,"has-refresher",null]],[["window","resize"]],function(l,n,u){var e=!0;return"window:resize"===n&&(e=!1!==r["ɵnov"](l,16).resize()&&e),e},x.b,x.a)),r["ɵdid"](4374528,null,0,O.a,[m.a,S.a,j.a,r.ElementRef,r.Renderer,I.a,N.a,r.NgZone,[2,w.a],[2,_.a]],null,null),(l()(),r["ɵted"](1,["\n\n  "])),(l()(),r["ɵted"](1,["\n  "])),(l()(),r["ɵeld"](0,null,1,56,"div",[["class","m-background-2b3137 m-margin-top0 m-color-white"],["padding",""],["text-center",""]],null,null,null,null,null)),(l()(),r["ɵted"](null,["\n\n    "])),(l()(),r["ɵeld"](0,null,null,53,"ion-grid",[["class","grid"]],null,null,null,null,null)),r["ɵdid"](16384,null,0,F.a,[],null,null),(l()(),r["ɵted"](null,["\n\n      "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n          "])),(l()(),r["ɵeld"](0,null,null,1,"font",[["class","m-color-white m-font-size-25px m-font-weight-300"]],null,null,null,null,null)),(l()(),r["ɵted"](null,["Teachers that fits to your requirements"])),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵted"](null,["\n\n      "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵeld"](0,null,null,6,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n          We've searched in our databases to give you the best results of the teachers that suggest themselves. Go and look at them\n          and pick one.\n        "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵted"](null,["\n\n      "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n          "])),(l()(),r["ɵeld"](0,null,null,1,"font",[["class","m-color-orange"]],null,null,null,null,null)),(l()(),r["ɵted"](null,["The power is in your hands, rank and comment to make the community grow and be better."])),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵted"](null,["\n\n      "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵeld"](0,null,null,15,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵeld"](0,null,null,11,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n          "])),(l()(),r["ɵeld"](0,null,null,7,"font",[["class","m-font-size-15px m-color-white m-opacity-6"]],null,null,null,null,null)),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵeld"](0,null,null,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),r["ɵted"](null,["*"])),(l()(),r["ɵted"](null,[" In order to see all the details on the teacher click on the card to expand it\n            "])),(l()(),r["ɵeld"](0,null,null,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),r["ɵted"](null,["*"])),(l()(),r["ɵted"](null,["\n          "])),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵted"](null,["\n\n    "])),(l()(),r["ɵted"](null,["\n\n  "])),(l()(),r["ɵted"](1,["\n\n  "])),(l()(),r["ɵted"](1,["\n  "])),(l()(),r["ɵeld"](0,null,1,30,"div",[],null,null,null,null,null)),(l()(),r["ɵted"](null,["\n\n    "])),(l()(),r["ɵeld"](0,null,null,27,"ion-grid",[["class","grid"]],null,null,null,null,null)),r["ɵdid"](16384,null,0,F.a,[],null,null),(l()(),r["ɵted"](null,["\n\n      "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵeld"](0,null,null,14,"ion-row",[["class","row"]],null,null,null,null,null)),r["ɵdid"](16384,null,0,s.a,[],null,null),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵeld"](0,null,null,10,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),r["ɵdid"](16384,null,0,c.a,[],null,null),(l()(),r["ɵted"](null,["\n          "])),(l()(),r["ɵeld"](0,null,null,6,"ion-toolbar",[["class","toolbar"],["color","m-darker"]],[[2,"statusbar-padding",null]],null,null,A.b,A.a)),r["ɵdid"](49152,null,0,M.a,[m.a,r.ElementRef,r.Renderer],{color:[0,"color"]},null),(l()(),r["ɵted"](3,["\n            "])),(l()(),r["ɵeld"](0,null,3,2,"ion-searchbar",[["animated","true"],["debounce","100"],["placeholder","Search for teacher name"],["type","text"]],[[2,"searchbar-animated",null],[2,"searchbar-has-value",null],[2,"searchbar-active",null],[2,"searchbar-show-cancel",null],[2,"searchbar-left-aligned",null],[2,"searchbar-has-focus",null]],[[null,"ionInput"]],function(l,n,u){var e=!0;return"ionInput"===n&&(e=!1!==l.component.onInput(u)&&e),e},D.b,D.a)),r["ɵdid"](1294336,null,0,L.a,[m.a,S.a,r.ElementRef,r.Renderer,[2,R.f]],{showCancelButton:[0,"showCancelButton"],debounce:[1,"debounce"],placeholder:[2,"placeholder"],type:[3,"type"],animated:[4,"animated"]},{ionInput:"ionInput"}),(l()(),r["ɵted"](null,["\n            "])),(l()(),r["ɵted"](3,["\n          "])),(l()(),r["ɵted"](null,["\n        "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵted"](null,["\n\n      "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵand"](16777216,null,null,1,null,e)),r["ɵdid"](16384,null,0,f.i,[r.ViewContainerRef,r.TemplateRef],{ngIf:[0,"ngIf"]},null),(l()(),r["ɵted"](null,["\n\n      "])),(l()(),r["ɵted"](null,["\n      "])),(l()(),r["ɵand"](16777216,null,null,1,null,o)),r["ɵdid"](802816,null,0,f.h,[r.ViewContainerRef,r.TemplateRef,r.IterableDiffers],{ngForOf:[0,"ngForOf"]},null),(l()(),r["ɵted"](null,["\n\n    "])),(l()(),r["ɵted"](null,["\n\n  "])),(l()(),r["ɵted"](1,["\n\n"]))],function(l,n){var u=n.component;l(n,91,0,"m-darker");l(n,94,0,u.shouldShowCancel,"100","Search for teacher name","text","true"),l(n,102,0,0==u.teachers.length),l(n,106,0,u.teachers)},function(l,n){l(n,3,0,r["ɵnov"](n,4)._hidden,r["ɵnov"](n,4)._sbPadding),l(n,15,0,r["ɵnov"](n,16).statusbarPadding,r["ɵnov"](n,16)._hasRefresher),l(n,90,0,r["ɵnov"](n,91)._sbPadding),l(n,93,0,r["ɵnov"](n,94)._animated,r["ɵnov"](n,94)._value,r["ɵnov"](n,94)._isActive,r["ɵnov"](n,94)._showCancelButton,r["ɵnov"](n,94)._shouldAlignLeft,r["ɵnov"](n,94)._isFocus)})}u.d(n,"a",function(){return B});var r=u(0),s=u(39),c=u(37),g=u(22),m=u(1),h=u(83),f=u(10),p=u(84),v=u(125),b=u(152),y=u(65),R=u(12),C=u(32),w=u(5),E=u(49),k=u(24),I=u(6),_=u(14),T=u(50),P=u(29),M=u(26),x=u(51),O=u(19),S=u(4),j=u(7),N=u(20),F=u(38),A=u(258),q=u(111),D=u(259),L=u(99),U=u(11),V=u(76),H=u(52),z=r["ɵcrt"]({encapsulation:2,styles:[],data:{}}),B=r["ɵccf"]("page-teacherslist",q.a,function(l){return r["ɵvid"](0,[(l()(),r["ɵeld"](0,null,null,1,"page-teacherslist",[],null,null,null,i,z)),r["ɵdid"](49152,null,0,q.a,[_.a,U.a,V.a,H.a],null,null)],null,null)},{},{},[])},228:function(l,n,u){"use strict";function e(l){return d["ɵvid"](0,[(l()(),d["ɵeld"](0,null,null,2,"ion-nav",[],null,null,null,G.b,G.a)),d["ɵprd"](6144,null,J.a,null,[W.a]),d["ɵdid"](4374528,null,0,W.a,[[2,Y.a],[2,K.a],Q.a,X.a,ll.a,d.ElementRef,d.NgZone,d.Renderer,d.ComponentFactoryResolver,nl.l,ul.a,[2,el.a],tl.a,d.ErrorHandler],{root:[0,"root"]},null),(l()(),d["ɵted"](null,["\n"]))],function(l,n){l(n,2,0,n.component.rootPage)},null)}function t(l){return d["ɵvid"](0,[(l()(),d["ɵeld"](0,null,null,24,"ion-header",[],null,null,null,null,null)),d["ɵdid"](16384,null,0,ol.a,[X.a,d.ElementRef,d.Renderer,[2,Y.a]],null,null),(l()(),d["ɵted"](null,["\n  "])),(l()(),d["ɵeld"](0,null,null,20,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,il.b,il.a)),d["ɵdid"](49152,null,0,rl.a,[Q.a,[2,Y.a],[2,K.a],X.a,d.ElementRef,d.Renderer],null,null),(l()(),d["ɵted"](3,["\n    "])),(l()(),d["ɵeld"](0,null,3,5,"ion-title",[["text-center",""]],null,null,null,sl.b,sl.a)),d["ɵdid"](49152,null,0,cl.a,[X.a,d.ElementRef,d.Renderer,[2,gl.a],[2,rl.a]],null,null),(l()(),d["ɵted"](0,["\n      "])),(l()(),d["ɵeld"](0,null,0,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),d["ɵted"](null,["StudyHub"])),(l()(),d["ɵted"](0,["\n    "])),(l()(),d["ɵted"](3,["\n    "])),(l()(),d["ɵeld"](0,null,2,9,"ion-buttons",[["class","m-color-f5ae08"],["end",""],["icon-only",""]],null,null,null,null,null)),d["ɵdid"](16384,null,1,ml.a,[X.a,d.ElementRef,d.Renderer,[2,gl.a],[2,rl.a]],null,null),d["ɵqud"](603979776,1,{_buttons:1}),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,4,"div",[["class","animated flip"]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.goPage("favorites")&&e),e},null,null)),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,1,"ion-icon",[["name","ios-star"],["role","img"]],[[2,"hide",null]],null,null,null,null)),d["ɵdid"](147456,null,0,hl.a,[X.a,d.ElementRef,d.Renderer],{name:[0,"name"]},null),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n    "])),(l()(),d["ɵted"](3,["\n  "])),(l()(),d["ɵted"](null,["\n"])),(l()(),d["ɵted"](null,["\n\n"])),(l()(),d["ɵeld"](0,null,null,209,"ion-content",[],[[2,"statusbar-padding",null],[2,"has-refresher",null]],[["window","resize"]],function(l,n,u){var e=!0;return"window:resize"===n&&(e=!1!==d["ɵnov"](l,27).resize()&&e),e},fl.b,fl.a)),d["ɵdid"](4374528,null,0,pl.a,[X.a,ll.a,tl.a,d.ElementRef,d.Renderer,Q.a,vl.a,d.NgZone,[2,Y.a],[2,K.a]],null,null),(l()(),d["ɵted"](1,["\n\n  "])),(l()(),d["ɵted"](1,["\n  "])),(l()(),d["ɵeld"](0,null,1,58,"div",[["class","m-background-2b3137 m-margin-top0"],["padding",""],["text-center",""]],null,null,null,null,null)),(l()(),d["ɵted"](null,["\n\n    "])),(l()(),d["ɵeld"](0,null,null,55,"ion-grid",[["class","grid"]],null,null,null,null,null)),d["ɵdid"](16384,null,0,bl.a,[],null,null),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,9,"ion-row",[["class","row"]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          "])),(l()(),d["ɵeld"](0,null,null,1,"font",[["class","m-color-white m-font-size-43px m-font-weight-300"]],null,null,null,null,null)),(l()(),d["ɵted"](null,["Built for students and teachers"])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,22,"ion-row",[["class","row"]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,8,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          "])),(l()(),d["ɵeld"](0,null,null,4,"div",[["class","m-font-size-20px m-color-white m-font-weight-300 m-opacity-6"]],null,null,null,null,null)),(l()(),d["ɵted"](null,["\n            StudyHub is a study platform inspired by the way you work. You can find teachers\n            "])),(l()(),d["ɵeld"](0,null,null,1,"font",[["class","m-color-white"]],null,null,null,null,null)),(l()(),d["ɵted"](null,["from your home"])),(l()(),d["ɵted"](null,[" and talk with them directly, Manage your teachers & Teach other people.\n          "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,8,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          "])),(l()(),d["ɵeld"](0,null,null,4,"div",[["class","m-font-size-20px m-color-white m-font-weight-300"]],null,null,null,null,null)),(l()(),d["ɵted"](null,["\n            "])),(l()(),d["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),d["ɵted"](null,["Keep it simple and fun"])),(l()(),d["ɵted"](null,["\n          "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,13,"ion-row",[["class","row"]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          "])),(l()(),d["ɵeld"](0,null,null,5,"button",[["color","secondary"],["ion-button",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.goPage("search")&&e),e},Cl.b,Cl.a)),d["ɵdid"](1097728,null,0,wl.a,[[8,""],X.a,d.ElementRef,d.Renderer],{color:[0,"color"]},null),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵeld"](0,null,0,1,"b",[],null,null,null,null,null)),(l()(),d["ɵted"](null,["Start using StudyHub"])),(l()(),d["ɵted"](0,["\n          "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n\n    "])),(l()(),d["ɵted"](null,["\n  "])),(l()(),d["ɵted"](1,["\n\n  "])),(l()(),d["ɵted"](1,["\n  "])),(l()(),d["ɵeld"](0,null,1,143,"div",[],null,null,null,null,null)),(l()(),d["ɵted"](null,["\n    "])),(l()(),d["ɵeld"](0,null,null,140,"ion-grid",[["class","grid"]],null,null,null,null,null)),d["ɵdid"](16384,null,0,bl.a,[],null,null),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,6,"ion-row",[["class","m-padding-buttom-15px m-padding-top-15px row"],["text-center",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          StudyHub for individuals\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n\n          "])),(l()(),d["ɵeld"](0,null,null,1,"font",[["class","m-font-size-17px m-font-weight-300 m-color-586069"]],null,null,null,null,null)),(l()(),d["ɵted"](null,["As individual user at StudyHub you can find teachers around Israel, talk with them directly at WhatsApp, rank teachers\n            and tell your opinion about them."])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,6,"ion-row",[["class","m-padding-buttom-15px m-padding-top-15px row"],["text-center",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          StudyHub for teachers\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,9,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,5,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n\n          "])),(l()(),d["ɵeld"](0,null,null,1,"font",[["class","m-font-size-17px m-font-weight-300 m-color-586069"]],null,null,null,null,null)),(l()(),d["ɵted"](null,["\n            As a teacher at StudyHub you'll be shown at students searches over the app, you will have your own profile and you will be\n            able to manage it as you wish.\n          "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,13,"ion-row",[["class","row"],["text-center",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          "])),(l()(),d["ɵeld"](0,null,null,5,"button",[["color","primary"],["icon-start",""],["ion-button",""],["outline",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.goPage("joinasteacher")&&e),e},Cl.b,Cl.a)),d["ɵdid"](1097728,null,0,wl.a,[[8,""],X.a,d.ElementRef,d.Renderer],{color:[0,"color"],outline:[1,"outline"]},null),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵeld"](0,null,0,1,"ion-icon",[["name","ios-person-add-outline"],["role","img"]],[[2,"hide",null]],null,null,null,null)),d["ɵdid"](147456,null,0,hl.a,[X.a,d.ElementRef,d.Renderer],{name:[0,"name"]},null),(l()(),d["ɵted"](0,["\n            Join as teacher\n          "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,34,"ion-row",[["class","row"]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,30,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          "])),(l()(),d["ɵeld"](0,null,null,26,"ion-slides",[["centeredSlides","true"],["loop","true"],["pager","true"],["speed","600"]],null,null,null,El.b,El.a)),d["ɵdid"](1228800,null,0,kl.a,[X.a,ll.a,d.NgZone,[2,Y.a],d.ElementRef,d.Renderer],{loop:[0,"loop"],pager:[1,"pager"],speed:[2,"speed"],centeredSlides:[3,"centeredSlides"]},null),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵeld"](0,null,0,4,"ion-slide",[],null,null,null,Il.b,Il.a)),d["ɵdid"](180224,null,0,_l.a,[d.ElementRef,d.Renderer,kl.a],null,null),(l()(),d["ɵted"](0,["\n              "])),(l()(),d["ɵeld"](0,null,0,0,"img",[["src","assets\\\\imgs\\\\StudySlider1.jpeg"]],null,null,null,null,null)),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵeld"](0,null,0,4,"ion-slide",[],null,null,null,Il.b,Il.a)),d["ɵdid"](180224,null,0,_l.a,[d.ElementRef,d.Renderer,kl.a],null,null),(l()(),d["ɵted"](0,["\n              "])),(l()(),d["ɵeld"](0,null,0,0,"img",[["src","assets\\\\imgs\\\\StudySlider4.jpg"]],null,null,null,null,null)),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵeld"](0,null,0,4,"ion-slide",[],null,null,null,Il.b,Il.a)),d["ɵdid"](180224,null,0,_l.a,[d.ElementRef,d.Renderer,kl.a],null,null),(l()(),d["ɵted"](0,["\n              "])),(l()(),d["ɵeld"](0,null,0,0,"img",[["src","assets\\\\imgs\\\\StudySlider3.jpeg"]],null,null,null,null,null)),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵeld"](0,null,0,4,"ion-slide",[],null,null,null,Il.b,Il.a)),d["ɵdid"](180224,null,0,_l.a,[d.ElementRef,d.Renderer,kl.a],null,null),(l()(),d["ɵted"](0,["\n              "])),(l()(),d["ɵeld"](0,null,0,0,"img",[["src","assets\\\\imgs\\\\StudySlider2.jpg"]],null,null,null,null,null)),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵted"](0,["\n          "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵeld"](0,null,null,0,"hr",[],null,null,null,null,null)),(l()(),d["ɵted"](null,["\n\n      "])),(l()(),d["ɵeld"](0,null,null,12,"ion-row",[["class","row"]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,8,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          "])),(l()(),d["ɵeld"](0,null,null,4,"font",[["class","m-font-size-25px"]],null,null,null,null,null)),(l()(),d["ɵted"](null,["\n            "])),(l()(),d["ɵeld"](0,null,null,1,"b",[],null,null,null,null,null)),(l()(),d["ɵted"](null,["StudyHub - Owner"])),(l()(),d["ɵted"](null,["\n          "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵeld"](0,null,null,25,"ion-row",[["class","row"]],null,null,null,null,null)),d["ɵdid"](16384,null,0,yl.a,[],null,null),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          Moshe Binieli\n        "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          mmoshikoo@gmail.com\n        "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,2,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n          Computer Science student and Full Stack developer.\n        "])),(l()(),d["ɵted"](null,["\n        "])),(l()(),d["ɵeld"](0,null,null,9,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),d["ɵdid"](16384,null,0,Rl.a,[],null,null),(l()(),d["ɵted"](null,["\n\n          "])),(l()(),d["ɵeld"](0,null,null,5,"button",[["color","dark"],["icon-start",""],["ion-button",""],["outline",""],["small",""]],null,[[null,"click"]],function(l,n,u){var e=!0;return"click"===n&&(e=!1!==l.component.goPage("contactme")&&e),e},Cl.b,Cl.a)),d["ɵdid"](1097728,null,0,wl.a,[[8,""],X.a,d.ElementRef,d.Renderer],{color:[0,"color"],small:[1,"small"],outline:[2,"outline"]},null),(l()(),d["ɵted"](0,["\n            "])),(l()(),d["ɵeld"](0,null,0,1,"ion-icon",[["name","ios-contacts"],["role","img"]],[[2,"hide",null]],null,null,null,null)),d["ɵdid"](147456,null,0,hl.a,[X.a,d.ElementRef,d.Renderer],{name:[0,"name"]},null),(l()(),d["ɵted"](0,["Contact us"])),(l()(),d["ɵted"](null,["\n\n        "])),(l()(),d["ɵted"](null,["\n      "])),(l()(),d["ɵted"](null,["\n    "])),(l()(),d["ɵted"](null,["\n  "])),(l()(),d["ɵted"](1,["\n"])),(l()(),d["ɵted"](null,["\n\n"]))],function(l,n){l(n,20,0,"ios-star");l(n,80,0,"secondary");l(n,146,0,"primary","");l(n,149,0,"ios-person-add-outline");l(n,162,0,"true","true","600","true");l(n,226,0,"dark","","");l(n,229,0,"ios-contacts")},function(l,n){l(n,3,0,d["ɵnov"](n,4)._hidden,d["ɵnov"](n,4)._sbPadding),l(n,19,0,d["ɵnov"](n,20)._hidden),l(n,26,0,d["ɵnov"](n,27).statusbarPadding,d["ɵnov"](n,27)._hasRefresher),l(n,148,0,d["ɵnov"](n,149)._hidden),l(n,228,0,d["ɵnov"](n,229)._hidden)})}function a(l){return d["ɵvid"](0,[(l()(),d["ɵeld"](0,null,null,12,"ion-tabs",[],null,null,null,Ml.b,Ml.a)),d["ɵprd"](6144,null,J.a,null,[xl.a]),d["ɵdid"](4374528,[["myTabs",4]],0,xl.a,[[2,K.a],[2,Y.a],Q.a,X.a,d.ElementRef,ll.a,d.Renderer,el.a,vl.a],null,null),(l()(),d["ɵted"](0,["\n  "])),(l()(),d["ɵeld"](0,null,0,1,"ion-tab",[["role","tabpanel"],["tabIcon","home"],["tabTitle","Home"]],[[1,"id",0],[1,"aria-labelledby",0]],null,null,Ol.b,Ol.a)),d["ɵdid"](245760,null,0,Sl.a,[xl.a,Q.a,X.a,ll.a,d.ElementRef,d.NgZone,d.Renderer,d.ComponentFactoryResolver,d.ChangeDetectorRef,nl.l,ul.a,[2,el.a],tl.a,d.ErrorHandler],{root:[0,"root"],tabTitle:[1,"tabTitle"],tabIcon:[2,"tabIcon"]},null),(l()(),d["ɵted"](0,["\n  "])),(l()(),d["ɵeld"](0,null,0,1,"ion-tab",[["role","tabpanel"],["tabIcon","search"],["tabTitle","Search"]],[[1,"id",0],[1,"aria-labelledby",0]],null,null,Ol.b,Ol.a)),d["ɵdid"](245760,null,0,Sl.a,[xl.a,Q.a,X.a,ll.a,d.ElementRef,d.NgZone,d.Renderer,d.ComponentFactoryResolver,d.ChangeDetectorRef,nl.l,ul.a,[2,el.a],tl.a,d.ErrorHandler],{root:[0,"root"],tabTitle:[1,"tabTitle"],tabIcon:[2,"tabIcon"]},null),(l()(),d["ɵted"](0,["\n  "])),(l()(),d["ɵeld"](0,null,0,1,"ion-tab",[["role","tabpanel"],["tabIcon","ios-aperture-outline"],["tabTitle","Settings"]],[[1,"id",0],[1,"aria-labelledby",0]],null,null,Ol.b,Ol.a)),d["ɵdid"](245760,null,0,Sl.a,[xl.a,Q.a,X.a,ll.a,d.ElementRef,d.NgZone,d.Renderer,d.ComponentFactoryResolver,d.ChangeDetectorRef,nl.l,ul.a,[2,el.a],tl.a,d.ErrorHandler],{root:[0,"root"],tabTitle:[1,"tabTitle"],tabIcon:[2,"tabIcon"]},null),(l()(),d["ɵted"](0,["\n"])),(l()(),d["ɵted"](null,["\n"]))],function(l,n){var u=n.component;l(n,5,0,u.tab1Root,"Home","home");l(n,8,0,u.tab2Root,"Search","search");l(n,11,0,u.tab3Root,"Settings","ios-aperture-outline")},function(l,n){l(n,4,0,d["ɵnov"](n,5)._tabId,d["ɵnov"](n,5)._btnId),l(n,7,0,d["ɵnov"](n,8)._tabId,d["ɵnov"](n,8)._btnId),l(n,10,0,d["ɵnov"](n,11)._tabId,d["ɵnov"](n,11)._btnId)})}Object.defineProperty(n,"__esModule",{value:!0});var d=u(0),o=u(41),i=u(2),r=u(27),s=u(106),c=u(107),g=u(66),m=u(108),h=u(109),f=function(){function l(l){this.navCtrl=l,this.tabRef=this.navCtrl.parent}return l.prototype.goPage=function(l){switch(l){case"search":this.tabRef.select(1);break;case"contactme":this.navCtrl.push(m.a);break;case"joinasteacher":this.navCtrl.push(h.a);break;case"favorites":this.navCtrl.push(g.a);break;default:console.log("Not found the requested page "+l)}},l}();f=Object(i.__decorate)([Object(d.Component)({selector:"page-home",templateUrl:"home.html"}),Object(i.__metadata)("design:paramtypes",["function"==typeof(p=void 0!==r.h&&r.h)&&p||Object])],f);var p,v=u(110),b=u(112),y=function(){return function(){this.tab1Root=f,this.tab2Root=v.a,this.tab3Root=b.a}}();y=Object(i.__decorate)([Object(d.Component)({templateUrl:"tabs.html"}),Object(i.__metadata)("design:paramtypes",[])],y);var R=function(){return function(l,n,u){this.rootPage=y,l.ready().then(function(){n.styleDefault(),u.hide()})}}();R=Object(i.__decorate)([Object(d.Component)({templateUrl:"app.html"}),Object(i.__metadata)("design:paramtypes",["function"==typeof(C=void 0!==r.j&&r.j)&&C||Object,"function"==typeof(w=void 0!==s.a&&s.a)&&w||Object,"function"==typeof(E=void 0!==c.a&&c.a)&&E||Object])],R);var C,w,E,k=u(130),I=u(260),_=u(208),T=u(105),P=u(28),M=u(104),x=u(154),O=u(111),S=u(77),j=u(150),N=u(52),F=u(155),A=function(){return function(){}}();A=Object(i.__decorate)([Object(d.NgModule)({declarations:[R,f,y,v.a,b.a,m.a,g.a,x.a,h.a,O.a,S.a,F.a],imports:[o.a,k.f,I.a,r.d.forRoot(R,{},{links:[{loadChildren:"../pages/contactus/contactus.module.ngfactory#ContactusPageModuleNgFactory",name:"ContactusPage",segment:"contactus",priority:"low",defaultHistory:[]},{loadChildren:"../pages/favorites/favorites.module.ngfactory#FavoritesPageModuleNgFactory",name:"FavoritesPage",segment:"favorites",priority:"low",defaultHistory:[]},{loadChildren:"../pages/jointeacher/jointeacher.module.ngfactory#JointeacherPageModuleNgFactory",name:"JointeacherPage",segment:"jointeacher",priority:"low",defaultHistory:[]},{loadChildren:"../pages/search/search.module.ngfactory#SearchPageModuleNgFactory",name:"SearchPage",segment:"search",priority:"low",defaultHistory:[]},{loadChildren:"../pages/settings/settings.module.ngfactory#SettingsPageModuleNgFactory",name:"SettingsPage",segment:"settings",priority:"low",defaultHistory:[]},{loadChildren:"../pages/singleteacher/singleteacher.module.ngfactory#SingleteacherPageModuleNgFactory",name:"SingleteacherPage",segment:"singleteacher",priority:"low",defaultHistory:[]},{loadChildren:"../pages/teacherslist/teacherslist.module.ngfactory#TeacherslistPageModuleNgFactory",name:"TeacherslistPage",segment:"teacherslist",priority:"low",defaultHistory:[]}]}),_.LocalStorageModule.withConfig({prefix:"StudyHub",storageType:"localStorage"})],bootstrap:[r.b],entryComponents:[R,f,y,v.a,b.a,g.a,m.a,h.a,O.a,S.a],providers:[T.a,s.a,c.a,{provide:d.ErrorHandler,useClass:r.c},P.a,x.a,M.a,j.a,F.a,N.a]})],A);var q=u(69),D=u(212),L=u(213),U=u(214),V=u(215),H=u(216),z=u(217),B=u(218),Z=u(219),$=u(220),G=u(261),J=u(40),W=u(73),Y=u(5),K=u(14),Q=u(6),X=u(1),ll=u(4),nl=u(8),ul=u(30),el=u(13),tl=u(7),al=d["ɵcrt"]({encapsulation:2,styles:[],data:{}}),dl=d["ɵccf"]("ng-component",R,function(l){return d["ɵvid"](0,[(l()(),d["ɵeld"](0,null,null,1,"ng-component",[],null,null,null,e,al)),d["ɵdid"](49152,null,0,R,[ll.a,s.a,c.a],null,null)],null,null)},{},{},[]),ol=u(32),il=u(49),rl=u(24),sl=u(50),cl=u(29),gl=u(26),ml=u(64),hl=u(22),fl=u(51),pl=u(19),vl=u(20),bl=u(38),yl=u(39),Rl=u(37),Cl=u(23),wl=u(15),El=u(262),kl=u(62),Il=u(263),_l=u(100),Tl=d["ɵcrt"]({encapsulation:2,styles:[],data:{}}),Pl=d["ɵccf"]("page-home",f,function(l){return d["ɵvid"](0,[(l()(),d["ɵeld"](0,null,null,1,"page-home",[],null,null,null,t,Tl)),d["ɵdid"](49152,null,0,f,[K.a],null,null)],null,null)},{},{},[]),Ml=u(264),xl=u(63),Ol=u(265),Sl=u(101),jl=d["ɵcrt"]({encapsulation:2,styles:[],data:{}}),Nl=d["ɵccf"]("ng-component",y,function(l){return d["ɵvid"](0,[(l()(),d["ɵeld"](0,null,null,1,"ng-component",[],null,null,null,a,jl)),d["ɵdid"](49152,null,0,y,[],null,null)],null,null)},{},{},[]),Fl=u(224),Al=u(225),ql=u(222),Dl=u(221),Ll=u(223),Ul=u(227),Vl=u(226),Hl=u(10),zl=u(136),Bl=u(12),Zl=u(151),$l=u(122),Gl=u(45),Jl=u(135),Wl=u(16),Yl=u(31),Kl=u(48),Ql=u(156),Xl=u(71),ln=u(56),nn=u(76),un=u(85),en=u(142),tn=u(138),an=u(146),dn=u(210),on=u(137),rn=u(43),sn=u(129),cn=u(139),gn=u(211),mn=u(209),hn=d["ɵcmf"](A,[q.b],function(l){return d["ɵmod"]([d["ɵmpd"](512,d.ComponentFactoryResolver,d["ɵCodegenComponentFactoryResolver"],[[8,[D.a,L.a,U.a,V.a,H.a,z.a,B.a,Z.a,$.a,dl,Pl,Nl,Fl.a,Al.a,ql.a,Dl.a,Ll.a,Ul.a,Vl.a]],[3,d.ComponentFactoryResolver],d.NgModuleRef]),d["ɵmpd"](5120,d.LOCALE_ID,d["ɵm"],[[3,d.LOCALE_ID]]),d["ɵmpd"](4608,Hl.k,Hl.j,[d.LOCALE_ID]),d["ɵmpd"](5120,d.APP_ID,d["ɵf"],[]),d["ɵmpd"](5120,d.IterableDiffers,d["ɵk"],[]),d["ɵmpd"](5120,d.KeyValueDiffers,d["ɵl"],[]),d["ɵmpd"](4608,o.c,o.s,[Hl.c]),d["ɵmpd"](6144,d.Sanitizer,null,[o.c]),d["ɵmpd"](4608,o.f,zl.a,[]),d["ɵmpd"](5120,o.d,function(l,n,u,e){return[new o.l(l),new o.p(n),new o.o(u,e)]},[Hl.c,Hl.c,Hl.c,o.f]),d["ɵmpd"](4608,o.e,o.e,[o.d,d.NgZone]),d["ɵmpd"](135680,o.n,o.n,[Hl.c]),d["ɵmpd"](4608,o.m,o.m,[o.e,o.n]),d["ɵmpd"](6144,d.RendererFactory2,null,[o.m]),d["ɵmpd"](6144,o.q,null,[o.n]),d["ɵmpd"](4608,d.Testability,d.Testability,[d.NgZone]),d["ɵmpd"](4608,o.h,o.h,[Hl.c]),d["ɵmpd"](4608,o.j,o.j,[Hl.c]),d["ɵmpd"](4608,k.c,k.c,[]),d["ɵmpd"](4608,k.h,k.b,[]),d["ɵmpd"](5120,k.j,k.k,[]),d["ɵmpd"](4608,k.i,k.i,[k.c,k.h,k.j]),d["ɵmpd"](4608,k.g,k.a,[]),d["ɵmpd"](5120,k.e,k.l,[k.i,k.g]),d["ɵmpd"](4608,Bl.k,Bl.k,[]),d["ɵmpd"](4608,Bl.c,Bl.c,[]),d["ɵmpd"](4608,Zl.LocalStorageService,Zl.LocalStorageService,["LOCAL_STORAGE_SERVICE_CONFIG"]),d["ɵmpd"](4608,$l.a,$l.a,[Q.a,X.a]),d["ɵmpd"](4608,Gl.a,Gl.a,[Q.a,X.a]),d["ɵmpd"](4608,Jl.a,Jl.a,[]),d["ɵmpd"](4608,Wl.a,Wl.a,[]),d["ɵmpd"](4608,Yl.a,Yl.a,[ll.a]),d["ɵmpd"](4608,vl.a,vl.a,[X.a,ll.a,d.NgZone,tl.a]),d["ɵmpd"](4608,Kl.a,Kl.a,[Q.a,X.a]),d["ɵmpd"](5120,Hl.f,Ql.c,[Hl.q,[2,Hl.a],X.a]),d["ɵmpd"](4608,Hl.e,Hl.e,[Hl.f]),d["ɵmpd"](5120,Xl.b,Xl.d,[Q.a,Xl.a]),d["ɵmpd"](5120,el.a,el.b,[Q.a,Xl.b,Hl.e,ln.b,d.ComponentFactoryResolver]),d["ɵmpd"](4608,nn.a,nn.a,[Q.a,X.a,el.a]),d["ɵmpd"](4608,un.a,un.a,[Q.a,X.a]),d["ɵmpd"](4608,en.a,en.a,[Q.a,X.a,el.a]),d["ɵmpd"](4608,tn.a,tn.a,[X.a,ll.a,tl.a,Q.a,nl.l]),d["ɵmpd"](4608,an.a,an.a,[Q.a,X.a]),d["ɵmpd"](4608,ul.a,ul.a,[ll.a,X.a]),d["ɵmpd"](4608,T.a,T.a,[]),d["ɵmpd"](4608,s.a,s.a,[]),d["ɵmpd"](4608,c.a,c.a,[]),d["ɵmpd"](4608,P.a,P.a,[k.e]),d["ɵmpd"](4608,x.a,x.a,[]),d["ɵmpd"](4608,M.a,M.a,[an.a]),d["ɵmpd"](4608,j.a,j.a,[Zl.LocalStorageService]),d["ɵmpd"](4608,F.a,F.a,[]),d["ɵmpd"](4608,N.a,N.a,[j.a]),d["ɵmpd"](512,Hl.b,Hl.b,[]),d["ɵmpd"](512,d.ErrorHandler,dn.a,[]),d["ɵmpd"](256,X.b,{},[]),d["ɵmpd"](1024,on.a,on.b,[]),d["ɵmpd"](1024,ll.a,ll.b,[o.b,on.a,d.NgZone]),d["ɵmpd"](1024,X.a,X.c,[X.b,ll.a]),d["ɵmpd"](512,tl.a,tl.a,[ll.a]),d["ɵmpd"](512,rn.a,rn.a,[]),d["ɵmpd"](512,Q.a,Q.a,[X.a,ll.a,[2,rn.a]]),d["ɵmpd"](512,nl.l,nl.l,[Q.a]),d["ɵmpd"](256,Xl.a,{links:[{loadChildren:"../pages/contactus/contactus.module.ngfactory#ContactusPageModuleNgFactory",name:"ContactusPage",segment:"contactus",priority:"low",defaultHistory:[]},{loadChildren:"../pages/favorites/favorites.module.ngfactory#FavoritesPageModuleNgFactory",name:"FavoritesPage",segment:"favorites",priority:"low",defaultHistory:[]},{loadChildren:"../pages/jointeacher/jointeacher.module.ngfactory#JointeacherPageModuleNgFactory",name:"JointeacherPage",segment:"jointeacher",priority:"low",defaultHistory:[]},{loadChildren:"../pages/search/search.module.ngfactory#SearchPageModuleNgFactory",name:"SearchPage",segment:"search",priority:"low",defaultHistory:[]},{loadChildren:"../pages/settings/settings.module.ngfactory#SettingsPageModuleNgFactory",name:"SettingsPage",segment:"settings",priority:"low",defaultHistory:[]},{loadChildren:"../pages/singleteacher/singleteacher.module.ngfactory#SingleteacherPageModuleNgFactory",name:"SingleteacherPage",segment:"singleteacher",priority:"low",defaultHistory:[]},{loadChildren:"../pages/teacherslist/teacherslist.module.ngfactory#TeacherslistPageModuleNgFactory",name:"TeacherslistPage",segment:"teacherslist",priority:"low",defaultHistory:[]}]},[]),d["ɵmpd"](512,d.Compiler,d.Compiler,[]),d["ɵmpd"](512,sn.a,sn.a,[d.Compiler]),d["ɵmpd"](1024,ln.b,ln.c,[sn.a,d.Injector]),d["ɵmpd"](1024,d.APP_INITIALIZER,function(l,n,u,e,t,a,d,i,r,s,c,g,m,h){return[o.r(l,n),cn.a(u),Jl.b(e,t),tn.b(a,d,i,r,s),ln.d(c,g,m,h)]},[[2,o.i],[2,d.NgProbeToken],X.a,ll.a,tl.a,X.a,ll.a,tl.a,Q.a,nl.l,X.a,Xl.a,ln.b,d.NgZone]),d["ɵmpd"](512,d.ApplicationInitStatus,d.ApplicationInitStatus,[[2,d.APP_INITIALIZER]]),d["ɵmpd"](131584,d["ɵe"],d["ɵe"],[d.NgZone,d["ɵConsole"],d.Injector,d.ErrorHandler,d.ComponentFactoryResolver,d.ApplicationInitStatus]),d["ɵmpd"](2048,d.ApplicationRef,null,[d["ɵe"]]),d["ɵmpd"](512,d.ApplicationModule,d.ApplicationModule,[d.ApplicationRef]),d["ɵmpd"](512,o.a,o.a,[[3,o.a]]),d["ɵmpd"](512,k.f,k.f,[]),d["ɵmpd"](512,Bl.j,Bl.j,[]),d["ɵmpd"](512,Bl.d,Bl.d,[]),d["ɵmpd"](512,Bl.i,Bl.i,[]),d["ɵmpd"](512,Ql.a,Ql.a,[]),d["ɵmpd"](512,gn.a,gn.a,[]),d["ɵmpd"](512,mn.LocalStorageModule,mn.LocalStorageModule,[]),d["ɵmpd"](512,A,A,[]),d["ɵmpd"](256,"LOCAL_STORAGE_SERVICE_CONFIG",{prefix:"StudyHub",storageType:"localStorage"},[]),d["ɵmpd"](256,q.a,R,[]),d["ɵmpd"](256,Hl.a,"/",[])])});Object(d.enableProdMode)(),Object(o.k)().bootstrapModuleFactory(hn)},28:function(l,n,u){"use strict";u.d(n,"a",function(){return o});var e=u(2),t=u(130),a=u(0),d=u(131),o=(u.n(d),function(){function l(l){this.http=l,this.endPoint="https://teacher-student-backend.herokuapp.com/"}return l.prototype.httpGet=function(l){var n=this;return this.http.get(this.endPoint+l,null).map(function(l){return n.checkResultModel(l)})},l.prototype.httpPost=function(l,n){var u=this,e=this.endPoint+l,t=this.buildHeader();return this.http.post(e,JSON.stringify(n),{headers:t}).map(function(l){return u.checkResultModel(l)})},l.prototype.buildHeader=function(){return new t.d({"Content-Type":"application/json"})},l.prototype.checkResultModel=function(l){try{return l.json()}catch(l){return null}},l}());o=Object(e.__decorate)([Object(a.Injectable)(),Object(e.__metadata)("design:paramtypes",["function"==typeof(i=void 0!==t.e&&t.e)&&i||Object])],o);var i},52:function(l,n,u){"use strict";u.d(n,"a",function(){return o});var e=u(2),t=u(0),a=u(150),d=u(131),o=(u.n(d),function(){function l(l){this.localStorage=l}return l.prototype.addID=function(l){if(null==l||""===l)return!1;if(this.isIDExist(l))return!1;var n=this.getFavorites();null==n&&(n=[]),n.push(l),this.setFavorites(n)},l.prototype.isIDExist=function(l){var n=this.getFavorites();if(null==n)return!1;for(var u=0,e=n;u<e.length;u++)if(e[u]===l)return!0;return!1},l.prototype.removeID=function(l){var n=this.getFavorites();if(null==n)return!1;for(var u=0;u<n.length;u++)if(n[u]==l){n.splice(u,1),this.setFavorites(n);break}},l.prototype.getFavorites=function(){return this.localStorage.Get("FavoritesIDs")},l.prototype.setFavorites=function(l){this.localStorage.Set("FavoritesIDs",l)},l}());o=Object(e.__decorate)([Object(t.Injectable)(),Object(e.__metadata)("design:paramtypes",["function"==typeof(i=void 0!==a.a&&a.a)&&i||Object])],o);var i},66:function(l,n,u){"use strict";u.d(n,"a",function(){return r});var e=u(2),t=u(0),a=u(27),d=u(28),o=u(77),i=u(52),r=function(){function l(l,n,u,e,t,a,d){this.navCtrl=l,this.navParams=n,this.favoritesManagerProvider=u,this.apiProvider=e,this.modalCtrl=t,this.loadingCtrl=a,this.alertCtrl=d,this.tabRef=this.navCtrl.parent,this.userHaveFavorites=!1,this.teachers=[];var o=this.favoritesManagerProvider.getFavorites();this.bootstrapFavoritePage(o)}return l.prototype.goPage=function(l){switch(l){case"search":this.navCtrl.pop(),this.tabRef.select(1);break;default:console.log("Not found the requested page "+l)}},l.prototype.expandTeacherInformation=function(l){var n=this,u=this.modalCtrl.create(o.a,{teacher:this.teachers[l]});u.onDidDismiss(function(u){!1===u&&(n.teachers.splice(l,1),0===n.teachers.length&&(n.userHaveFavorites=!1))}),u.present()},l.prototype.bootstrapFavoritePage=function(l){null==l||0==l.length?this.userHaveFavorites=!1:(this.userHaveFavorites=!0,this.getTeachersByID(l))},l.prototype.getTeachersByID=function(l){var n=this,u={listOfTeacherID:l},e=this.loadingCtrl.create({content:"Loading favorites, please wait..."});e.present(),this.apiProvider.httpPost("teacher/getlistofteachersbyid",u).subscribe(function(l){n.teachers=l,e.dismiss()},function(l){n.createAlert("Couldn't load the favorites teachers","There was some problem, we couldn't load the favorite teachers, please try again later.").present()})},l.prototype.createAlert=function(l,n){return this.alertCtrl.create({title:l,subTitle:n,buttons:["Ok"]})},l}();r=Object(e.__decorate)([Object(t.Component)({selector:"page-favorites",templateUrl:"favorites.html"}),Object(e.__metadata)("design:paramtypes",["function"==typeof(s=void 0!==a.h&&a.h)&&s||Object,"function"==typeof(c=void 0!==a.i&&a.i)&&c||Object,"function"==typeof(g=void 0!==i.a&&i.a)&&g||Object,"function"==typeof(m=void 0!==d.a&&d.a)&&m||Object,"function"==typeof(h=void 0!==a.g&&a.g)&&h||Object,"function"==typeof(f=void 0!==a.f&&a.f)&&f||Object,"function"==typeof(p=void 0!==a.a&&a.a)&&p||Object])],r);var s,c,g,m,h,f,p},77:function(l,n,u){"use strict";u.d(n,"a",function(){return r});var e=u(2),t=u(0),a=u(27),d=u(28),o=u(52),i=u(104),r=function(){function l(l,n,u,e,t,a,d,o){this.navCtrl=l,this.navParams=n,this.viewCtrl=u,this.apiProvider=e,this.loadingCtrl=t,this.alertCtrl=a,this.favoritesManagerProvider=d,this.toasterProvider=o,this.rate=3,this.showErrorMessage=!1,this.showRecommendationsBoolean=!1,this.alreadyAddedRecommend=!1,this.isTeacherFavorited=!1,this.teacher=this.navParams.get("teacher"),this.isTeacherFavorited=this.favoritesManagerProvider.isIDExist(this.teacher._id)}return l.prototype.dismiss=function(){this.viewCtrl.dismiss(this.isTeacherFavorited)},l.prototype.toggleRecommendations=function(){this.showRecommendationsBoolean=!this.showRecommendationsBoolean},l.prototype.addNewRecommend=function(){var l=this;if(this.showErrorMessage=!1,this.isModelValid()){var n={id:this.teacher._id,recommendData:{fullName:this.fullName,email:this.email,message:this.message,rate:this.rate}},u=this.loadingCtrl.create({content:"Adding your recommendation, please wait..."});u.present(),this.apiProvider.httpPost("teacher/addrecommend",n).subscribe(function(e){u.dismiss(),l.createAlert("Your recommendation has been added","Thank you for posting recommendation for this teacher, thanks for making our community better.").present(),l.alreadyAddedRecommend=!0,l.showRecommendationsBoolean=!1,l.teacher.recommendations.push(n.recommendData)},function(n){u.dismiss(),l.createAlert("Failed to add recommendation","The request has been failed for some reason, please try again later.").present()})}else this.showErrorMessage=!0},l.prototype.addFavorite=function(){this.favoritesManagerProvider.addID(this.teacher._id),this.isTeacherFavorited=!0,this.toasterProvider.presentToast("Teacher has been added to favorites.")},l.prototype.removeFavorite=function(){this.favoritesManagerProvider.removeID(this.teacher._id),this.isTeacherFavorited=!1,this.toasterProvider.presentToast("Teacher has been removed from favorites.")},l.prototype.openWhatsApp=function(){if(this.teacher&&this.teacher.phone)if(-1!==this.teacher.phone.indexOf("972"))window.open("https://api.whatsapp.com/send?phone="+this.teacher.phone);else if("0"===this.teacher.phone[0]){var l="972"+this.teacher.phone;window.open("https://api.whatsapp.com/send?phone="+l)}},l.prototype.isModelValid=function(){return this.convertRateToInteger(),!(null==this.rate||this.rate<0||this.rate>5||this.isStringNullOrEmpty(this.email)||this.isStringNullOrEmpty(this.fullName)||this.isStringNullOrEmpty(this.message))},l.prototype.isStringNullOrEmpty=function(l){return null==l||""===l},l.prototype.convertRateToInteger=function(){null!=this.rate&&(this.rate=parseInt(this.rate.toString()))},l.prototype.createAlert=function(l,n){return this.alertCtrl.create({title:l,subTitle:n,buttons:["Ok"]})},l}();r=Object(e.__decorate)([Object(t.Component)({selector:"page-singleteacher",templateUrl:"singleteacher.html"}),Object(e.__metadata)("design:paramtypes",["function"==typeof(s=void 0!==a.h&&a.h)&&s||Object,"function"==typeof(c=void 0!==a.i&&a.i)&&c||Object,"function"==typeof(g=void 0!==a.l&&a.l)&&g||Object,"function"==typeof(m=void 0!==d.a&&d.a)&&m||Object,"function"==typeof(h=void 0!==a.f&&a.f)&&h||Object,"function"==typeof(f=void 0!==a.a&&a.a)&&f||Object,"function"==typeof(p=void 0!==o.a&&o.a)&&p||Object,"function"==typeof(v=void 0!==i.a&&i.a)&&v||Object])],r);var s,c,g,m,h,f,p,v}},[228]);
+webpackJsonp([7],{
+
+/***/ 106:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactusPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(32);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ContactusPage = (function () {
+    function ContactusPage(navCtrl, navParams, apiProvider, loadingCtrl, alertCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.apiProvider = apiProvider;
+        this.loadingCtrl = loadingCtrl;
+        this.alertCtrl = alertCtrl;
+        this.showErrorMessage = false;
+    }
+    ContactusPage.prototype.isFormValid = function () {
+        if (this.isStringNullOrEmpty(this.fullName) ||
+            this.isStringNullOrEmpty(this.email) ||
+            this.isStringNullOrEmpty(this.contactReason) ||
+            this.isStringNullOrEmpty(this.message)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    ContactusPage.prototype.sendContactUsForm = function () {
+        var _this = this;
+        this.setErrorMessage(false);
+        if (!this.isFormValid()) {
+            this.setErrorMessage(true);
+            return;
+        }
+        var data = {
+            fullName: this.fullName,
+            email: this.email,
+            contactReason: this.contactReason,
+            message: this.message
+        };
+        var loading = this.loadingCtrl.create({
+            content: 'Sending the information, please wait...'
+        });
+        loading.present();
+        this.apiProvider.httpPost('contactus/create', data)
+            .subscribe(function (success) {
+            loading.dismiss();
+            var alert = _this.createAlert('Request send successfully', 'Your request to contact you sent successfully.We\'ll contact you as soon as possible, thank you.');
+            alert.present();
+            _this.navCtrl.pop();
+        }, function (failure) {
+            loading.dismiss();
+            var alert = _this.createAlert('Request failed to send', 'The request has been failed for some reason, please try again later.');
+            alert.present();
+        });
+    };
+    ContactusPage.prototype.openWhatsApp = function () {
+        window.open('https://api.whatsapp.com/send?phone=972542477052');
+    };
+    ContactusPage.prototype.setErrorMessage = function (set) {
+        this.showErrorMessage = set;
+    };
+    ContactusPage.prototype.createAlert = function (titleInput, subTitleInput) {
+        var alert = this.alertCtrl.create({
+            title: titleInput,
+            subTitle: subTitleInput,
+            buttons: ['Ok']
+        });
+        return alert;
+    };
+    ContactusPage.prototype.isStringNullOrEmpty = function (str) {
+        if (str == null || str === "") {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    return ContactusPage;
+}());
+ContactusPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-contactus',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\contactus\contactus.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Contact Us</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-38px m-font-weight-300">\n            What is your opinion?\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          You can send us anything you wish, feedback, recommendation, new ideas, bugs you\'ve found, or even send message for fun,\n          we\'ll try to comment as soon as possible.\n        </ion-col>\n      </ion-row>\n\n      <!-- Direct contant -->\n      <ion-row text-left>\n        <ion-col col-12>\n          <font class="m-color-orange">You can contact the owner of this application by:</font>\n        </ion-col>\n        <ion-col col-12>\n          <font class="m-color-c2bbbb">Email: mmoshikoo@gmail.com</font>\n        </ion-col>\n        <ion-col col-12>\n          <font class="m-color-c2bbbb">Phone: 0542477052</font>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n      <ion-list>\n\n        <!-- Full name -->\n        <ion-row>\n          <ion-col col-12>\n            <ion-item>\n              <ion-label floating>Full name</ion-label>\n              <ion-input type="text" [(ngModel)]="fullName"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Email -->\n        <ion-row>\n          <ion-col col-12>\n            <ion-item>\n              <ion-label floating>Email</ion-label>\n              <ion-input type="email" [(ngModel)]="email"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Reason to contact -->\n        <ion-row>\n          <ion-col col-12>\n            <ion-item>\n              <ion-label>Reason to contact</ion-label>\n              <ion-select [(ngModel)]="contactReason">\n                <ion-option>Suggestion</ion-option>\n                <ion-option>Investment</ion-option>\n                <ion-option>Careers</ion-option>\n                <ion-option>Complain</ion-option>\n                <ion-option>Bug report</ion-option>\n                <ion-option>Other</ion-option>\n              </ion-select>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Message -->\n        <ion-row>\n          <ion-col col-12>\n            <ion-item>\n              <ion-label floating>Your message</ion-label>\n              <ion-textarea rows="4" type="text" [(ngModel)]="message"></ion-textarea>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n      </ion-list>\n\n      <!-- Error message -->\n      <ion-row *ngIf="showErrorMessage" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">The fields are not valid.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Buttons -->\n      <ion-row>\n        <ion-col col-6>\n          <button ion-button outline icon-start color="primary" block (click)="sendContactUsForm();">\n            <ion-icon name="ios-send-outline"></ion-icon>\n            Send\n          </button>\n        </ion-col>\n        <ion-col col-6>\n          <button ion-button outline icon-start color="secondary" block (click)="openWhatsApp();">\n            <ion-icon name="logo-whatsapp"></ion-icon>\n            WhatsApp\n          </button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\contactus\contactus.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+], ContactusPage);
+
+//# sourceMappingURL=contactus.js.map
+
+/***/ }),
+
+/***/ 107:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JointeacherPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(32);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var JointeacherPage = (function () {
+    function JointeacherPage(navCtrl, navParams, apiProvider, loadingCtrl, alertCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.apiProvider = apiProvider;
+        this.loadingCtrl = loadingCtrl;
+        this.alertCtrl = alertCtrl;
+        this.teachesInstitutions = [];
+        this.showErrorMessage = false;
+    }
+    JointeacherPage.prototype.createTeacher = function () {
+        var _this = this;
+        this.setErrorMessage(false);
+        this.convertStringToInteger();
+        if (!this.isModelValid()) {
+            this.setErrorMessage(true);
+            return;
+        }
+        var newTeacherData = this.createNewTeacherDataJson();
+        var loading = this.loadingCtrl.create({
+            content: 'Sending information, please wait...'
+        });
+        loading.present();
+        this.apiProvider.httpPost('teacher/create', newTeacherData)
+            .subscribe(function (success) {
+            loading.dismiss();
+            var alert = _this.createAlert('Welcome new teacher', 'Your account has been created successfully, this is your teacher page, thank you and good luck.');
+            alert.present();
+        }, function (failure) {
+            loading.dismiss();
+            var alert = _this.createAlert('Something went wrong', 'Please try again later, we have some server issues.');
+            alert.present();
+        });
+    };
+    JointeacherPage.prototype.convertStringToInteger = function () {
+        if (this.priceFrom != null) {
+            this.priceFrom = parseInt(this.priceFrom.toString());
+        }
+        if (this.priceTo != null) {
+            this.priceTo = parseInt(this.priceTo.toString());
+        }
+        if (this.age != null) {
+            this.age = parseInt(this.age.toString());
+        }
+    };
+    JointeacherPage.prototype.isModelValid = function () {
+        if (this.teachesAt < 0 ||
+            this.priceTo == null || this.priceTo > 200 ||
+            this.priceFrom == null || this.priceFrom < 0 ||
+            this.priceFrom > this.priceTo ||
+            this.age == null || this.age < 0 || this.age > 120 ||
+            this.isStringNullOrEmpty(this.phone) ||
+            this.isStringNullOrEmpty(this.email) ||
+            this.isStringNullOrEmpty(this.gender) ||
+            this.isStringNullOrEmpty(this.lastName) ||
+            this.isStringNullOrEmpty(this.firstName) ||
+            this.isStringNullOrEmpty(this.personalMessage) ||
+            this.teachesInstitutions == null || this.teachesInstitutions.length === 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    JointeacherPage.prototype.setErrorMessage = function (set) {
+        this.showErrorMessage = set;
+    };
+    JointeacherPage.prototype.isStringNullOrEmpty = function (str) {
+        if (str == null || str === "") {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    JointeacherPage.prototype.createNewTeacherDataJson = function () {
+        var _this = this;
+        this.teachesAt = parseInt(this.teachesAt.toString());
+        this.teachesInstitutions.forEach(function (value, index) {
+            _this.teachesInstitutions[index] = parseInt(value.toString());
+        });
+        var newTeacher = {
+            age: this.age,
+            priceTo: this.priceTo,
+            priceFrom: this.priceFrom,
+            phone: this.phone,
+            email: this.email,
+            gender: this.gender,
+            lastName: this.lastName,
+            firstName: this.firstName,
+            personalMessage: this.personalMessage,
+            teachesAt: this.teachesAt,
+            teachesInstitutions: this.teachesInstitutions,
+            rate: 0
+        };
+        return newTeacher;
+    };
+    JointeacherPage.prototype.createAlert = function (titleInput, subTitleInput) {
+        var alert = this.alertCtrl.create({
+            title: titleInput,
+            subTitle: subTitleInput,
+            buttons: ['Ok']
+        });
+        return alert;
+    };
+    return JointeacherPage;
+}());
+JointeacherPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
+        selector: 'page-jointeacher',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\jointeacher\jointeacher.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Join as Teacher</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-35px m-font-weight-300">Become a next-generation teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          In order to join as teacher you must fill all the following fields. Be specific with your information to gain more good resume\n          and comments from students. Remember, good instructor is remembered for lifetime.\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font>\n          Give full information at the relevant fields to interest more students.\n        </ion-col>\n      </ion-row>\n\n      <!-- Price warning -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-red">*The price per lesson is for one hour*</font>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- StudyHub for individuals title -->\n      <ion-row text-center class="m-padding-top-15px m-padding-buttom-15px">\n        <ion-col col-12>\n          <u>\n            <b>Fill teacher form</b>\n          </u>\n        </ion-col>\n      </ion-row>\n\n      <!-- Form -->\n\n      <ion-list>\n\n        <!-- First name and Last name -->\n        <ion-row>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>First name</ion-label>\n              <ion-input type="text" [(ngModel)]="firstName"></ion-input>\n            </ion-item>\n          </ion-col>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>Last name</ion-label>\n              <ion-input type="text" [(ngModel)]="lastName"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Age and Gender -->\n        <ion-row>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>Age</ion-label>\n              <ion-input type="number" [(ngModel)]="age"></ion-input>\n            </ion-item>\n          </ion-col>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>Gender</ion-label>\n              <ion-select [(ngModel)]="gender" interface="popover">\n                <ion-option value="Male">Male</ion-option>\n                <ion-option value="Female">Female</ion-option>\n              </ion-select>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Email and Phone -->\n        <ion-row>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>Email</ion-label>\n              <ion-input type="email" [(ngModel)]="email"></ion-input>\n            </ion-item>\n          </ion-col>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>Phone</ion-label>\n              <ion-input type="tel" [(ngModel)]="phone"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Price from and Proce to -->\n        <ion-row>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>From price</ion-label>\n              <ion-input type="number" [(ngModel)]="priceFrom"></ion-input>\n            </ion-item>\n          </ion-col>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>To price\n                <font class="m-color-red m-font-size-10px;">Max 200</font>\n              </ion-label>\n              <ion-input type="number" [(ngModel)]="priceTo"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teach at and Teaches subjects -->\n        <ion-row>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>Teach at</ion-label>\n              <ion-select [(ngModel)]="teachesAt" interface="popover">\n                <ion-option value="0">Student\'s house</ion-option>\n                <ion-option value="1">Academic institution</ion-option>\n                <ion-option value="2">Both</ion-option>\n              </ion-select>\n            </ion-item>\n          </ion-col>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>Teaches institutions</ion-label>\n              <ion-select [(ngModel)]="teachesInstitutions" multiple="true">\n                <ion-option value="0">Holon Institute Of Technology</ion-option>\n                <ion-option value="1">Technion</ion-option>\n                <ion-option value="2">Tel-Aviv University</ion-option>\n                <ion-option value="4">Ben Gurion University</ion-option>\n                <ion-option value="8">Hebrew University</ion-option>\n                <ion-option value="16">Bar-Ilan University</ion-option>\n                <ion-option value="32">Tel-Aviv Jaffa Academic College</ion-option>\n                <ion-option value="64">IDC Herzliya</ion-option>\n                <ion-option value="128">Ariel University</ion-option>\n                <ion-option value="256">Haifa University</ion-option>\n                <ion-option value="512">Sapir Academic College</ion-option>\n                <ion-option value="1024">ORT Braude Collegeof Engineering</ion-option>\n                <ion-option value="2048">The Open University</ion-option>\n                <ion-option value="4096">College of Management</ion-option>\n                <ion-option value="8192">Achva Academic Campus</ion-option>\n              </ion-select>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Personal Message -->\n        <ion-row>\n          <ion-col col-12>\n            <ion-item>\n              <ion-label floating>Personal message</ion-label>\n              <ion-textarea rows="5" type="text" [(ngModel)]="personalMessage"></ion-textarea>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n      </ion-list>\n\n      <!-- Error message -->\n      <ion-row *ngIf="showErrorMessage" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">The fields are not valid.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Send form button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button block (click)="createTeacher();">Make me a teacher</button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\jointeacher\jointeacher.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */],
+        __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["a" /* AlertController */]])
+], JointeacherPage);
+
+//# sourceMappingURL=jointeacher.js.map
+
+/***/ }),
+
+/***/ 108:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__favorites_favorites__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__teacherslist_teacherslist__ = __webpack_require__(109);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var SearchPage = (function () {
+    function SearchPage(navCtrl, navParams, apiProvider, loadingCtrl, alertCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.apiProvider = apiProvider;
+        this.loadingCtrl = loadingCtrl;
+        this.alertCtrl = alertCtrl;
+        this.brightness = 20;
+        this.saturation = 0;
+        this.warmth = 1300;
+        this.structure = { lower: 30, upper: 140 };
+        this.gender = "Both";
+        this.showErrorMessage = false;
+    }
+    SearchPage.prototype.searchTeachers = function () {
+        var _this = this;
+        this.setErrorMessage(false);
+        this.convertStringToInteger();
+        if (!this.isModelValid()) {
+            this.setErrorMessage(true);
+            return;
+        }
+        this.gender = this.gender === 'Both' ? "" : this.gender;
+        var searchTeacherModel = {
+            fromPrice: this.structure.lower,
+            toPrice: this.structure.upper,
+            teachesAt: this.teachesAt,
+            teachesInstitutions: this.teachesInstitutions,
+            gender: this.gender
+        };
+        var loading = this.loadingCtrl.create({
+            content: 'Getting teachers, please wait...'
+        });
+        loading.present();
+        this.apiProvider.httpPost('teacher/search', searchTeacherModel)
+            .subscribe(function (success) {
+            loading.dismiss();
+            if (success && success.length > 0) {
+                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__teacherslist_teacherslist__["a" /* TeacherslistPage */], { teacherSearchList: success });
+                return;
+            }
+            var alert = _this.createAlert('Couldn\'t find the teachers', 'Please make the search filters to aim to more options, the teachers you asked for doesn\'t exist yet.');
+            alert.present();
+        }, function (failure) {
+            loading.dismiss();
+            var alert = _this.createAlert('Request failed to send', 'The request has been failed for some reason, please try again later.');
+            alert.present();
+        });
+    };
+    SearchPage.prototype.getAllTeachers = function () {
+        var _this = this;
+        var loading = this.loadingCtrl.create({
+            content: 'Getting teachers, please wait...'
+        });
+        loading.present();
+        this.apiProvider.httpGet('teacher/getall')
+            .subscribe(function (success) {
+            loading.dismiss();
+            if (success && success.length > 0) {
+                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__teacherslist_teacherslist__["a" /* TeacherslistPage */], { teacherSearchList: success });
+                return;
+            }
+            var alert = _this.createAlert('Couldn\'t find the teachers', 'Please make the search filters to aim to more options, the teachers you asked for doesn\'t exist yet.');
+            alert.present();
+        }, function (failure) {
+            loading.dismiss();
+            var alert = _this.createAlert('Request failed to send', 'The request has been failed for some reason, please try again later.');
+            alert.present();
+        });
+    };
+    SearchPage.prototype.goPage = function (page) {
+        switch (page) {
+            case 'favorites':
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__favorites_favorites__["a" /* FavoritesPage */]);
+                break;
+            default:
+                console.log('Not found the requested page ' + page);
+                break;
+        }
+    };
+    SearchPage.prototype.convertStringToInteger = function () {
+        if (this.teachesAt != null) {
+            this.teachesAt = parseInt(this.teachesAt.toString());
+        }
+        if (this.teachesInstitutions != null) {
+            this.teachesInstitutions = parseInt(this.teachesInstitutions.toString());
+        }
+    };
+    SearchPage.prototype.isModelValid = function () {
+        if (this.structure == null ||
+            this.gender == null || this.gender === "" ||
+            this.teachesAt == null || this.teachesAt < 0 ||
+            this.structure.lower == null || this.structure.lower < 0 ||
+            this.teachesInstitutions == null || this.teachesInstitutions < 0 ||
+            this.structure.upper == null || this.structure.upper > 200 ||
+            this.structure.lower > this.structure.upper) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    SearchPage.prototype.setErrorMessage = function (set) {
+        this.showErrorMessage = set;
+    };
+    SearchPage.prototype.createAlert = function (titleInput, subTitleInput) {
+        var alert = this.alertCtrl.create({
+            title: titleInput,
+            subTitle: subTitleInput,
+            buttons: ['Ok']
+        });
+        return alert;
+    };
+    return SearchPage;
+}());
+SearchPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-search',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\search\search.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Search Teacher</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-weight-300 m-font-size-35px">Search for a teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle 1 -->\n      <ion-row>\n        <ion-col col-12>\n          It\'s easy, it\'s fast, just fill the fields you want that your teacher will fit and we will find for you what you\'ve requested.\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle 2 -->\n      <ion-row>\n        <ion-col col-12>\n          We\n          <b>\n            <u>don\'t</u>\n          </b> force you to talk to them in our app, take the conversation to\n          <font class="m-color-1ab81a">WhatsApp</font> or other platform as you want, good luck!\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font> Be specific with your filter details in order to get the best results.\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- Find your next teacher title -->\n      <ion-row text-center class="m-padding-top-15px m-padding-buttom-15px">\n        <ion-col col-12>\n          Find your next teacher\n        </ion-col>\n      </ion-row>\n      <ion-list>\n\n        <!-- Get all teachers button -->\n        <ion-row>\n          <ion-col col-12>\n            <button ion-button outline icon-start small (click)="getAllTeachers();">\n              <ion-icon name="ios-people"></ion-icon>\n              Get all teachers\n            </button>\n          </ion-col>\n        </ion-row>\n\n        <!-- Price range -->\n        <ion-row>\n          <ion-col col-12>\n            <ion-list-header>\n              Price per hour\n              <ion-badge item-end color="dark">From: {{structure.lower}}</ion-badge>\n              <ion-badge item-end color="dark">To: {{structure.upper}}</ion-badge>\n            </ion-list-header>\n            <ion-item>\n              <ion-range dualKnobs="true" pin="true" [(ngModel)]="structure" color="dark" min="0" max="200">\n                <ion-label range-left>0</ion-label>\n                <ion-label range-right>200</ion-label>\n              </ion-range>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teach at and Teaches institutions -->\n        <ion-row>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>Teach at</ion-label>\n              <ion-select [(ngModel)]="teachesAt" interface="popover">\n                <ion-option value="0">Student\'s house</ion-option>\n                <ion-option value="1">Academic institution</ion-option>\n                <ion-option value="2">Both</ion-option>\n              </ion-select>\n            </ion-item>\n          </ion-col>\n          <ion-col col-6>\n            <ion-item>\n              <ion-label floating>Teaches institutions</ion-label>\n              <ion-select [(ngModel)]="teachesInstitutions">\n                <ion-option value="0">Holon Institute Of Technology</ion-option>\n                <ion-option value="1">Technion</ion-option>\n                <ion-option value="2">Tel-Aviv University</ion-option>\n                <ion-option value="4">Ben-Gurion University</ion-option>\n                <ion-option value="8">Hebrew University</ion-option>\n                <ion-option value="16">Bar-Ilan University</ion-option>\n                <ion-option value="32">Tel-Aviv Jaffa Academic College</ion-option>\n                <ion-option value="64">IDC Herzliya</ion-option>\n                <ion-option value="128">Ariel University</ion-option>\n                <ion-option value="256">Haifa University</ion-option>\n                <ion-option value="512">Sapir Academic College</ion-option>\n                <ion-option value="1024">ORT Braude Collegeof Engineering</ion-option>\n                <ion-option value="2048">The Open University</ion-option>\n                <ion-option value="4096">College of Management</ion-option>\n                <ion-option value="8192">Achva Academic Campus</ion-option>\n              </ion-select>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Gender -->\n        <ion-row>\n          <ion-col col-12>\n            <ion-item>\n              <ion-label floating>Prefered gender</ion-label>\n              <ion-select [(ngModel)]="gender" interface="popover">\n                <ion-option value="Male">Male</ion-option>\n                <ion-option value="Female">Female</ion-option>\n                <ion-option value="Both">Doesn\'t matter</ion-option>\n              </ion-select>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n      </ion-list>\n\n      <!-- Error message -->\n      <ion-row *ngIf="showErrorMessage" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">The fields are not valid.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Search teachers button -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <button ion-button (click)="searchTeachers()" block>Search for teacher</button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\search\search.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+], SearchPage);
+
+//# sourceMappingURL=search.js.map
+
+/***/ }),
+
+/***/ 109:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeacherslistPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__singleteacher_singleteacher__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_favorites_manager_favorites_manager__ = __webpack_require__(48);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var TeacherslistPage = (function () {
+    function TeacherslistPage(navCtrl, navParams, modalCtrl, favoritesManagerProvider) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.modalCtrl = modalCtrl;
+        this.favoritesManagerProvider = favoritesManagerProvider;
+        this.teachersListNotChange = [];
+        this.teachers = [];
+        var tempArray = this.navParams.get('teacherSearchList');
+        for (var _i = 0, tempArray_1 = tempArray; _i < tempArray_1.length; _i++) {
+            var item = tempArray_1[_i];
+            if (this.favoritesManagerProvider.isIDExist(item._id)) {
+                item.isTeacherFavorited = true;
+            }
+            else {
+                item.isTeacherFavorited = false;
+            }
+        }
+        this.teachers = __WEBPACK_IMPORTED_MODULE_0_lodash__["sortBy"](tempArray, [function (o) {
+                return o.firstName;
+            }]);
+        this.teachersListNotChange = this.teachers.slice();
+    }
+    TeacherslistPage.prototype.expandTeacherInformation = function (index) {
+        var _this = this;
+        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_3__singleteacher_singleteacher__["a" /* SingleteacherPage */], { teacher: this.teachers[index] });
+        modal.onDidDismiss(function (data) {
+            _this.teachers[index].isTeacherFavorited = data;
+            for (var _i = 0, _a = _this.teachersListNotChange; _i < _a.length; _i++) {
+                var teacher = _a[_i];
+                if (teacher._id === _this.teachers[index]._id) {
+                    teacher.isTeacherFavorited = data;
+                    break;
+                }
+            }
+        });
+        modal.present();
+    };
+    TeacherslistPage.prototype.onInput = function (event) {
+        var val = event.target.value;
+        if (val == null || val === '') {
+            this.teachers = this.teachersListNotChange;
+            return;
+        }
+        if (val && val.trim() !== '') {
+            this.teachers = this.teachersListNotChange.filter(function (item) {
+                var fullName = item.firstName + " " + item.lastName;
+                return fullName.toLowerCase().includes(val.toLowerCase());
+            });
+        }
+    };
+    return TeacherslistPage;
+}());
+TeacherslistPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
+        selector: 'page-teacherslist',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacherslist\teacherslist.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Teacher List</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-25px m-font-weight-300">Teachers that fits to your requirements</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n          We\'ve searched in our databases to give you the best results of the teachers that suggest themselves. Go and look at them\n          and pick one.\n        </ion-col>\n      </ion-row>\n\n      <!-- Rank and comment text -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-orange">The power is in your hands, rank and comment to make the community grow and be better.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Click on the card to expant it text -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-font-size-15px m-color-white m-opacity-6">\n            <font class="m-color-white">*</font> In order to see all the details on the teacher click on the card to expand it\n            <font class="m-color-white">*</font>\n          </font>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- Search bar -->\n      <ion-row>\n        <ion-col col-12>\n          <ion-toolbar color="m-darker">\n            <ion-searchbar [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" placeholder="Search for teacher name" type="text"\n              animated="true" debounce="100">\n            </ion-searchbar>\n          </ion-toolbar>\n        </ion-col>\n      </ion-row>\n\n      <!-- Teachers wasn\'t found -->\n      <ion-row text-center *ngIf="teachers.length == 0">\n        <ion-col col-12>\n          <b>Not even single teacher was found, sorry.</b>\n        </ion-col>\n      </ion-row>\n\n      <!-- List of teachers -->\n      <div *ngFor="let teacher of teachers; let i = index;">\n        <ion-card (click)="expandTeacherInformation(i);">\n\n          <!-- Image -->\n          <ion-row>\n            <ion-col col-10 text-left>\n              <img class="m-width-150px" src="assets\\imgs\\imageNotFound.jpg" />\n            </ion-col>\n            <ion-col *ngIf="teacher.isTeacherFavorited" col-2 text-right>\n              <ion-icon name="ios-bookmark-outline" class="m-font-size-35px"></ion-icon>\n            </ion-col>\n          </ion-row>\n\n          <!-- Content - Stars should be modified. -->\n          <ion-card-content>\n\n            <!-- Name and Age -->\n            <ion-row>\n              <ion-col col-12>\n                <ion-card-title>\n                  <font class="m-font-size-25px">{{teacher.firstName}} {{teacher.lastName}}</font>\n                  -\n                  <font class="m-font-size-17px">\n                    <i>{{teacher.gender}} {{teacher.age}}</i>\n                  </font>\n\n                </ion-card-title>\n              </ion-col>\n            </ion-row>\n\n            <!-- Price -->\n            <ion-row>\n              <ion-col col-12>\n                <u>\n                  <b>Price:</b>\n                </u>\n                <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>\n                <font class="m-font-size-10px">ILS</font>\n              </ion-col>\n            </ion-row>\n\n            <!-- Rate -->\n            <ion-row>\n              <ion-col col-12>\n                <u>\n                  <b>Rating:</b>\n                </u> \n                <font *ngIf="teacher.recommendations.length === 1"><i>( {{teacher.recommendations.length}} person rated )</i></font> \n                <font *ngIf="teacher.recommendations.length !== 1"><i>( {{teacher.recommendations.length}} people rated )</i></font> \n                <rating [(ngModel)]="teachers[i].rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"\n                  starIconName="star" nullable="false"></rating>\n              </ion-col>\n            </ion-row>\n\n            <!-- Message -->\n            <ion-row>\n              <ion-col col-12>\n                <u>\n                  <b>Message:</b>\n                </u>\n                {{teacher.personalMessage}}\n              </ion-col>\n            </ion-row>\n\n          </ion-card-content>\n\n        </ion-card>\n      </div>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacherslist\teacherslist.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */],
+        __WEBPACK_IMPORTED_MODULE_4__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */]])
+], TeacherslistPage);
+
+//# sourceMappingURL=teacherslist.js.map
+
+/***/ }),
+
+/***/ 110:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__favorites_favorites__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(167);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var SettingsPage = (function () {
+    function SettingsPage(navCtrl, navParams, camera) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.camera = camera;
+    }
+    SettingsPage.prototype.goPage = function (page) {
+        switch (page) {
+            case 'favorites':
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__favorites_favorites__["a" /* FavoritesPage */]);
+                break;
+            default:
+                console.log('Not found the requested page ' + page);
+                break;
+        }
+    };
+    SettingsPage.prototype.test = function () {
+        var options = {
+            quality: 100,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64:
+            var base64Image = 'data:image/jpeg;base64,' + imageData;
+            console.log(base64Image);
+        }, function (err) {
+            // Handle error
+        });
+    };
+    return SettingsPage;
+}());
+SettingsPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  Settings page, go away, it\'s not ready!\n  <button ion-button (click)="test()">Test</button>\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */]])
+], SettingsPage);
+
+//# sourceMappingURL=settings.js.map
+
+/***/ }),
+
+/***/ 119:
+/***/ (function(module, exports) {
+
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
+	});
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 119;
+
+/***/ }),
+
+/***/ 161:
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"../pages/contactus/contactus.module": [
+		288,
+		6
+	],
+	"../pages/favorites/favorites.module": [
+		289,
+		5
+	],
+	"../pages/jointeacher/jointeacher.module": [
+		290,
+		4
+	],
+	"../pages/search/search.module": [
+		291,
+		3
+	],
+	"../pages/settings/settings.module": [
+		292,
+		2
+	],
+	"../pages/singleteacher/singleteacher.module": [
+		293,
+		1
+	],
+	"../pages/teacherslist/teacherslist.module": [
+		294,
+		0
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(ids[0]);
+	});
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = 161;
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ 163:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocalStorageProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_2_local_storage__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_2_local_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_2_local_storage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var LocalStorageProvider = (function () {
+    function LocalStorageProvider(localStorageService) {
+        this.localStorageService = localStorageService;
+    }
+    LocalStorageProvider.prototype.Set = function (key, value) {
+        this.localStorageService.set(key, value);
+    };
+    LocalStorageProvider.prototype.Get = function (key) {
+        return this.localStorageService.get(key);
+    };
+    LocalStorageProvider.prototype.Remove = function (key) {
+        this.localStorageService.remove(key);
+    };
+    return LocalStorageProvider;
+}());
+LocalStorageProvider = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angular_2_local_storage__["LocalStorageService"]])
+], LocalStorageProvider);
+
+//# sourceMappingURL=local-storage.js.map
+
+/***/ }),
+
+/***/ 166:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ToasterProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ToasterProvider = (function () {
+    function ToasterProvider(toastCtrl) {
+        this.toastCtrl = toastCtrl;
+    }
+    ToasterProvider.prototype.presentToast = function (message, time, location) {
+        if (time === void 0) { time = 2000; }
+        if (location === void 0) { location = "buttom"; }
+        var toast = this.toastCtrl.create({
+            message: message,
+            duration: time,
+            position: location
+        });
+        toast.present();
+    };
+    return ToasterProvider;
+}());
+ToasterProvider = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]])
+], ToasterProvider);
+
+//# sourceMappingURL=toaster.js.map
+
+/***/ }),
+
+/***/ 210:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_search__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_settings__ = __webpack_require__(110);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var TabsPage = (function () {
+    function TabsPage() {
+        this.tab1Root = __WEBPACK_IMPORTED_MODULE_1__home_home__["a" /* HomePage */];
+        this.tab2Root = __WEBPACK_IMPORTED_MODULE_2__search_search__["a" /* SearchPage */];
+        this.tab3Root = __WEBPACK_IMPORTED_MODULE_3__settings_settings__["a" /* SettingsPage */];
+    }
+    return TabsPage;
+}());
+TabsPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\tabs\tabs.html"*/'<ion-tabs #myTabs>\n  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>\n  <ion-tab [root]="tab2Root" tabTitle="Search" tabIcon="search"></ion-tab>\n  <ion-tab [root]="tab3Root" tabTitle="Settings" tabIcon="ios-aperture-outline"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\tabs\tabs.html"*/
+    }),
+    __metadata("design:paramtypes", [])
+], TabsPage);
+
+//# sourceMappingURL=tabs.js.map
+
+/***/ }),
+
+/***/ 211:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__favorites_favorites__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contactus_contactus__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__jointeacher_jointeacher__ = __webpack_require__(107);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var HomePage = (function () {
+    function HomePage(navCtrl) {
+        this.navCtrl = navCtrl;
+        this.tabRef = this.navCtrl.parent;
+    }
+    HomePage.prototype.goPage = function (page) {
+        switch (page) {
+            case 'search':
+                this.tabRef.select(1);
+                break;
+            case 'contactme':
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__contactus_contactus__["a" /* ContactusPage */]);
+                break;
+            case 'joinasteacher':
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__jointeacher_jointeacher__["a" /* JointeacherPage */]);
+                break;
+            case 'favorites':
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__favorites_favorites__["a" /* FavoritesPage */]);
+                break;
+            default:
+                console.log('Not found the requested page ' + page);
+                break;
+        }
+    };
+    return HomePage;
+}());
+HomePage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">StudyHub</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');" class="animated flip">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-43px m-font-weight-300">Built for students and teachers</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          <div class="m-font-size-20px m-color-white m-font-weight-300 m-opacity-6">\n            StudyHub is a study platform inspired by the way you work. You can find teachers\n            <font class="m-color-white">from your home</font> and talk with them directly, Manage your teachers & Teach other people.\n          </div>\n        </ion-col>\n        <ion-col col-12>\n          <div class="m-font-size-20px m-color-white m-font-weight-300">\n            <b>Keep it simple and fun</b>\n          </div>\n        </ion-col>\n      </ion-row>\n\n      <!-- Start using button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button color="secondary" (click)="goPage(\'search\');">\n            <b>Start using StudyHub</b>\n          </button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n  </div>\n\n  <!-- White area -->\n  <div>\n    <ion-grid>\n\n      <!-- StudyHub for individuals title -->\n      <ion-row text-center class="m-padding-buttom-15px m-padding-top-15px">\n        <ion-col col-12>\n          StudyHub for individuals\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for individuals subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n\n          <font class="m-font-size-17px m-font-weight-300 m-color-586069">As individual user at StudyHub you can find teachers around Israel, talk with them directly at WhatsApp, rank teachers\n            and tell your opinion about them.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for teachers title -->\n      <ion-row text-center class="m-padding-buttom-15px m-padding-top-15px">\n        <ion-col col-12>\n          StudyHub for teachers\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for teachers subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n\n          <font class="m-font-size-17px m-font-weight-300 m-color-586069">\n            As a teacher at StudyHub you\'ll be shown at students searches over the app, you will have your own profile and you will be\n            able to manage it as you wish.\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Join as teacher button -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <button ion-button outline color="primary" (click)="goPage(\'joinasteacher\');" icon-start>\n            <ion-icon name="ios-person-add-outline"></ion-icon>\n            Join as teacher\n          </button>\n        </ion-col>\n      </ion-row>\n\n      <!-- Slider -->\n      <ion-row>\n        <ion-col col-12>\n          <ion-slides centeredSlides="true" loop="true" pager="true" speed="600">\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider1.jpeg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider4.jpg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider3.jpeg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider2.jpg" />\n            </ion-slide>\n          </ion-slides>\n        </ion-col>\n      </ion-row>\n\n      <hr>\n\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-font-size-25px">\n            <b>StudyHub - Owner</b>\n          </font>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col col-12>\n          Moshe Binieli\n        </ion-col>\n        <ion-col col-12>\n          mmoshikoo@gmail.com\n        </ion-col>\n        <ion-col col-12>\n          Computer Science student and Full Stack developer.\n        </ion-col>\n        <ion-col col-12>\n\n          <button ion-button outline color="dark" small icon-start (click)="goPage(\'contactme\');">\n            <ion-icon name="ios-contacts"></ion-icon>Contact us</button>\n\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </div>\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\home\home.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
+], HomePage);
+
+//# sourceMappingURL=home.js.map
+
+/***/ }),
+
+/***/ 213:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_module__ = __webpack_require__(231);
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["enableProdMode"])();
+Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_module__["a" /* AppModule */]);
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 231:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_component__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular_2_local_storage__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular_2_local_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angular_2_local_storage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_home_home__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_api_api__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_search_search__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_favorites_favorites__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_toaster_toaster__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_contactus_contactus__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pipes_teaches_at_teaches_at__ = __webpack_require__(286);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_jointeacher_jointeacher__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_teacherslist_teacherslist__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_singleteacher_singleteacher__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_local_storage_local_storage__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_favorites_manager_favorites_manager__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pipes_teaches_institutions_teaches_institutions__ = __webpack_require__(287);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var AppModule = (function () {
+    function AppModule() {
+    }
+    return AppModule;
+}());
+AppModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_8__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__["a" /* TabsPage */],
+            __WEBPACK_IMPORTED_MODULE_12__pages_search_search__["a" /* SearchPage */],
+            __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__["a" /* SettingsPage */],
+            __WEBPACK_IMPORTED_MODULE_17__pages_contactus_contactus__["a" /* ContactusPage */],
+            __WEBPACK_IMPORTED_MODULE_15__pages_favorites_favorites__["a" /* FavoritesPage */],
+            __WEBPACK_IMPORTED_MODULE_18__pipes_teaches_at_teaches_at__["a" /* TeachesAtPipe */],
+            __WEBPACK_IMPORTED_MODULE_19__pages_jointeacher_jointeacher__["a" /* JointeacherPage */],
+            __WEBPACK_IMPORTED_MODULE_20__pages_teacherslist_teacherslist__["a" /* TeacherslistPage */],
+            __WEBPACK_IMPORTED_MODULE_21__pages_singleteacher_singleteacher__["a" /* SingleteacherPage */],
+            __WEBPACK_IMPORTED_MODULE_24__pipes_teaches_institutions_teaches_institutions__["a" /* TeachesInstitutionsPipe */]
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__["a" /* BrowserModule */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__["a" /* Ionic2RatingModule */],
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */], {}, {
+                links: [
+                    { loadChildren: '../pages/contactus/contactus.module#ContactusPageModule', name: 'ContactusPage', segment: 'contactus', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/favorites/favorites.module#FavoritesPageModule', name: 'FavoritesPage', segment: 'favorites', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/jointeacher/jointeacher.module#JointeacherPageModule', name: 'JointeacherPage', segment: 'jointeacher', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/search/search.module#SearchPageModule', name: 'SearchPage', segment: 'search', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/singleteacher/singleteacher.module#SingleteacherPageModule', name: 'SingleteacherPage', segment: 'singleteacher', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/teacherslist/teacherslist.module#TeacherslistPageModule', name: 'TeacherslistPage', segment: 'teacherslist', priority: 'low', defaultHistory: [] }
+                ]
+            }),
+            __WEBPACK_IMPORTED_MODULE_5_angular_2_local_storage__["LocalStorageModule"].withConfig({
+                prefix: 'StudyHub',
+                storageType: 'localStorage'
+            })
+        ],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_6_ionic_angular__["b" /* IonicApp */]],
+        entryComponents: [
+            __WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_8__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__["a" /* TabsPage */],
+            __WEBPACK_IMPORTED_MODULE_12__pages_search_search__["a" /* SearchPage */],
+            __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__["a" /* SettingsPage */],
+            __WEBPACK_IMPORTED_MODULE_15__pages_favorites_favorites__["a" /* FavoritesPage */],
+            __WEBPACK_IMPORTED_MODULE_17__pages_contactus_contactus__["a" /* ContactusPage */],
+            __WEBPACK_IMPORTED_MODULE_19__pages_jointeacher_jointeacher__["a" /* JointeacherPage */],
+            __WEBPACK_IMPORTED_MODULE_20__pages_teacherslist_teacherslist__["a" /* TeacherslistPage */],
+            __WEBPACK_IMPORTED_MODULE_21__pages_singleteacher_singleteacher__["a" /* SingleteacherPage */]
+        ],
+        providers: [
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__["a" /* SplashScreen */],
+            { provide: __WEBPACK_IMPORTED_MODULE_3__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["c" /* IonicErrorHandler */] },
+            __WEBPACK_IMPORTED_MODULE_10__providers_api_api__["a" /* ApiProvider */],
+            __WEBPACK_IMPORTED_MODULE_18__pipes_teaches_at_teaches_at__["a" /* TeachesAtPipe */],
+            __WEBPACK_IMPORTED_MODULE_16__providers_toaster_toaster__["a" /* ToasterProvider */],
+            __WEBPACK_IMPORTED_MODULE_22__providers_local_storage_local_storage__["a" /* LocalStorageProvider */],
+            __WEBPACK_IMPORTED_MODULE_24__pipes_teaches_institutions_teaches_institutions__["a" /* TeachesInstitutionsPipe */],
+            __WEBPACK_IMPORTED_MODULE_23__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */]
+        ]
+    })
+], AppModule);
+
+//# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ 232:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(210);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var MyApp = (function () {
+    function MyApp(platform, statusBar, splashScreen) {
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__["a" /* TabsPage */];
+        platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            statusBar.styleDefault();
+            splashScreen.hide();
+        });
+    }
+    return MyApp;
+}());
+MyApp = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\app\app.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+], MyApp);
+
+//# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 286:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeachesAtPipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var TeachesAtPipe = (function () {
+    function TeachesAtPipe() {
+    }
+    TeachesAtPipe.prototype.transform = function (value) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var teachesAtValue = "";
+        switch (value) {
+            case 0:
+                teachesAtValue = 'Home';
+                break;
+            case 1:
+                teachesAtValue = 'Academic Institute';
+                break;
+            case 2:
+                teachesAtValue = 'Both';
+                break;
+        }
+        return teachesAtValue;
+    };
+    return TeachesAtPipe;
+}());
+TeachesAtPipe = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Pipe"])({
+        name: 'teachesAt',
+    })
+], TeachesAtPipe);
+
+//# sourceMappingURL=teaches-at.js.map
+
+/***/ }),
+
+/***/ 287:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeachesInstitutionsPipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var TeachesInstitutionsPipe = (function () {
+    function TeachesInstitutionsPipe() {
+    }
+    TeachesInstitutionsPipe.prototype.transform = function (value) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var teachesInstitutionsValue = "";
+        switch (value) {
+            case 0:
+                teachesInstitutionsValue = 'Holon Institute Of Technology';
+                break;
+            case 1:
+                teachesInstitutionsValue = 'Technion';
+                break;
+            case 2:
+                teachesInstitutionsValue = 'Tel-Aviv University';
+                break;
+            case 4:
+                teachesInstitutionsValue = 'Ben-Gurion Universit';
+                break;
+            case 8:
+                teachesInstitutionsValue = 'Hebrew University';
+                break;
+            case 16:
+                teachesInstitutionsValue = 'Bar-Ilan University';
+                break;
+            case 32:
+                teachesInstitutionsValue = 'Tel-Aviv Jaffa Academic College';
+                break;
+            case 64:
+                teachesInstitutionsValue = 'IDC Herzliya';
+                break;
+            case 128:
+                teachesInstitutionsValue = 'Ariel University';
+                break;
+            case 256:
+                teachesInstitutionsValue = 'Haifa University';
+                break;
+            case 512:
+                teachesInstitutionsValue = 'Sapir Academic College';
+                break;
+            case 1024:
+                teachesInstitutionsValue = 'ORT Braude Collegeof Engineering';
+                break;
+            case 2048:
+                teachesInstitutionsValue = 'The Open University';
+                break;
+            case 4096:
+                teachesInstitutionsValue = 'College of Management';
+                break;
+            case 8192:
+                teachesInstitutionsValue = 'Achva Academic Campus';
+                break;
+        }
+        return teachesInstitutionsValue;
+    };
+    return TeachesInstitutionsPipe;
+}());
+TeachesInstitutionsPipe = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Pipe"])({
+        name: 'teachesInstitutions',
+    })
+], TeachesInstitutionsPipe);
+
+//# sourceMappingURL=teaches-institutions.js.map
+
+/***/ }),
+
+/***/ 32:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApiProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ApiProvider = (function () {
+    function ApiProvider(http) {
+        this.http = http;
+        // private endPoint: string = "http://localhost:8000/";
+        this.endPoint = "https://teacher-student-backend.herokuapp.com/";
+    }
+    ApiProvider.prototype.httpGet = function (path) {
+        var _this = this;
+        var url = this.endPoint + path;
+        return this.http.get(url, null).map(function (res) { return _this.checkResultModel(res); });
+    };
+    ApiProvider.prototype.httpPost = function (path, data) {
+        var _this = this;
+        var url = this.endPoint + path;
+        var header = this.buildHeader();
+        return this.http.post(url, JSON.stringify(data), { headers: header }).map(function (res) { return _this.checkResultModel(res); });
+    };
+    ApiProvider.prototype.buildHeader = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return headers;
+    };
+    ApiProvider.prototype.checkResultModel = function (result) {
+        try {
+            var dataCovertedToJson = result.json();
+            return dataCovertedToJson;
+        }
+        catch (ex) {
+            return null;
+        }
+    };
+    return ApiProvider;
+}());
+ApiProvider = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */]])
+], ApiProvider);
+
+//# sourceMappingURL=api.js.map
+
+/***/ }),
+
+/***/ 42:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FavoritesPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__singleteacher_singleteacher__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_favorites_manager_favorites_manager__ = __webpack_require__(48);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var FavoritesPage = (function () {
+    function FavoritesPage(navCtrl, navParams, favoritesManagerProvider, apiProvider, modalCtrl, loadingCtrl, alertCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.favoritesManagerProvider = favoritesManagerProvider;
+        this.apiProvider = apiProvider;
+        this.modalCtrl = modalCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.alertCtrl = alertCtrl;
+        this.tabRef = this.navCtrl.parent;
+        this.userHaveFavorites = false;
+        this.teachers = [];
+        var listOfTeacherID = this.favoritesManagerProvider.getFavorites();
+        this.bootstrapFavoritePage(listOfTeacherID);
+    }
+    FavoritesPage.prototype.goPage = function (page) {
+        switch (page) {
+            case 'search':
+                this.navCtrl.pop();
+                this.tabRef.select(1);
+                break;
+            default:
+                console.log('Not found the requested page ' + page);
+                break;
+        }
+    };
+    FavoritesPage.prototype.expandTeacherInformation = function (index) {
+        var _this = this;
+        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_3__singleteacher_singleteacher__["a" /* SingleteacherPage */], { teacher: this.teachers[index] });
+        modal.onDidDismiss(function (data) {
+            if (data === false) {
+                _this.teachers.splice(index, 1);
+                if (_this.teachers.length === 0) {
+                    _this.userHaveFavorites = false;
+                }
+            }
+        });
+        modal.present();
+    };
+    FavoritesPage.prototype.bootstrapFavoritePage = function (listOfTeacherID) {
+        if (listOfTeacherID == null || listOfTeacherID.length == 0) {
+            this.userHaveFavorites = false;
+        }
+        else {
+            this.userHaveFavorites = true;
+            this.getTeachersByID(listOfTeacherID);
+        }
+    };
+    FavoritesPage.prototype.getTeachersByID = function (listOfTeacherID) {
+        var _this = this;
+        var data = {
+            "listOfTeacherID": listOfTeacherID
+        };
+        var loading = this.loadingCtrl.create({
+            content: 'Loading favorites, please wait...'
+        });
+        loading.present();
+        this.apiProvider.httpPost('teacher/getlistofteachersbyid', data)
+            .subscribe(function (teachersList) {
+            _this.teachers = teachersList;
+            loading.dismiss();
+        }, function (failure) {
+            var alert = _this.createAlert('Couldn\'t load the favorites teachers', 'There was some problem, we couldn\'t load the favorite teachers, please try again later.');
+            alert.present();
+        });
+    };
+    FavoritesPage.prototype.createAlert = function (titleInput, subTitleInput) {
+        var alert = this.alertCtrl.create({
+            title: titleInput,
+            subTitle: subTitleInput,
+            buttons: ['Ok']
+        });
+        return alert;
+    };
+    return FavoritesPage;
+}());
+FavoritesPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-favorites',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\favorites\favorites.html"*/'<ion-header>\n  <ion-navbar text-center>\n    <ion-title>\n      <font class="m-color-white">Favorites</font>\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-35px m-font-weight-300">Favorites</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          This is all the favorites teachers you\'ve saved, you can manage all your teachers here and save them for the future.\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font>\n          In order to keep your teachers quickly accessed, do not remove StudyHub cache from your app.\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- No favorites case -->\n      <div *ngIf="!userHaveFavorites">\n        <!-- No teachers as favorites text -->\n        <ion-row text-center>\n          <ion-col col-12>\n            You have none in your favorite list.\n          </ion-col>\n        </ion-row>\n\n        <!-- Search for teachers button -->\n        <ion-row text-center>\n          <ion-col col-12>\n            <button ion-button icon-start outline (click)="goPage(\'search\');">\n              <ion-icon name="ios-search"></ion-icon>\n              Search for teacher\n            </button>\n          </ion-col>\n        </ion-row>\n      </div>\n\n      <!-- There are teachers in favorites list -->\n      <div *ngIf="userHaveFavorites">\n        <ion-row>\n          <ion-col col-6 class="animated zoomIn" *ngFor="let teacher of teachers;let i = index;">\n            <ion-card (click)="expandTeacherInformation(i);">\n              <!-- Name -->\n              <ion-card-header>\n                {{teacher.firstName}} {{teacher.lastName}}\n              </ion-card-header>\n              <ion-card-content>\n                <!-- Image -->\n                <ion-col col-12>\n                  <img src="assets\\imgs\\imageNotFound.jpg" />\n                </ion-col>\n                <!-- Price -->\n                <ion-col col-12>\n                  <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>\n                  <font class="m-font-size-10px">ILS</font>\n                </ion-col>\n                <!-- Rate -->\n                <ion-col col-12>\n                  <rating [(ngModel)]="teachers[i].rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"\n                    starIconName="star" nullable="false"></rating>\n                </ion-col>\n              </ion-card-content>\n            </ion-card>\n          </ion-col>\n        </ion-row>\n\n      </div>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\favorites\favorites.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */],
+        __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+], FavoritesPage);
+
+//# sourceMappingURL=favorites.js.map
+
+/***/ }),
+
+/***/ 48:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FavoritesManagerProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_local_storage_local_storage__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var FavoritesManagerProvider = (function () {
+    function FavoritesManagerProvider(localStorage) {
+        this.localStorage = localStorage;
+    }
+    FavoritesManagerProvider.prototype.addID = function (id) {
+        if (id == null || id === "") {
+            return false;
+        }
+        if (this.isIDExist(id)) {
+            return false;
+        }
+        var favoritesList = this.getFavorites();
+        if (favoritesList == null) {
+            favoritesList = [];
+        }
+        favoritesList.push(id);
+        this.setFavorites(favoritesList);
+    };
+    FavoritesManagerProvider.prototype.isIDExist = function (id) {
+        var favoritesList = this.getFavorites();
+        if (favoritesList == null) {
+            return false;
+        }
+        for (var _i = 0, favoritesList_1 = favoritesList; _i < favoritesList_1.length; _i++) {
+            var favorite = favoritesList_1[_i];
+            if (favorite === id) {
+                return true;
+            }
+        }
+        return false;
+    };
+    FavoritesManagerProvider.prototype.removeID = function (id) {
+        var favoritesList = this.getFavorites();
+        if (favoritesList == null) {
+            return false;
+        }
+        for (var i = 0; i < favoritesList.length; i++) {
+            if (favoritesList[i] == id) {
+                favoritesList.splice(i, 1);
+                this.setFavorites(favoritesList);
+                break;
+            }
+        }
+    };
+    FavoritesManagerProvider.prototype.getFavorites = function () {
+        var favoritesID = this.localStorage.Get('FavoritesIDs');
+        return favoritesID;
+    };
+    FavoritesManagerProvider.prototype.setFavorites = function (value) {
+        this.localStorage.Set('FavoritesIDs', value);
+    };
+    return FavoritesManagerProvider;
+}());
+FavoritesManagerProvider = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_local_storage_local_storage__["a" /* LocalStorageProvider */]])
+], FavoritesManagerProvider);
+
+//# sourceMappingURL=favorites-manager.js.map
+
+/***/ }),
+
+/***/ 53:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SingleteacherPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_favorites_manager_favorites_manager__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_toaster_toaster__ = __webpack_require__(166);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var SingleteacherPage = (function () {
+    function SingleteacherPage(navCtrl, navParams, viewCtrl, apiProvider, loadingCtrl, alertCtrl, favoritesManagerProvider, toasterProvider) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.viewCtrl = viewCtrl;
+        this.apiProvider = apiProvider;
+        this.loadingCtrl = loadingCtrl;
+        this.alertCtrl = alertCtrl;
+        this.favoritesManagerProvider = favoritesManagerProvider;
+        this.toasterProvider = toasterProvider;
+        this.rate = 3;
+        this.showErrorMessage = false;
+        this.showRecommendationsBoolean = false;
+        this.alreadyAddedRecommend = false;
+        this.isTeacherFavorited = false;
+        this.teacher = this.navParams.get('teacher');
+        this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
+    }
+    SingleteacherPage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss(this.isTeacherFavorited);
+    };
+    SingleteacherPage.prototype.toggleRecommendations = function () {
+        this.showRecommendationsBoolean = !this.showRecommendationsBoolean;
+    };
+    SingleteacherPage.prototype.addNewRecommend = function () {
+        var _this = this;
+        this.showErrorMessage = false;
+        if (!this.isModelValid()) {
+            this.showErrorMessage = true;
+            return;
+        }
+        var newRecommendData = {
+            "id": this.teacher._id,
+            "recommendData": {
+                "fullName": this.fullName,
+                "email": this.email,
+                "message": this.message,
+                "rate": this.rate
+            }
+        };
+        var loading = this.loadingCtrl.create({
+            content: 'Adding your recommendation, please wait...'
+        });
+        loading.present();
+        this.apiProvider.httpPost('teacher/addrecommend', newRecommendData)
+            .subscribe(function (success) {
+            loading.dismiss();
+            var alert = _this.createAlert('Your recommendation has been added', 'Thank you for posting recommendation for this teacher, thanks for making our community better.');
+            alert.present();
+            _this.alreadyAddedRecommend = true;
+            _this.showRecommendationsBoolean = false;
+            _this.teacher.recommendations.push(newRecommendData.recommendData);
+        }, function (failure) {
+            loading.dismiss();
+            var alert = _this.createAlert('Failed to add recommendation', 'The request has been failed for some reason, please try again later.');
+            alert.present();
+        });
+    };
+    SingleteacherPage.prototype.addFavorite = function () {
+        this.favoritesManagerProvider.addID(this.teacher._id);
+        this.isTeacherFavorited = true;
+        this.toasterProvider.presentToast("Teacher has been added to favorites.");
+    };
+    SingleteacherPage.prototype.removeFavorite = function () {
+        this.favoritesManagerProvider.removeID(this.teacher._id);
+        this.isTeacherFavorited = false;
+        this.toasterProvider.presentToast("Teacher has been removed from favorites.");
+    };
+    SingleteacherPage.prototype.openWhatsApp = function () {
+        if (this.teacher && this.teacher.phone) {
+            if ((this.teacher.phone).indexOf("972") !== -1) {
+                window.open('https://api.whatsapp.com/send?phone=' + this.teacher.phone);
+            }
+            else if (this.teacher.phone[0] === "0") {
+                var number = "972" + this.teacher.phone;
+                window.open('https://api.whatsapp.com/send?phone=' + number);
+            }
+        }
+    };
+    SingleteacherPage.prototype.isModelValid = function () {
+        this.convertRateToInteger();
+        if (this.rate == null || this.rate < 0 || this.rate > 5 ||
+            this.isStringNullOrEmpty(this.email) ||
+            this.isStringNullOrEmpty(this.fullName) ||
+            this.isStringNullOrEmpty(this.message)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    SingleteacherPage.prototype.isStringNullOrEmpty = function (str) {
+        if (str == null || str === "") {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    SingleteacherPage.prototype.convertRateToInteger = function () {
+        if (this.rate != null) {
+            this.rate = parseInt(this.rate.toString());
+        }
+    };
+    SingleteacherPage.prototype.createAlert = function (titleInput, subTitleInput) {
+        var alert = this.alertCtrl.create({
+            title: titleInput,
+            subTitle: subTitleInput,
+            buttons: ['Ok']
+        });
+        return alert;
+    };
+    return SingleteacherPage;
+}());
+SingleteacherPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-singleteacher',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\singleteacher\singleteacher.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-buttons start>\n      <button ion-button (click)="dismiss();">\n        <font class="m-color-white">Close</font>\n      </button>\n    </ion-buttons>\n    <ion-title text-center>\n      <font class="m-color-white">{{teacher.firstName}} {{teacher.lastName}}</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <!-- Image and add recommend button -->\n    <ion-row>\n      <ion-col col-7 text-left>\n        <img class="m-width-150px" src="assets\\imgs\\imageNotFound.jpg" />\n      </ion-col>\n      <ion-col *ngIf="!isTeacherFavorited" col-5 text-right>\n        <button ion-button icon-start small outline color="dark" (click)="addFavorite()">\n          <ion-icon name="star"></ion-icon>\n          Add favorite\n        </button>\n      </ion-col>\n      <ion-col *ngIf="isTeacherFavorited" col-5 text-right>\n        <button ion-button icon-start small outline color="dark" (click)="removeFavorite()">\n          <ion-icon name="star"></ion-icon>\n          Remove favorite\n        </button>\n      </ion-col>\n    </ion-row>\n\n    <!-- First name and Last name -->\n    <ion-row>\n      <ion-col col-12>\n        <font class="m-font-size-20px">\n          <i>{{teacher.firstName}} {{teacher.lastName}}</i>\n        </font> -\n        <i>{{teacher.gender}}, {{teacher.age}}</i>\n      </ion-col>\n    </ion-row>\n\n    <!-- Phone -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Phone: </b>\n        <i>{{teacher.phone}}</i>\n        <ion-icon class="m-padding-left-7px" color="secondary" name="logo-whatsapp" (click)="openWhatsApp()"></ion-icon>\n      </ion-col>\n    </ion-row>\n\n    <!-- Email -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Email: </b>\n        <i>{{teacher.email}}</i>\n      </ion-col>\n    </ion-row>\n\n    <!-- Prices -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Price: </b>\n        <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>\n        <font class="m-font-size-10px">ILS</font>\n      </ion-col>\n    </ion-row>\n\n    <!-- Rate -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Rate: </b>\n        <i>{{teacher.rate}}</i> \n         <font *ngIf="teacher.recommendations.length === 1"><i>( {{teacher.recommendations.length}} person rated )</i></font> \n         <font *ngIf="teacher.recommendations.length !== 1"><i>( {{teacher.recommendations.length}} people rated )</i></font> \n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches At -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches at:</b> {{1|teachesAt}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches Institutions -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches at Institutions:</b>\n      </ion-col>\n      <ion-col col-12 *ngFor="let subject of teacher.teachesInstitutions">\n        - {{subject | teachesInstitutions}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Message -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Personal message: </b>{{teacher.personalMessage}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Recommendations Text and Add recommend icon -->\n    <ion-row>\n      <ion-col col-6 text-left>\n        <b>\n          <u>Recommendations:</u>\n        </b>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && !showRecommendationsBoolean">\n        <button ion-button outline icon-start small color="dark" (click)="toggleRecommendations()">\n          <ion-icon name="ios-add-outline"></ion-icon>\n          Add\n        </button>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && showRecommendationsBoolean">\n        <button ion-button outline icon-start small color="dark" (click)="toggleRecommendations()">\n          <ion-icon name="ios-close-outline"></ion-icon>\n          Close\n        </button>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="alreadyAddedRecommend">\n        <ion-icon class="m-font-size-30px" name="md-done-all"></ion-icon>\n      </ion-col>\n    </ion-row>\n\n    <!-- Show recommendation -->\n    <div class="animated bounceInDown" *ngIf="showRecommendationsBoolean" text-center>\n\n      <ion-list>\n\n        <!-- Add Recommendations text -->\n        <ion-row>\n          <ion-col col-12>\n            <b>\n              <u>Add recommendations:</u>\n            </b>\n          </ion-col>\n        </ion-row>\n\n        <!-- Full name input -->\n        <ion-row>\n          <ion-col col-12>\n            <ion-item>\n              <ion-label floating>Full name</ion-label>\n              <ion-input type="text" [(ngModel)]="fullName"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Email input -->\n        <ion-row>\n          <ion-col col-12>\n            <ion-item>\n              <ion-label floating>Email</ion-label>\n              <ion-input type="email" [(ngModel)]="email"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Rate input -->\n        <ion-row>\n          <ion-col col-12>\n            <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"\n              nullable="false"></rating>\n          </ion-col>\n        </ion-row>\n\n        <!-- Message input -->\n        <ion-row>\n          <ion-col col-12>\n            <ion-item>\n              <ion-label floating>Message</ion-label>\n              <ion-textarea rows="4" type="email" [(ngModel)]="message"></ion-textarea>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n\n        <!-- Error message -->\n        <ion-row *ngIf="showErrorMessage">\n          <ion-col col-12>\n            <font class="m-color-red">The fields are not valid.</font>\n          </ion-col>\n        </ion-row>\n\n        <!-- Add button message -->\n        <ion-row>\n          <ion-col col-12>\n            <button ion-button block outline (click)="addNewRecommend()" icon-start>\n              <ion-icon name="add"></ion-icon>Add</button>\n          </ion-col>\n        </ion-row>\n\n      </ion-list>\n\n    </div>\n\n    <!-- Recommendations List -->\n    <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">\n      <ion-col col-12>\n        {{recommend.fullName}} - {{recommend.rate}}\n      </ion-col>\n      <ion-col col-12>\n        - {{recommend.message}}\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\singleteacher\singleteacher.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */],
+        __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+        __WEBPACK_IMPORTED_MODULE_3__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_toaster_toaster__["a" /* ToasterProvider */]])
+], SingleteacherPage);
+
+//# sourceMappingURL=singleteacher.js.map
+
+/***/ })
+
+},[213]);
+//# sourceMappingURL=main.js.map

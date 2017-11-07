@@ -1,1 +1,40 @@
-webpackJsonp([2],{270:function(e,o,a){"use strict";Object.defineProperty(o,"__esModule",{value:!0});var t=a(0),d=a(2),n=a(27),r=a(112),c=function(){return function(){}}();c=Object(d.__decorate)([Object(t.NgModule)({declarations:[],imports:[n.e.forChild(r.a)]})],c);var p=a(212),m=a(213),u=a(214),i=a(215),l=a(216),s=a(217),f=a(218),b=a(219),v=a(220),g=a(225),j=a(10),C=a(12),y=a(156),_=a(56);a.d(o,"SettingsPageModuleNgFactory",function(){return k});var k=t["ɵcmf"](c,[],function(e){return t["ɵmod"]([t["ɵmpd"](512,t.ComponentFactoryResolver,t["ɵCodegenComponentFactoryResolver"],[[8,[p.a,m.a,u.a,i.a,l.a,s.a,f.a,b.a,v.a,g.a]],[3,t.ComponentFactoryResolver],t.NgModuleRef]),t["ɵmpd"](4608,j.k,j.j,[t.LOCALE_ID]),t["ɵmpd"](4608,C.k,C.k,[]),t["ɵmpd"](4608,C.c,C.c,[]),t["ɵmpd"](512,j.b,j.b,[]),t["ɵmpd"](512,C.j,C.j,[]),t["ɵmpd"](512,C.d,C.d,[]),t["ɵmpd"](512,C.i,C.i,[]),t["ɵmpd"](512,y.a,y.a,[]),t["ɵmpd"](512,y.b,y.b,[]),t["ɵmpd"](512,c,c,[]),t["ɵmpd"](256,_.a,r.a,[])])})}});
+webpackJsonp([2],{
+
+/***/ 292:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingsPageModule", function() { return SettingsPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__settings__ = __webpack_require__(110);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var SettingsPageModule = (function () {
+    function SettingsPageModule() {
+    }
+    return SettingsPageModule;
+}());
+SettingsPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__settings__["a" /* SettingsPage */]),
+        ],
+    })
+], SettingsPageModule);
+
+//# sourceMappingURL=settings.module.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=2.js.map

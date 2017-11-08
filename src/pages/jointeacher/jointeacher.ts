@@ -1,3 +1,4 @@
+import { ImageCompressService } from 'ng2-image-compress';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
@@ -62,14 +63,14 @@ export class JointeacherPage {
   }
 
   public readImageBase64($event) {
-    let inputValue = $event.target;
-    var file: File = inputValue.files[0];
-    var myReader: FileReader = new FileReader();
-
-    myReader.onloadend = (e) => {
-      this.image = myReader.result;
-    }
-    myReader.readAsDataURL(file);
+    ImageCompressService.filesToCompressedImageSource($event.target.files).
+      then((observableImages) => {
+        observableImages.subscribe((compressedObject) => {
+          this.image = compressedObject.compressedImage.imageDataUrl;
+        }, (error) => {
+          console.log("Error while converting image.");
+        });
+      });
   }
 
   public clearImage() {

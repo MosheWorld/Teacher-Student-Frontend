@@ -21,5 +21,21 @@
       </ion-col>
     </ion-row>
 
+    <!-- Get image button -->
+    <ion-row>
+      <ion-col col-12>
+        <input type="file" (change)="readImageBase64($event)">
+      </ion-col>
+    </ion-row>
+
+    <!-- Image -->
+    <ion-row>
+      <ion-col col-12>
+        <img src="{{image}}">
+      </ion-col>
+    </ion-row>
+
+
+    <button ion-button outline (click)="show()">Show console</button>
   </ion-grid>
 </ion-content>

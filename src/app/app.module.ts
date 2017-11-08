@@ -6,6 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
+import { ImageCompressService,ResizeOptions,ImageUtilityService } from 'ng2-image-compress';
+
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ApiProvider } from '../providers/api/api';
@@ -71,7 +73,9 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     ToasterProvider,
     LocalStorageProvider,
     TeachesInstitutionsPipe,
-    FavoritesManagerProvider
+    FavoritesManagerProvider,
+    ImageCompressService,
+    ResizeOptions
   ]
 })
 export class AppModule { }

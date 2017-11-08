@@ -9,6 +9,7 @@ import { FavoritesPage } from './../favorites/favorites';
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
+  public image;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -22,5 +23,23 @@ export class SettingsPage {
         console.log('Not found the requested page ' + page);
         break;
     }
+  }
+
+  changeListener($event) : void {
+    this.readThis($event.target);
+  }
+  
+  readThis(inputValue: any): void {
+    var file:File = inputValue.files[0];
+    var myReader:FileReader = new FileReader();
+  
+    myReader.onloadend = (e) => {
+      this.image = myReader.result;
+    }
+    myReader.readAsDataURL(file);
+  }
+
+  public test(){
+    console.log(this.image);
   }
 }

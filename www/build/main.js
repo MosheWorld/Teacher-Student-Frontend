@@ -520,11 +520,26 @@ var SettingsPage = (function () {
                 break;
         }
     };
+    SettingsPage.prototype.changeListener = function ($event) {
+        this.readThis($event.target);
+    };
+    SettingsPage.prototype.readThis = function (inputValue) {
+        var _this = this;
+        var file = inputValue.files[0];
+        var myReader = new FileReader();
+        myReader.onloadend = function (e) {
+            _this.image = myReader.result;
+        };
+        myReader.readAsDataURL(file);
+    };
+    SettingsPage.prototype.test = function () {
+        console.log(this.image);
+    };
     return SettingsPage;
 }());
 SettingsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  Settings page, go away, it\'s not ready!\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
+        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n      <ion-col col-12>\n        Settings page, go away, it\'s not ready!\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col col-12>\n        <input type="file" (change)="changeListener($event)" placeholder="Upload file">\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col col-12>\n        <button ion-button outline (click)="test()">Test</button>\n      </ion-col>\n    </ion-row>\n\n\n    <ion-row>\n        <ion-col col-12>\n         <img src="{{image}}" >\n        </ion-col>\n      </ion-row>\n\n  </ion-grid>\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
 ], SettingsPage);

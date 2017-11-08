@@ -181,33 +181,27 @@
           </ion-col>
         </ion-row>
 
-        <!-- Get image button -->
+        <!-- Get image button and clear button -->
         <ion-row>
-          <ion-col col-12>
-            <input #inputImage type="file" (change)="readImageBase64($event)" accept="image/*" >
-          </ion-col>
-        </ion-row>
-
-        <!-- Image -->
-        <ion-row *ngIf="image != null && image.length > 0" class="animated flash">
-          <ion-col col-12>
-            <img src="{{image}}">
-          </ion-col>
-        </ion-row>
-
-        <!-- Image buttons -->
-        <ion-row *ngIf="image != null && image.length > 0">
           <ion-col col-6>
-            <button ion-button outline block icon-start small color="dark">
-              <ion-icon name="ios-bookmark-outline"></ion-icon>
-              Save
+            <input #inputImage type="file" id="inputImageid" style="display: none;" (change)="readImageBase64($event)" accept="image/*">
+            <button ion-button outline block icon-start small color="dark" onclick="document.getElementById('inputImageid').click();">
+              <ion-icon name="ios-camera-outline"></ion-icon>
+              Add Image
             </button>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-6 *ngIf="image != null && image.length > 0">
             <button ion-button outline block icon-start small color="dark" (click)="clearImage()">
               <ion-icon name="ios-trash-outline"></ion-icon>
               Clear
             </button>
+          </ion-col>
+        </ion-row>
+
+        <!-- Image -->
+        <ion-row #viewImage *ngIf="image != null && image.length > 0" class="animated flash">
+          <ion-col col-12>
+            <img src="{{image}}">
           </ion-col>
         </ion-row>
 

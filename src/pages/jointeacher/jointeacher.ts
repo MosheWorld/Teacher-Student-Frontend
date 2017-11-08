@@ -1,7 +1,7 @@
 import { ImageCompressService } from 'ng2-image-compress';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { ApiProvider } from './../../providers/api/api';
 
 @IonicPage()
@@ -26,9 +26,10 @@ export class JointeacherPage {
 
   public showErrorMessage: boolean = false;
   @ViewChild('inputImage') el: ElementRef;
+  @ViewChild('viewImage') elViewImage: ElementRef;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public rd: Renderer2) {
   }
 
   public createTeacher() {
@@ -75,8 +76,12 @@ export class JointeacherPage {
 
   public clearImage() {
     if (this.image && this.image.length > 0) {
-      this.image = null;
-      this.el.nativeElement.value = "";
+      this.rd.removeClass(this.elViewImage.nativeElement, "flash");
+      this.rd.addClass(this.elViewImage.nativeElement, "bounceOutUp");
+      setTimeout(() => {
+        this.image = null;
+        this.el.nativeElement.value = "";
+      }, 1000);
     }
   }
 

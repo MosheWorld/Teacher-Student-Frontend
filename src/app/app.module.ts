@@ -5,7 +5,6 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { Camera } from '@ionic-native/camera';
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -64,7 +63,6 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     SingleteacherPage
   ],
   providers: [
-    Camera,
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

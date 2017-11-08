@@ -24,22 +24,4 @@ export class SettingsPage {
         break;
     }
   }
-
-  changeListener($event) : void {
-    this.readThis($event.target);
-  }
-  
-  readThis(inputValue: any): void {
-    var file:File = inputValue.files[0];
-    var myReader:FileReader = new FileReader();
-  
-    myReader.onloadend = (e) => {
-      this.image = myReader.result;
-    }
-    myReader.readAsDataURL(file);
-  }
-
-  public test(){
-    console.log(this.image);
-  }
 }

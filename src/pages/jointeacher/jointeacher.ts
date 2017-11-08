@@ -1,6 +1,6 @@
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ApiProvider } from './../../providers/api/api';
 
 @IonicPage()
@@ -15,6 +15,7 @@ export class JointeacherPage {
   public priceFrom: number;
   public phone: string;
   public email: string;
+  public image: String = null;
   public gender: string;
   public lastName: string;
   public firstName: string;
@@ -23,6 +24,7 @@ export class JointeacherPage {
   public teachesInstitutions: number[] = [];
 
   public showErrorMessage: boolean = false;
+  @ViewChild('inputImage') el: ElementRef;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
@@ -57,6 +59,24 @@ export class JointeacherPage {
         alert.present();
       }
       );
+  }
+
+  public readImageBase64($event) {
+    let inputValue = $event.target;
+    var file: File = inputValue.files[0];
+    var myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.image = myReader.result;
+    }
+    myReader.readAsDataURL(file);
+  }
+
+  public clearImage() {
+    if (this.image && this.image.length > 0) {
+      this.image = null;
+      this.el.nativeElement.value = "";
+    }
   }
 
   private convertStringToInteger() {
@@ -115,7 +135,8 @@ export class JointeacherPage {
       personalMessage: this.personalMessage,
       teachesAt: this.teachesAt,
       teachesInstitutions: this.teachesInstitutions,
-      rate: 0
+      rate: 0,
+      image: this.image
     };
     return newTeacher;
   }

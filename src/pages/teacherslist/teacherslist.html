@@ -78,11 +78,14 @@
       <div *ngFor="let teacher of teachers; let i = index;">
         <ion-card (click)="expandTeacherInformation(i);">
 
-          <!-- Image -->
+          <!-- Image and Favorite -->
           <ion-row>
-            <ion-col col-10 text-left>
+            <ion-col *ngIf="teacher.image == null" col-10 text-left>
               <img class="m-width-150px" src="assets\\imgs\\imageNotFound.jpg" />
             </ion-col>
+            <ion-col *ngIf="teacher.image != null" col-10 text-left>
+                <img class="m-width-150px" src="{{teacher.image}}" />
+              </ion-col>
             <ion-col *ngIf="teacher.isTeacherFavorited" col-2 text-right>
               <ion-icon name="ios-bookmark-outline" class="m-font-size-35px"></ion-icon>
             </ion-col>

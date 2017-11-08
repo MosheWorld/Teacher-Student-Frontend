@@ -19,9 +19,12 @@
 
     <!-- Image and add recommend button -->
     <ion-row>
-      <ion-col col-7 text-left>
+      <ion-col col-7 text-left *ngIf="teacher.image == null">
         <img class="m-width-150px" src="assets\\imgs\\imageNotFound.jpg" />
       </ion-col>
+      <ion-col col-7 text-left *ngIf="teacher.image != null">
+          <img class="m-width-150px" src="{{teacher.image}}" />
+        </ion-col>
       <ion-col *ngIf="!isTeacherFavorited" col-5 text-right>
         <button ion-button icon-start small outline color="dark" (click)="addFavorite()">
           <ion-icon name="star"></ion-icon>

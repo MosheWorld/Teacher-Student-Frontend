@@ -64,7 +64,6 @@
       </ion-row>
 
       <!-- Form -->
-
       <ion-list>
 
         <!-- First name and Last name -->
@@ -179,6 +178,36 @@
               <ion-label floating>Personal message</ion-label>
               <ion-textarea rows="5" type="text" [(ngModel)]="personalMessage"></ion-textarea>
             </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Get image button -->
+        <ion-row>
+          <ion-col col-12>
+            <input #inputImage type="file" (change)="readImageBase64($event)">
+          </ion-col>
+        </ion-row>
+
+        <!-- Image -->
+        <ion-row *ngIf="image != null && image.length > 0" class="animated flash">
+          <ion-col col-12>
+            <img src="{{image}}">
+          </ion-col>
+        </ion-row>
+
+        <!-- Image buttons -->
+        <ion-row *ngIf="image != null && image.length > 0">
+          <ion-col col-6>
+            <button ion-button outline block icon-start small color="dark">
+              <ion-icon name="ios-bookmark-outline"></ion-icon>
+              Save
+            </button>
+          </ion-col>
+          <ion-col col-6>
+            <button ion-button outline block icon-start small color="dark" (click)="clearImage()">
+              <ion-icon name="ios-trash-outline"></ion-icon>
+              Clear
+            </button>
           </ion-col>
         </ion-row>
 

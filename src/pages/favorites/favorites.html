@@ -75,9 +75,12 @@
               </ion-card-header>
               <ion-card-content>
                 <!-- Image -->
-                <ion-col col-12>
+                <ion-col col-12 *ngIf="teacher.image == null">
                   <img src="assets\\imgs\\imageNotFound.jpg" />
                 </ion-col>
+                <ion-col col-12 *ngIf="teacher.image != null">
+                    <img src="{{teacher.image}}" />
+                  </ion-col>
                 <!-- Price -->
                 <ion-col col-12>
                   <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>

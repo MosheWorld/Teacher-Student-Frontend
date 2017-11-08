@@ -184,7 +184,7 @@
         <!-- Get image button -->
         <ion-row>
           <ion-col col-12>
-            <input #inputImage type="file" (change)="readImageBase64($event)">
+            <input #inputImage type="file" (change)="readImageBase64($event)" accept="image/*" >
           </ion-col>
         </ion-row>
 

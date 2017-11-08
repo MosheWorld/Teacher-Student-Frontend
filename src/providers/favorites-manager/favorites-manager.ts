@@ -59,6 +59,10 @@ export class FavoritesManagerProvider {
     return favoritesID;
   }
 
+  public removeAll() {
+    this.setFavorites([]);
+  }
+
   private setFavorites(value: any) {
     this.localStorage.Set('FavoritesIDs', value);
   }

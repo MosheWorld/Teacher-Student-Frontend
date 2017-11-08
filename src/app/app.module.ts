@@ -2,11 +2,11 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { NgModule, ErrorHandler } from '@angular/core';
+import { ImageCompressService } from 'ng2-image-compress';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
-import { ImageCompressService,ResizeOptions,ImageUtilityService } from 'ng2-image-compress';
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -72,10 +72,9 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     TeachesAtPipe,
     ToasterProvider,
     LocalStorageProvider,
-    TeachesInstitutionsPipe,
-    FavoritesManagerProvider,
     ImageCompressService,
-    ResizeOptions
+    TeachesInstitutionsPipe,
+    FavoritesManagerProvider
   ]
 })
 export class AppModule { }

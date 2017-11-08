@@ -53,12 +53,12 @@
     "description": "An Ionic project",
     "cordova": {
         "plugins": {
+            "cordova-plugin-camera": {},
             "cordova-plugin-device": {},
             "cordova-plugin-ionic-webview": {},
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-whitelist": {},
-            "ionic-plugin-keyboard": {},
-            "cordova-plugin-camera": {}
+            "ionic-plugin-keyboard": {}
         },
         "platforms": [
             "browser"

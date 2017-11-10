@@ -81,10 +81,10 @@
           <!-- Image and Favorite -->
           <ion-row>
             <ion-col *ngIf="teacher.image == null" col-10 text-left>
-              <img class="m-width-150px" src="assets\\imgs\\imageNotFound.jpg" />
+              <img class="m-default-image-cards-teacherlist" src="assets\\imgs\\imageNotFound.jpg" />
             </ion-col>
             <ion-col *ngIf="teacher.image != null" col-10 text-left>
-                <img class="m-width-150px" src="{{teacher.image}}" />
+                <img class="m-default-image-cards-teacherlist" src="{{teacher.image}}" />
               </ion-col>
             <ion-col *ngIf="teacher.isTeacherFavorited" col-2 text-right>
               <ion-icon name="ios-bookmark-outline" class="m-font-size-35px"></ion-icon>

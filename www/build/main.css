@@ -30496,6 +30496,27 @@ ul.rating li ion-icon {
   border-bottom: 1px solid #b18b22;
 }
 
+.m-default-image-cards-favorite {
+  max-height: 116px;
+  height: 116px;
+  width: 116px;
+  max-width: 116px;
+}
+
+.m-default-image-cards-teacherlist {
+  max-height: 165px;
+  height: 165px;
+  width: 165px;
+  max-width: 165px;
+}
+
+.m-default-image-cards-singleteacher {
+  max-height: 150px;
+  height: 150px;
+  width: 150px;
+  max-width: 150px;
+}
+
 page-favorites ul {
   padding: 0px;
 }

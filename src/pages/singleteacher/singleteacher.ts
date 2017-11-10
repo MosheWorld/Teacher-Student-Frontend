@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
@@ -24,10 +24,12 @@ export class SingleteacherPage {
   public alreadyAddedRecommend: boolean = false;
 
   public isTeacherFavorited: boolean = false;
+  @ViewChild('addRecommend') elAddRecommend: ElementRef;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
     public apiProvider: ApiProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-    public favoritesManagerProvider: FavoritesManagerProvider, public toasterProvider: ToasterProvider) {
+    public favoritesManagerProvider: FavoritesManagerProvider, public toasterProvider: ToasterProvider,
+    public rd: Renderer2) {
     this.teacher = this.navParams.get('teacher');
     this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
   }
@@ -36,8 +38,16 @@ export class SingleteacherPage {
     this.viewCtrl.dismiss(this.isTeacherFavorited);
   }
 
-  public toggleRecommendations() {
-    this.showRecommendationsBoolean = !this.showRecommendationsBoolean;
+  public openRecommendations() {
+    this.showRecommendationsBoolean = true;
+  }
+
+  public closeRecommendations() {
+    this.rd.removeClass(this.elAddRecommend.nativeElement, "bounceInDown");
+    this.rd.addClass(this.elAddRecommend.nativeElement, "bounceOutUp");
+    setTimeout(() => {
+      this.showRecommendationsBoolean = false;
+    }, 1000);
   }
 
   public addNewRecommend() {

@@ -124,7 +124,7 @@ ul {
   padding-bottom: 15px;
 }
 
-.m-padding-left-7px{
+.m-padding-left-7px {
   padding-left: 7px;
 }
 
@@ -136,3 +136,27 @@ ul {
 .m-border-bottom-1px-solid-b18b22 {
   border-bottom: 1px solid #b18b22;
 }
+
+// Images
+.m-default-image-cards-favorite {
+  max-height: 116px;
+  height: 116px;
+  width: 116px;
+  max-width: 116px;
+}
+
+.m-default-image-cards-teacherlist {
+  max-height: 165px;
+  height: 165px;
+  width: 165px;
+  max-width: 165px;
+}
+
+.m-default-image-cards-singleteacher {
+  max-height: 150px;
+  height: 150px;
+  width: 150px;
+  max-width: 150px;
+}
+
+

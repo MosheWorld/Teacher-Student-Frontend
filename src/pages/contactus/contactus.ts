@@ -1,4 +1,4 @@
-import validator from 'validator';
+import isEmail from 'validator/lib/isEmail';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
@@ -61,7 +61,7 @@ export class ContactusPage {
 
   private isFormValid() {
     if (this.isStringNullOrEmpty(this.fullName) ||
-      this.isStringNullOrEmpty(this.email) || !validator.isEmail(this.email) ||
+      this.isStringNullOrEmpty(this.email) || !isEmail(this.email) ||
       this.isStringNullOrEmpty(this.contactReason) ||
       this.isStringNullOrEmpty(this.message)) {
       return false;

@@ -1,4 +1,4 @@
-import validator from 'validator';
+import isEmail from 'validator/lib/isEmail';
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 
@@ -117,7 +117,7 @@ export class SingleteacherPage {
   private isModelValid() {
     this.convertRateToInteger();
     if (this.rate == null || this.rate < 0 || this.rate > 5 ||
-      this.isStringNullOrEmpty(this.email) || !validator.isEmail(this.email) ||
+      this.isStringNullOrEmpty(this.email) || !isEmail(this.email) ||
       this.isStringNullOrEmpty(this.fullName) ||
       this.isStringNullOrEmpty(this.message)
     ) {

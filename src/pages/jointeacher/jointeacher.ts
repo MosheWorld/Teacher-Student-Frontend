@@ -1,4 +1,4 @@
-import validator from 'validator';
+import isEmail from 'validator/lib/isEmail';
 import { ImageCompressService } from 'ng2-image-compress';
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
@@ -101,7 +101,7 @@ export class JointeacherPage {
       this.priceFrom > this.priceTo ||
       this.age == null || this.age < 0 || this.age > 120 ||
       !this.isPhoneValid(this.phone) ||
-      this.isStringNullOrEmpty(this.email) || !validator.isEmail(this.email) ||
+      this.isStringNullOrEmpty(this.email) || !isEmail(this.email) ||
       this.isStringNullOrEmpty(this.gender) ||
       this.isStringNullOrEmpty(this.lastName) ||
       this.isStringNullOrEmpty(this.firstName) ||

@@ -1,10 +1,10 @@
+import validator from 'validator';
 import { ImageCompressService } from 'ng2-image-compress';
+import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
-import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { ApiProvider } from './../../providers/api/api';
 
-import validator from 'validator';
 
 @IonicPage()
 @Component({

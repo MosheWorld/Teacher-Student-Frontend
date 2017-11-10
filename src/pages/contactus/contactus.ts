@@ -1,3 +1,4 @@
+import validator from 'validator';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
@@ -18,18 +19,6 @@ export class ContactusPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
-  }
-
-  public isFormValid() {
-    if (this.isStringNullOrEmpty(this.fullName) ||
-      this.isStringNullOrEmpty(this.email) ||
-      this.isStringNullOrEmpty(this.contactReason) ||
-      this.isStringNullOrEmpty(this.message)) {
-      return false;
-    }
-    else {
-      return true;
-    }
   }
 
   public sendContactUsForm() {
@@ -68,6 +57,18 @@ export class ContactusPage {
 
   public openWhatsApp() {
     window.open('https://api.whatsapp.com/send?phone=972542477052');
+  }
+
+  private isFormValid() {
+    if (this.isStringNullOrEmpty(this.fullName) ||
+      this.isStringNullOrEmpty(this.email) || !validator.isEmail(this.email) ||
+      this.isStringNullOrEmpty(this.contactReason) ||
+      this.isStringNullOrEmpty(this.message)) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   private setErrorMessage(set: boolean) {

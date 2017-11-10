@@ -8,50 +8,53 @@ export class TeachesInstitutionsPipe implements PipeTransform {
   transform(value: number, ...args) {
     let teachesInstitutionsValue: string = "";
     switch (value) {
-      case 0:
+      case 1:
         teachesInstitutionsValue = 'Holon Institute Of Technology';
         break;
-      case 1:
+      case 2:
         teachesInstitutionsValue = 'Technion';
         break;
-      case 2:
+      case 3:
         teachesInstitutionsValue = 'Tel-Aviv University';
         break;
       case 4:
         teachesInstitutionsValue = 'Ben-Gurion Universit';
         break;
-      case 8:
+      case 5:
         teachesInstitutionsValue = 'Hebrew University';
         break;
-      case 16:
+      case 6:
         teachesInstitutionsValue = 'Bar-Ilan University';
         break;
-      case 32:
+      case 7:
         teachesInstitutionsValue = 'Tel-Aviv Jaffa Academic College';
         break;
-      case 64:
+      case 8:
         teachesInstitutionsValue = 'IDC Herzliya';
         break;
-      case 128:
+      case 9:
         teachesInstitutionsValue = 'Ariel University';
         break;
-      case 256:
+      case 10:
         teachesInstitutionsValue = 'Haifa University';
         break;
-      case 512:
+      case 11:
         teachesInstitutionsValue = 'Sapir Academic College';
         break;
-      case 1024:
+      case 12:
         teachesInstitutionsValue = 'ORT Braude Collegeof Engineering';
         break;
-      case 2048:
+      case 13:
         teachesInstitutionsValue = 'The Open University';
         break;
-      case 4096:
+      case 14:
         teachesInstitutionsValue = 'College of Management';
         break;
-      case 8192:
+      case 15:
         teachesInstitutionsValue = 'Achva Academic Campus';
+        break;
+      default:
+        console.log("Bad pipe value.");
         break;
     }
     return teachesInstitutionsValue;

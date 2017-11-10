@@ -32,6 +32,7 @@ export class SingleteacherPage {
     public rd: Renderer2) {
     this.teacher = this.navParams.get('teacher');
     this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
+    console.log(this.teacher);
   }
 
   public dismiss() {

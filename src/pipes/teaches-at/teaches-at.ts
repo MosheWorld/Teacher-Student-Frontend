@@ -9,13 +9,13 @@ export class TeachesAtPipe implements PipeTransform {
   transform(value: number, ...args) {
     let teachesAtValue: string = "";
     switch (value) {
-      case 0:
+      case 1:
         teachesAtValue = 'Home';
         break;
-      case 1:
+      case 2:
         teachesAtValue = 'Academic Institute';
         break;
-      case 2:
+      case 3:
         teachesAtValue = 'Both';
         break;
     }

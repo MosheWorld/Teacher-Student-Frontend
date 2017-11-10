@@ -14,7 +14,7 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 export class TeacherslistPage {
   public teachersListNotChange: any[] = [];
   public teachers: any[] = [];
-  public orderByType: string;
+  public sortByType: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
     public favoritesManagerProvider: FavoritesManagerProvider) {
@@ -64,19 +64,21 @@ export class TeacherslistPage {
     }
   }
 
-  public orderByTeacherList() {
-    if (this.orderByType != null && this.orderByType.length > 1) {
-      if (this.orderByType === "Name") {
-        this.orderByName();
-      } else if (this.orderByType === "Rate") {
-        this.orderByRate();
-      } else if (this.orderByType === "Recommendations") {
-        this.orderByRecommendations();
+  public sortByTeacherList() {
+    if (this.sortByType != null && this.sortByType.length > 1) {
+      if (this.sortByType === "Name") {
+        this.sortByName();
+      } else if (this.sortByType === "Rate") {
+        this.sortByRate();
+      } else if (this.sortByType === "Recommendations") {
+        this.sortByRecommendations();
+      } else if (this.sortByType === "RecommendationsRate") {
+        this.sortByRecommendationsRate();
       }
     }
   }
 
-  private orderByName() {
+  private sortByName() {
     this.teachers.sort((a, b) => {
       let first = (a.firstName + " " + a.lastName).toLowerCase();
       let second = (b.firstName + " " + b.lastName).toLowerCase();
@@ -92,7 +94,7 @@ export class TeacherslistPage {
     });
   }
 
-  private orderByRate() {
+  private sortByRate() {
     this.teachers.sort((a, b) => {
       if (a.rate < b.rate) {
         return 1;
@@ -105,7 +107,7 @@ export class TeacherslistPage {
     });
   }
 
-  private orderByRecommendations() {
+  private sortByRecommendations() {
     this.teachers.sort((a, b) => {
       if (a.recommendations.length < b.recommendations.length) {
         return 1;
@@ -114,6 +116,25 @@ export class TeacherslistPage {
         return -1;
       } else {
         return 0;
+      }
+    });
+  }
+
+  private sortByRecommendationsRate() {
+    this.teachers.sort((a, b) => {
+      if (a.recommendations.length < b.recommendations.length) {
+        return 1;
+      }
+      if (a.recommendations.length > b.recommendations.length) {
+        return -1;
+      } else {
+        if (a.recommendations.length > b.recommendations.length) {
+          return -1;
+        } else if (a.recommendations.length < b.recommendations.length) {
+          return 1;
+        } else {
+          return 0;
+        }
       }
     });
   }

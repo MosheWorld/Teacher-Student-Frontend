@@ -12,11 +12,12 @@
 
     <!-- List of orders - Display is none always -->
     <ion-item class="m-display-none">
-      <ion-label>Order By</ion-label>
-      <ion-select [(ngModel)]="orderByType" id="selectOrderByID" interface="action-sheet" (ionChange)="orderByTeacherList()">
-        <ion-option value="Name">Order by Name</ion-option>
-        <ion-option value="Rate">Order by Rate</ion-option>
-        <ion-option value="Recommendations">Order by Recommendations</ion-option>
+      <ion-label>Sort By</ion-label>
+      <ion-select [(ngModel)]="sortByType" id="selectOrderByID" interface="action-sheet" (ionChange)="sortByTeacherList()">
+        <ion-option value="Name">Name</ion-option>
+        <ion-option value="Rate">Rate</ion-option>
+        <ion-option value="Recommendations">Recommendations</ion-option>
+        <ion-option value="RecommendationsRate">Recommendations + Rate</ion-option>
       </ion-select>
     </ion-item>
 
@@ -76,8 +77,8 @@
       <ion-row>
         <ion-col col-12>
           <ion-toolbar color="m-darker">
-            <ion-searchbar [showCancelButton]="true" (ionInput)="onInput($event)" placeholder="Search for teacher name" type="text"
-              animated="true" debounce="100">
+            <ion-searchbar [showCancelButton]="true" (ionInput)="onInput($event)" placeholder="Search for teacher name" type="text" animated="true"
+              debounce="100">
             </ion-searchbar>
           </ion-toolbar>
         </ion-col>

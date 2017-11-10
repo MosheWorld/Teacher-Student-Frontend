@@ -162,7 +162,7 @@ export class JointeacherPage {
     if (this.isStringNullOrEmpty(phone) || phone.length < 9) {
       return false;
     } else {
-      if (phone.substring(0, 3) === "054") {
+      if (phone.substring(0, 1) === "0") {
         return true;
       } else if (phone.substring(0, 3) === "972") {
         return true;

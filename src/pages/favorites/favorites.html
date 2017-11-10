@@ -68,9 +68,9 @@
       <div *ngIf="userHaveFavorites">
         <ion-row>
           <ion-col col-6 class="animated zoomIn" *ngFor="let teacher of teachers;let i = index;">
-            <ion-card (click)="expandTeacherInformation(i);">
+            <ion-card (click)="expandTeacherInformation(i);" text-center>
               <!-- Name -->
-              <ion-card-header>
+              <ion-card-header >
                 {{teacher.firstName}} {{teacher.lastName}}
               </ion-card-header>
               <ion-card-content>

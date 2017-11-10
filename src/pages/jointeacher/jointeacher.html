@@ -128,7 +128,7 @@
           <ion-col col-6>
             <ion-item>
               <ion-label floating>To price
-                <font class="m-color-red m-font-size-10px;">Max 200</font>
+                <font class="m-color-red m-font-size-10px">Max 200</font>
               </ion-label>
               <ion-input type="number" [(ngModel)]="priceTo"></ion-input>
             </ion-item>
@@ -184,7 +184,7 @@
         <!-- Get image button and clear button -->
         <ion-row>
           <ion-col col-6>
-            <input #inputImage type="file" id="inputImageid" style="display: none;" (change)="readImageBase64($event)" accept="image/*">
+            <input #inputImage type="file" id="inputImageid" class="m-display-none" (change)="readImageBase64($event)" accept="image/*">
             <button ion-button outline block icon-start small color="dark" onclick="document.getElementById('inputImageid').click();">
               <ion-icon name="ios-camera-outline"></ion-icon>
               Add Image

@@ -11,7 +11,6 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 })
 
 export class SettingsPage {
-  public image;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider) {
   }

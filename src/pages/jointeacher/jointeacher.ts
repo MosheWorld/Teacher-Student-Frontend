@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { ApiProvider } from './../../providers/api/api';
 
+import validator from 'validator';
+
 @IonicPage()
 @Component({
   selector: 'page-jointeacher',
@@ -98,8 +100,8 @@ export class JointeacherPage {
       this.priceFrom == null || this.priceFrom < 0 ||
       this.priceFrom > this.priceTo ||
       this.age == null || this.age < 0 || this.age > 120 ||
-      this.isStringNullOrEmpty(this.phone) ||
-      this.isStringNullOrEmpty(this.email) ||
+      !this.isPhoneValid(this.phone) ||
+      this.isStringNullOrEmpty(this.email) || !validator.isEmail(this.email) ||
       this.isStringNullOrEmpty(this.gender) ||
       this.isStringNullOrEmpty(this.lastName) ||
       this.isStringNullOrEmpty(this.firstName) ||
@@ -154,5 +156,21 @@ export class JointeacherPage {
       buttons: ['Ok']
     });
     return alert;
+  }
+
+  private isPhoneValid(phone: string) {
+    if (this.isStringNullOrEmpty(phone) || phone.length < 9) {
+      return false;
+    } else {
+      if (phone.substring(0, 3) === "054") {
+        return true;
+      } else if (phone.substring(0, 3) === "972") {
+        return true;
+      } else if (phone.substring(0, 4) === "+972") {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }

@@ -30517,6 +30517,10 @@ ul.rating li ion-icon {
   max-width: 150px;
 }
 
+.m-display-none {
+  display: none;
+}
+
 page-favorites ul {
   padding: 0px;
 }
@@ -30529,4 +30533,8 @@ page-favorites ul.rating li {
 
 page-favorites ul.rating li ion-icon {
   font-size: 15px;
+}
+
+page-teacherslist .toolbar .searchbar-input {
+  background-color: #2b3137;
 }

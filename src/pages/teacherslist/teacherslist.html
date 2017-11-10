@@ -4,6 +4,22 @@
     <ion-title text-center>
       <font class="m-color-white">Teacher List</font>
     </ion-title>
+    <ion-buttons end icon-only class="m-color-white">
+      <div onclick="document.getElementById('selectOrderByID').click();">
+        <ion-icon name="md-reorder"></ion-icon>
+      </div>
+    </ion-buttons>
+
+    <!-- List of orders - Display is none always -->
+    <ion-item class="m-display-none">
+      <ion-label>Order By</ion-label>
+      <ion-select [(ngModel)]="orderByType" id="selectOrderByID" interface="action-sheet" (ionChange)="orderByTeacherList()">
+        <ion-option value="Name">Order by Name</ion-option>
+        <ion-option value="Rate">Order by Rate</ion-option>
+        <ion-option value="Recommendations">Order by Recommendations</ion-option>
+      </ion-select>
+    </ion-item>
+
   </ion-navbar>
 
 </ion-header>
@@ -60,7 +76,7 @@
       <ion-row>
         <ion-col col-12>
           <ion-toolbar color="m-darker">
-            <ion-searchbar [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" placeholder="Search for teacher name" type="text"
+            <ion-searchbar [showCancelButton]="true" (ionInput)="onInput($event)" placeholder="Search for teacher name" type="text"
               animated="true" debounce="100">
             </ion-searchbar>
           </ion-toolbar>
@@ -84,8 +100,8 @@
               <img class="m-default-image-cards-teacherlist" src="assets\\imgs\\imageNotFound.jpg" />
             </ion-col>
             <ion-col *ngIf="teacher.image != null" col-10 text-left>
-                <img class="m-default-image-cards-teacherlist" src="{{teacher.image}}" />
-              </ion-col>
+              <img class="m-default-image-cards-teacherlist" src="{{teacher.image}}" />
+            </ion-col>
             <ion-col *ngIf="teacher.isTeacherFavorited" col-2 text-right>
               <ion-icon name="ios-bookmark-outline" class="m-font-size-35px"></ion-icon>
             </ion-col>
@@ -124,9 +140,13 @@
               <ion-col col-12>
                 <u>
                   <b>Rating:</b>
-                </u> 
-                <font *ngIf="teacher.recommendations.length === 1"><i>( {{teacher.recommendations.length}} person rated )</i></font> 
-                <font *ngIf="teacher.recommendations.length !== 1"><i>( {{teacher.recommendations.length}} people rated )</i></font> 
+                </u>
+                <font *ngIf="teacher.recommendations.length === 1">
+                  <i>( {{teacher.recommendations.length}} person rated )</i>
+                </font>
+                <font *ngIf="teacher.recommendations.length !== 1">
+                  <i>( {{teacher.recommendations.length}} people rated )</i>
+                </font>
                 <rating [(ngModel)]="teachers[i].rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
                   starIconName="star" nullable="false"></rating>
               </ion-col>

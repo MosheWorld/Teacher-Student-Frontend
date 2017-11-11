@@ -79,7 +79,7 @@ export class JointeacherPage {
   public clearImage() {
     if (this.image && this.image.length > 0) {
       this.rd.removeClass(this.elViewImage.nativeElement, "flash");
-      this.rd.addClass(this.elViewImage.nativeElement, "bounceOutUp");
+      this.rd.addClass(this.elViewImage.nativeElement, "fadeOutLeft");
       setTimeout(() => {
         this.image = null;
         this.el.nativeElement.value = "";

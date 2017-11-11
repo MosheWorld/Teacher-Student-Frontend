@@ -94,13 +94,13 @@ export class SingleteacherPage {
   public addFavorite() {
     this.favoritesManagerProvider.addID(this.teacher._id);
     this.isTeacherFavorited = true;
-    this.toasterProvider.presentToast("Teacher has been added to favorites.");
+    this.toasterProvider.presentToast(this.teacher.firstName + " " + this.teacher.lastName + " " + " has been added to favorites.");
   }
 
   public removeFavorite() {
     this.favoritesManagerProvider.removeID(this.teacher._id);
     this.isTeacherFavorited = false;
-    this.toasterProvider.presentToast("Teacher has been removed from favorites.");
+    this.toasterProvider.presentToast(this.teacher.firstName + " " + this.teacher.lastName + " " + " has been removed from favorites.");
   }
 
   public openWhatsApp() {

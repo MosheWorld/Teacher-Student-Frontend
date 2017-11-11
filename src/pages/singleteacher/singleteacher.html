@@ -26,15 +26,15 @@
         <img class="m-default-image-cards-singleteacher" src="{{teacher.image}}" />
       </ion-col>
       <ion-col *ngIf="!isTeacherFavorited" col-5 text-right>
-        <button ion-button icon-start small outline color="dark" (click)="addFavorite()">
-          <ion-icon name="star"></ion-icon>
+        <button ion-button icon-end small outline color="dark" (click)="addFavorite()">
           Add favorite
+          <ion-icon name="star"></ion-icon>
         </button>
       </ion-col>
       <ion-col *ngIf="isTeacherFavorited" col-5 text-right>
-        <button ion-button icon-start small outline color="dark" (click)="removeFavorite()">
-          <ion-icon name="star"></ion-icon>
+        <button ion-button icon-end small outline color="dark" (click)="removeFavorite()">
           Remove favorite
+          <ion-icon name="star"></ion-icon>
         </button>
       </ion-col>
     </ion-row>
@@ -121,15 +121,15 @@
         </b>
       </ion-col>
       <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && !showRecommendationsBoolean">
-        <button ion-button outline icon-start small color="dark" (click)="openRecommendations()">
-          <ion-icon name="ios-add-outline"></ion-icon>
+        <button ion-button outline icon-end small color="dark" (click)="openRecommendations()">
           Add
+          <ion-icon name="ios-add-outline"></ion-icon>
         </button>
       </ion-col>
       <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && showRecommendationsBoolean">
-        <button ion-button outline icon-start small color="dark" (click)="closeRecommendations()">
-          <ion-icon name="ios-close-outline"></ion-icon>
+        <button ion-button outline icon-end small color="dark" (click)="closeRecommendations()">
           Close
+          <ion-icon name="ios-close-outline"></ion-icon>
         </button>
       </ion-col>
       <ion-col col-6 text-right *ngIf="alreadyAddedRecommend">

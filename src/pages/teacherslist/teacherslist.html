@@ -77,7 +77,7 @@
       <ion-row>
         <ion-col col-12>
           <ion-toolbar color="m-darker">
-            <ion-searchbar [showCancelButton]="true" (ionInput)="onInput($event)" placeholder="Search for teacher name" type="text" animated="true"
+            <ion-searchbar [showCancelButton]="false" (ionInput)="onInput($event)" placeholder="Search for teacher name" type="text" animated="true"
               debounce="100">
             </ion-searchbar>
           </ion-toolbar>
@@ -160,6 +160,15 @@
                   <b>Message:</b>
                 </u>
                 {{teacher.personalMessage}}
+              </ion-col>
+            </ion-row>
+
+            <!-- Click to see more details -->
+            <ion-row text-center>
+              <ion-col col-12>
+                <font class="m-color-midnightblue m-font-size-11px">
+                  <i>* Click on the card to see more details *</i>
+                </font>
               </ion-col>
             </ion-row>
 

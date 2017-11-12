@@ -226,9 +226,9 @@
         </ion-row>
 
         <!-- Image -->
-        <ion-row #viewImage *ngIf="image != null && image.length > 0" class="animated flash">
+        <ion-row text-center #viewImage *ngIf="image != null && image.length > 0" class="animated flash">
           <ion-col col-12>
-            <img src="{{image}}">
+            <img height="{{imageHeight}}" width="{{imageWidth}}" src="{{image}}">
           </ion-col>
         </ion-row>
 

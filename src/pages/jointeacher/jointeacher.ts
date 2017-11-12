@@ -1,7 +1,7 @@
 import isEmail from 'validator/lib/isEmail';
 import { ImageCompressService } from 'ng2-image-compress';
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Platform } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
 
@@ -30,8 +30,16 @@ export class JointeacherPage {
   @ViewChild('inputImage') el: ElementRef;
   @ViewChild('viewImage') elViewImage: ElementRef;
 
+  public imageWidth: number;
+  public imageHeight: number;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public rd: Renderer2) {
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public rd: Renderer2,
+    public platform: Platform) {
+
+    // We take minutes 20 in the calculation to take the padding at calculation.
+    this.imageWidth = platform.width() - 20;
+    this.imageHeight = platform.width() - 20;
   }
 
   public createTeacher() {

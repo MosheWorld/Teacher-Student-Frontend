@@ -1,8 +1,8 @@
 {
-    "name": "Frontend",
+    "name": "Teacher-Student-Frontend",
     "version": "0.0.1",
-    "author": "Ionic Framework",
-    "homepage": "http://ionicframework.com/",
+    "author": "Moshe Binieli",
+    "homepage": "https://teacher-student-frontend.herokuapp.com/",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
@@ -45,5 +45,5 @@
         "@ionic/app-scripts": "3.0.1",
         "typescript": "2.3.4"
     },
-    "description": "An Ionic project"
+    "description": "Teacher and students idea application, to find each other easily for private lessons."
 }

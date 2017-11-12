@@ -77,8 +77,8 @@
       <ion-row>
         <ion-col col-12>
           <ion-toolbar color="m-darker">
-            <ion-searchbar [showCancelButton]="false" (ionInput)="onInput($event)" placeholder="Search for teacher name" type="text" animated="true"
-              debounce="100">
+            <ion-searchbar [showCancelButton]="false" (ionInput)="onInput($event)" placeholder="Search for teacher name" type="text"
+              animated="true" debounce="100">
             </ion-searchbar>
           </ion-toolbar>
         </ion-col>
@@ -108,7 +108,7 @@
             </ion-col>
           </ion-row>
 
-          <!-- Content - Stars should be modified. -->
+          <!-- Content -->
           <ion-card-content>
 
             <!-- Name and Age -->
@@ -128,9 +128,7 @@
             <!-- Price -->
             <ion-row>
               <ion-col col-12>
-                <u>
-                  <b>Price:</b>
-                </u>
+                <b>Price:</b>
                 <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>
                 <font class="m-font-size-10px">ILS</font>
               </ion-col>
@@ -139,9 +137,7 @@
             <!-- Rate -->
             <ion-row>
               <ion-col col-12>
-                <u>
-                  <b>Rating:</b>
-                </u>
+                <b>Rating:</b>
                 <font *ngIf="teacher.recommendations.length === 1">
                   <i>( {{teacher.recommendations.length}} person rated )</i>
                 </font>
@@ -156,9 +152,7 @@
             <!-- Message -->
             <ion-row>
               <ion-col col-12>
-                <u>
-                  <b>Message:</b>
-                </u>
+                <b>Message:</b>
                 {{teacher.personalMessage}}
               </ion-col>
             </ion-row>
@@ -166,7 +160,7 @@
             <!-- Click to see more details -->
             <ion-row text-center>
               <ion-col col-12>
-                <font class="m-color-midnightblue m-font-size-11px">
+                <font class="m-color-midnightblue m-font-size-13px">
                   <i>* Click on the card to see more details *</i>
                 </font>
               </ion-col>
@@ -182,3 +176,4 @@
   </div>
 
 </ion-content>
+

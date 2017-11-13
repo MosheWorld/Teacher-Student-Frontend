@@ -234,6 +234,158 @@
 
       </ion-list>
 
+      <!-- New Form -->
+      <form class="teacher-join-form">
+
+        <!-- First name and Last name -->
+        <ion-row>
+          <ion-col col-6>
+            <!-- First name-->
+            <mat-form-field class="teacher-join-full-width">
+              <input type="text" matInput placeholder="First name" [formControl]="firstNameFormControl" [errorStateMatcher]="matcher">
+              <mat-hint>Moshe</mat-hint>
+              <mat-error *ngIf="firstNameFormControl.hasError('required')">
+                First name is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </ion-col>
+          <!-- Last name -->
+          <ion-col col-6>
+            <mat-form-field class="teacher-join-full-width">
+              <input type="text" matInput placeholder="Last name" [formControl]="lastNameFormControl" [errorStateMatcher]="matcher">
+              <mat-hint>Binieli</mat-hint>
+              <mat-error *ngIf="lastNameFormControl.hasError('required')">
+                Last name is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <!-- Age and Gender -->
+        <ion-row>
+          <!-- Age -->
+          <ion-col col-6>
+            <mat-form-field class="teacher-join-full-width">
+              <input type="tel" matInput placeholder="Age" [formControl]="ageFormControl" [errorStateMatcher]="matcher">
+              <mat-hint>What's your age?</mat-hint>
+              <mat-error *ngIf="ageFormControl.hasError('minlength') || ageFormControl.hasError('maxlength') && !ageFormControl.hasError('required')">
+                Type proper age.
+              </mat-error>
+              <mat-error *ngIf="ageFormControl.hasError('required')">
+                Age is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </ion-col>
+          <!-- Gender -->
+          <ion-col col-6>
+            <mat-form-field>
+              <mat-select placeholder="Gender" [formControl]="genderAtFormControl" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let item of commonProvider.genderArray" [value]="item.value">
+                  {{ item.viewValue }}
+                </mat-option>
+              </mat-select>
+              <mat-hint>What is your gender?</mat-hint>
+              <mat-error *ngIf="genderAtFormControl.hasError('required')">You must make a selection.</mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <!-- Email and phone number -->
+        <ion-row>
+          <!-- Email -->
+          <ion-col col-6>
+            <mat-form-field class="teacher-join-full-width">
+              <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"
+                [errorStateMatcher]="matcher">
+              <mat-hint>Email@gmail.com</mat-hint>
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address.
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </ion-col>
+          <!-- Phone -->
+          <ion-col col-6>
+            <mat-form-field class="teacher-join-full-width">
+              <input type="tel" matInput placeholder="Phone" [formControl]="phoneFormControl" [errorStateMatcher]="matcher">
+              <mat-hint>0542477050</mat-hint>
+              <mat-error *ngIf="phoneFormControl.hasError('minlength') || phoneFormControl.hasError('maxlength') && !phoneFormControl.hasError('required')">
+                Phone is not valid.
+              </mat-error>
+              <mat-error *ngIf="phoneFormControl.hasError('required')">
+                Phone is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <!-- From price and To price -->
+        <ion-row>
+          <ion-col col-6>
+            <!-- From price -->
+            <mat-form-field class="teacher-join-full-width">
+              <input type="tel" matInput placeholder="From price" [formControl]="fromPriceFormControl" [errorStateMatcher]="matcher">
+              <mat-hint>1 is Minimum.</mat-hint>
+              <mat-error *ngIf="fromPriceFormControl.hasError('minlength') || fromPriceFormControl.hasError('maxlength') && !fromPriceFormControl.hasError('required')">
+                Please fix the number.
+              </mat-error>
+              <mat-error *ngIf="fromPriceFormControl.hasError('required')">
+                From price is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </ion-col>
+          <!-- To Price -->
+          <ion-col col-6>
+            <mat-form-field class="teacher-join-full-width">
+              <input type="tel" matInput placeholder="To price" [formControl]="toPriceFormControl" [errorStateMatcher]="matcher">
+              <mat-hint>200 is Maximum.</mat-hint>
+              <mat-error *ngIf="toPriceFormControl.hasError('minlength') || toPriceFormControl.hasError('maxlength') && !toPriceFormControl.hasError('required')">
+                Please fix the number.
+              </mat-error>
+              <mat-error *ngIf="toPriceFormControl.hasError('required')">
+                To price is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <!-- Teach at and Teaches institutions -->
+        <ion-row>
+          <!-- Teach at -->
+          <ion-col col-6>
+            <mat-form-field>
+              <mat-select placeholder="Teach at" [formControl]="teachesAtFormControl" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let item of commonProvider.teachesAtArray" [value]="item.value">
+                  {{ item.viewValue }}
+                </mat-option>
+              </mat-select>
+              <mat-hint>What places do you teach at?</mat-hint>
+              <mat-error *ngIf="teachesAtFormControl.hasError('required')">You must make a selection.</mat-error>
+            </mat-form-field>
+          </ion-col>
+          <!-- Teaches institutions -->
+          <ion-col col-6>
+            <mat-form-field>
+              <mat-select placeholder="Teaches institutions" [formControl]="teachesInstitutionsFormControl" multiple>
+                <mat-option *ngFor="let item of commonProvider.teachesInstitutionsArray" [value]="item.value">{{item.viewValue}}</mat-option>
+              </mat-select>
+              <mat-hint>What institutions do you teach at?</mat-hint>
+              <mat-error *ngIf="teachesInstitutionsFormControl.hasError('required')">You must make a selection.</mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+      </form>
+
       <!-- Error message -->
       <ion-row *ngIf="showErrorMessage" text-center>
         <ion-col col-12>

@@ -1,10 +1,19 @@
 import isEmail from 'validator/lib/isEmail';
 import { ImageCompressService } from 'ng2-image-compress';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController, Platform } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
+import { CommonProvider } from './../../providers/common/common';
 
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @IonicPage()
 @Component({
@@ -26,6 +35,19 @@ export class JointeacherPage {
   public teachesAt: number;
   public teachesInstitutions: number[] = [];
 
+  firstNameFormControl = new FormControl('', [Validators.required]);
+  lastNameFormControl = new FormControl('', [Validators.required]);
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  phoneFormControl = new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(10)]);
+  fromPriceFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]);
+  toPriceFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]);
+  teachesAtFormControl = new FormControl('', [Validators.required]);
+  ageFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]);
+  genderAtFormControl = new FormControl('', [Validators.required]);
+  teachesInstitutionsFormControl = new FormControl('', [Validators.required]);
+
+  matcher = new MyErrorStateMatcher();
+
   public showErrorMessage: boolean = false;
   @ViewChild('inputImage') el: ElementRef;
   @ViewChild('viewImage') elViewImage: ElementRef;
@@ -35,7 +57,7 @@ export class JointeacherPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController, public rd: Renderer2,
-    public platform: Platform) {
+    public platform: Platform, public commonProvider: CommonProvider) {
 
     // We take minutes 20 in the calculation to take the padding at calculation.
     this.imageWidth = platform.width() - 20;

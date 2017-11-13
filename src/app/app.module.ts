@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SearchPage } from './../pages/search/search';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SettingsPage } from './../pages/settings/settings';
+import { CommonProvider } from '../providers/common/common';
 import { FavoritesPage } from './../pages/favorites/favorites';
 import { ToasterProvider } from '../providers/toaster/toaster';
 import { ContactusPage } from './../pages/contactus/contactus';
@@ -24,6 +25,10 @@ import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
 import { LocalStorageProvider } from '../providers/local-storage/local-storage';
 import { FavoritesManagerProvider } from '../providers/favorites-manager/favorites-manager';
 import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,10 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     LocalStorageModule.withConfig({
       prefix: 'StudyHub',
       storageType: 'localStorage'
-    })
+    }),
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatSelectModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -69,6 +77,7 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ApiProvider,
     TeachesAtPipe,
+    CommonProvider,
     ToasterProvider,
     LocalStorageProvider,
     ImageCompressService,

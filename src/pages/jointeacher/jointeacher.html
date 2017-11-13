@@ -268,7 +268,7 @@
           <!-- Age -->
           <ion-col col-6>
             <mat-form-field class="teacher-join-full-width">
-              <input type="tel" matInput placeholder="Age" [formControl]="ageFormControl" [errorStateMatcher]="matcher">
+              <input type="tel" maxlength="3" matInput placeholder="Age" [formControl]="ageFormControl" [errorStateMatcher]="matcher">
               <mat-hint>What's your age?</mat-hint>
               <mat-error *ngIf="ageFormControl.hasError('minlength') || ageFormControl.hasError('maxlength') && !ageFormControl.hasError('required')">
                 Type proper age.
@@ -313,7 +313,7 @@
           <!-- Phone -->
           <ion-col col-6>
             <mat-form-field class="teacher-join-full-width">
-              <input type="tel" matInput placeholder="Phone" [formControl]="phoneFormControl" [errorStateMatcher]="matcher">
+              <input type="tel" maxlength="10" matInput placeholder="Phone" [formControl]="phoneFormControl" [errorStateMatcher]="matcher">
               <mat-hint>0542477050</mat-hint>
               <mat-error *ngIf="phoneFormControl.hasError('minlength') || phoneFormControl.hasError('maxlength') && !phoneFormControl.hasError('required')">
                 Phone is not valid.
@@ -331,7 +331,7 @@
           <ion-col col-6>
             <!-- From price -->
             <mat-form-field class="teacher-join-full-width">
-              <input type="tel" matInput placeholder="From price" [formControl]="fromPriceFormControl" [errorStateMatcher]="matcher">
+              <input type="tel" matInput maxlength="3" placeholder="From price" [formControl]="fromPriceFormControl" [errorStateMatcher]="matcher">
               <mat-hint>1 is Minimum.</mat-hint>
               <mat-error *ngIf="fromPriceFormControl.hasError('minlength') || fromPriceFormControl.hasError('maxlength') && !fromPriceFormControl.hasError('required')">
                 Please fix the number.
@@ -345,7 +345,7 @@
           <!-- To Price -->
           <ion-col col-6>
             <mat-form-field class="teacher-join-full-width">
-              <input type="tel" matInput placeholder="To price" [formControl]="toPriceFormControl" [errorStateMatcher]="matcher">
+              <input type="tel" matInput maxlength="3" placeholder="To price" [formControl]="toPriceFormControl" [errorStateMatcher]="matcher">
               <mat-hint>200 is Maximum.</mat-hint>
               <mat-error *ngIf="toPriceFormControl.hasError('minlength') || toPriceFormControl.hasError('maxlength') && !toPriceFormControl.hasError('required')">
                 Please fix the number.
@@ -381,6 +381,30 @@
               <mat-hint>What institutions do you teach at?</mat-hint>
               <mat-error *ngIf="teachesInstitutionsFormControl.hasError('required')">You must make a selection.</mat-error>
             </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <!-- Get image button and clear button -->
+        <ion-row>
+          <ion-col col-6>
+            <input #inputImage type="file" id="inputImageid" class="m-display-none" (change)="readImageBase64($event)" accept="image/*">
+            <button ion-button outline block icon-start small color="dark" onclick="document.getElementById('inputImageid').click();">
+              <ion-icon name="ios-camera-outline"></ion-icon>
+              Add Image
+            </button>
+          </ion-col>
+          <ion-col col-6 *ngIf="image != null && image.length > 0">
+            <button ion-button outline block icon-start small color="dark" (click)="clearImage()">
+              <ion-icon name="ios-trash-outline"></ion-icon>
+              Clear
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <!-- Image -->
+        <ion-row text-center #viewImage *ngIf="image != null && image.length > 0" class="animated flash">
+          <ion-col col-12>
+            <img height="{{imageHeight}}" width="{{imageWidth}}" src="{{image}}">
           </ion-col>
         </ion-row>
 

@@ -67,6 +67,8 @@ export class JointeacherPage {
   public createTeacher() {
     this.setErrorMessage(false);
 
+    // this.emailFormControl.valid
+
     this.convertStringToInteger();
     if (!this.isModelValid()) {
       this.setErrorMessage(true);

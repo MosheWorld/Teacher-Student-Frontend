@@ -140,71 +140,91 @@
     <!-- Show recommendation -->
     <div #addRecommend class="animated bounceInDown" *ngIf="showRecommendationsBoolean" text-center>
 
-      <ion-list>
+      <form class="m-form">
 
-        <!-- Add Recommendations text -->
-        <ion-row>
-          <ion-col col-12>
-            <b>
-              <u>Add recommendations:</u>
-            </b>
-          </ion-col>
-        </ion-row>
+      <!-- Add Recommendations text -->
+      <ion-row>
+        <ion-col col-12>
+          <b>
+            <u>Add recommendations:</u>
+          </b>
+        </ion-col>
+      </ion-row>
 
-        <!-- Full name input -->
-        <ion-row>
-          <ion-col col-12>
-            <ion-item>
-              <ion-label floating>Full name</ion-label>
-              <ion-input type="text" [(ngModel)]="fullName"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+      <!-- Full name and Email -->
+      <ion-row>
+        <!-- Full name -->
+        <ion-col col-6>
+          <mat-form-field class="m-full-width">
+            <input type="text" matInput placeholder="Full name" [formControl]="fullNameFormControl" [errorStateMatcher]="matcher">
+            <mat-hint>First name and Last name</mat-hint>
+            <mat-error *ngIf="fullNameFormControl.hasError('required')">
+              Full name is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </ion-col>
+        <!-- Email -->
+        <ion-col col-6>
+          <mat-form-field class="m-full-width">
+            <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"
+              [errorStateMatcher]="matcher">
+            <mat-hint>Ex: Email@gmail.com</mat-hint>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address.
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
 
-        <!-- Email input -->
-        <ion-row>
-          <ion-col col-12>
-            <ion-item>
-              <ion-label floating>Email</ion-label>
-              <ion-input type="email" [(ngModel)]="email"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+      <!-- Rate input -->
+      <ion-row>
+        <ion-col col-12>
+          <rating [(ngModel)]="rate" [ngModelOptions]="{standalone: true}" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+            nullable="false"></rating>
+        </ion-col>
+      </ion-row>
 
-        <!-- Rate input -->
-        <ion-row>
-          <ion-col col-12>
-            <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
-              nullable="false"></rating>
-          </ion-col>
-        </ion-row>
+      <!-- Message -->
+      <ion-row>
+        <ion-col col-12>
+          <mat-form-field class="m-full-width">
+            <textarea matInput maxlength="100" rows="3" placeholder="Message" [formControl]="messageFormControl" [errorStateMatcher]="matcher"></textarea>
+            <mat-hint align="start">Please be kind :)</mat-hint>
+            <mat-hint align="end">{{messageFormControl.value.length}} / 100</mat-hint>
+            <mat-error *ngIf="messageFormControl.hasError('minlength') && !messageFormControl.hasError('required')">
+              Minimum number is 1
+            </mat-error>
+            <mat-error *ngIf="messageFormControl.hasError('maxlength') && !messageFormControl.hasError('required')">
+              Maximum number is 100
+            </mat-error>
+            <mat-error *ngIf="messageFormControl.hasError('required')">
+              Write down something.
+            </mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
 
-        <!-- Message input -->
-        <ion-row>
-          <ion-col col-12>
-            <ion-item>
-              <ion-label floating>Message</ion-label>
-              <ion-textarea rows="4" type="email" [(ngModel)]="message"></ion-textarea>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+      <!-- Error message - Fields -->
+      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>
+        <ion-col col-12>
+          <font class="m-color-red">Please fill the requested fields.</font>
+        </ion-col>
+      </ion-row>
 
-        <!-- Error message -->
-        <ion-row *ngIf="showErrorMessage">
-          <ion-col col-12>
-            <font class="m-color-red">The fields are not valid.</font>
-          </ion-col>
-        </ion-row>
+      <!-- Add button message -->
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button block outline (click)="addNewRecommend()" icon-start>
+            <ion-icon name="add"></ion-icon>Add</button>
+        </ion-col>
+      </ion-row>
 
-        <!-- Add button message -->
-        <ion-row>
-          <ion-col col-12>
-            <button ion-button block outline (click)="addNewRecommend()" icon-start>
-              <ion-icon name="add"></ion-icon>Add</button>
-          </ion-col>
-        </ion-row>
-
-      </ion-list>
+      </form>
 
     </div>
 

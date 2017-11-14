@@ -1,10 +1,19 @@
 import isEmail from 'validator/lib/isEmail';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
 import { ToasterProvider } from './../../providers/toaster/toaster';
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @IonicPage()
 @Component({
@@ -15,9 +24,9 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 export class SingleteacherPage {
   public teacher: any;
 
-  public fullName: string;
-  public email: string;
-  public message: string;
+  public fullNameFormControl = new FormControl('', [Validators.required]);
+  public emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  public messageFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]);
   public rate: number = 3;
 
   public showErrorMessage: boolean = false;
@@ -26,6 +35,8 @@ export class SingleteacherPage {
 
   public isTeacherFavorited: boolean = false;
   @ViewChild('addRecommend') elAddRecommend: ElementRef;
+
+  public matcher = new MyErrorStateMatcher();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
     public apiProvider: ApiProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
@@ -60,12 +71,12 @@ export class SingleteacherPage {
     }
 
     let newRecommendData = {
-      "id": this.teacher._id,
-      "recommendData": {
-        "fullName": this.fullName,
-        "email": this.email,
-        "message": this.message,
-        "rate": this.rate
+      id: this.teacher._id,
+      recommendData: {
+        fullName: this.fullNameFormControl.value,
+        email: this.emailFormControl.value,
+        message: this.messageFormControl.value,
+        rate: this.rate
       }
     };
 
@@ -117,21 +128,13 @@ export class SingleteacherPage {
   private isModelValid() {
     this.convertRateToInteger();
     if (this.rate == null || this.rate < 0 || this.rate > 5 ||
-      this.isStringNullOrEmpty(this.email) || !isEmail(this.email) ||
-      this.isStringNullOrEmpty(this.fullName) ||
-      this.isStringNullOrEmpty(this.message)
+      !this.emailFormControl.valid || !isEmail(this.emailFormControl.value) ||
+      !this.fullNameFormControl.valid ||
+      !this.messageFormControl.valid
     ) {
       return false;
     } else {
       return true;
-    }
-  }
-
-  private isStringNullOrEmpty(str: string) {
-    if (str == null || str === "") {
-      return true;
-    } else {
-      return false;
     }
   }
 

@@ -22,32 +22,22 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class JointeacherPage {
-  public age: number;
-  public priceTo: number;
-  public priceFrom: number;
-  public phone: string;
-  public email: string;
+  public firstNameFormControl = new FormControl('', [Validators.required]);
+  public lastNameFormControl = new FormControl('', [Validators.required]);
+  public emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  public phoneFormControl = new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(10)]);
+  public personalMessageFormControl = new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]);
+  public toPriceFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(1), Validators.max(200)]);
+  public fromPriceFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(1), Validators.max(200)]);
+  public teachesAtFormControl = new FormControl('', [Validators.required]);
+  public ageFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(1), Validators.max(120)]);
+  public genderAtFormControl = new FormControl('', [Validators.required]);
+  public teachesInstitutionsFormControl = new FormControl('', [Validators.required]);
+
   public image: String = null;
-  public gender: string;
-  public lastName: string;
-  public firstName: string;
-  public personalMessage: string;
-  public teachesAt: number;
-  public teachesInstitutions: number[] = [];
-
-  firstNameFormControl = new FormControl('', [Validators.required]);
-  lastNameFormControl = new FormControl('', [Validators.required]);
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  phoneFormControl = new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(10)]);
-  fromPriceFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]);
-  toPriceFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]);
-  teachesAtFormControl = new FormControl('', [Validators.required]);
-  ageFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]);
-  genderAtFormControl = new FormControl('', [Validators.required]);
-  teachesInstitutionsFormControl = new FormControl('', [Validators.required]);
-
   matcher = new MyErrorStateMatcher();
 
+  public showErrorMessagePrices: boolean = false;
   public showErrorMessage: boolean = false;
   @ViewChild('inputImage') el: ElementRef;
   @ViewChild('viewImage') elViewImage: ElementRef;
@@ -65,13 +55,12 @@ export class JointeacherPage {
   }
 
   public createTeacher() {
-    this.setErrorMessage(false);
-
-    // this.emailFormControl.valid
+    this.showErrorMessage = false;
+    this.showErrorMessagePrices = false;
 
     this.convertStringToInteger();
     if (!this.isModelValid()) {
-      this.setErrorMessage(true);
+      this.showErrorMessage = true;
       return;
     }
 
@@ -120,33 +109,35 @@ export class JointeacherPage {
   }
 
   private convertStringToInteger() {
-    if (this.priceFrom != null) { this.priceFrom = parseInt(this.priceFrom.toString()); }
-    if (this.priceTo != null) { this.priceTo = parseInt(this.priceTo.toString()); }
-    if (this.age != null) { this.age = parseInt(this.age.toString()); }
+    if (this.fromPriceFormControl.valid) { this.fromPriceFormControl.setValue(parseInt(this.fromPriceFormControl.value)); }
+    if (this.toPriceFormControl.valid) { this.toPriceFormControl.setValue(parseInt(this.toPriceFormControl.value)); }
+    if (this.ageFormControl.valid) { this.ageFormControl.setValue(parseInt(this.ageFormControl.value)); }
   }
 
   private isModelValid() {
     if (
-      this.teachesAt < 0 ||
-      this.priceTo == null || this.priceTo > 200 ||
-      this.priceFrom == null || this.priceFrom < 0 ||
-      this.priceFrom > this.priceTo ||
-      this.age == null || this.age < 0 || this.age > 120 ||
-      !this.isPhoneValid(this.phone) ||
-      this.isStringNullOrEmpty(this.email) || !isEmail(this.email) ||
-      this.isStringNullOrEmpty(this.gender) ||
-      this.isStringNullOrEmpty(this.lastName) ||
-      this.isStringNullOrEmpty(this.firstName) ||
-      this.isStringNullOrEmpty(this.personalMessage) ||
-      this.teachesInstitutions == null || this.teachesInstitutions.length === 0) {
+      !this.teachesAtFormControl.value ||
+      !this.fromPriceFormControl.valid ||
+      !this.toPriceFormControl.valid ||
+      this.fromPriceFormControl.value > this.toPriceFormControl.value ||
+      !this.ageFormControl.valid ||
+      !this.phoneFormControl.valid ||
+      !this.isPhoneValid(this.phoneFormControl.value) ||
+      !this.emailFormControl.valid ||
+      !isEmail(this.emailFormControl.value) ||
+      !this.genderAtFormControl.valid ||
+      !this.firstNameFormControl.valid ||
+      !this.lastNameFormControl.valid ||
+      !this.personalMessageFormControl.valid ||
+      !this.teachesAtFormControl.valid ||
+      this.teachesAtFormControl.value == null || this.teachesAtFormControl.value.length === 0) {
+      if (this.fromPriceFormControl.value > this.toPriceFormControl.value) {
+        this.showErrorMessagePrices = true;
+      }
       return false;
     } else {
       return true;
     }
-  }
-
-  private setErrorMessage(set: boolean) {
-    this.showErrorMessage = set;
   }
 
   private isStringNullOrEmpty(str: string) {
@@ -158,23 +149,22 @@ export class JointeacherPage {
   }
 
   private createNewTeacherDataJson() {
-    this.teachesAt = parseInt(this.teachesAt.toString());
-    this.teachesInstitutions.forEach((value, index) => {
-      this.teachesInstitutions[index] = parseInt(value.toString());
+    this.teachesInstitutionsFormControl.value.forEach((value, index) => {
+      this.teachesInstitutionsFormControl.value[index] = parseInt(value.toString());
     })
 
     let newTeacher = {
-      age: this.age,
-      priceTo: this.priceTo,
-      priceFrom: this.priceFrom,
-      phone: this.phone,
-      email: this.email,
-      gender: this.gender,
-      lastName: this.lastName,
-      firstName: this.firstName,
-      personalMessage: this.personalMessage,
-      teachesAt: this.teachesAt,
-      teachesInstitutions: this.teachesInstitutions,
+      age: this.ageFormControl.value,
+      priceTo: this.toPriceFormControl.value,
+      priceFrom: this.fromPriceFormControl.value,
+      phone: this.phoneFormControl.value,
+      email: this.emailFormControl.value,
+      gender: this.genderAtFormControl.value,
+      lastName: this.lastNameFormControl.value,
+      firstName: this.firstNameFormControl.value,
+      personalMessage: this.personalMessageFormControl.value,
+      teachesAt: parseInt(this.teachesAtFormControl.value),
+      teachesInstitutions: this.teachesInstitutionsFormControl.value,
       rate: 0,
       image: this.image
     };

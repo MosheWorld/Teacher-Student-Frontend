@@ -64,177 +64,6 @@
       </ion-row>
 
       <!-- Form -->
-      <ion-list>
-
-        <!-- First name and Last name -->
-        <ion-row>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>First name</ion-label>
-              <ion-input type="text" [(ngModel)]="firstName"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>Last name</ion-label>
-              <ion-input type="text" [(ngModel)]="lastName"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <!-- Age and Gender -->
-        <ion-row>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>Age</ion-label>
-              <ion-input type="number" [(ngModel)]="age"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>Gender</ion-label>
-              <ion-select [(ngModel)]="gender" interface="popover">
-                <ion-option value="Male">Male</ion-option>
-                <ion-option value="Female">Female</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <!-- Email and Phone -->
-        <ion-row>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>Email</ion-label>
-              <ion-input type="email" [(ngModel)]="email"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>Phone</ion-label>
-              <ion-input type="tel" [(ngModel)]="phone"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <!-- Price from and Proce to -->
-        <ion-row>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>From price</ion-label>
-              <ion-input type="number" [(ngModel)]="priceFrom"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>To price
-                <font class="m-color-red m-font-size-10px">Max 200</font>
-              </ion-label>
-              <ion-input type="number" [(ngModel)]="priceTo"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <!-- Teach at and Teaches institutions -->
-        <ion-row>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>Teach at</ion-label>
-              <ion-select [(ngModel)]="teachesAt" interface="popover">
-                <ion-option value="1">Student's house</ion-option>
-                <ion-option value="2">Academic institution</ion-option>
-                <ion-option value="3">Both</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>Teaches institutions</ion-label>
-              <ion-select [(ngModel)]="teachesInstitutions" multiple="true">
-                <ion-option value="1">Holon Institute Of Technology</ion-option>
-                <ion-option value="2">Technion</ion-option>
-                <ion-option value="3">Tel-Aviv University</ion-option>
-                <ion-option value="4">Ben Gurion University</ion-option>
-                <ion-option value="5">Hebrew University</ion-option>
-                <ion-option value="6">Bar-Ilan University</ion-option>
-                <ion-option value="7">Weizmann Institute of Science</ion-option>
-                <ion-option value="8">Ben-Gurion University of the Negev</ion-option>
-                <ion-option value="9">Open University of Israel</ion-option>
-                <ion-option value="10">Ariel University</ion-option>
-                <ion-option value="11">Haredi College of Jerusalem</ion-option>
-                <ion-option value="12">College of Law and Business</ion-option>
-                <ion-option value="13">Academic College of Tel Aviv-Yafo</ion-option>
-                <ion-option value="14">Afeka College of Engineering</ion-option>
-                <ion-option value="15">Ashkelon Academic College</ion-option>
-                <ion-option value="16">Beersheba Tehni School</ion-option>
-                <ion-option value="17">Beit Zvi School of the Performing Arts</ion-option>
-                <ion-option value="18">Bezalel Academy of Art and Design</ion-option>
-                <ion-option value="19">Carmel Academic Center</ion-option>
-                <ion-option value="20">Center for Academic Studies</ion-option>
-                <ion-option value="21">COMAS</ion-option>
-                <ion-option value="22">Dan Academic Center</ion-option>
-                <ion-option value="23">Kfar-Avraham Technology College</ion-option>
-                <ion-option value="24">Hadassah Academic College</ion-option>
-                <ion-option value="25">Interdisciplinary Center Herzliya</ion-option>
-                <ion-option value="26">Israel College of the Bible</ion-option>
-                <ion-option value="27">Jerusalem Academy of Music and Dance</ion-option>
-                <ion-option value="28">Jerusalem College of Engineering</ion-option>
-                <ion-option value="29">Jerusalem College of Technology</ion-option>
-                <ion-option value="30">Jerusalem University College</ion-option>
-                <ion-option value="31">Kinneret Academic College</ion-option>
-                <ion-option value="32">Lander Institute</ion-option>
-                <ion-option value="33">Netanya Academic College</ion-option>
-                <ion-option value="34">Ono Academi cCollege</ion-option>
-                <ion-option value="35">ORT Braude College of Engineering</ion-option>
-                <ion-option value="36">Peres Academic Center</ion-option>
-                <ion-option value="37">Reidman College</ion-option>
-                <ion-option value="38">Ruppin Academic Center</ion-option>
-                <ion-option value="39">Sapir Academic College</ion-option>
-                <ion-option value="40">Sami Shamoon College of Engineering</ion-option>
-                <ion-option value="41">Shenkar College of Engineering and Design</ion-option>
-                <ion-option value="42">Tel-Hai Academic College</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <!-- Personal Message -->
-        <ion-row>
-          <ion-col col-12>
-            <ion-item>
-              <ion-label floating>Personal message</ion-label>
-              <ion-textarea rows="5" type="text" [(ngModel)]="personalMessage"></ion-textarea>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <!-- Get image button and clear button -->
-        <ion-row>
-          <ion-col col-6>
-            <input #inputImage type="file" id="inputImageid" class="m-display-none" (change)="readImageBase64($event)" accept="image/*">
-            <button ion-button outline block icon-start small color="dark" onclick="document.getElementById('inputImageid').click();">
-              <ion-icon name="ios-camera-outline"></ion-icon>
-              Add Image
-            </button>
-          </ion-col>
-          <ion-col col-6 *ngIf="image != null && image.length > 0">
-            <button ion-button outline block icon-start small color="dark" (click)="clearImage()">
-              <ion-icon name="ios-trash-outline"></ion-icon>
-              Clear
-            </button>
-          </ion-col>
-        </ion-row>
-
-        <!-- Image -->
-        <ion-row text-center #viewImage *ngIf="image != null && image.length > 0" class="animated flash">
-          <ion-col col-12>
-            <img height="{{imageHeight}}" width="{{imageWidth}}" src="{{image}}">
-          </ion-col>
-        </ion-row>
-
-      </ion-list>
-
-      <!-- New Form -->
       <form class="teacher-join-form">
 
         <!-- First name and Last name -->
@@ -243,7 +72,7 @@
             <!-- First name-->
             <mat-form-field class="teacher-join-full-width">
               <input type="text" matInput placeholder="First name" [formControl]="firstNameFormControl" [errorStateMatcher]="matcher">
-              <mat-hint>Moshe</mat-hint>
+              <mat-hint>Your personal first name</mat-hint>
               <mat-error *ngIf="firstNameFormControl.hasError('required')">
                 First name is
                 <strong>required</strong>
@@ -254,7 +83,7 @@
           <ion-col col-6>
             <mat-form-field class="teacher-join-full-width">
               <input type="text" matInput placeholder="Last name" [formControl]="lastNameFormControl" [errorStateMatcher]="matcher">
-              <mat-hint>Binieli</mat-hint>
+              <mat-hint>Your personal last name</mat-hint>
               <mat-error *ngIf="lastNameFormControl.hasError('required')">
                 Last name is
                 <strong>required</strong>
@@ -268,10 +97,16 @@
           <!-- Age -->
           <ion-col col-6>
             <mat-form-field class="teacher-join-full-width">
-              <input type="tel" maxlength="3" matInput placeholder="Age" [formControl]="ageFormControl" [errorStateMatcher]="matcher">
+              <input type="text" maxlength="3" matInput placeholder="Age" [formControl]="ageFormControl" [errorStateMatcher]="matcher">
               <mat-hint>What's your age?</mat-hint>
               <mat-error *ngIf="ageFormControl.hasError('minlength') || ageFormControl.hasError('maxlength') && !ageFormControl.hasError('required')">
                 Type proper age.
+              </mat-error>
+              <mat-error *ngIf="ageFormControl.hasError('min') && !ageFormControl.hasError('required')">
+                Age cannot be less than 1.
+              </mat-error>
+              <mat-error *ngIf="ageFormControl.hasError('max') && !ageFormControl.hasError('required')">
+                Age cannot be greater than 120.
               </mat-error>
               <mat-error *ngIf="ageFormControl.hasError('required')">
                 Age is
@@ -300,7 +135,7 @@
             <mat-form-field class="teacher-join-full-width">
               <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"
                 [errorStateMatcher]="matcher">
-              <mat-hint>Email@gmail.com</mat-hint>
+              <mat-hint>Ex: Email@gmail.com</mat-hint>
               <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                 Please enter a valid email address.
               </mat-error>
@@ -314,7 +149,7 @@
           <ion-col col-6>
             <mat-form-field class="teacher-join-full-width">
               <input type="tel" maxlength="10" matInput placeholder="Phone" [formControl]="phoneFormControl" [errorStateMatcher]="matcher">
-              <mat-hint>0542477050</mat-hint>
+              <mat-hint>Your personal phone number</mat-hint>
               <mat-error *ngIf="phoneFormControl.hasError('minlength') || phoneFormControl.hasError('maxlength') && !phoneFormControl.hasError('required')">
                 Phone is not valid.
               </mat-error>
@@ -336,6 +171,12 @@
               <mat-error *ngIf="fromPriceFormControl.hasError('minlength') || fromPriceFormControl.hasError('maxlength') && !fromPriceFormControl.hasError('required')">
                 Please fix the number.
               </mat-error>
+              <mat-error *ngIf="fromPriceFormControl.hasError('min') && !fromPriceFormControl.hasError('required')">
+                Minimum is 1.
+              </mat-error>
+              <mat-error *ngIf="fromPriceFormControl.hasError('max') && !fromPriceFormControl.hasError('required')">
+                Maximum is 200.
+              </mat-error>
               <mat-error *ngIf="fromPriceFormControl.hasError('required')">
                 From price is
                 <strong>required</strong>
@@ -349,6 +190,12 @@
               <mat-hint>200 is Maximum.</mat-hint>
               <mat-error *ngIf="toPriceFormControl.hasError('minlength') || toPriceFormControl.hasError('maxlength') && !toPriceFormControl.hasError('required')">
                 Please fix the number.
+              </mat-error>
+              <mat-error *ngIf="toPriceFormControl.hasError('min') && !toPriceFormControl.hasError('required')">
+                Minimum is 1.
+              </mat-error>
+              <mat-error *ngIf="toPriceFormControl.hasError('max') && !toPriceFormControl.hasError('required')">
+                Maximum is 200.
               </mat-error>
               <mat-error *ngIf="toPriceFormControl.hasError('required')">
                 To price is
@@ -384,6 +231,26 @@
           </ion-col>
         </ion-row>
 
+        <!-- Personal Message -->
+        <ion-row>
+          <ion-col col-12>
+            <mat-form-field class="teacher-join-full-width">
+              <textarea matInput maxlength="200" rows="4" placeholder="Personal Message" [formControl]="personalMessageFormControl" [errorStateMatcher]="matcher"></textarea>
+              <mat-hint align="start">Say something about your self.</mat-hint>
+              <mat-hint align="end">{{personalMessageFormControl.value.length}} / 200</mat-hint>
+              <mat-error *ngIf="personalMessageFormControl.hasError('minlength') && !personalMessageFormControl.hasError('required')">
+                Minimum words are 10.
+              </mat-error>
+              <mat-error *ngIf="personalMessageFormControl.hasError('maxlength') && !personalMessageFormControl.hasError('required')">
+                Maximum words are 200.
+              </mat-error>
+              <mat-error *ngIf="personalMessageFormControl.hasError('required')">
+                You must say few words about yourself.
+              </mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
         <!-- Get image button and clear button -->
         <ion-row>
           <ion-col col-6>
@@ -410,10 +277,17 @@
 
       </form>
 
-      <!-- Error message -->
-      <ion-row *ngIf="showErrorMessage" text-center>
+      <!-- Error message - Fields -->
+      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>
         <ion-col col-12>
-          <font class="m-color-red">The fields are not valid.</font>
+          <font class="m-color-red">Please fill the requested fields.</font>
+        </ion-col>
+      </ion-row>
+
+      <!-- Error message - Prices not valid -->
+      <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>
+        <ion-col col-12>
+          <font class="m-color-red">"Price from" cannot be greater from "To price"</font>
         </ion-col>
       </ion-row>
 

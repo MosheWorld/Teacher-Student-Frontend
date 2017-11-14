@@ -8,7 +8,6 @@
 
 </ion-header>
 
-
 <ion-content>
 
   <!-- Gray area -->
@@ -54,62 +53,83 @@
   <div>
 
     <ion-grid>
-      <ion-list>
 
-        <!-- Full name -->
+      <!-- Form -->
+      <form class="m-form">
+
+        <!-- Full name and Reason to contact -->
         <ion-row>
-          <ion-col col-12>
-            <ion-item>
-              <ion-label floating>Full name</ion-label>
-              <ion-input type="text" [(ngModel)]="fullName"></ion-input>
-            </ion-item>
+          <!-- Full name -->
+          <ion-col col-6>
+            <mat-form-field class="m-full-width">
+              <input type="text" matInput placeholder="Full name" [formControl]="fullNameFormControl" [errorStateMatcher]="matcher">
+              <mat-hint>First name and Last name</mat-hint>
+              <mat-error *ngIf="fullNameFormControl.hasError('required')">
+                Full name is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </ion-col>
+          <!-- Reason to contact -->
+          <ion-col col-6>
+            <mat-form-field class="m-full-width">
+              <mat-select placeholder="Reason to contact" [formControl]="contactReasonFormControl" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let item of commonProvider.reasonToContactArray" [value]="item.value">
+                  {{ item.viewValue }}
+                </mat-option>
+              </mat-select>
+              <mat-hint>Why do you want to contact us?</mat-hint>
+              <mat-error *ngIf="contactReasonFormControl.hasError('required')">You must make a selection.</mat-error>
+            </mat-form-field>
           </ion-col>
         </ion-row>
 
         <!-- Email -->
         <ion-row>
           <ion-col col-12>
-            <ion-item>
-              <ion-label floating>Email</ion-label>
-              <ion-input type="email" [(ngModel)]="email"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <!-- Reason to contact -->
-        <ion-row>
-          <ion-col col-12>
-            <ion-item>
-              <ion-label>Reason to contact</ion-label>
-              <ion-select [(ngModel)]="contactReason">
-                <ion-option>Suggestion</ion-option>
-                <ion-option>Investment</ion-option>
-                <ion-option>Careers</ion-option>
-                <ion-option>Complain</ion-option>
-                <ion-option>Bug report</ion-option>
-                <ion-option>Other</ion-option>
-              </ion-select>
-            </ion-item>
+            <mat-form-field class="m-full-width">
+              <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"
+                [errorStateMatcher]="matcher">
+              <mat-hint>Ex: Email@gmail.com</mat-hint>
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address.
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
           </ion-col>
         </ion-row>
 
         <!-- Message -->
         <ion-row>
           <ion-col col-12>
-            <ion-item>
-              <ion-label floating>Your message</ion-label>
-              <ion-textarea rows="4" type="text" [(ngModel)]="message"></ion-textarea>
-            </ion-item>
+            <mat-form-field class="m-full-width">
+              <textarea matInput maxlength="200" rows="4" placeholder="Personal Message" [formControl]="messageFormControl" [errorStateMatcher]="matcher"></textarea>
+              <mat-hint align="start">Tell us your ideas, we will be happy to know.</mat-hint>
+              <mat-hint align="end">{{messageFormControl.value.length}} / 200</mat-hint>
+              <mat-error *ngIf="messageFormControl.hasError('minlength') && !messageFormControl.hasError('required')">
+                Minimum words are 10.
+              </mat-error>
+              <mat-error *ngIf="messageFormControl.hasError('maxlength') && !messageFormControl.hasError('required')">
+                Maximum words are 200.
+              </mat-error>
+              <mat-error *ngIf="messageFormControl.hasError('required')">
+                Write down something.
+              </mat-error>
+            </mat-form-field>
           </ion-col>
         </ion-row>
-      </ion-list>
 
-      <!-- Error message -->
-      <ion-row *ngIf="showErrorMessage" text-center>
-        <ion-col col-12>
-          <font class="m-color-red">The fields are not valid.</font>
-        </ion-col>
-      </ion-row>
+      </form>
+
+      <!-- Error message - Fields -->
+      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>
+          <ion-col col-12>
+            <font class="m-color-red">Please fill the requested fields.</font>
+          </ion-col>
+        </ion-row>
 
       <!-- Buttons -->
       <ion-row>
@@ -126,6 +146,7 @@
           </button>
         </ion-col>
       </ion-row>
+
     </ion-grid>
 
   </div>

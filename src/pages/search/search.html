@@ -67,120 +67,107 @@
           Find your next teacher
         </ion-col>
       </ion-row>
-      <ion-list>
 
-        <!-- Get all teachers button -->
-        <ion-row>
-          <ion-col col-12>
-            <button ion-button outline icon-start small (click)="getAllTeachers();">
-              <ion-icon name="ios-people"></ion-icon>
-              Get all teachers
-            </button>
-          </ion-col>
-        </ion-row>
-
-        <!-- Price range -->
-        <ion-row>
-          <ion-col col-12>
-            <ion-list-header>
-              Price per hour
-              <ion-badge item-end color="dark">From: {{structure.lower}}</ion-badge>
-              <ion-badge item-end color="dark">To: {{structure.upper}}</ion-badge>
-            </ion-list-header>
-            <ion-item>
-              <ion-range dualKnobs="true" pin="true" [(ngModel)]="structure" color="dark" min="0" max="200">
-                <ion-label range-left>0</ion-label>
-                <ion-label range-right>200</ion-label>
-              </ion-range>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <!-- Teach at and Teaches institutions -->
-        <ion-row>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>Teach at</ion-label>
-              <ion-select [(ngModel)]="teachesAt" interface="popover">
-                <ion-option value="1">Student's house</ion-option>
-                <ion-option value="2">Academic institution</ion-option>
-                <ion-option value="3">Both</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item>
-              <ion-label floating>Teaches institutions</ion-label>
-              <ion-select [(ngModel)]="teachesInstitutions">
-                <ion-option value="1">Holon Institute Of Technology</ion-option>
-                <ion-option value="2">Technion</ion-option>
-                <ion-option value="3">Tel-Aviv University</ion-option>
-                <ion-option value="4">Ben Gurion University</ion-option>
-                <ion-option value="5">Hebrew University</ion-option>
-                <ion-option value="6">Bar-Ilan University</ion-option>
-                <ion-option value="7">Weizmann Institute of Science</ion-option>
-                <ion-option value="8">Ben-Gurion University of the Negev</ion-option>
-                <ion-option value="9">Open University of Israel</ion-option>
-                <ion-option value="10">Ariel University</ion-option>
-                <ion-option value="11">Haredi College of Jerusalem</ion-option>
-                <ion-option value="12">College of Law and Business</ion-option>
-                <ion-option value="13">Academic College of Tel Aviv-Yafo</ion-option>
-                <ion-option value="14">Afeka College of Engineering</ion-option>
-                <ion-option value="15">Ashkelon Academic College</ion-option>
-                <ion-option value="16">Beersheba Tehni School</ion-option>
-                <ion-option value="17">Beit Zvi School of the Performing Arts</ion-option>
-                <ion-option value="18">Bezalel Academy of Art and Design</ion-option>
-                <ion-option value="19">Carmel Academic Center</ion-option>
-                <ion-option value="20">Center for Academic Studies</ion-option>
-                <ion-option value="21">COMAS</ion-option>
-                <ion-option value="22">Dan Academic Center</ion-option>
-                <ion-option value="23">Kfar-Avraham Technology College</ion-option>
-                <ion-option value="24">Hadassah Academic College</ion-option>
-                <ion-option value="25">Interdisciplinary Center Herzliya</ion-option>
-                <ion-option value="26">Israel College of the Bible</ion-option>
-                <ion-option value="27">Jerusalem Academy of Music and Dance</ion-option>
-                <ion-option value="28">Jerusalem College of Engineering</ion-option>
-                <ion-option value="29">Jerusalem College of Technology</ion-option>
-                <ion-option value="30">Jerusalem University College</ion-option>
-                <ion-option value="31">Kinneret Academic College</ion-option>
-                <ion-option value="32">Lander Institute</ion-option>
-                <ion-option value="33">Netanya Academic College</ion-option>
-                <ion-option value="34">Ono Academi cCollege</ion-option>
-                <ion-option value="35">ORT Braude College of Engineering</ion-option>
-                <ion-option value="36">Peres Academic Center</ion-option>
-                <ion-option value="37">Reidman College</ion-option>
-                <ion-option value="38">Ruppin Academic Center</ion-option>
-                <ion-option value="39">Sapir Academic College</ion-option>
-                <ion-option value="40">Sami Shamoon College of Engineering</ion-option>
-                <ion-option value="41">Shenkar College of Engineering and Design</ion-option>
-                <ion-option value="42">Tel-Hai Academic College</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <!-- Gender -->
-        <ion-row>
-          <ion-col col-12>
-            <ion-item>
-              <ion-label floating>Prefered gender</ion-label>
-              <ion-select [(ngModel)]="gender" interface="popover">
-                <ion-option value="Male">Male</ion-option>
-                <ion-option value="Female">Female</ion-option>
-                <ion-option value="Both">Doesn't matter</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-      </ion-list>
-
-      <!-- Error message -->
-      <ion-row *ngIf="showErrorMessage" text-center>
+      <!-- Get all teachers button -->
+      <ion-row>
         <ion-col col-12>
-          <font class="m-color-red">The fields are not valid.</font>
+          <button ion-button outline icon-start small (click)="getAllTeachers();">
+            <ion-icon name="ios-people"></ion-icon>
+            Get all teachers
+          </button>
         </ion-col>
       </ion-row>
+
+      <!-- Price range -->
+      <ion-row>
+        <ion-col col-12>
+          <ion-list-header>
+            Price per hour
+            <ion-badge item-end color="dark">From: {{structure.lower}}</ion-badge>
+            <ion-badge item-end color="dark">To: {{structure.upper}}</ion-badge>
+          </ion-list-header>
+          <ion-item>
+            <ion-range dualKnobs="true" pin="true" [(ngModel)]="structure" color="dark" min="0" max="200">
+              <ion-label range-left>0</ion-label>
+              <ion-label range-right>200</ion-label>
+            </ion-range>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!-- Form -->
+      <form class="m-form">
+
+        <!-- Teaches Subjects and Teaches institutions -->
+        <ion-row>
+          <!-- Teaches Subjects -->
+          <ion-col col-6>
+            <mat-form-field class="m-full-width">
+              <mat-select placeholder="Teaches subjects">
+                <mat-option *ngFor="let item of commonProvider.subjectsArray" [value]="item.value">
+                  {{ item.viewValue }}
+                </mat-option>
+              </mat-select>
+              <mat-hint>Subjects you're looking for?</mat-hint>
+            </mat-form-field>
+          </ion-col>
+          <!-- Teaches institutions -->
+          <ion-col col-6>
+            <mat-form-field class="m-full-width">
+              <mat-select placeholder="Teaches institutions" [formControl]="teachesInstitutionsFormControl" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let item of commonProvider.teachesInstitutionsArray" [value]="item.value">
+                  {{ item.viewValue }}
+                </mat-option>
+              </mat-select>
+              <mat-hint>Institidues you're looking for?</mat-hint>
+              <mat-error *ngIf="teachesInstitutionsFormControl.hasError('required')">You must make a selection.</mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <!-- Teach at and Gender -->
+        <ion-row>
+          <!-- Teach at -->
+          <ion-col col-6>
+            <mat-form-field class="m-full-width">
+              <mat-select placeholder="Teach at" [formControl]="teachesAtFormControl" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let item of commonProvider.teachesAtArray" [value]="item.value">
+                  {{ item.viewValue }}
+                </mat-option>
+              </mat-select>
+              <mat-hint>Preferred place to learn?</mat-hint>
+              <mat-error *ngIf="teachesAtFormControl.hasError('required')">You must make a selection.</mat-error>
+            </mat-form-field>
+          </ion-col>
+          <!-- Gender -->
+          <ion-col col-6>
+            <mat-form-field class="m-full-width">
+              <mat-select placeholder="Gender" [formControl]="genderFormControl" [errorStateMatcher]="matcher">
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
+                <mat-option value="Both">Doesn't matter</mat-option>
+              </mat-select>
+              <mat-hint>Gender preferred of your teacher?</mat-hint>
+              <mat-error *ngIf="genderFormControl.hasError('required')">You must make a selection.</mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+      </form>
+
+      <!-- Error message - Fields -->
+      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>
+        <ion-col col-12>
+          <font class="m-color-red">Please fill the requested fields.</font>
+        </ion-col>
+      </ion-row>
+
+      <!-- Error message - Prices not valid -->
+      <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>
+          <ion-col col-12>
+            <font class="m-color-red">"Price from" cannot be greater from "To price"</font>
+          </ion-col>
+        </ion-row>
 
       <!-- Search teachers button -->
       <ion-row text-center>
@@ -188,6 +175,7 @@
           <button ion-button (click)="searchTeachers()" block>Search for teacher</button>
         </ion-col>
       </ion-row>
+      
     </ion-grid>
 
   </div>

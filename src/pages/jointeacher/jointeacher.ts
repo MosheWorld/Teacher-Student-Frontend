@@ -35,7 +35,7 @@ export class JointeacherPage {
   public teachesInstitutionsFormControl = new FormControl('', [Validators.required]);
 
   public image: String = null;
-  matcher = new MyErrorStateMatcher();
+  public matcher = new MyErrorStateMatcher();
 
   public showErrorMessagePrices: boolean = false;
   public showErrorMessage: boolean = false;

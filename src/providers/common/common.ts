@@ -59,6 +59,19 @@ export class CommonProvider {
     { value: '42', viewValue: 'Tel-Hai Academic College' },
   ];
 
+  public subjectsArray = [
+    { value: '1', viewValue: 'None' }
+  ];
+
+  public reasonToContactArray = [
+    { value: 'Suggestion', viewValue: 'Suggestion' },
+    { value: 'Investment', viewValue: 'Investment' },
+    { value: 'Careers', viewValue: 'Careers' },
+    { value: 'Complain', viewValue: 'Complain' },
+    { value: 'Bug report', viewValue: 'Bug report' },
+    { value: 'Other', viewValue: 'Other' }
+  ];
+
   constructor() {
 
   }

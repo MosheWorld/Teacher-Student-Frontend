@@ -1,8 +1,18 @@
 import isEmail from 'validator/lib/isEmail';
 import { Component } from '@angular/core';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
+import { CommonProvider } from './../../providers/common/common';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @IonicPage()
 @Component({
@@ -11,28 +21,32 @@ import { ApiProvider } from './../../providers/api/api';
 })
 
 export class ContactusPage {
-  public fullName: string;
-  public email: string;
-  public contactReason: string;
-  public message: string;
+
+  public fullNameFormControl = new FormControl('', [Validators.required]);
+  public contactReasonFormControl = new FormControl('', [Validators.required]);
+  public messageFormControl = new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]);
+  public emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
   public showErrorMessage: boolean = false;
+  public matcher = new MyErrorStateMatcher();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public commonProvider: CommonProvider) {
   }
 
   public sendContactUsForm() {
-    this.setErrorMessage(false);
+    this.showErrorMessage = false;
+
     if (!this.isFormValid()) {
-      this.setErrorMessage(true);
+      this.showErrorMessage = true;
       return;
     }
 
     let data = {
-      fullName: this.fullName,
-      email: this.email,
-      contactReason: this.contactReason,
-      message: this.message
+      fullName: this.fullNameFormControl.value,
+      email: this.emailFormControl.value,
+      contactReason: this.contactReasonFormControl.value,
+      message: this.messageFormControl.value
     };
 
     const loading = this.loadingCtrl.create({
@@ -60,19 +74,16 @@ export class ContactusPage {
   }
 
   private isFormValid() {
-    if (this.isStringNullOrEmpty(this.fullName) ||
-      this.isStringNullOrEmpty(this.email) || !isEmail(this.email) ||
-      this.isStringNullOrEmpty(this.contactReason) ||
-      this.isStringNullOrEmpty(this.message)) {
+    if (
+      !this.fullNameFormControl.valid ||
+      !this.emailFormControl.valid || !isEmail(this.emailFormControl.value) ||
+      !this.contactReasonFormControl.valid ||
+      !this.messageFormControl.valid) {
       return false;
     }
     else {
       return true;
     }
-  }
-
-  private setErrorMessage(set: boolean) {
-    this.showErrorMessage = set;
   }
 
   private createAlert(titleInput: string, subTitleInput: string) {
@@ -82,13 +93,5 @@ export class ContactusPage {
       buttons: ['Ok']
     });
     return alert;
-  }
-
-  private isStringNullOrEmpty(str: string) {
-    if (str == null || str === "") {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

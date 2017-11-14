@@ -1,9 +1,19 @@
 import { Component } from '@angular/core';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
 import { FavoritesPage } from './../favorites/favorites';
+import { CommonProvider } from './../../providers/common/common';
 import { TeacherslistPage } from './../teacherslist/teacherslist';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @IonicPage()
 @Component({
@@ -17,33 +27,33 @@ export class SearchPage {
   public warmth: number = 1300;
   public structure: any = { lower: 30, upper: 140 };
 
-  public teachesAt: number;
-  public teachesInstitutions: number;
-  public gender: string = "Both";
+  public teachesAtFormControl = new FormControl('', [Validators.required]);
+  public teachesInstitutionsFormControl = new FormControl('', [Validators.required]);
+  public genderFormControl = new FormControl('', [Validators.required]);
 
+  public showErrorMessagePrices: boolean = false;
   public showErrorMessage: boolean = false;
+  public matcher = new MyErrorStateMatcher();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public commonProvider: CommonProvider) {
   }
 
   public searchTeachers() {
-    this.setErrorMessage(false);
-
-    this.convertStringToInteger();
+    this.showErrorMessage = false;
+    this.showErrorMessagePrices = false;
+    
     if (!this.isModelValid()) {
-      this.setErrorMessage(true);
+      this.showErrorMessage = true;
       return;
     }
-
-    this.gender = this.gender === 'Both' ? "" : this.gender;
 
     let searchTeacherModel = {
       fromPrice: this.structure.lower,
       toPrice: this.structure.upper,
-      teachesAt: this.teachesAt,
-      teachesInstitutions: this.teachesInstitutions,
-      gender: this.gender
+      teachesAt: parseInt(this.teachesAtFormControl.value),
+      teachesInstitutions: parseInt(this.teachesInstitutionsFormControl.value),
+      gender: this.genderFormControl.value === 'Both' ? "" : this.genderFormControl.value
     };
 
     const loading = this.loadingCtrl.create({
@@ -106,28 +116,22 @@ export class SearchPage {
     }
   }
 
-  private convertStringToInteger() {
-    if (this.teachesAt != null) { this.teachesAt = parseInt(this.teachesAt.toString()); }
-    if (this.teachesInstitutions != null) { this.teachesInstitutions = parseInt(this.teachesInstitutions.toString()); }
-  }
-
   private isModelValid() {
     if (
       this.structure == null ||
-      this.gender == null || this.gender === "" ||
-      this.teachesAt == null || this.teachesAt < 0 ||
+      !this.genderFormControl.valid ||
+      !this.teachesAtFormControl.valid ||
       this.structure.lower == null || this.structure.lower < 0 ||
-      this.teachesInstitutions == null || this.teachesInstitutions < 0 ||
+      !this.teachesInstitutionsFormControl.valid ||
       this.structure.upper == null || this.structure.upper > 200 ||
       this.structure.lower > this.structure.upper) {
+      if (this.structure.lower > this.structure.upper) {
+        this.showErrorMessagePrices = true;
+      }
       return false;
     } else {
       return true;
     }
-  }
-
-  private setErrorMessage(set: boolean) {
-    this.showErrorMessage = set;
   }
 
   private createAlert(titleInput: string, subTitleInput: string) {

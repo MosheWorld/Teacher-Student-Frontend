@@ -120,7 +120,6 @@
                 </mat-option>
               </mat-select>
               <mat-hint>Institidues you're looking for?</mat-hint>
-              <mat-error *ngIf="teachesInstitutionsFormControl.hasError('required')">You must make a selection.</mat-error>
             </mat-form-field>
           </ion-col>
         </ion-row>
@@ -136,19 +135,18 @@
                 </mat-option>
               </mat-select>
               <mat-hint>Preferred place to learn?</mat-hint>
-              <mat-error *ngIf="teachesAtFormControl.hasError('required')">You must make a selection.</mat-error>
             </mat-form-field>
           </ion-col>
           <!-- Gender -->
           <ion-col col-6>
             <mat-form-field class="m-full-width">
               <mat-select placeholder="Gender" [formControl]="genderFormControl" [errorStateMatcher]="matcher">
-                <mat-option value="Male">Male</mat-option>
-                <mat-option value="Female">Female</mat-option>
-                <mat-option value="Both">Doesn't matter</mat-option>
+                <mat-option *ngFor="let item of commonProvider.genderArray" [value]="item.value">
+                  {{ item.viewValue }}
+                </mat-option>
+                <mat-option value="3">Doesn't matter</mat-option>
               </mat-select>
               <mat-hint>Gender preferred of your teacher?</mat-hint>
-              <mat-error *ngIf="genderFormControl.hasError('required')">You must make a selection.</mat-error>
             </mat-form-field>
           </ion-col>
         </ion-row>
@@ -164,10 +162,10 @@
 
       <!-- Error message - Prices not valid -->
       <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>
-          <ion-col col-12>
-            <font class="m-color-red">"Price from" cannot be greater from "To price"</font>
-          </ion-col>
-        </ion-row>
+        <ion-col col-12>
+          <font class="m-color-red">"Price from" cannot be greater from "To price"</font>
+        </ion-col>
+      </ion-row>
 
       <!-- Search teachers button -->
       <ion-row text-center>
@@ -175,7 +173,7 @@
           <button ion-button (click)="searchTeachers()" block>Search for teacher</button>
         </ion-col>
       </ion-row>
-      
+
     </ion-grid>
 
   </div>

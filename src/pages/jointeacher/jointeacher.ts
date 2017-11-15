@@ -159,7 +159,7 @@ export class JointeacherPage {
       priceFrom: this.fromPriceFormControl.value,
       phone: this.phoneFormControl.value,
       email: this.emailFormControl.value,
-      gender: this.genderAtFormControl.value,
+      gender: parseInt(this.genderAtFormControl.value),
       lastName: this.lastNameFormControl.value,
       firstName: this.firstNameFormControl.value,
       personalMessage: this.personalMessageFormControl.value,

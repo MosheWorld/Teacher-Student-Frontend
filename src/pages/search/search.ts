@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
@@ -27,9 +27,9 @@ export class SearchPage {
   public warmth: number = 1300;
   public structure: any = { lower: 30, upper: 140 };
 
-  public teachesAtFormControl = new FormControl('', [Validators.required]);
-  public teachesInstitutionsFormControl = new FormControl('', [Validators.required]);
-  public genderFormControl = new FormControl('', [Validators.required]);
+  public teachesAtFormControl = new FormControl(null);
+  public teachesInstitutionsFormControl = new FormControl(null);
+  public genderFormControl = new FormControl(null);
 
   public showErrorMessagePrices: boolean = false;
   public showErrorMessage: boolean = false;
@@ -42,7 +42,7 @@ export class SearchPage {
   public searchTeachers() {
     this.showErrorMessage = false;
     this.showErrorMessagePrices = false;
-    
+
     if (!this.isModelValid()) {
       this.showErrorMessage = true;
       return;
@@ -51,9 +51,9 @@ export class SearchPage {
     let searchTeacherModel = {
       fromPrice: this.structure.lower,
       toPrice: this.structure.upper,
-      teachesAt: parseInt(this.teachesAtFormControl.value),
-      teachesInstitutions: parseInt(this.teachesInstitutionsFormControl.value),
-      gender: this.genderFormControl.value === 'Both' ? "" : this.genderFormControl.value
+      teachesAt: this.teachesAtFormControl.value == null ? this.teachesAtFormControl.value : parseInt(this.teachesAtFormControl.value),
+      teachesInstitutions: this.teachesInstitutionsFormControl.value == null ? this.teachesInstitutionsFormControl.value : parseInt(this.teachesInstitutionsFormControl.value),
+      gender: this.genderFormControl.value == null ? this.genderFormControl.value : parseInt(this.genderFormControl.value)
     };
 
     const loading = this.loadingCtrl.create({

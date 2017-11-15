@@ -39,13 +39,13 @@
       </ion-col>
     </ion-row>
 
-    <!-- First name and Last name -->
+    <!-- First name and Last name and Gender and Age -->
     <ion-row>
       <ion-col col-12>
         <font class="m-font-size-20px">
           <i>{{teacher.firstName}} {{teacher.lastName}}</i>
         </font> -
-        <i>{{teacher.gender}}, {{teacher.age}}</i>
+        <i>{{teacher.gender | gender}}, {{teacher.age}}</i>
       </ion-col>
     </ion-row>
 

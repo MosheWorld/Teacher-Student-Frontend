@@ -10,8 +10,8 @@ export class CommonProvider {
   ];
 
   public genderArray = [
-    { value: 'Male', viewValue: 'Male' },
-    { value: 'Female', viewValue: 'Female' }
+    { value: '1', viewValue: 'Male' },
+    { value: '2', viewValue: 'Female' }
   ];
 
   public teachesInstitutionsArray = [

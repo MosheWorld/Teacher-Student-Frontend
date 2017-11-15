@@ -11,6 +11,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ApiProvider } from '../providers/api/api';
 import { StatusBar } from '@ionic-native/status-bar';
+import { GenderPipe } from './../pipes/gender/gender';
 import { SearchPage } from './../pages/search/search';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SettingsPage } from './../pages/settings/settings';
@@ -26,9 +27,10 @@ import { LocalStorageProvider } from '../providers/local-storage/local-storage';
 import { FavoritesManagerProvider } from '../providers/favorites-manager/favorites-manager';
 import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { MatSelectModule } from '@angular/material/select';
     HomePage,
     TabsPage,
     SearchPage,
+    GenderPipe,
     SettingsPage,
     ContactusPage,
     FavoritesPage,
@@ -56,7 +59,8 @@ import { MatSelectModule } from '@angular/material/select';
     }),
     BrowserAnimationsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -75,6 +79,7 @@ import { MatSelectModule } from '@angular/material/select';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    GenderPipe,
     ApiProvider,
     TeachesAtPipe,
     CommonProvider,

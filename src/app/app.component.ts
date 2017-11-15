@@ -8,13 +8,15 @@ import { TabsPage } from '../pages/tabs/tabs';
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
       navigator.geolocation.getCurrentPosition((data => {
-        console.log(data);
+        console.log(data.coords);
+        alert(data.coords.latitude + " " + data.coords.longitude);
       }));
 
       statusBar.styleDefault();

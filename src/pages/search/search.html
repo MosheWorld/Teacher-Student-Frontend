@@ -103,12 +103,12 @@
           <!-- Teaches Subjects -->
           <ion-col col-6>
             <mat-form-field class="m-full-width">
-              <mat-select placeholder="Teaches subjects">
-                <mat-option *ngFor="let item of commonProvider.subjectsArray" [value]="item.value">
-                  {{ item.viewValue }}
+              <input matInput placeholder="Teaches subjects" aria-label="Teaches subjects" [matAutocomplete]="auto" [formControl]="teachesSubjectsFormControl">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let state of filteredStates | async" [value]="state.viewValue">
+                  {{ state.viewValue }}
                 </mat-option>
-              </mat-select>
-              <mat-hint>Subjects you're looking for?</mat-hint>
+              </mat-autocomplete>
             </mat-form-field>
           </ion-col>
           <!-- Teaches institutions -->
@@ -179,3 +179,4 @@
   </div>
 
 </ion-content>
+

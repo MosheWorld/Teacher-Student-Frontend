@@ -60,7 +60,8 @@ export class CommonProvider {
   ];
 
   public subjectsArray = [
-    { value: '1', viewValue: 'None' }
+    { value: '1', viewValue: 'Test a' },
+    { value: '2', viewValue: 'Test b' }
   ];
 
   public reasonToContactArray = [
@@ -73,6 +74,5 @@ export class CommonProvider {
   ];
 
   constructor() {
-
   }
 }

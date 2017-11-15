@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 
 import { ApiProvider } from './../../providers/api/api';
 import { FavoritesPage } from './../favorites/favorites';
@@ -27,6 +30,7 @@ export class SearchPage {
   public warmth: number = 1300;
   public structure: any = { lower: 30, upper: 140 };
 
+  public teachesSubjectsFormControl = new FormControl(null);
   public teachesAtFormControl = new FormControl(null);
   public teachesInstitutionsFormControl = new FormControl(null);
   public genderFormControl = new FormControl(null);
@@ -35,8 +39,18 @@ export class SearchPage {
   public showErrorMessage: boolean = false;
   public matcher = new MyErrorStateMatcher();
 
+  filteredStates: Observable<any[]>;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController, public commonProvider: CommonProvider) {
+    this.filteredStates = this.teachesSubjectsFormControl.valueChanges
+      .startWith(null)
+      .map((subject) => subject ? this.filterStates(subject) : this.commonProvider.subjectsArray.slice());
+  }
+
+  public filterStates(input: string) {
+    return this.commonProvider.subjectsArray.filter((subject) =>
+      subject.viewValue.toLowerCase().includes(input.toLowerCase()));
   }
 
   public searchTeachers() {
@@ -47,6 +61,11 @@ export class SearchPage {
       this.showErrorMessage = true;
       return;
     }
+
+    // Checks whether the subject form control input is match to subject list.
+    let subject = this.commonProvider.subjectsArray.find((data) => {
+      return data.viewValue === this.teachesSubjectsFormControl.value;
+    });
 
     let searchTeacherModel = {
       fromPrice: this.structure.lower,
@@ -121,6 +140,7 @@ export class SearchPage {
       this.structure == null ||
       !this.genderFormControl.valid ||
       !this.teachesAtFormControl.valid ||
+      !this.teachesSubjectsFormControl.valid ||
       this.structure.lower == null || this.structure.lower < 0 ||
       !this.teachesInstitutionsFormControl.valid ||
       this.structure.upper == null || this.structure.upper > 200 ||

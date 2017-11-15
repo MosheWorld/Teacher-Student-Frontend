@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -12,11 +12,17 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any = TabsPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+    private alertCtrl: AlertController) {
     platform.ready().then(() => {
       navigator.geolocation.getCurrentPosition((data => {
         console.log(data.coords);
-        alert(data.coords.latitude + " " + data.coords.longitude);
+        let alert = this.alertCtrl.create({
+          title: 'Location',
+          subTitle: data.coords.latitude + " " + data.coords.longitude,
+          buttons: ['Dismiss']
+        });
+        alert.present();
       }));
 
       statusBar.styleDefault();

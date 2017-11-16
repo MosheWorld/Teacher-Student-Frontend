@@ -62,13 +62,12 @@ export class SearchPage {
       return;
     }
 
-    let subjectID = this.getSubjectID();
-
     let searchTeacherModel = {
       fromPrice: this.structure.lower,
       toPrice: this.structure.upper,
       teachesAt: this.teachesAtFormControl.value == null ? this.teachesAtFormControl.value : parseInt(this.teachesAtFormControl.value),
       teachesInstitutions: this.teachesInstitutionsFormControl.value == null ? this.teachesInstitutionsFormControl.value : parseInt(this.teachesInstitutionsFormControl.value),
+      teachesSubjects: this.getSubjectID(),
       gender: this.genderFormControl.value == null ? this.genderFormControl.value : parseInt(this.genderFormControl.value)
     };
 

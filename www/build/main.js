@@ -165,7 +165,7 @@ __decorate([
 ], SingleteacherPage.prototype, "elAddRecommend", void 0);
 SingleteacherPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-singleteacher',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\singleteacher\singleteacher.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-buttons start>\n      <button ion-button (click)="dismiss();">\n        <font class="m-color-white">Close</font>\n      </button>\n    </ion-buttons>\n    <ion-title text-center>\n      <font class="m-color-white">{{teacher.firstName}} {{teacher.lastName}}</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <!-- Image and add recommend button -->\n    <ion-row>\n      <ion-col col-7 text-left *ngIf="teacher.image == null">\n        <img class="m-default-image-cards-singleteacher" src="assets\\imgs\\imageNotFound.jpg" />\n      </ion-col>\n      <ion-col col-7 text-left *ngIf="teacher.image != null">\n        <img class="m-default-image-cards-singleteacher" src="{{teacher.image}}" />\n      </ion-col>\n      <ion-col *ngIf="!isTeacherFavorited" col-5 text-right>\n        <button ion-button icon-end small outline color="dark" (click)="addFavorite()">\n          Add favorite\n          <ion-icon name="star"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col *ngIf="isTeacherFavorited" col-5 text-right>\n        <button ion-button icon-end small outline color="dark" (click)="removeFavorite()">\n          Remove favorite\n          <ion-icon name="star"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n\n    <!-- First name and Last name and Gender and Age -->\n    <ion-row>\n      <ion-col col-12>\n        <font class="m-font-size-20px">\n          <i>{{teacher.firstName}} {{teacher.lastName}}</i>\n        </font> -\n        <i>{{teacher.gender | gender}}, {{teacher.age}}</i>\n      </ion-col>\n    </ion-row>\n\n    <!-- Phone -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Phone: </b>\n        <i>{{teacher.phone}}</i>\n        <ion-icon class="m-padding-left-7px" color="secondary" name="logo-whatsapp" (click)="openWhatsApp()"></ion-icon>\n      </ion-col>\n    </ion-row>\n\n    <!-- Email -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Email: </b>\n        <i>{{teacher.email}}</i>\n      </ion-col>\n    </ion-row>\n\n    <!-- Prices -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Price: </b>\n        <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>\n        <font class="m-font-size-10px">ILS</font>\n      </ion-col>\n    </ion-row>\n\n    <!-- Rate -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Rate: </b>\n        <i>{{teacher.rate}}</i>\n        <font *ngIf="teacher.recommendations.length === 1">\n          <i>( {{teacher.recommendations.length}} person rated )</i>\n        </font>\n        <font *ngIf="teacher.recommendations.length !== 1">\n          <i>( {{teacher.recommendations.length}} people rated )</i>\n        </font>\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches At -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches at:</b> {{teacher.teachesAt|teachesAt}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches Institutions -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches at Institutions:</b>\n      </ion-col>\n      <ion-col col-12 *ngFor="let subject of teacher.teachesInstitutions">\n        - {{subject | teachesInstitutions}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Message -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Personal message: </b>{{teacher.personalMessage}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Recommendations Text and Add recommend icon -->\n    <ion-row>\n      <ion-col col-6 text-left>\n        <b>\n          <u>Recommendations:</u>\n        </b>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && !showRecommendationsBoolean">\n        <button ion-button outline icon-end small color="dark" (click)="openRecommendations()">\n          Add\n          <ion-icon name="ios-add-outline"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && showRecommendationsBoolean">\n        <button ion-button outline icon-end small color="dark" (click)="closeRecommendations()">\n          Close\n          <ion-icon name="ios-close-outline"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="alreadyAddedRecommend">\n        <ion-icon class="m-font-size-30px" name="md-done-all"></ion-icon>\n      </ion-col>\n    </ion-row>\n\n    <!-- Show recommendation -->\n    <div #addRecommend class="animated bounceInDown" *ngIf="showRecommendationsBoolean" text-center>\n\n      <form class="m-form">\n\n      <!-- Add Recommendations text -->\n      <ion-row>\n        <ion-col col-12>\n          <b>\n            <u>Add recommendations:</u>\n          </b>\n        </ion-col>\n      </ion-row>\n\n      <!-- Full name and Email -->\n      <ion-row>\n        <!-- Full name -->\n        <ion-col col-6>\n          <mat-form-field class="m-full-width">\n            <input type="text" matInput placeholder="Full name" [formControl]="fullNameFormControl" [errorStateMatcher]="matcher">\n            <mat-hint>First name and Last name</mat-hint>\n            <mat-error *ngIf="fullNameFormControl.hasError(\'required\')">\n              Full name is\n              <strong>required</strong>\n            </mat-error>\n          </mat-form-field>\n        </ion-col>\n        <!-- Email -->\n        <ion-col col-6>\n          <mat-form-field class="m-full-width">\n            <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"\n              [errorStateMatcher]="matcher">\n            <mat-hint>Ex: Email@gmail.com</mat-hint>\n            <mat-error *ngIf="emailFormControl.hasError(\'email\') && !emailFormControl.hasError(\'required\')">\n              Please enter a valid email address.\n            </mat-error>\n            <mat-error *ngIf="emailFormControl.hasError(\'required\')">\n              Email is\n              <strong>required</strong>\n            </mat-error>\n          </mat-form-field>\n        </ion-col>\n      </ion-row>\n\n      <!-- Rate input -->\n      <ion-row>\n        <ion-col col-12>\n          <rating [(ngModel)]="rate" [ngModelOptions]="{standalone: true}" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"\n            nullable="false"></rating>\n        </ion-col>\n      </ion-row>\n\n      <!-- Message -->\n      <ion-row>\n        <ion-col col-12>\n          <mat-form-field class="m-full-width">\n            <textarea matInput maxlength="100" rows="3" placeholder="Message" [formControl]="messageFormControl" [errorStateMatcher]="matcher"></textarea>\n            <mat-hint align="start">Please be kind :)</mat-hint>\n            <mat-hint align="end">{{messageFormControl.value.length}} / 100</mat-hint>\n            <mat-error *ngIf="messageFormControl.hasError(\'minlength\') && !messageFormControl.hasError(\'required\')">\n              Minimum number is 1\n            </mat-error>\n            <mat-error *ngIf="messageFormControl.hasError(\'maxlength\') && !messageFormControl.hasError(\'required\')">\n              Maximum number is 100\n            </mat-error>\n            <mat-error *ngIf="messageFormControl.hasError(\'required\')">\n              Write down something.\n            </mat-error>\n          </mat-form-field>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Add button message -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button block outline (click)="addNewRecommend()" icon-start>\n            <ion-icon name="add"></ion-icon>Add</button>\n        </ion-col>\n      </ion-row>\n\n      </form>\n\n    </div>\n\n    <!-- Recommendations List -->\n    <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">\n      <ion-col col-12>\n        {{recommend.fullName}} - {{recommend.rate}}\n      </ion-col>\n      <ion-col col-12>\n        - {{recommend.message}}\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\singleteacher\singleteacher.html"*/,
+        selector: 'page-singleteacher',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\singleteacher\singleteacher.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-buttons start>\n      <button ion-button (click)="dismiss();">\n        <font class="m-color-white">Close</font>\n      </button>\n    </ion-buttons>\n    <ion-title text-center>\n      <font class="m-color-white">{{teacher.firstName}} {{teacher.lastName}}</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <!-- Image and add recommend button -->\n    <ion-row>\n      <ion-col col-7 text-left *ngIf="teacher.image == null">\n        <img class="m-default-image-cards-singleteacher" src="assets\\imgs\\imageNotFound.jpg" />\n      </ion-col>\n      <ion-col col-7 text-left *ngIf="teacher.image != null">\n        <img class="m-default-image-cards-singleteacher" src="{{teacher.image}}" />\n      </ion-col>\n      <ion-col *ngIf="!isTeacherFavorited" col-5 text-right>\n        <button ion-button icon-end small outline color="dark" (click)="addFavorite()">\n          Add favorite\n          <ion-icon name="star"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col *ngIf="isTeacherFavorited" col-5 text-right>\n        <button ion-button icon-end small outline color="dark" (click)="removeFavorite()">\n          Remove favorite\n          <ion-icon name="star"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n\n    <!-- First name and Last name and Gender and Age -->\n    <ion-row>\n      <ion-col col-12>\n        <font class="m-font-size-20px">\n          <i>{{teacher.firstName}} {{teacher.lastName}}</i>\n        </font> -\n        <i>{{teacher.gender | gender}}, {{teacher.age}}</i>\n      </ion-col>\n    </ion-row>\n\n    <!-- Phone -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Phone: </b>\n        <i>{{teacher.phone}}</i>\n        <ion-icon class="m-padding-left-7px" color="secondary" name="logo-whatsapp" (click)="openWhatsApp()"></ion-icon>\n      </ion-col>\n    </ion-row>\n\n    <!-- Email -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Email: </b>\n        <i>{{teacher.email}}</i>\n      </ion-col>\n    </ion-row>\n\n    <!-- Prices -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Price: </b>\n        <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>\n        <font class="m-font-size-10px">ILS</font>\n      </ion-col>\n    </ion-row>\n\n    <!-- Rate -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Rate: </b>\n        <i>{{teacher.rate}}</i>\n        <font *ngIf="teacher.recommendations.length === 1">\n          <i>( {{teacher.recommendations.length}} person rated )</i>\n        </font>\n        <font *ngIf="teacher.recommendations.length !== 1">\n          <i>( {{teacher.recommendations.length}} people rated )</i>\n        </font>\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches At -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches at:</b> {{teacher.teachesAt|teachesAt}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches Institutions -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches at Institutions:</b>\n      </ion-col>\n      <ion-col col-12 *ngFor="let institution of teacher.teachesInstitutions">\n        - {{institution | teachesInstitutions}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches Subjects -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches Subjects:</b>\n      </ion-col>\n      <ion-col col-12 *ngFor="let subject of teacher.teachesSubjects">\n        - {{subject | teachesSubjects}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Message -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Personal message: </b>{{teacher.personalMessage}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Recommendations Text and Add recommend icon -->\n    <ion-row>\n      <ion-col col-6 text-left>\n        <b>\n          <u>Recommendations:</u>\n        </b>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && !showRecommendationsBoolean">\n        <button ion-button outline icon-end small color="dark" (click)="openRecommendations()">\n          Add\n          <ion-icon name="ios-add-outline"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && showRecommendationsBoolean">\n        <button ion-button outline icon-end small color="dark" (click)="closeRecommendations()">\n          Close\n          <ion-icon name="ios-close-outline"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="alreadyAddedRecommend">\n        <ion-icon class="m-font-size-30px" name="md-done-all"></ion-icon>\n      </ion-col>\n    </ion-row>\n\n    <!-- Show recommendation -->\n    <div #addRecommend class="animated bounceInDown" *ngIf="showRecommendationsBoolean" text-center>\n\n      <form class="m-form">\n\n      <!-- Add Recommendations text -->\n      <ion-row>\n        <ion-col col-12>\n          <b>\n            <u>Add recommendations:</u>\n          </b>\n        </ion-col>\n      </ion-row>\n\n      <!-- Full name and Email -->\n      <ion-row>\n        <!-- Full name -->\n        <ion-col col-6>\n          <mat-form-field class="m-full-width">\n            <input type="text" matInput placeholder="Full name" [formControl]="fullNameFormControl" [errorStateMatcher]="matcher">\n            <mat-hint>First name and Last name</mat-hint>\n            <mat-error *ngIf="fullNameFormControl.hasError(\'required\')">\n              Full name is\n              <strong>required</strong>\n            </mat-error>\n          </mat-form-field>\n        </ion-col>\n        <!-- Email -->\n        <ion-col col-6>\n          <mat-form-field class="m-full-width">\n            <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"\n              [errorStateMatcher]="matcher">\n            <mat-hint>Ex: Email@gmail.com</mat-hint>\n            <mat-error *ngIf="emailFormControl.hasError(\'email\') && !emailFormControl.hasError(\'required\')">\n              Please enter a valid email address.\n            </mat-error>\n            <mat-error *ngIf="emailFormControl.hasError(\'required\')">\n              Email is\n              <strong>required</strong>\n            </mat-error>\n          </mat-form-field>\n        </ion-col>\n      </ion-row>\n\n      <!-- Rate input -->\n      <ion-row>\n        <ion-col col-12>\n          <rating [(ngModel)]="rate" [ngModelOptions]="{standalone: true}" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"\n            nullable="false"></rating>\n        </ion-col>\n      </ion-row>\n\n      <!-- Message -->\n      <ion-row>\n        <ion-col col-12>\n          <mat-form-field class="m-full-width">\n            <textarea matInput maxlength="100" rows="3" placeholder="Message" [formControl]="messageFormControl" [errorStateMatcher]="matcher"></textarea>\n            <mat-hint align="start">Please be kind :)</mat-hint>\n            <mat-hint align="end">{{messageFormControl.value.length}} / 100</mat-hint>\n            <mat-error *ngIf="messageFormControl.hasError(\'minlength\') && !messageFormControl.hasError(\'required\')">\n              Minimum number is 1\n            </mat-error>\n            <mat-error *ngIf="messageFormControl.hasError(\'maxlength\') && !messageFormControl.hasError(\'required\')">\n              Maximum number is 100\n            </mat-error>\n            <mat-error *ngIf="messageFormControl.hasError(\'required\')">\n              Write down something.\n            </mat-error>\n          </mat-form-field>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Add button message -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button block outline (click)="addNewRecommend()" icon-start>\n            <ion-icon name="add"></ion-icon>Add</button>\n        </ion-col>\n      </ion-row>\n\n      </form>\n\n    </div>\n\n    <!-- Recommendations List -->\n    <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">\n      <ion-col col-12>\n        {{recommend.fullName}} - {{recommend.rate}}\n      </ion-col>\n      <ion-col col-12>\n        - {{recommend.message}}\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\singleteacher\singleteacher.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ViewController */],
         __WEBPACK_IMPORTED_MODULE_4__providers_api_api__["a" /* ApiProvider */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */],
@@ -517,7 +517,7 @@ __decorate([
 ], JointeacherPage.prototype, "elViewImage", void 0);
 JointeacherPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["Component"])({
-        selector: 'page-jointeacher',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\jointeacher\jointeacher.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Join as Teacher</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-35px m-font-weight-300">Become a next-generation teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          In order to join as teacher you must fill all the following fields. Be specific with your information to gain more good resume\n          and comments from students. Remember, good instructor is remembered for lifetime.\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font>\n          Give full information at the relevant fields to interest more students.\n        </ion-col>\n      </ion-row>\n\n      <!-- Price warning -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-red">*The price per lesson is for one hour*</font>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- StudyHub for individuals title -->\n      <ion-row text-center class="m-padding-top-15px m-padding-buttom-15px">\n        <ion-col col-12>\n          <u>\n            <b>Fill teacher form</b>\n          </u>\n        </ion-col>\n      </ion-row>\n\n      <!-- Form -->\n      <form class="m-form">\n\n        <!-- First name and Last name -->\n        <ion-row>\n          <ion-col col-6>\n            <!-- First name-->\n            <mat-form-field class="m-full-width">\n              <input type="text" matInput placeholder="First name" [formControl]="firstNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal first name</mat-hint>\n              <mat-error *ngIf="firstNameFormControl.hasError(\'required\')">\n                First name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Last name -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" matInput placeholder="Last name" [formControl]="lastNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal last name</mat-hint>\n              <mat-error *ngIf="lastNameFormControl.hasError(\'required\')">\n                Last name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Age and Gender -->\n        <ion-row>\n          <!-- Age -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" maxlength="3" matInput placeholder="Age" [formControl]="ageFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>What\'s your age?</mat-hint>\n              <mat-error *ngIf="ageFormControl.hasError(\'minlength\') || ageFormControl.hasError(\'maxlength\') && !ageFormControl.hasError(\'required\')">\n                Type proper age.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'min\') && !ageFormControl.hasError(\'required\')">\n                Age cannot be less than 1.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'max\') && !ageFormControl.hasError(\'required\')">\n                Age cannot be greater than 120.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'required\')">\n                Age is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Gender -->\n          <ion-col col-6>\n            <mat-form-field>\n              <mat-select placeholder="Gender" [formControl]="genderAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.genderArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>What is your gender?</mat-hint>\n              <mat-error *ngIf="genderAtFormControl.hasError(\'required\')">Male or Female?</mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Email and phone number -->\n        <ion-row>\n          <!-- Email -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"\n                [errorStateMatcher]="matcher">\n              <mat-hint>Ex: Email@gmail.com</mat-hint>\n              <mat-error *ngIf="emailFormControl.hasError(\'email\') && !emailFormControl.hasError(\'required\')">\n                Please enter a valid email address.\n              </mat-error>\n              <mat-error *ngIf="emailFormControl.hasError(\'required\')">\n                Email is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Phone -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="tel" maxlength="10" matInput placeholder="Phone" [formControl]="phoneFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal phone number</mat-hint>\n              <mat-error *ngIf="phoneFormControl.hasError(\'minlength\') || phoneFormControl.hasError(\'maxlength\') && !phoneFormControl.hasError(\'required\')">\n                Phone is not valid.\n              </mat-error>\n              <mat-error *ngIf="phoneFormControl.hasError(\'required\')">\n                Phone is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- From price and To price -->\n        <ion-row>\n          <ion-col col-6>\n            <!-- From price -->\n            <mat-form-field class="m-full-width">\n              <input type="tel" matInput maxlength="3" placeholder="From price" [formControl]="fromPriceFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>1 is Minimum.</mat-hint>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'minlength\') || fromPriceFormControl.hasError(\'maxlength\') && !fromPriceFormControl.hasError(\'required\')">\n                Please fix the number.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'min\') && !fromPriceFormControl.hasError(\'required\')">\n                Minimum is 1.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'max\') && !fromPriceFormControl.hasError(\'required\')">\n                Maximum is 200.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'required\')">\n                From price is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- To Price -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="tel" matInput maxlength="3" placeholder="To price" [formControl]="toPriceFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>200 is Maximum.</mat-hint>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'minlength\') || toPriceFormControl.hasError(\'maxlength\') && !toPriceFormControl.hasError(\'required\')">\n                Please fix the number.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'min\') && !toPriceFormControl.hasError(\'required\')">\n                Minimum is 1.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'max\') && !toPriceFormControl.hasError(\'required\')">\n                Maximum is 200.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'required\')">\n                To price is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teach at and Teaches institutions -->\n        <ion-row>\n          <!-- Teach at -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teach at" [formControl]="teachesAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesAtArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>What places do you teach at?</mat-hint>\n              <mat-error *ngIf="teachesAtFormControl.hasError(\'required\')">You must make a selection.</mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Teaches institutions -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teaches institutions" [formControl]="teachesInstitutionsFormControl" multiple>\n                <mat-option *ngFor="let item of commonProvider.teachesInstitutionsArray" [value]="item.value">{{item.viewValue}}</mat-option>\n              </mat-select>\n              <mat-hint>What institutions do you teach at?</mat-hint>\n              <mat-error *ngIf="teachesInstitutionsFormControl.hasError(\'required\')">You must make a selection.</mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Personal Message -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <textarea matInput maxlength="200" rows="4" placeholder="Personal Message" [formControl]="personalMessageFormControl" [errorStateMatcher]="matcher"></textarea>\n              <mat-hint align="start">Say something about your self.</mat-hint>\n              <mat-hint align="end">{{personalMessageFormControl.value.length}} / 200</mat-hint>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'minlength\') && !personalMessageFormControl.hasError(\'required\')">\n                Minimum words are 10.\n              </mat-error>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'maxlength\') && !personalMessageFormControl.hasError(\'required\')">\n                Maximum words are 200.\n              </mat-error>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'required\')">\n                You must say few words about yourself.\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Get image button and clear button -->\n        <ion-row>\n          <ion-col col-6>\n            <input #inputImage type="file" id="inputImageid" class="m-display-none" (change)="readImageBase64($event)" accept="image/*">\n            <button ion-button outline block icon-start small color="dark" onclick="document.getElementById(\'inputImageid\').click();">\n              <ion-icon name="ios-camera-outline"></ion-icon>\n              Add Image\n            </button>\n          </ion-col>\n          <ion-col col-6 *ngIf="image != null && image.length > 0">\n            <button ion-button outline block icon-start small color="dark" (click)="clearImage()">\n              <ion-icon name="ios-trash-outline"></ion-icon>\n              Clear\n            </button>\n          </ion-col>\n        </ion-row>\n\n        <!-- Image -->\n        <ion-row text-center #viewImage *ngIf="image != null && image.length > 0" class="animated flash">\n          <ion-col col-12>\n            <img height="{{imageHeight}}" width="{{imageWidth}}" src="{{image}}">\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Prices not valid -->\n      <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">"Price from" cannot be greater from "To price"</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Send form button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button block (click)="createTeacher();">Make me a teacher</button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\jointeacher\jointeacher.html"*/,
+        selector: 'page-jointeacher',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\jointeacher\jointeacher.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Join as Teacher</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-35px m-font-weight-300">Become a next-generation teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          In order to join as teacher you must fill all the following fields. Be specific with your information to gain more good resume\n          and comments from students. Remember, good instructor is remembered for lifetime.\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font>\n          Give full information at the relevant fields to interest more students.\n        </ion-col>\n      </ion-row>\n\n      <!-- Price warning -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-red">*The price per lesson is for one hour*</font>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- StudyHub for individuals title -->\n      <ion-row text-center class="m-padding-top-15px m-padding-buttom-15px">\n        <ion-col col-12>\n          <u>\n            <b>Fill teacher form</b>\n          </u>\n        </ion-col>\n      </ion-row>\n\n      <!-- Form -->\n      <form class="m-form">\n\n        <!-- First name and Last name -->\n        <ion-row>\n          <ion-col col-6>\n            <!-- First name-->\n            <mat-form-field class="m-full-width">\n              <input type="text" matInput placeholder="First name" [formControl]="firstNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal first name</mat-hint>\n              <mat-error *ngIf="firstNameFormControl.hasError(\'required\')">\n                First name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Last name -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" matInput placeholder="Last name" [formControl]="lastNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal last name</mat-hint>\n              <mat-error *ngIf="lastNameFormControl.hasError(\'required\')">\n                Last name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Age and Gender -->\n        <ion-row>\n          <!-- Age -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" maxlength="3" matInput placeholder="Age" [formControl]="ageFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>What\'s your age?</mat-hint>\n              <mat-error *ngIf="ageFormControl.hasError(\'minlength\') || ageFormControl.hasError(\'maxlength\') && !ageFormControl.hasError(\'required\')">\n                Type proper age.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'min\') && !ageFormControl.hasError(\'required\')">\n                Age cannot be less than 1.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'max\') && !ageFormControl.hasError(\'required\')">\n                Age cannot be greater than 120.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'required\')">\n                Age is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Gender -->\n          <ion-col col-6>\n            <mat-form-field>\n              <mat-select placeholder="Gender" [formControl]="genderAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.genderArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>What is your gender?</mat-hint>\n              <mat-error *ngIf="genderAtFormControl.hasError(\'required\')">Male or Female?</mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Email and phone number -->\n        <ion-row>\n          <!-- Email -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"\n                [errorStateMatcher]="matcher">\n              <mat-hint>Ex: Email@gmail.com</mat-hint>\n              <mat-error *ngIf="emailFormControl.hasError(\'email\') && !emailFormControl.hasError(\'required\')">\n                Please enter a valid email address.\n              </mat-error>\n              <mat-error *ngIf="emailFormControl.hasError(\'required\')">\n                Email is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Phone -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="tel" maxlength="10" matInput placeholder="Phone" [formControl]="phoneFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal phone number</mat-hint>\n              <mat-error *ngIf="phoneFormControl.hasError(\'minlength\') || phoneFormControl.hasError(\'maxlength\') && !phoneFormControl.hasError(\'required\')">\n                Phone is not valid.\n              </mat-error>\n              <mat-error *ngIf="phoneFormControl.hasError(\'required\')">\n                Phone is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- From price and To price -->\n        <ion-row>\n          <ion-col col-6>\n            <!-- From price -->\n            <mat-form-field class="m-full-width">\n              <input type="tel" matInput maxlength="3" placeholder="From price" [formControl]="fromPriceFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>1 is Minimum.</mat-hint>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'minlength\') || fromPriceFormControl.hasError(\'maxlength\') && !fromPriceFormControl.hasError(\'required\')">\n                Please fix the number.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'min\') && !fromPriceFormControl.hasError(\'required\')">\n                Minimum is 1.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'max\') && !fromPriceFormControl.hasError(\'required\')">\n                Maximum is 200.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'required\')">\n                From price is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- To Price -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="tel" matInput maxlength="3" placeholder="To price" [formControl]="toPriceFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>200 is Maximum.</mat-hint>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'minlength\') || toPriceFormControl.hasError(\'maxlength\') && !toPriceFormControl.hasError(\'required\')">\n                Please fix the number.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'min\') && !toPriceFormControl.hasError(\'required\')">\n                Minimum is 1.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'max\') && !toPriceFormControl.hasError(\'required\')">\n                Maximum is 200.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'required\')">\n                To price is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teach at and Teaches institutions -->\n        <ion-row>\n          <!-- Teach at -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teach at" [formControl]="teachesAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesAtArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>What places do you teach at?</mat-hint>\n              <mat-error *ngIf="teachesAtFormControl.hasError(\'required\')">You must make a selection.</mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Teaches institutions -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teaches institutions" [formControl]="teachesInstitutionsFormControl" multiple>\n                <mat-option *ngFor="let item of commonProvider.teachesInstitutionsArray" [value]="item.value">{{item.viewValue}}</mat-option>\n              </mat-select>\n              <mat-hint>What institutions do you teach at?</mat-hint>\n              <mat-error *ngIf="teachesInstitutionsFormControl.hasError(\'required\')">You must make a selection.</mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teaches Subjects -->\n        <ion-row>\n          <ion-col col-12>\n            <font style="color: red;">Wokring on subjects, bug currently.</font>\n          </ion-col>\n        </ion-row>\n\n        <!-- Personal Message -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <textarea matInput maxlength="200" rows="4" placeholder="Personal Message" [formControl]="personalMessageFormControl" [errorStateMatcher]="matcher"></textarea>\n              <mat-hint align="start">Say something about your self.</mat-hint>\n              <mat-hint align="end">{{personalMessageFormControl.value.length}} / 200</mat-hint>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'minlength\') && !personalMessageFormControl.hasError(\'required\')">\n                Minimum words are 10.\n              </mat-error>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'maxlength\') && !personalMessageFormControl.hasError(\'required\')">\n                Maximum words are 200.\n              </mat-error>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'required\')">\n                You must say few words about yourself.\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Get image button and clear button -->\n        <ion-row>\n          <ion-col col-6>\n            <input #inputImage type="file" id="inputImageid" class="m-display-none" (change)="readImageBase64($event)" accept="image/*">\n            <button ion-button outline block icon-start small color="dark" onclick="document.getElementById(\'inputImageid\').click();">\n              <ion-icon name="ios-camera-outline"></ion-icon>\n              Add Image\n            </button>\n          </ion-col>\n          <ion-col col-6 *ngIf="image != null && image.length > 0">\n            <button ion-button outline block icon-start small color="dark" (click)="clearImage()">\n              <ion-icon name="ios-trash-outline"></ion-icon>\n              Clear\n            </button>\n          </ion-col>\n        </ion-row>\n\n        <!-- Image -->\n        <ion-row text-center #viewImage *ngIf="image != null && image.length > 0" class="animated flash">\n          <ion-col col-12>\n            <img height="{{imageHeight}}" width="{{imageWidth}}" src="{{image}}">\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Prices not valid -->\n      <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">"Price from" cannot be greater from "To price"</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Send form button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button block (click)="createTeacher();">Make me a teacher</button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\jointeacher\jointeacher.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_api_api__["a" /* ApiProvider */],
         __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__angular_core__["Renderer2"],
@@ -610,12 +610,12 @@ var SearchPage = (function () {
             this.showErrorMessage = true;
             return;
         }
-        var subjectID = this.getSubjectID();
         var searchTeacherModel = {
             fromPrice: this.structure.lower,
             toPrice: this.structure.upper,
             teachesAt: this.teachesAtFormControl.value == null ? this.teachesAtFormControl.value : parseInt(this.teachesAtFormControl.value),
             teachesInstitutions: this.teachesInstitutionsFormControl.value == null ? this.teachesInstitutionsFormControl.value : parseInt(this.teachesInstitutionsFormControl.value),
+            teachesSubjects: this.getSubjectID(),
             gender: this.genderFormControl.value == null ? this.genderFormControl.value : parseInt(this.genderFormControl.value)
         };
         var loading = this.loadingCtrl.create({
@@ -708,7 +708,7 @@ var SearchPage = (function () {
 }());
 SearchPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-search',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\search\search.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Search Teacher</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-weight-300 m-font-size-35px">Search for a teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle 1 -->\n      <ion-row>\n        <ion-col col-12>\n          It\'s easy, it\'s fast, just fill the fields you want that your teacher will fit and we will find for you what you\'ve requested.\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle 2 -->\n      <ion-row>\n        <ion-col col-12>\n          We\n          <b>\n            <u>don\'t</u>\n          </b> force you to talk to them in our app, take the conversation to\n          <font class="m-color-1ab81a">WhatsApp</font> or other platform as you want, good luck!\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font> Be specific with your filter details in order to get the best results.\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- Find your next teacher title -->\n      <ion-row text-center class="m-padding-top-15px m-padding-buttom-15px">\n        <ion-col col-12>\n          Find your next teacher\n        </ion-col>\n      </ion-row>\n\n      <!-- Get all teachers button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button outline icon-start small (click)="getAllTeachers();">\n            <ion-icon name="ios-people"></ion-icon>\n            Get all teachers\n          </button>\n        </ion-col>\n      </ion-row>\n\n      <!-- Price range -->\n      <ion-row>\n        <ion-col col-12>\n          <ion-list-header>\n            Price per hour\n            <ion-badge item-end color="dark">From: {{structure.lower}}</ion-badge>\n            <ion-badge item-end color="dark">To: {{structure.upper}}</ion-badge>\n          </ion-list-header>\n          <ion-item>\n            <ion-range dualKnobs="true" pin="true" [(ngModel)]="structure" color="dark" min="0" max="200">\n              <ion-label range-left>0</ion-label>\n              <ion-label range-right>200</ion-label>\n            </ion-range>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n\n      <!-- Form -->\n      <form class="m-form">\n\n        <!-- Teaches institutions -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teaches institutions" [formControl]="teachesInstitutionsFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesInstitutionsArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>Institidues you\'re looking for?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teaches Subjects -->\n        <ion-row>\n          <ion-col col-12>\n            <font style="color: red;">Subjects not applied yet, beta.</font>\n            <mat-form-field class="m-full-width">\n              <input matInput placeholder="Teaches subjects" aria-label="Teaches subjects" [matAutocomplete]="auto" [formControl]="teachesSubjectsFormControl">\n              <mat-autocomplete #auto="matAutocomplete">\n                <mat-option *ngFor="let state of filteredStates | async" [value]="state.viewValue">\n                  {{ state.viewValue }}\n                </mat-option>\n              </mat-autocomplete>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teach at and Gender -->\n        <ion-row>\n          <!-- Teach at -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teach at" [formControl]="teachesAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesAtArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>Preferred place to learn?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n          <!-- Gender -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Gender" [formControl]="genderFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.genderArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n                <mat-option value="3">Doesn\'t matter</mat-option>\n              </mat-select>\n              <mat-hint>Gender preferred of your teacher?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Prices not valid -->\n      <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">"Price from" cannot be greater from "To price"</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Search teachers button -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <button ion-button (click)="searchTeachers()" block>Search for teacher</button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\search\search.html"*/,
+        selector: 'page-search',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\search\search.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Search Teacher</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-weight-300 m-font-size-35px">Search for a teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle 1 -->\n      <ion-row>\n        <ion-col col-12>\n          It\'s easy, it\'s fast, just fill the fields you want that your teacher will fit and we will find for you what you\'ve requested.\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle 2 -->\n      <ion-row>\n        <ion-col col-12>\n          We\n          <b>\n            <u>don\'t</u>\n          </b> force you to talk to them in our app, take the conversation to\n          <font class="m-color-1ab81a">WhatsApp</font> or other platform as you want, good luck!\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font> Be specific with your filter details in order to get the best results.\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- Find your next teacher title -->\n      <ion-row text-center class="m-padding-top-15px m-padding-buttom-15px">\n        <ion-col col-12>\n          Find your next teacher\n        </ion-col>\n      </ion-row>\n\n      <!-- Get all teachers button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button outline icon-start small (click)="getAllTeachers();">\n            <ion-icon name="ios-people"></ion-icon>\n            Get all teachers\n          </button>\n        </ion-col>\n      </ion-row>\n\n      <!-- Price range -->\n      <ion-row>\n        <ion-col col-12>\n          <ion-list-header>\n            Price per hour\n            <ion-badge item-end color="dark">From: {{structure.lower}}</ion-badge>\n            <ion-badge item-end color="dark">To: {{structure.upper}}</ion-badge>\n          </ion-list-header>\n          <ion-item>\n            <ion-range dualKnobs="true" pin="true" [(ngModel)]="structure" color="dark" min="0" max="200">\n              <ion-label range-left>0</ion-label>\n              <ion-label range-right>200</ion-label>\n            </ion-range>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n\n      <!-- Form -->\n      <form class="m-form">\n\n        <!-- Teaches institutions -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teaches institutions" [formControl]="teachesInstitutionsFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesInstitutionsArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>Institidues you\'re looking for?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teaches Subjects -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <input matInput placeholder="Teaches subjects" aria-label="Teaches subjects" [matAutocomplete]="auto" [formControl]="teachesSubjectsFormControl">\n              <mat-autocomplete #auto="matAutocomplete">\n                <mat-option *ngFor="let state of filteredStates | async" [value]="state.viewValue">\n                  {{ state.viewValue }}\n                </mat-option>\n              </mat-autocomplete>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teach at and Gender -->\n        <ion-row>\n          <!-- Teach at -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teach at" [formControl]="teachesAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesAtArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>Preferred place to learn?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n          <!-- Gender -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Gender" [formControl]="genderFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.genderArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n                <mat-option value="3">Doesn\'t matter</mat-option>\n              </mat-select>\n              <mat-hint>Gender preferred of your teacher?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Prices not valid -->\n      <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">"Price from" cannot be greater from "To price"</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Search teachers button -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <button ion-button (click)="searchTeachers()" block>Search for teacher</button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\search\search.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_api_api__["a" /* ApiProvider */],
         __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_7__providers_common_common__["a" /* CommonProvider */]])
@@ -962,11 +962,11 @@ webpackEmptyAsyncContext.id = 189;
 
 var map = {
 	"../pages/contactus/contactus.module": [
-		724,
+		723,
 		6
 	],
 	"../pages/favorites/favorites.module": [
-		723,
+		724,
 		5
 	],
 	"../pages/jointeacher/jointeacher.module": [
@@ -1221,7 +1221,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_component__ = __webpack_require__(384);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(234);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(235);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__ = __webpack_require__(709);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_image_compress__ = __webpack_require__(241);
@@ -1323,8 +1323,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__["a" /* Ionic2RatingModule */],
             __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */], {}, {
                 links: [
-                    { loadChildren: '../pages/favorites/favorites.module#FavoritesPageModule', name: 'FavoritesPage', segment: 'favorites', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/contactus/contactus.module#ContactusPageModule', name: 'ContactusPage', segment: 'contactus', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/favorites/favorites.module#FavoritesPageModule', name: 'FavoritesPage', segment: 'favorites', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/jointeacher/jointeacher.module#JointeacherPageModule', name: 'JointeacherPage', segment: 'jointeacher', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/search/search.module#SearchPageModule', name: 'SearchPage', segment: 'search', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
@@ -1427,7 +1427,7 @@ MyApp = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApiProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(234);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(235);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1688,289 +1688,289 @@ var TeachesSubjectsPipe = (function () {
         var teachesSubjectsValue;
         switch (value) {
             case 1:
-                teachesSubjectsValue = 'Introduction to Computer Science';
+                teachesSubjectsValue = 'Programming in C';
                 break;
             case 2:
-                teachesSubjectsValue = 'Data Structures';
+                teachesSubjectsValue = 'Introduction to Computer Science';
                 break;
             case 3:
-                teachesSubjectsValue = 'Mathematical Tools for Computer Science';
+                teachesSubjectsValue = 'Data Structures';
                 break;
             case 4:
-                teachesSubjectsValue = 'Advanced Programming Workshop';
+                teachesSubjectsValue = 'Mathematical Tools for Computer Science';
                 break;
             case 5:
-                teachesSubjectsValue = 'Computer Organization and Assembly';
+                teachesSubjectsValue = 'Advanced Programming Workshop';
                 break;
             case 6:
-                teachesSubjectsValue = 'Computer Structure and Switching Theory';
+                teachesSubjectsValue = 'Computer Organization and Assembly';
                 break;
             case 7:
-                teachesSubjectsValue = 'Operating Systems';
+                teachesSubjectsValue = 'Computer Structure and Switching Theory';
                 break;
             case 8:
-                teachesSubjectsValue = 'Automata and Formal Languages';
+                teachesSubjectsValue = 'Operating Systems';
                 break;
             case 9:
-                teachesSubjectsValue = 'Design and Analysis of Algorithms';
+                teachesSubjectsValue = 'Automata and Formal Languages';
                 break;
             case 10:
-                teachesSubjectsValue = 'Logic For Computer Science';
+                teachesSubjectsValue = 'Design and Analysis of Algorithms';
                 break;
             case 11:
-                teachesSubjectsValue = 'Logic Programming';
+                teachesSubjectsValue = 'Logic For Computer Science';
                 break;
             case 12:
-                teachesSubjectsValue = 'Data Base Systems';
+                teachesSubjectsValue = 'Logic Programming';
                 break;
             case 13:
-                teachesSubjectsValue = 'Compilation Theory';
+                teachesSubjectsValue = 'Data Base Systems';
                 break;
             case 14:
-                teachesSubjectsValue = 'Computer Communication Networks';
+                teachesSubjectsValue = 'Compilation Theory';
                 break;
             case 15:
-                teachesSubjectsValue = 'Computability and Complexity of Algorithms';
+                teachesSubjectsValue = 'Computer Communication Networks';
                 break;
             case 16:
-                teachesSubjectsValue = 'Object Oriented Programming';
+                teachesSubjectsValue = 'Computability and Complexity of Algorithms';
                 break;
             case 17:
-                teachesSubjectsValue = 'Foundations of Information Systems';
+                teachesSubjectsValue = 'Object Oriented Programming';
                 break;
             case 18:
-                teachesSubjectsValue = 'Graph Theory';
+                teachesSubjectsValue = 'Foundations of Information Systems';
                 break;
             case 19:
-                teachesSubjectsValue = 'Real Time Systems';
+                teachesSubjectsValue = 'Graph Theory';
                 break;
             case 20:
-                teachesSubjectsValue = 'System Programming';
+                teachesSubjectsValue = 'Real Time Systems';
                 break;
             case 21:
-                teachesSubjectsValue = 'Design Patterns';
+                teachesSubjectsValue = 'System Programming';
                 break;
             case 22:
-                teachesSubjectsValue = 'Data Mining';
+                teachesSubjectsValue = 'Design Patterns';
                 break;
             case 23:
-                teachesSubjectsValue = 'Computer Vision';
+                teachesSubjectsValue = 'Data Mining';
                 break;
             case 24:
-                teachesSubjectsValue = 'Geometry View Multiple';
+                teachesSubjectsValue = 'Computer Vision';
                 break;
             case 25:
-                teachesSubjectsValue = 'Computer Graphics';
+                teachesSubjectsValue = 'Geometry View Multiple';
                 break;
             case 26:
-                teachesSubjectsValue = 'Introduction to Fuzzy Logic';
+                teachesSubjectsValue = 'Computer Graphics';
                 break;
             case 27:
-                teachesSubjectsValue = 'Introduction to Cryptography';
+                teachesSubjectsValue = 'Introduction to Fuzzy Logic';
                 break;
             case 28:
-                teachesSubjectsValue = 'Data Compression';
+                teachesSubjectsValue = 'Introduction to Cryptography';
                 break;
             case 29:
-                teachesSubjectsValue = 'Signal and Image Processing ';
+                teachesSubjectsValue = 'Data Compression';
                 break;
             case 30:
-                teachesSubjectsValue = 'Computer Architecture';
+                teachesSubjectsValue = 'Signal and Image Processing ';
                 break;
             case 31:
-                teachesSubjectsValue = 'Hardware Description Languages';
+                teachesSubjectsValue = 'Computer Architecture';
                 break;
             case 32:
-                teachesSubjectsValue = 'Digital Systems';
+                teachesSubjectsValue = 'Hardware Description Languages';
                 break;
             case 33:
-                teachesSubjectsValue = 'Expert Systems';
+                teachesSubjectsValue = 'Digital Systems';
                 break;
             case 34:
-                teachesSubjectsValue = 'Artificial Intelligence';
+                teachesSubjectsValue = 'Expert Systems';
                 break;
             case 35:
-                teachesSubjectsValue = 'Programming in C#';
+                teachesSubjectsValue = 'Artificial Intelligence';
                 break;
             case 36:
-                teachesSubjectsValue = 'Programming in Java';
+                teachesSubjectsValue = 'Programming in C#';
                 break;
             case 37:
-                teachesSubjectsValue = 'Programming in Python';
+                teachesSubjectsValue = 'Programming in Java';
                 break;
             case 38:
-                teachesSubjectsValue = 'Programming in JavaScript';
+                teachesSubjectsValue = 'Programming in Python';
                 break;
             case 39:
-                teachesSubjectsValue = 'Numerical Analysis';
+                teachesSubjectsValue = 'Programming in JavaScript';
                 break;
             case 40:
-                teachesSubjectsValue = 'Numerical algorithms';
+                teachesSubjectsValue = 'Numerical Analysis';
                 break;
             case 41:
-                teachesSubjectsValue = 'Logic Design';
+                teachesSubjectsValue = 'Numerical algorithms';
                 break;
             case 42:
-                teachesSubjectsValue = 'Approximation algorithms';
+                teachesSubjectsValue = 'Logic Design';
                 break;
             case 43:
-                teachesSubjectsValue = 'Secure Quality Programs';
+                teachesSubjectsValue = 'Approximation algorithms';
                 break;
             case 44:
-                teachesSubjectsValue = 'Introduction to Robotics';
+                teachesSubjectsValue = 'Secure Quality Programs';
                 break;
             case 45:
-                teachesSubjectsValue = 'Semiconductors';
+                teachesSubjectsValue = 'Introduction to Robotics';
                 break;
             case 46:
-                teachesSubjectsValue = 'Electrical Engineering Laboratory';
+                teachesSubjectsValue = 'Semiconductors';
                 break;
             case 47:
-                teachesSubjectsValue = 'Semiconductor Devices';
+                teachesSubjectsValue = 'Electrical Engineering Laboratory';
                 break;
             case 48:
-                teachesSubjectsValue = 'Switching and Logic Design';
+                teachesSubjectsValue = 'Semiconductor Devices';
                 break;
             case 49:
-                teachesSubjectsValue = 'Introduction to Linear Systems';
+                teachesSubjectsValue = 'Switching and Logic Design';
                 break;
             case 50:
-                teachesSubjectsValue = 'Analog Linear Electronic Circuits';
+                teachesSubjectsValue = 'Introduction to Linear Systems';
                 break;
             case 51:
-                teachesSubjectsValue = 'Energy Conversion';
+                teachesSubjectsValue = 'Analog Linear Electronic Circuits';
                 break;
             case 52:
-                teachesSubjectsValue = 'Signals and Systems';
+                teachesSubjectsValue = 'Energy Conversion';
                 break;
             case 53:
-                teachesSubjectsValue = 'Electromagnetic Fields';
+                teachesSubjectsValue = 'Signals and Systems';
                 break;
             case 54:
-                teachesSubjectsValue = 'Digital Circuits';
+                teachesSubjectsValue = 'Electromagnetic Fields';
                 break;
             case 55:
-                teachesSubjectsValue = 'Introduction to Control Theory';
+                teachesSubjectsValue = 'Digital Circuits';
                 break;
             case 56:
-                teachesSubjectsValue = 'Laboratory of Logic Digital Circuits';
+                teachesSubjectsValue = 'Introduction to Control Theory';
                 break;
             case 57:
-                teachesSubjectsValue = 'Communication Engineering';
+                teachesSubjectsValue = 'Laboratory of Logic Digital Circuits';
                 break;
             case 58:
-                teachesSubjectsValue = 'Electric Drives';
+                teachesSubjectsValue = 'Communication Engineering';
                 break;
             case 59:
-                teachesSubjectsValue = 'Microprocessors';
+                teachesSubjectsValue = 'Electric Drives';
                 break;
             case 60:
-                teachesSubjectsValue = 'Introduction to Microwaves';
+                teachesSubjectsValue = 'Microprocessors';
                 break;
             case 61:
-                teachesSubjectsValue = 'Microprocessors Laboratory';
+                teachesSubjectsValue = 'Introduction to Microwaves';
                 break;
             case 62:
-                teachesSubjectsValue = 'Waves Propagation';
+                teachesSubjectsValue = 'Microprocessors Laboratory';
                 break;
             case 63:
-                teachesSubjectsValue = 'Photonics and Electro-optics systems';
+                teachesSubjectsValue = 'Waves Propagation';
                 break;
             case 64:
-                teachesSubjectsValue = 'Antennas and Radiation';
+                teachesSubjectsValue = 'Photonics and Electro-optics systems';
                 break;
             case 65:
-                teachesSubjectsValue = 'Power Systems';
+                teachesSubjectsValue = 'Antennas and Radiation';
                 break;
             case 66:
-                teachesSubjectsValue = 'Waves and Distributed Systems';
+                teachesSubjectsValue = 'Power Systems';
                 break;
             case 67:
-                teachesSubjectsValue = 'Conversion Laboratory Energy';
+                teachesSubjectsValue = 'Waves and Distributed Systems';
                 break;
             case 68:
-                teachesSubjectsValue = 'Filter Design';
+                teachesSubjectsValue = 'Conversion Laboratory Energy';
                 break;
             case 69:
-                teachesSubjectsValue = 'Power Electronics Systems';
+                teachesSubjectsValue = 'Filter Design';
                 break;
             case 70:
-                teachesSubjectsValue = 'Advanced Control Theory';
+                teachesSubjectsValue = 'Power Electronics Systems';
                 break;
             case 71:
-                teachesSubjectsValue = 'High Voltage Engineering';
+                teachesSubjectsValue = 'Advanced Control Theory';
                 break;
             case 72:
-                teachesSubjectsValue = 'Digital Signal Processing';
+                teachesSubjectsValue = 'High Voltage Engineering';
                 break;
             case 73:
-                teachesSubjectsValue = 'Electronics Computer Aided Design';
+                teachesSubjectsValue = 'Digital Signal Processing';
                 break;
             case 74:
-                teachesSubjectsValue = 'Random Signals';
+                teachesSubjectsValue = 'Electronics Computer Aided Design';
                 break;
             case 75:
-                teachesSubjectsValue = 'Network Theory';
+                teachesSubjectsValue = 'Random Signals';
                 break;
             case 76:
-                teachesSubjectsValue = 'Neural Networks';
+                teachesSubjectsValue = 'Network Theory';
                 break;
             case 77:
-                teachesSubjectsValue = 'Dynamics and Control Spacecraft';
+                teachesSubjectsValue = 'Neural Networks';
                 break;
             case 78:
-                teachesSubjectsValue = 'Modern Optics and Electro optics';
+                teachesSubjectsValue = 'Dynamics and Control Spacecraft';
                 break;
             case 79:
-                teachesSubjectsValue = 'Engineering Economics';
+                teachesSubjectsValue = 'Modern Optics and Electro optics';
                 break;
             case 80:
-                teachesSubjectsValue = 'Introduction to Lasers';
+                teachesSubjectsValue = 'Engineering Economics';
                 break;
             case 81:
-                teachesSubjectsValue = 'Electronic Materials';
+                teachesSubjectsValue = 'Introduction to Lasers';
                 break;
             case 82:
-                teachesSubjectsValue = 'Robots Dynamics and Control';
+                teachesSubjectsValue = 'Electronic Materials';
                 break;
             case 83:
-                teachesSubjectsValue = 'High and Low Voltages Devices';
+                teachesSubjectsValue = 'Robots Dynamics and Control';
                 break;
             case 84:
-                teachesSubjectsValue = 'Receiving and Transmitting Techniques';
+                teachesSubjectsValue = 'High and Low Voltages Devices';
                 break;
             case 85:
-                teachesSubjectsValue = 'Statistics and Probability';
+                teachesSubjectsValue = 'Receiving and Transmitting Techniques';
                 break;
             case 86:
-                teachesSubjectsValue = 'Linear Algebra';
+                teachesSubjectsValue = 'Statistics and Probability';
                 break;
             case 87:
-                teachesSubjectsValue = 'Calculus';
+                teachesSubjectsValue = 'Linear Algebra';
                 break;
             case 88:
-                teachesSubjectsValue = 'Discrete Mathematics';
+                teachesSubjectsValue = 'Calculus';
                 break;
             case 89:
-                teachesSubjectsValue = 'Ordinary Differential Equations';
+                teachesSubjectsValue = 'Discrete Mathematics';
                 break;
             case 90:
-                teachesSubjectsValue = 'Mathematical Modeling';
+                teachesSubjectsValue = 'Ordinary Differential Equations';
                 break;
             case 91:
-                teachesSubjectsValue = 'Partial Differential Equations';
+                teachesSubjectsValue = 'Mathematical Modeling';
                 break;
             case 92:
-                teachesSubjectsValue = 'Complex Valued Functions';
+                teachesSubjectsValue = 'Partial Differential Equations';
                 break;
             case 93:
-                teachesSubjectsValue = 'Fourier Series and Integral Transforms';
+                teachesSubjectsValue = 'Complex Valued Functions';
                 break;
             case 94:
-                teachesSubjectsValue = 'Introduction to Modern Analysis';
+                teachesSubjectsValue = 'Fourier Series and Integral Transforms';
                 break;
             case 95:
-                teachesSubjectsValue = 'Numerical Analysis';
+                teachesSubjectsValue = 'Introduction to Modern Analysis';
                 break;
             case 96:
                 teachesSubjectsValue = 'Algorithm in Optimization';
@@ -2464,16 +2464,15 @@ var CommonProvider = (function () {
             { value: '93', viewValue: 'Complex Valued Functions' },
             { value: '94', viewValue: 'Fourier Series and Integral Transforms' },
             { value: '95', viewValue: 'Introduction to Modern Analysis' },
-            { value: '96', viewValue: 'Numerical Analysis' },
-            { value: '97', viewValue: 'Algorithm in Optimization' },
-            { value: '98', viewValue: 'Machine Learning' },
-            { value: '99', viewValue: 'Complex Functions' },
-            { value: '100', viewValue: 'Statistical Inference' },
-            { value: '101', viewValue: 'Machine Vision' },
-            { value: '102', viewValue: 'Forecasting Methods' },
-            { value: '103', viewValue: 'Fluid Mechanics' },
-            { value: '104', viewValue: 'Mechanics of Solids' },
-            { value: '105', viewValue: 'Web Programming' },
+            { value: '96', viewValue: 'Algorithm in Optimization' },
+            { value: '97', viewValue: 'Machine Learning' },
+            { value: '98', viewValue: 'Complex Functions' },
+            { value: '99', viewValue: 'Statistical Inference' },
+            { value: '100', viewValue: 'Machine Vision' },
+            { value: '101', viewValue: 'Forecasting Methods' },
+            { value: '102', viewValue: 'Fluid Mechanics' },
+            { value: '103', viewValue: 'Mechanics of Solids' },
+            { value: '104', viewValue: 'Web Programming' },
         ];
         this.reasonToContactArray = [
             { value: 'Suggestion', viewValue: 'Suggestion' },

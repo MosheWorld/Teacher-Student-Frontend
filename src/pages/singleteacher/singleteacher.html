@@ -101,8 +101,18 @@
       <ion-col col-12>
         <b>Teaches at Institutions:</b>
       </ion-col>
-      <ion-col col-12 *ngFor="let subject of teacher.teachesInstitutions">
-        - {{subject | teachesInstitutions}}
+      <ion-col col-12 *ngFor="let institution of teacher.teachesInstitutions">
+        - {{institution | teachesInstitutions}}
+      </ion-col>
+    </ion-row>
+
+    <!-- Teaches Subjects -->
+    <ion-row>
+      <ion-col col-12>
+        <b>Teaches Subjects:</b>
+      </ion-col>
+      <ion-col col-12 *ngFor="let subject of teacher.teachesSubjects">
+        - {{subject | teachesSubjects}}
       </ion-col>
     </ion-row>
 

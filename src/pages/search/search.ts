@@ -39,7 +39,7 @@ export class SearchPage {
   public showErrorMessage: boolean = false;
   public matcher = new MyErrorStateMatcher();
 
-  filteredStates: Observable<any[]>;
+  public filteredStates: Observable<any[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController, public commonProvider: CommonProvider) {
@@ -62,10 +62,7 @@ export class SearchPage {
       return;
     }
 
-    // Checks whether the subject form control input is match to subject list.
-    let subject = this.commonProvider.subjectsArray.find((data) => {
-      return data.viewValue === this.teachesSubjectsFormControl.value;
-    });
+    let subjectID = this.getSubjectID();
 
     let searchTeacherModel = {
       fromPrice: this.structure.lower,
@@ -161,5 +158,17 @@ export class SearchPage {
       buttons: ['Ok']
     });
     return alert;
+  }
+
+  private getSubjectID() {
+    let subjectID;
+
+    if (this.teachesSubjectsFormControl.value != null) {
+      subjectID = this.commonProvider.subjectsArray.find((data) => {
+        return data.viewValue === this.teachesSubjectsFormControl.value;
+      });
+    }
+
+    return subjectID == null ? null : parseInt(subjectID.value);
   }
 }

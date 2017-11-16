@@ -24,6 +24,7 @@ import { JointeacherPage } from './../pages/jointeacher/jointeacher';
 import { TeacherslistPage } from './../pages/teacherslist/teacherslist';
 import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
 import { LocalStorageProvider } from '../providers/local-storage/local-storage';
+import { TeachesSubjectsPipe } from './../pipes/teaches-subjects/teaches-subjects';
 import { FavoritesManagerProvider } from '../providers/favorites-manager/favorites-manager';
 import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
 
@@ -47,6 +48,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     JointeacherPage,
     TeacherslistPage,
     SingleteacherPage,
+    TeachesSubjectsPipe,
     TeachesInstitutionsPipe
   ],
   imports: [
@@ -86,6 +88,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     TeachesAtPipe,
     CommonProvider,
     ToasterProvider,
+    TeachesSubjectsPipe,
     LocalStorageProvider,
     ImageCompressService,
     TeachesInstitutionsPipe,

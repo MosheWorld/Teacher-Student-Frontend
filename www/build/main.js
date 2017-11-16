@@ -610,10 +610,7 @@ var SearchPage = (function () {
             this.showErrorMessage = true;
             return;
         }
-        // Checks whether the subject form control input is match to subject list.
-        var subject = this.commonProvider.subjectsArray.find(function (data) {
-            return data.viewValue === _this.teachesSubjectsFormControl.value;
-        });
+        var subjectID = this.getSubjectID();
         var searchTeacherModel = {
             fromPrice: this.structure.lower,
             toPrice: this.structure.upper,
@@ -697,11 +694,21 @@ var SearchPage = (function () {
         });
         return alert;
     };
+    SearchPage.prototype.getSubjectID = function () {
+        var _this = this;
+        var subjectID;
+        if (this.teachesSubjectsFormControl.value != null) {
+            subjectID = this.commonProvider.subjectsArray.find(function (data) {
+                return data.viewValue === _this.teachesSubjectsFormControl.value;
+            });
+        }
+        return subjectID == null ? null : parseInt(subjectID.value);
+    };
     return SearchPage;
 }());
 SearchPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-search',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\search\search.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Search Teacher</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-weight-300 m-font-size-35px">Search for a teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle 1 -->\n      <ion-row>\n        <ion-col col-12>\n          It\'s easy, it\'s fast, just fill the fields you want that your teacher will fit and we will find for you what you\'ve requested.\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle 2 -->\n      <ion-row>\n        <ion-col col-12>\n          We\n          <b>\n            <u>don\'t</u>\n          </b> force you to talk to them in our app, take the conversation to\n          <font class="m-color-1ab81a">WhatsApp</font> or other platform as you want, good luck!\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font> Be specific with your filter details in order to get the best results.\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- Find your next teacher title -->\n      <ion-row text-center class="m-padding-top-15px m-padding-buttom-15px">\n        <ion-col col-12>\n          Find your next teacher\n        </ion-col>\n      </ion-row>\n\n      <!-- Get all teachers button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button outline icon-start small (click)="getAllTeachers();">\n            <ion-icon name="ios-people"></ion-icon>\n            Get all teachers\n          </button>\n        </ion-col>\n      </ion-row>\n\n      <!-- Price range -->\n      <ion-row>\n        <ion-col col-12>\n          <ion-list-header>\n            Price per hour\n            <ion-badge item-end color="dark">From: {{structure.lower}}</ion-badge>\n            <ion-badge item-end color="dark">To: {{structure.upper}}</ion-badge>\n          </ion-list-header>\n          <ion-item>\n            <ion-range dualKnobs="true" pin="true" [(ngModel)]="structure" color="dark" min="0" max="200">\n              <ion-label range-left>0</ion-label>\n              <ion-label range-right>200</ion-label>\n            </ion-range>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n\n      <!-- Form -->\n      <form class="m-form">\n\n        <!-- Teaches Subjects and Teaches institutions -->\n        <ion-row>\n          <!-- Teaches Subjects -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input matInput placeholder="Teaches subjects" aria-label="Teaches subjects" [matAutocomplete]="auto" [formControl]="teachesSubjectsFormControl">\n              <mat-autocomplete #auto="matAutocomplete">\n                <mat-option *ngFor="let state of filteredStates | async" [value]="state.viewValue">\n                  {{ state.viewValue }}\n                </mat-option>\n              </mat-autocomplete>\n            </mat-form-field>\n          </ion-col>\n          <!-- Teaches institutions -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teaches institutions" [formControl]="teachesInstitutionsFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesInstitutionsArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>Institidues you\'re looking for?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teach at and Gender -->\n        <ion-row>\n          <!-- Teach at -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teach at" [formControl]="teachesAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesAtArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>Preferred place to learn?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n          <!-- Gender -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Gender" [formControl]="genderFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.genderArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n                <mat-option value="3">Doesn\'t matter</mat-option>\n              </mat-select>\n              <mat-hint>Gender preferred of your teacher?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Prices not valid -->\n      <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">"Price from" cannot be greater from "To price"</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Search teachers button -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <button ion-button (click)="searchTeachers()" block>Search for teacher</button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\search\search.html"*/,
+        selector: 'page-search',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\search\search.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Search Teacher</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-weight-300 m-font-size-35px">Search for a teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle 1 -->\n      <ion-row>\n        <ion-col col-12>\n          It\'s easy, it\'s fast, just fill the fields you want that your teacher will fit and we will find for you what you\'ve requested.\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle 2 -->\n      <ion-row>\n        <ion-col col-12>\n          We\n          <b>\n            <u>don\'t</u>\n          </b> force you to talk to them in our app, take the conversation to\n          <font class="m-color-1ab81a">WhatsApp</font> or other platform as you want, good luck!\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font> Be specific with your filter details in order to get the best results.\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- Find your next teacher title -->\n      <ion-row text-center class="m-padding-top-15px m-padding-buttom-15px">\n        <ion-col col-12>\n          Find your next teacher\n        </ion-col>\n      </ion-row>\n\n      <!-- Get all teachers button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button outline icon-start small (click)="getAllTeachers();">\n            <ion-icon name="ios-people"></ion-icon>\n            Get all teachers\n          </button>\n        </ion-col>\n      </ion-row>\n\n      <!-- Price range -->\n      <ion-row>\n        <ion-col col-12>\n          <ion-list-header>\n            Price per hour\n            <ion-badge item-end color="dark">From: {{structure.lower}}</ion-badge>\n            <ion-badge item-end color="dark">To: {{structure.upper}}</ion-badge>\n          </ion-list-header>\n          <ion-item>\n            <ion-range dualKnobs="true" pin="true" [(ngModel)]="structure" color="dark" min="0" max="200">\n              <ion-label range-left>0</ion-label>\n              <ion-label range-right>200</ion-label>\n            </ion-range>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n\n      <!-- Form -->\n      <form class="m-form">\n\n        <!-- Teaches institutions -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teaches institutions" [formControl]="teachesInstitutionsFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesInstitutionsArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>Institidues you\'re looking for?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teaches Subjects -->\n        <ion-row>\n          <ion-col col-12>\n            <font style="color: red;">Subjects not applied yet, beta.</font>\n            <mat-form-field class="m-full-width">\n              <input matInput placeholder="Teaches subjects" aria-label="Teaches subjects" [matAutocomplete]="auto" [formControl]="teachesSubjectsFormControl">\n              <mat-autocomplete #auto="matAutocomplete">\n                <mat-option *ngFor="let state of filteredStates | async" [value]="state.viewValue">\n                  {{ state.viewValue }}\n                </mat-option>\n              </mat-autocomplete>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teach at and Gender -->\n        <ion-row>\n          <!-- Teach at -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teach at" [formControl]="teachesAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesAtArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>Preferred place to learn?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n          <!-- Gender -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Gender" [formControl]="genderFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.genderArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n                <mat-option value="3">Doesn\'t matter</mat-option>\n              </mat-select>\n              <mat-hint>Gender preferred of your teacher?</mat-hint>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Prices not valid -->\n      <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">"Price from" cannot be greater from "To price"</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Search teachers button -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <button ion-button (click)="searchTeachers()" block>Search for teacher</button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\search\search.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_api_api__["a" /* ApiProvider */],
         __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_7__providers_common_common__["a" /* CommonProvider */]])
@@ -955,7 +962,7 @@ webpackEmptyAsyncContext.id = 189;
 
 var map = {
 	"../pages/contactus/contactus.module": [
-		722,
+		724,
 		6
 	],
 	"../pages/favorites/favorites.module": [
@@ -963,23 +970,23 @@ var map = {
 		5
 	],
 	"../pages/jointeacher/jointeacher.module": [
-		724,
+		725,
 		4
 	],
 	"../pages/search/search.module": [
-		725,
+		726,
 		3
 	],
 	"../pages/settings/settings.module": [
-		726,
+		727,
 		2
 	],
 	"../pages/singleteacher/singleteacher.module": [
-		727,
+		728,
 		1
 	],
 	"../pages/teacherslist/teacherslist.module": [
-		728,
+		729,
 		0
 	]
 };
@@ -1214,7 +1221,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_component__ = __webpack_require__(384);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(235);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(234);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__ = __webpack_require__(709);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_image_compress__ = __webpack_require__(241);
@@ -1240,19 +1247,21 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_teacherslist_teacherslist__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_singleteacher_singleteacher__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_local_storage_local_storage__ = __webpack_require__(237);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_favorites_manager_favorites_manager__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pipes_teaches_institutions_teaches_institutions__ = __webpack_require__(713);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__angular_material_tabs__ = __webpack_require__(714);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__angular_material_input__ = __webpack_require__(716);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__angular_material_select__ = __webpack_require__(717);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__angular_platform_browser_animations__ = __webpack_require__(719);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__angular_material_autocomplete__ = __webpack_require__(721);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pipes_teaches_subjects_teaches_subjects__ = __webpack_require__(713);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__providers_favorites_manager_favorites_manager__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pipes_teaches_institutions_teaches_institutions__ = __webpack_require__(714);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__angular_material_tabs__ = __webpack_require__(715);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__angular_material_input__ = __webpack_require__(717);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__angular_material_select__ = __webpack_require__(718);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__angular_platform_browser_animations__ = __webpack_require__(720);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__angular_material_autocomplete__ = __webpack_require__(722);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1305,7 +1314,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_21__pages_jointeacher_jointeacher__["a" /* JointeacherPage */],
             __WEBPACK_IMPORTED_MODULE_22__pages_teacherslist_teacherslist__["a" /* TeacherslistPage */],
             __WEBPACK_IMPORTED_MODULE_23__pages_singleteacher_singleteacher__["a" /* SingleteacherPage */],
-            __WEBPACK_IMPORTED_MODULE_26__pipes_teaches_institutions_teaches_institutions__["a" /* TeachesInstitutionsPipe */]
+            __WEBPACK_IMPORTED_MODULE_25__pipes_teaches_subjects_teaches_subjects__["a" /* TeachesSubjectsPipe */],
+            __WEBPACK_IMPORTED_MODULE_27__pipes_teaches_institutions_teaches_institutions__["a" /* TeachesInstitutionsPipe */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__["a" /* BrowserModule */],
@@ -1313,8 +1323,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__["a" /* Ionic2RatingModule */],
             __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */], {}, {
                 links: [
-                    { loadChildren: '../pages/contactus/contactus.module#ContactusPageModule', name: 'ContactusPage', segment: 'contactus', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/favorites/favorites.module#FavoritesPageModule', name: 'FavoritesPage', segment: 'favorites', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/contactus/contactus.module#ContactusPageModule', name: 'ContactusPage', segment: 'contactus', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/jointeacher/jointeacher.module#JointeacherPageModule', name: 'JointeacherPage', segment: 'jointeacher', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/search/search.module#SearchPageModule', name: 'SearchPage', segment: 'search', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
@@ -1326,11 +1336,11 @@ AppModule = __decorate([
                 prefix: 'StudyHub',
                 storageType: 'localStorage'
             }),
-            __WEBPACK_IMPORTED_MODULE_30__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-            __WEBPACK_IMPORTED_MODULE_28__angular_material_input__["a" /* MatInputModule */],
-            __WEBPACK_IMPORTED_MODULE_29__angular_material_select__["a" /* MatSelectModule */],
-            __WEBPACK_IMPORTED_MODULE_27__angular_material_tabs__["a" /* MatTabsModule */],
-            __WEBPACK_IMPORTED_MODULE_31__angular_material_autocomplete__["a" /* MatAutocompleteModule */]
+            __WEBPACK_IMPORTED_MODULE_31__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
+            __WEBPACK_IMPORTED_MODULE_29__angular_material_input__["a" /* MatInputModule */],
+            __WEBPACK_IMPORTED_MODULE_30__angular_material_select__["a" /* MatSelectModule */],
+            __WEBPACK_IMPORTED_MODULE_28__angular_material_tabs__["a" /* MatTabsModule */],
+            __WEBPACK_IMPORTED_MODULE_32__angular_material_autocomplete__["a" /* MatAutocompleteModule */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_7_ionic_angular__["b" /* IonicApp */]],
         entryComponents: [
@@ -1354,10 +1364,11 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_20__pipes_teaches_at_teaches_at__["a" /* TeachesAtPipe */],
             __WEBPACK_IMPORTED_MODULE_16__providers_common_common__["a" /* CommonProvider */],
             __WEBPACK_IMPORTED_MODULE_18__providers_toaster_toaster__["a" /* ToasterProvider */],
+            __WEBPACK_IMPORTED_MODULE_25__pipes_teaches_subjects_teaches_subjects__["a" /* TeachesSubjectsPipe */],
             __WEBPACK_IMPORTED_MODULE_24__providers_local_storage_local_storage__["a" /* LocalStorageProvider */],
             __WEBPACK_IMPORTED_MODULE_4_ng2_image_compress__["ImageCompressService"],
-            __WEBPACK_IMPORTED_MODULE_26__pipes_teaches_institutions_teaches_institutions__["a" /* TeachesInstitutionsPipe */],
-            __WEBPACK_IMPORTED_MODULE_25__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */]
+            __WEBPACK_IMPORTED_MODULE_27__pipes_teaches_institutions_teaches_institutions__["a" /* TeachesInstitutionsPipe */],
+            __WEBPACK_IMPORTED_MODULE_26__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */]
         ]
     })
 ], AppModule);
@@ -1416,7 +1427,7 @@ MyApp = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApiProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(235);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(234);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1654,6 +1665,359 @@ TeachesAtPipe = __decorate([
 /***/ }),
 
 /***/ 713:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeachesSubjectsPipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var TeachesSubjectsPipe = (function () {
+    function TeachesSubjectsPipe() {
+    }
+    TeachesSubjectsPipe.prototype.transform = function (value) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var teachesSubjectsValue;
+        switch (value) {
+            case 1:
+                teachesSubjectsValue = 'Introduction to Computer Science';
+                break;
+            case 2:
+                teachesSubjectsValue = 'Data Structures';
+                break;
+            case 3:
+                teachesSubjectsValue = 'Mathematical Tools for Computer Science';
+                break;
+            case 4:
+                teachesSubjectsValue = 'Advanced Programming Workshop';
+                break;
+            case 5:
+                teachesSubjectsValue = 'Computer Organization and Assembly';
+                break;
+            case 6:
+                teachesSubjectsValue = 'Computer Structure and Switching Theory';
+                break;
+            case 7:
+                teachesSubjectsValue = 'Operating Systems';
+                break;
+            case 8:
+                teachesSubjectsValue = 'Automata and Formal Languages';
+                break;
+            case 9:
+                teachesSubjectsValue = 'Design and Analysis of Algorithms';
+                break;
+            case 10:
+                teachesSubjectsValue = 'Logic For Computer Science';
+                break;
+            case 11:
+                teachesSubjectsValue = 'Logic Programming';
+                break;
+            case 12:
+                teachesSubjectsValue = 'Data Base Systems';
+                break;
+            case 13:
+                teachesSubjectsValue = 'Compilation Theory';
+                break;
+            case 14:
+                teachesSubjectsValue = 'Computer Communication Networks';
+                break;
+            case 15:
+                teachesSubjectsValue = 'Computability and Complexity of Algorithms';
+                break;
+            case 16:
+                teachesSubjectsValue = 'Object Oriented Programming';
+                break;
+            case 17:
+                teachesSubjectsValue = 'Foundations of Information Systems';
+                break;
+            case 18:
+                teachesSubjectsValue = 'Graph Theory';
+                break;
+            case 19:
+                teachesSubjectsValue = 'Real Time Systems';
+                break;
+            case 20:
+                teachesSubjectsValue = 'System Programming';
+                break;
+            case 21:
+                teachesSubjectsValue = 'Design Patterns';
+                break;
+            case 22:
+                teachesSubjectsValue = 'Data Mining';
+                break;
+            case 23:
+                teachesSubjectsValue = 'Computer Vision';
+                break;
+            case 24:
+                teachesSubjectsValue = 'Geometry View Multiple';
+                break;
+            case 25:
+                teachesSubjectsValue = 'Computer Graphics';
+                break;
+            case 26:
+                teachesSubjectsValue = 'Introduction to Fuzzy Logic';
+                break;
+            case 27:
+                teachesSubjectsValue = 'Introduction to Cryptography';
+                break;
+            case 28:
+                teachesSubjectsValue = 'Data Compression';
+                break;
+            case 29:
+                teachesSubjectsValue = 'Signal and Image Processing ';
+                break;
+            case 30:
+                teachesSubjectsValue = 'Computer Architecture';
+                break;
+            case 31:
+                teachesSubjectsValue = 'Hardware Description Languages';
+                break;
+            case 32:
+                teachesSubjectsValue = 'Digital Systems';
+                break;
+            case 33:
+                teachesSubjectsValue = 'Expert Systems';
+                break;
+            case 34:
+                teachesSubjectsValue = 'Artificial Intelligence';
+                break;
+            case 35:
+                teachesSubjectsValue = 'Programming in C#';
+                break;
+            case 36:
+                teachesSubjectsValue = 'Programming in Java';
+                break;
+            case 37:
+                teachesSubjectsValue = 'Programming in Python';
+                break;
+            case 38:
+                teachesSubjectsValue = 'Programming in JavaScript';
+                break;
+            case 39:
+                teachesSubjectsValue = 'Numerical Analysis';
+                break;
+            case 40:
+                teachesSubjectsValue = 'Numerical algorithms';
+                break;
+            case 41:
+                teachesSubjectsValue = 'Logic Design';
+                break;
+            case 42:
+                teachesSubjectsValue = 'Approximation algorithms';
+                break;
+            case 43:
+                teachesSubjectsValue = 'Secure Quality Programs';
+                break;
+            case 44:
+                teachesSubjectsValue = 'Introduction to Robotics';
+                break;
+            case 45:
+                teachesSubjectsValue = 'Semiconductors';
+                break;
+            case 46:
+                teachesSubjectsValue = 'Electrical Engineering Laboratory';
+                break;
+            case 47:
+                teachesSubjectsValue = 'Semiconductor Devices';
+                break;
+            case 48:
+                teachesSubjectsValue = 'Switching and Logic Design';
+                break;
+            case 49:
+                teachesSubjectsValue = 'Introduction to Linear Systems';
+                break;
+            case 50:
+                teachesSubjectsValue = 'Analog Linear Electronic Circuits';
+                break;
+            case 51:
+                teachesSubjectsValue = 'Energy Conversion';
+                break;
+            case 52:
+                teachesSubjectsValue = 'Signals and Systems';
+                break;
+            case 53:
+                teachesSubjectsValue = 'Electromagnetic Fields';
+                break;
+            case 54:
+                teachesSubjectsValue = 'Digital Circuits';
+                break;
+            case 55:
+                teachesSubjectsValue = 'Introduction to Control Theory';
+                break;
+            case 56:
+                teachesSubjectsValue = 'Laboratory of Logic Digital Circuits';
+                break;
+            case 57:
+                teachesSubjectsValue = 'Communication Engineering';
+                break;
+            case 58:
+                teachesSubjectsValue = 'Electric Drives';
+                break;
+            case 59:
+                teachesSubjectsValue = 'Microprocessors';
+                break;
+            case 60:
+                teachesSubjectsValue = 'Introduction to Microwaves';
+                break;
+            case 61:
+                teachesSubjectsValue = 'Microprocessors Laboratory';
+                break;
+            case 62:
+                teachesSubjectsValue = 'Waves Propagation';
+                break;
+            case 63:
+                teachesSubjectsValue = 'Photonics and Electro-optics systems';
+                break;
+            case 64:
+                teachesSubjectsValue = 'Antennas and Radiation';
+                break;
+            case 65:
+                teachesSubjectsValue = 'Power Systems';
+                break;
+            case 66:
+                teachesSubjectsValue = 'Waves and Distributed Systems';
+                break;
+            case 67:
+                teachesSubjectsValue = 'Conversion Laboratory Energy';
+                break;
+            case 68:
+                teachesSubjectsValue = 'Filter Design';
+                break;
+            case 69:
+                teachesSubjectsValue = 'Power Electronics Systems';
+                break;
+            case 70:
+                teachesSubjectsValue = 'Advanced Control Theory';
+                break;
+            case 71:
+                teachesSubjectsValue = 'High Voltage Engineering';
+                break;
+            case 72:
+                teachesSubjectsValue = 'Digital Signal Processing';
+                break;
+            case 73:
+                teachesSubjectsValue = 'Electronics Computer Aided Design';
+                break;
+            case 74:
+                teachesSubjectsValue = 'Random Signals';
+                break;
+            case 75:
+                teachesSubjectsValue = 'Network Theory';
+                break;
+            case 76:
+                teachesSubjectsValue = 'Neural Networks';
+                break;
+            case 77:
+                teachesSubjectsValue = 'Dynamics and Control Spacecraft';
+                break;
+            case 78:
+                teachesSubjectsValue = 'Modern Optics and Electro optics';
+                break;
+            case 79:
+                teachesSubjectsValue = 'Engineering Economics';
+                break;
+            case 80:
+                teachesSubjectsValue = 'Introduction to Lasers';
+                break;
+            case 81:
+                teachesSubjectsValue = 'Electronic Materials';
+                break;
+            case 82:
+                teachesSubjectsValue = 'Robots Dynamics and Control';
+                break;
+            case 83:
+                teachesSubjectsValue = 'High and Low Voltages Devices';
+                break;
+            case 84:
+                teachesSubjectsValue = 'Receiving and Transmitting Techniques';
+                break;
+            case 85:
+                teachesSubjectsValue = 'Statistics and Probability';
+                break;
+            case 86:
+                teachesSubjectsValue = 'Linear Algebra';
+                break;
+            case 87:
+                teachesSubjectsValue = 'Calculus';
+                break;
+            case 88:
+                teachesSubjectsValue = 'Discrete Mathematics';
+                break;
+            case 89:
+                teachesSubjectsValue = 'Ordinary Differential Equations';
+                break;
+            case 90:
+                teachesSubjectsValue = 'Mathematical Modeling';
+                break;
+            case 91:
+                teachesSubjectsValue = 'Partial Differential Equations';
+                break;
+            case 92:
+                teachesSubjectsValue = 'Complex Valued Functions';
+                break;
+            case 93:
+                teachesSubjectsValue = 'Fourier Series and Integral Transforms';
+                break;
+            case 94:
+                teachesSubjectsValue = 'Introduction to Modern Analysis';
+                break;
+            case 95:
+                teachesSubjectsValue = 'Numerical Analysis';
+                break;
+            case 96:
+                teachesSubjectsValue = 'Algorithm in Optimization';
+                break;
+            case 97:
+                teachesSubjectsValue = 'Machine Learning';
+                break;
+            case 98:
+                teachesSubjectsValue = 'Complex Functions';
+                break;
+            case 99:
+                teachesSubjectsValue = 'Statistical Inference';
+                break;
+            case 100:
+                teachesSubjectsValue = 'Machine Vision';
+                break;
+            case 101:
+                teachesSubjectsValue = 'Forecasting Methods';
+                break;
+            case 102:
+                teachesSubjectsValue = 'Fluid Mechanics';
+                break;
+            case 103:
+                teachesSubjectsValue = 'Mechanics of Solids';
+                break;
+            case 104:
+                teachesSubjectsValue = 'Web Programming';
+                break;
+            default:
+                console.log("Bad pipe value.");
+                break;
+        }
+        return teachesSubjectsValue;
+    };
+    return TeachesSubjectsPipe;
+}());
+TeachesSubjectsPipe = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Pipe"])({
+        name: 'teachesSubjects',
+    })
+], TeachesSubjectsPipe);
+
+//# sourceMappingURL=teaches-subjects.js.map
+
+/***/ }),
+
+/***/ 714:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2005,8 +2369,111 @@ var CommonProvider = (function () {
             { value: '42', viewValue: 'Tel-Hai Academic College' },
         ];
         this.subjectsArray = [
-            { value: '1', viewValue: 'Test a' },
-            { value: '2', viewValue: 'Test b' }
+            { value: '1', viewValue: 'Programming in C' },
+            { value: '2', viewValue: 'Introduction to Computer Science' },
+            { value: '3', viewValue: 'Data Structures' },
+            { value: '4', viewValue: 'Mathematical Tools for Computer Science' },
+            { value: '5', viewValue: 'Advanced Programming Workshop' },
+            { value: '6', viewValue: 'Computer Organization and Assembly' },
+            { value: '7', viewValue: 'Computer Structure and Switching Theory' },
+            { value: '8', viewValue: 'Operating Systems' },
+            { value: '9', viewValue: 'Automata and Formal Languages' },
+            { value: '10', viewValue: 'Design and Analysis of Algorithms' },
+            { value: '11', viewValue: 'Logic For Computer Science' },
+            { value: '12', viewValue: 'Logic Programming' },
+            { value: '13', viewValue: 'Data Base Systems' },
+            { value: '14', viewValue: 'Compilation Theory' },
+            { value: '15', viewValue: 'Computer Communication Networks' },
+            { value: '16', viewValue: 'Computability and Complexity of Algorithms' },
+            { value: '17', viewValue: 'Object Oriented Programming' },
+            { value: '18', viewValue: 'Foundations of Information Systems' },
+            { value: '19', viewValue: 'Graph Theory' },
+            { value: '20', viewValue: 'Real Time Systems' },
+            { value: '21', viewValue: 'System Programming' },
+            { value: '22', viewValue: 'Design Patterns' },
+            { value: '23', viewValue: 'Data Mining' },
+            { value: '24', viewValue: 'Computer Vision' },
+            { value: '25', viewValue: 'Geometry View Multiple' },
+            { value: '26', viewValue: 'Computer Graphics' },
+            { value: '27', viewValue: 'Introduction to Fuzzy Logic' },
+            { value: '28', viewValue: 'Introduction to Cryptography' },
+            { value: '29', viewValue: 'Data Compression' },
+            { value: '30', viewValue: 'Signal and Image Processing ' },
+            { value: '31', viewValue: 'Computer Architecture' },
+            { value: '32', viewValue: 'Hardware Description Languages' },
+            { value: '33', viewValue: 'Digital Systems' },
+            { value: '34', viewValue: 'Expert Systems' },
+            { value: '35', viewValue: 'Artificial Intelligence' },
+            { value: '36', viewValue: 'Programming in C#' },
+            { value: '37', viewValue: 'Programming in Java' },
+            { value: '38', viewValue: 'Programming in Python' },
+            { value: '39', viewValue: 'Programming in JavaScript' },
+            { value: '40', viewValue: 'Numerical Analysis' },
+            { value: '41', viewValue: 'Numerical algorithms' },
+            { value: '42', viewValue: 'Logic Design' },
+            { value: '43', viewValue: 'Approximation algorithms' },
+            { value: '44', viewValue: 'Secure Quality Programs' },
+            { value: '45', viewValue: 'Introduction to Robotics' },
+            { value: '46', viewValue: 'Semiconductors' },
+            { value: '47', viewValue: 'Electrical Engineering Laboratory' },
+            { value: '48', viewValue: 'Semiconductor Devices' },
+            { value: '49', viewValue: 'Switching and Logic Design' },
+            { value: '50', viewValue: 'Introduction to Linear Systems' },
+            { value: '51', viewValue: 'Analog Linear Electronic Circuits' },
+            { value: '52', viewValue: 'Energy Conversion' },
+            { value: '53', viewValue: 'Signals and Systems' },
+            { value: '54', viewValue: 'Electromagnetic Fields' },
+            { value: '55', viewValue: 'Digital Circuits' },
+            { value: '56', viewValue: 'Introduction to Control Theory' },
+            { value: '57', viewValue: 'Laboratory of Logic Digital Circuits' },
+            { value: '58', viewValue: 'Communication Engineering' },
+            { value: '59', viewValue: 'Electric Drives' },
+            { value: '60', viewValue: 'Microprocessors' },
+            { value: '61', viewValue: 'Introduction to Microwaves' },
+            { value: '62', viewValue: 'Microprocessors Laboratory' },
+            { value: '63', viewValue: 'Waves Propagation' },
+            { value: '64', viewValue: 'Photonics and Electro-optics systems' },
+            { value: '65', viewValue: 'Antennas and Radiation' },
+            { value: '66', viewValue: 'Power Systems' },
+            { value: '67', viewValue: 'Waves and Distributed Systems' },
+            { value: '68', viewValue: 'Conversion Laboratory Energy' },
+            { value: '69', viewValue: 'Filter Design' },
+            { value: '70', viewValue: 'Power Electronics Systems' },
+            { value: '71', viewValue: 'Advanced Control Theory' },
+            { value: '72', viewValue: 'High Voltage Engineering' },
+            { value: '73', viewValue: 'Digital Signal Processing' },
+            { value: '74', viewValue: 'Electronics Computer Aided Design' },
+            { value: '75', viewValue: 'Random Signals' },
+            { value: '76', viewValue: 'Network Theory' },
+            { value: '77', viewValue: 'Neural Networks' },
+            { value: '78', viewValue: 'Dynamics and Control Spacecraft' },
+            { value: '79', viewValue: 'Modern Optics and Electro optics' },
+            { value: '80', viewValue: 'Engineering Economics' },
+            { value: '81', viewValue: 'Introduction to Lasers' },
+            { value: '82', viewValue: 'Electronic Materials' },
+            { value: '83', viewValue: 'Robots Dynamics and Control' },
+            { value: '84', viewValue: 'High and Low Voltages Devices' },
+            { value: '85', viewValue: 'Receiving and Transmitting Techniques' },
+            { value: '86', viewValue: 'Statistics and Probability' },
+            { value: '87', viewValue: 'Linear Algebra' },
+            { value: '88', viewValue: 'Calculus' },
+            { value: '89', viewValue: 'Discrete Mathematics' },
+            { value: '90', viewValue: 'Ordinary Differential Equations' },
+            { value: '91', viewValue: 'Mathematical Modeling' },
+            { value: '92', viewValue: 'Partial Differential Equations' },
+            { value: '93', viewValue: 'Complex Valued Functions' },
+            { value: '94', viewValue: 'Fourier Series and Integral Transforms' },
+            { value: '95', viewValue: 'Introduction to Modern Analysis' },
+            { value: '96', viewValue: 'Numerical Analysis' },
+            { value: '97', viewValue: 'Algorithm in Optimization' },
+            { value: '98', viewValue: 'Machine Learning' },
+            { value: '99', viewValue: 'Complex Functions' },
+            { value: '100', viewValue: 'Statistical Inference' },
+            { value: '101', viewValue: 'Machine Vision' },
+            { value: '102', viewValue: 'Forecasting Methods' },
+            { value: '103', viewValue: 'Fluid Mechanics' },
+            { value: '104', viewValue: 'Mechanics of Solids' },
+            { value: '105', viewValue: 'Web Programming' },
         ];
         this.reasonToContactArray = [
             { value: 'Suggestion', viewValue: 'Suggestion' },

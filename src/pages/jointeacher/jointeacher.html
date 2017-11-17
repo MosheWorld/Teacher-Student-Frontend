@@ -151,7 +151,10 @@
               <input type="tel" maxlength="10" matInput placeholder="Phone" [formControl]="phoneFormControl" [errorStateMatcher]="matcher">
               <mat-hint>Your personal phone number</mat-hint>
               <mat-error *ngIf="phoneFormControl.hasError('minlength') || phoneFormControl.hasError('maxlength') && !phoneFormControl.hasError('required')">
-                Phone is not valid.
+               Length of phone number is invalid.
+              </mat-error>
+              <mat-error *ngIf="phoneFormControl.errors && phoneFormControl.errors.badphonenumber && !phoneFormControl.hasError('required')">
+                Phone number is invalid.
               </mat-error>
               <mat-error *ngIf="phoneFormControl.hasError('required')">
                 Phone is

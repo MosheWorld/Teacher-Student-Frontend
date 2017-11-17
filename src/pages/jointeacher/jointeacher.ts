@@ -22,18 +22,19 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class JointeacherPage {
-  public firstNameFormControl = new FormControl('', [Validators.required]);
-  public lastNameFormControl = new FormControl('', [Validators.required]);
-  public emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  //#region Members
+  public firstNameFormControl = new FormControl(null, [Validators.required]);
+  public lastNameFormControl = new FormControl(null, [Validators.required]);
+  public emailFormControl = new FormControl(null, [Validators.required, Validators.email]);
   public phoneFormControl = new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(10)]);
   public personalMessageFormControl = new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]);
   public toPriceFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(1), Validators.max(200)]);
   public fromPriceFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(1), Validators.max(200)]);
-  public teachesAtFormControl = new FormControl('', [Validators.required]);
+  public teachesAtFormControl = new FormControl(null, [Validators.required]);
   public ageFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(1), Validators.max(120)]);
-  public genderAtFormControl = new FormControl('', [Validators.required]);
-  public teachesInstitutionsFormControl = new FormControl('', [Validators.required]);
-  public teachesSubjectsFormControl = new FormControl('', [Validators.required]);
+  public genderAtFormControl = new FormControl(null, [Validators.required]);
+  public teachesInstitutionsFormControl = new FormControl(null, [Validators.required]);
+  public teachesSubjectsFormControl = new FormControl(null, [Validators.required]);
 
   public image: String = null;
   public matcher = new MyErrorStateMatcher();
@@ -45,7 +46,9 @@ export class JointeacherPage {
 
   public imageWidth: number;
   public imageHeight: number;
+  //#endregion
 
+  //#region Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController, public rd: Renderer2,
     public platform: Platform, public commonProvider: CommonProvider) {
@@ -54,7 +57,9 @@ export class JointeacherPage {
     this.imageWidth = platform.width() - 20;
     this.imageHeight = platform.width() - 20;
   }
+  //#endregion
 
+  //#region Public Methods
   public createTeacher() {
     this.showErrorMessage = false;
     this.showErrorMessagePrices = false;
@@ -108,7 +113,9 @@ export class JointeacherPage {
       }, 1000);
     }
   }
+  //#endregion
 
+  //#region Private Methods
   private convertStringToInteger() {
     if (this.fromPriceFormControl.valid) { this.fromPriceFormControl.setValue(parseInt(this.fromPriceFormControl.value)); }
     if (this.toPriceFormControl.valid) { this.toPriceFormControl.setValue(parseInt(this.toPriceFormControl.value)); }
@@ -116,22 +123,13 @@ export class JointeacherPage {
   }
 
   private isModelValid() {
-    if (
-      !this.teachesAtFormControl.value ||
-      !this.fromPriceFormControl.valid ||
-      !this.toPriceFormControl.valid ||
+    if (!this.isFormsValid() ||
+      this.isFormsNullOrEmpty() ||
       this.fromPriceFormControl.value > this.toPriceFormControl.value ||
-      !this.ageFormControl.valid ||
-      !this.phoneFormControl.valid ||
       !this.isPhoneValid(this.phoneFormControl.value) ||
-      !this.emailFormControl.valid ||
       !isEmail(this.emailFormControl.value) ||
-      !this.genderAtFormControl.valid ||
-      !this.firstNameFormControl.valid ||
-      !this.lastNameFormControl.valid ||
-      !this.personalMessageFormControl.valid ||
-      !this.teachesAtFormControl.valid ||
-      this.teachesAtFormControl.value == null || this.teachesAtFormControl.value.length === 0) {
+      this.teachesInstitutionsFormControl.value == null || this.teachesInstitutionsFormControl.value.length === 0 ||
+      this.teachesSubjectsFormControl.value == null || this.teachesSubjectsFormControl.value.length === 0) {
       if (this.fromPriceFormControl.value > this.toPriceFormControl.value) {
         this.showErrorMessagePrices = true;
       }
@@ -152,7 +150,10 @@ export class JointeacherPage {
   private createNewTeacherDataJson() {
     this.teachesInstitutionsFormControl.value.forEach((value, index) => {
       this.teachesInstitutionsFormControl.value[index] = parseInt(value.toString());
-    })
+    });
+    this.teachesSubjectsFormControl.value.forEach((value, index) => {
+      this.teachesSubjectsFormControl.value[index] = parseInt(value.toString());
+    });
 
     let newTeacher = {
       age: this.ageFormControl.value,
@@ -166,6 +167,7 @@ export class JointeacherPage {
       personalMessage: this.personalMessageFormControl.value,
       teachesAt: parseInt(this.teachesAtFormControl.value),
       teachesInstitutions: this.teachesInstitutionsFormControl.value,
+      teachesSubjects: this.teachesSubjectsFormControl.value,
       rate: 0,
       image: this.image
     };
@@ -181,6 +183,37 @@ export class JointeacherPage {
     return alert;
   }
 
+  private isFormsValid() {
+    if (!this.firstNameFormControl.valid ||
+      !this.lastNameFormControl.valid ||
+      !this.ageFormControl.valid ||
+      !this.genderAtFormControl.valid ||
+      !this.emailFormControl.valid ||
+      !this.phoneFormControl.valid ||
+      !this.toPriceFormControl.valid ||
+      !this.fromPriceFormControl.valid ||
+      !this.teachesAtFormControl.valid ||
+      !this.teachesSubjectsFormControl.valid ||
+      !this.teachesInstitutionsFormControl.valid ||
+      !this.personalMessageFormControl.valid) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  private isFormsNullOrEmpty() {
+    if (this.isStringNullOrEmpty(this.firstNameFormControl.value) ||
+      this.isStringNullOrEmpty(this.lastNameFormControl.value) ||
+      this.isStringNullOrEmpty(this.emailFormControl.value) ||
+      this.isStringNullOrEmpty(this.phoneFormControl.value) ||
+      this.isStringNullOrEmpty(this.personalMessageFormControl.value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   private isPhoneValid(phone: string) {
     if (this.isStringNullOrEmpty(phone) || phone.length < 9) {
       return false;
@@ -192,8 +225,10 @@ export class JointeacherPage {
       } else if (phone.substring(0, 4) === "+972") {
         return true;
       } else {
+        this.phoneFormControl.setErrors({"badphonenumber":true});
         return false;
       }
     }
   }
+  //#endregion
 }

@@ -31,8 +31,8 @@ import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -61,9 +61,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
       storageType: 'localStorage'
     }),
     BrowserAnimationsModule,
+    MatTabsModule,
     MatInputModule,
     MatSelectModule,
-    MatTabsModule,
     MatAutocompleteModule
   ],
   bootstrap: [IonicApp],

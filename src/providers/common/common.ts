@@ -9,10 +9,18 @@ export class CommonProvider {
     { value: '3', viewValue: 'Both' }
   ];
 
+
+
+
+
   public genderArray = [
     { value: '1', viewValue: 'Male' },
     { value: '2', viewValue: 'Female' }
   ];
+
+
+
+
 
   public teachesInstitutionsArray = [
     { value: '1', viewValue: 'Holon Institute Of Technology' },
@@ -58,6 +66,10 @@ export class CommonProvider {
     { value: '41', viewValue: 'Shenkar College of Engineering and Design' },
     { value: '42', viewValue: 'Tel-Hai Academic College' },
   ];
+
+
+
+
 
   public subjectsArray = [
     { value: '1', viewValue: 'Advanced Control Theory' },
@@ -166,14 +178,9 @@ export class CommonProvider {
     { value: '104', viewValue: 'Web Programming' }
   ];
 
-  public reasonToContactArray = [
-    { value: 'Suggestion', viewValue: 'Suggestion' },
-    { value: 'Investment', viewValue: 'Investment' },
-    { value: 'Careers', viewValue: 'Careers' },
-    { value: 'Complain', viewValue: 'Complain' },
-    { value: 'Bug report', viewValue: 'Bug report' },
-    { value: 'Other', viewValue: 'Other' }
-  ];
+
+
+
 
   teachesSubjectsGroupsArray = [
     {
@@ -362,6 +369,35 @@ export class CommonProvider {
     }
   ];
 
+
+
+
+  public reasonToContactArray = [
+    { value: 'Suggestion', viewValue: 'Suggestion' },
+    { value: 'Investment', viewValue: 'Investment' },
+    { value: 'Careers', viewValue: 'Careers' },
+    { value: 'Complain', viewValue: 'Complain' },
+    { value: 'Bug report', viewValue: 'Bug report' },
+    { value: 'Other', viewValue: 'Other' }
+  ];
+
+
+  // subjectsArray.sort(function (a, b) {
+  //   if (a.viewValue.toLowerCase() < b.viewValue.toLowerCase()) {
+  //     return -1;
+  //   } else if (a.viewValue.toLowerCase() > b.viewValue.toLowerCase()) {
+  //     return 1;
+  //   } else {
+  //     return 0;
+  //   }
+  // });
+
+  // for (var i = 1; i <= subjectsArray.length; i++) {
+  //   var buildString = "{ value: '" + i + "', viewValue: '" + subjectsArray[i - 1].viewValue + "' },<br>";
+  //   document.getElementById("test").innerHTML += buildString;
+  // }
+
+  
   constructor() {
   }
 }

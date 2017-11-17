@@ -245,6 +245,8 @@
                   </mat-option>
                 </mat-optgroup>
               </mat-select>
+              <mat-hint>What courses do you teach?</mat-hint>
+              <mat-error *ngIf="teachesSubjectsFormControl.hasError('required')">You must make a selection.</mat-error>
             </mat-form-field>
           </ion-col>
         </ion-row>

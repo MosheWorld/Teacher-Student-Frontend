@@ -1223,7 +1223,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">StudyHub</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');" class="animated flip">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-43px m-font-weight-300">Built for students and teachers</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          <div class="m-font-size-20px m-color-white m-font-weight-300 m-opacity-6">\n            StudyHub is a study platform inspired by the way you work. You can find teachers\n            <font class="m-color-white">from your home</font> and talk with them directly, Manage your teachers & Teach other people.\n          </div>\n        </ion-col>\n        <ion-col col-12>\n          <div class="m-font-size-20px m-color-white m-font-weight-300">\n            <b>Keep it simple and fun</b>\n          </div>\n        </ion-col>\n      </ion-row>\n\n      <!-- Start using button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button color="secondary" (click)="goPage(\'search\');">\n            <b>Start using StudyHub</b>\n          </button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n  </div>\n\n  <!-- White area -->\n  <div>\n    <ion-grid>\n\n      <!-- StudyHub for individuals title -->\n      <ion-row text-center class="m-padding-buttom-15px m-padding-top-15px">\n        <ion-col col-12>\n          StudyHub for individuals\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for individuals subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n\n          <font class="m-font-size-17px m-font-weight-300 m-color-586069">As individual user at StudyHub you can find teachers around Israel, talk with them directly at WhatsApp, rank teachers\n            and tell your opinion about them.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for teachers title -->\n      <ion-row text-center class="m-padding-buttom-15px m-padding-top-15px">\n        <ion-col col-12>\n          StudyHub for teachers\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for teachers subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n\n          <font class="m-font-size-17px m-font-weight-300 m-color-586069">\n            As a teacher at StudyHub you\'ll be shown at students searches over the app, you will have your own profile and you will be\n            able to manage it as you wish.\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Join as teacher button -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <button ion-button outline color="primary" (click)="goPage(\'joinasteacher\');" icon-start>\n            <ion-icon name="ios-person-add-outline"></ion-icon>\n            Join as teacher\n          </button>\n        </ion-col>\n      </ion-row>\n\n      <!-- Slider -->\n      <ion-row>\n        <ion-col col-12>\n          <ion-slides centeredSlides="true" loop="true" pager="true" speed="600">\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider1.jpeg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider4.jpg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider3.jpeg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider2.jpg" />\n            </ion-slide>\n          </ion-slides>\n        </ion-col>\n      </ion-row>\n\n      <hr>\n\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-font-size-25px">\n            <b>StudyHub - Owner</b>\n          </font>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col col-12>\n          Moshe Binieli\n        </ion-col>\n        <ion-col col-12>\n          mmoshikoo@gmail.com\n        </ion-col>\n        <ion-col col-12>\n          Computer Science student and Full Stack developer.\n        </ion-col>\n        <ion-col col-12>\n\n          <button ion-button outline color="dark" small icon-start (click)="goPage(\'contactme\');">\n            <ion-icon name="ios-contacts"></ion-icon>Contact us</button>\n\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </div>\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">StudyHub</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-f5ae08">\n      <div (click)="goPage(\'favorites\');" class="animated flip">\n        <ion-icon name="ios-star"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-43px m-font-weight-300">Built for students and teachers</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          <div class="m-font-size-20px m-color-white m-font-weight-300 m-opacity-6">\n            StudyHub is a study platform inspired by the way you work. You can find teachers\n            <font class="m-color-white">from your home</font> and talk with them directly, Manage your teachers & Teach other people.\n          </div>\n        </ion-col>\n        <ion-col col-12>\n          <div class="m-font-size-20px m-color-white m-font-weight-300">\n            <b>Keep it simple and fun</b>\n          </div>\n        </ion-col>\n      </ion-row>\n\n      <!-- Start using button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button color="secondary" (click)="goPage(\'search\');">\n            <b>Start using StudyHub</b>\n          </button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n  </div>\n\n  <!-- White area -->\n  <div>\n    <ion-grid>\n\n      <!-- StudyHub for individuals title -->\n      <ion-row text-center class="m-padding-buttom-15px m-padding-top-15px">\n        <ion-col col-12>\n          StudyHub for individuals\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for individuals subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n\n          <font class="m-font-size-17px m-font-weight-300 m-color-586069">As individual user at StudyHub you can find teachers around Israel, talk with them directly at WhatsApp, rank teachers\n            and tell your opinion about them.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for teachers title -->\n      <ion-row text-center class="m-padding-buttom-15px m-padding-top-15px">\n        <ion-col col-12>\n          StudyHub for teachers\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for teachers subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n\n          <font class="m-font-size-17px m-font-weight-300 m-color-586069">\n            As a teacher at StudyHub you\'ll be shown at students searches over the app, you will have your own profile and you will be\n            able to manage it as you wish.\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Join as teacher button -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <button ion-button outline color="primary" (click)="goPage(\'joinasteacher\');" icon-start>\n            <ion-icon name="ios-person-add-outline"></ion-icon>\n            Join as teacher\n          </button>\n        </ion-col>\n      </ion-row>\n\n      <!-- Slider -->\n      <ion-row>\n        <ion-col col-12>\n          <ion-slides centeredSlides="true" loop="true" pager="true" speed="600">\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider1.jpeg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider4.jpg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider3.jpeg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider2.jpg" />\n            </ion-slide>\n          </ion-slides>\n        </ion-col>\n      </ion-row>\n\n      <hr>\n\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-font-size-25px">\n            <b>StudyHub - Owner</b>\n          </font>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col col-12>\n          Moshe Binieli\n        </ion-col>\n        <ion-col col-12>\n          mmoshikoo@gmail.com\n        </ion-col>\n        <ion-col col-12>\n          Computer Science student and Full Stack developer.\n        </ion-col>\n        <ion-col col-12>\n\n          <button ion-button outline color="dark" small icon-start (click)="goPage(\'contactme\');">\n            <ion-icon name="ios-contacts"></ion-icon>Contact us</button>\n\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </div>\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
 ], HomePage);
@@ -1237,17 +1237,17 @@ HomePage = __decorate([
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(380);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hammerjs__ = __webpack_require__(382);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hammerjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_hammerjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hammerjs__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hammerjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_hammerjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__ = __webpack_require__(381);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_module__ = __webpack_require__(383);
 
 
 
 
-Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["enableProdMode"])();
-Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_module__["a" /* AppModule */]);
+Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["enableProdMode"])();
+Object(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_module__["a" /* AppModule */]);
 //# sourceMappingURL=main.js.map
 
 /***/ }),
@@ -2084,88 +2084,88 @@ var TeachesInstitutionsPipe = (function () {
                 teachesInstitutionsValue = 'Technion';
                 break;
             case 3:
-                teachesInstitutionsValue = 'Tel-Aviv University';
-                break;
-            case 4:
-                teachesInstitutionsValue = 'Ben-Gurion Universit';
-                break;
-            case 5:
-                teachesInstitutionsValue = 'Hebrew University';
-                break;
-            case 6:
-                teachesInstitutionsValue = 'Bar-Ilan University';
-                break;
-            case 7:
-                teachesInstitutionsValue = 'Weizmann Institute of Science';
-                break;
-            case 8:
-                teachesInstitutionsValue = 'Ben-Gurion University of the Negev';
-                break;
-            case 9:
-                teachesInstitutionsValue = 'Open University of Israel';
-                break;
-            case 10:
                 teachesInstitutionsValue = 'Ariel University';
                 break;
+            case 4:
+                teachesInstitutionsValue = 'Bar-Ilan University';
+                break;
+            case 5:
+                teachesInstitutionsValue = 'Ben Gurion University';
+                break;
+            case 6:
+                teachesInstitutionsValue = 'Ben-Gurion University of the Negev';
+                break;
+            case 7:
+                teachesInstitutionsValue = 'Hebrew University';
+                break;
+            case 8:
+                teachesInstitutionsValue = 'Open University of Israel';
+                break;
+            case 9:
+                teachesInstitutionsValue = 'Tel-Aviv University';
+                break;
+            case 10:
+                teachesInstitutionsValue = 'Weizmann Institute of Science';
+                break;
             case 11:
-                teachesInstitutionsValue = 'Haredi College of Jerusalem';
-                break;
-            case 12:
-                teachesInstitutionsValue = 'College of Law and Business';
-                break;
-            case 13:
                 teachesInstitutionsValue = 'Academic College of Tel Aviv-Yafo';
                 break;
-            case 14:
+            case 12:
                 teachesInstitutionsValue = 'Afeka College of Engineering';
                 break;
-            case 15:
+            case 13:
                 teachesInstitutionsValue = 'Ashkelon Academic College';
                 break;
-            case 16:
+            case 14:
                 teachesInstitutionsValue = 'Beersheba Tehni School';
                 break;
-            case 17:
+            case 15:
                 teachesInstitutionsValue = 'Beit Zvi School of the Performing Arts';
                 break;
-            case 18:
+            case 16:
                 teachesInstitutionsValue = 'Bezalel Academy of Art and Design';
                 break;
-            case 19:
+            case 17:
                 teachesInstitutionsValue = 'Carmel Academic Center';
                 break;
-            case 20:
+            case 18:
                 teachesInstitutionsValue = 'Center for Academic Studies';
                 break;
-            case 21:
+            case 19:
+                teachesInstitutionsValue = 'College of Law and Business';
+                break;
+            case 20:
                 teachesInstitutionsValue = 'COMAS';
                 break;
-            case 22:
+            case 21:
                 teachesInstitutionsValue = 'Dan Academic Center';
                 break;
-            case 23:
-                teachesInstitutionsValue = 'Kfar-Avraham Technology College';
-                break;
-            case 24:
+            case 22:
                 teachesInstitutionsValue = 'Hadassah Academic College';
                 break;
-            case 25:
+            case 23:
+                teachesInstitutionsValue = 'Haredi College of Jerusalem';
+                break;
+            case 24:
                 teachesInstitutionsValue = 'Interdisciplinary Center Herzliya';
                 break;
-            case 26:
+            case 25:
                 teachesInstitutionsValue = 'Israel College of the Bible';
                 break;
-            case 27:
+            case 26:
                 teachesInstitutionsValue = 'Jerusalem Academy of Music and Dance';
                 break;
-            case 28:
+            case 27:
                 teachesInstitutionsValue = 'Jerusalem College of Engineering';
                 break;
-            case 29:
+            case 28:
                 teachesInstitutionsValue = 'Jerusalem College of Technology';
                 break;
-            case 30:
+            case 29:
                 teachesInstitutionsValue = 'Jerusalem University College';
+                break;
+            case 30:
+                teachesInstitutionsValue = 'Kfar-Avraham Technology College';
                 break;
             case 31:
                 teachesInstitutionsValue = 'Kinneret Academic College';
@@ -2177,7 +2177,7 @@ var TeachesInstitutionsPipe = (function () {
                 teachesInstitutionsValue = 'Netanya Academic College';
                 break;
             case 34:
-                teachesInstitutionsValue = 'Ono Academi cCollege';
+                teachesInstitutionsValue = 'Ono Academi College';
                 break;
             case 35:
                 teachesInstitutionsValue = 'ORT Braude College of Engineering';
@@ -2192,10 +2192,10 @@ var TeachesInstitutionsPipe = (function () {
                 teachesInstitutionsValue = 'Ruppin Academic Center';
                 break;
             case 39:
-                teachesInstitutionsValue = 'Sapir Academic College';
+                teachesInstitutionsValue = 'Sami Shamoon College of Engineering';
                 break;
             case 40:
-                teachesInstitutionsValue = 'Sami Shamoon College of Engineering';
+                teachesInstitutionsValue = 'Sapir Academic College';
                 break;
             case 41:
                 teachesInstitutionsValue = 'Shenkar College of Engineering and Design';
@@ -2377,34 +2377,34 @@ var CommonProvider = (function () {
         this.teachesInstitutionsArray = [
             { value: '1', viewValue: 'Holon Institute Of Technology' },
             { value: '2', viewValue: 'Technion' },
-            { value: '3', viewValue: 'Tel-Aviv University' },
-            { value: '4', viewValue: 'Ben Gurion University' },
-            { value: '5', viewValue: 'Hebrew University' },
-            { value: '6', viewValue: 'Bar-Ilan University' },
-            { value: '7', viewValue: 'Weizmann Institute of Science' },
-            { value: '8', viewValue: 'Ben-Gurion University of the Negev' },
-            { value: '9', viewValue: 'Open University of Israel' },
-            { value: '10', viewValue: 'Ariel University' },
-            { value: '11', viewValue: 'Haredi College of Jerusalem' },
-            { value: '12', viewValue: 'College of Law and Business' },
-            { value: '13', viewValue: 'Academic College of Tel Aviv-Yafo' },
-            { value: '14', viewValue: 'Afeka College of Engineering' },
-            { value: '15', viewValue: 'Ashkelon Academic College' },
-            { value: '16', viewValue: 'Beersheba Tehni School' },
-            { value: '17', viewValue: 'Beit Zvi School of the Performing Arts' },
-            { value: '18', viewValue: 'Bezalel Academy of Art and Design' },
-            { value: '19', viewValue: 'Carmel Academic Center' },
-            { value: '20', viewValue: 'Center for Academic Studies' },
-            { value: '21', viewValue: 'COMAS' },
-            { value: '22', viewValue: 'Dan Academic Center' },
-            { value: '23', viewValue: 'Kfar-Avraham Technology College' },
-            { value: '24', viewValue: 'Hadassah Academic College' },
-            { value: '25', viewValue: 'Interdisciplinary Center Herzliya' },
-            { value: '26', viewValue: 'Israel College of the Bible' },
-            { value: '27', viewValue: 'Jerusalem Academy of Music and Dance' },
-            { value: '28', viewValue: 'Jerusalem College of Engineering' },
-            { value: '29', viewValue: 'Jerusalem College of Technology' },
-            { value: '30', viewValue: 'Jerusalem University College' },
+            { value: '3', viewValue: 'Ariel University' },
+            { value: '4', viewValue: 'Bar-Ilan University' },
+            { value: '5', viewValue: 'Ben Gurion University' },
+            { value: '6', viewValue: 'Ben-Gurion University of the Negev' },
+            { value: '7', viewValue: 'Hebrew University' },
+            { value: '8', viewValue: 'Open University of Israel' },
+            { value: '9', viewValue: 'Tel-Aviv University' },
+            { value: '10', viewValue: 'Weizmann Institute of Science' },
+            { value: '11', viewValue: 'Academic College of Tel Aviv-Yafo' },
+            { value: '12', viewValue: 'Afeka College of Engineering' },
+            { value: '13', viewValue: 'Ashkelon Academic College' },
+            { value: '14', viewValue: 'Beersheba Tehni School' },
+            { value: '15', viewValue: 'Beit Zvi School of the Performing Arts' },
+            { value: '16', viewValue: 'Bezalel Academy of Art and Design' },
+            { value: '17', viewValue: 'Carmel Academic Center' },
+            { value: '18', viewValue: 'Center for Academic Studies' },
+            { value: '19', viewValue: 'College of Law and Business' },
+            { value: '20', viewValue: 'COMAS' },
+            { value: '21', viewValue: 'Dan Academic Center' },
+            { value: '22', viewValue: 'Hadassah Academic College' },
+            { value: '23', viewValue: 'Haredi College of Jerusalem' },
+            { value: '24', viewValue: 'Interdisciplinary Center Herzliya' },
+            { value: '25', viewValue: 'Israel College of the Bible' },
+            { value: '26', viewValue: 'Jerusalem Academy of Music and Dance' },
+            { value: '27', viewValue: 'Jerusalem College of Engineering' },
+            { value: '28', viewValue: 'Jerusalem College of Technology' },
+            { value: '29', viewValue: 'Jerusalem University College' },
+            { value: '30', viewValue: 'Kfar-Avraham Technology College' },
             { value: '31', viewValue: 'Kinneret Academic College' },
             { value: '32', viewValue: 'Lander Institute' },
             { value: '33', viewValue: 'Netanya Academic College' },
@@ -2413,10 +2413,10 @@ var CommonProvider = (function () {
             { value: '36', viewValue: 'Peres Academic Center' },
             { value: '37', viewValue: 'Reidman College' },
             { value: '38', viewValue: 'Ruppin Academic Center' },
-            { value: '39', viewValue: 'Sapir Academic College' },
-            { value: '40', viewValue: 'Sami Shamoon College of Engineering' },
+            { value: '39', viewValue: 'Sami Shamoon College of Engineering' },
+            { value: '40', viewValue: 'Sapir Academic College' },
             { value: '41', viewValue: 'Shenkar College of Engineering and Design' },
-            { value: '42', viewValue: 'Tel-Hai Academic College' },
+            { value: '42', viewValue: 'Tel-Hai Academic College' }
         ];
         this.subjectsArray = [
             { value: '1', viewValue: 'Advanced Control Theory' },

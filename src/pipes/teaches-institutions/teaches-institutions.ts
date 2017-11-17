@@ -15,88 +15,88 @@ export class TeachesInstitutionsPipe implements PipeTransform {
         teachesInstitutionsValue = 'Technion';
         break;
       case 3:
-        teachesInstitutionsValue = 'Tel-Aviv University';
-        break;
-      case 4:
-        teachesInstitutionsValue = 'Ben-Gurion Universit';
-        break;
-      case 5:
-        teachesInstitutionsValue = 'Hebrew University';
-        break;
-      case 6:
-        teachesInstitutionsValue = 'Bar-Ilan University';
-        break;
-      case 7:
-        teachesInstitutionsValue = 'Weizmann Institute of Science';
-        break;
-      case 8:
-        teachesInstitutionsValue = 'Ben-Gurion University of the Negev';
-        break;
-      case 9:
-        teachesInstitutionsValue = 'Open University of Israel';
-        break;
-      case 10:
         teachesInstitutionsValue = 'Ariel University';
         break;
+      case 4:
+        teachesInstitutionsValue = 'Bar-Ilan University';
+        break;
+      case 5:
+        teachesInstitutionsValue = 'Ben Gurion University';
+        break;
+      case 6:
+        teachesInstitutionsValue = 'Ben-Gurion University of the Negev';
+        break;
+      case 7:
+        teachesInstitutionsValue = 'Hebrew University';
+        break;
+      case 8:
+        teachesInstitutionsValue = 'Open University of Israel';
+        break;
+      case 9:
+        teachesInstitutionsValue = 'Tel-Aviv University';
+        break;
+      case 10:
+        teachesInstitutionsValue = 'Weizmann Institute of Science';
+        break;
       case 11:
-        teachesInstitutionsValue = 'Haredi College of Jerusalem';
-        break;
-      case 12:
-        teachesInstitutionsValue = 'College of Law and Business';
-        break;
-      case 13:
         teachesInstitutionsValue = 'Academic College of Tel Aviv-Yafo';
         break;
-      case 14:
+      case 12:
         teachesInstitutionsValue = 'Afeka College of Engineering';
         break;
-      case 15:
+      case 13:
         teachesInstitutionsValue = 'Ashkelon Academic College';
         break;
-      case 16:
+      case 14:
         teachesInstitutionsValue = 'Beersheba Tehni School';
         break;
-      case 17:
+      case 15:
         teachesInstitutionsValue = 'Beit Zvi School of the Performing Arts';
         break;
-      case 18:
+      case 16:
         teachesInstitutionsValue = 'Bezalel Academy of Art and Design';
         break;
-      case 19:
+      case 17:
         teachesInstitutionsValue = 'Carmel Academic Center';
         break;
-      case 20:
+      case 18:
         teachesInstitutionsValue = 'Center for Academic Studies';
         break;
-      case 21:
+      case 19:
+        teachesInstitutionsValue = 'College of Law and Business';
+        break;
+      case 20:
         teachesInstitutionsValue = 'COMAS';
         break;
-      case 22:
+      case 21:
         teachesInstitutionsValue = 'Dan Academic Center';
         break;
-      case 23:
-        teachesInstitutionsValue = 'Kfar-Avraham Technology College';
-        break;
-      case 24:
+      case 22:
         teachesInstitutionsValue = 'Hadassah Academic College';
         break;
-      case 25:
+      case 23:
+        teachesInstitutionsValue = 'Haredi College of Jerusalem';
+        break;
+      case 24:
         teachesInstitutionsValue = 'Interdisciplinary Center Herzliya';
         break;
-      case 26:
+      case 25:
         teachesInstitutionsValue = 'Israel College of the Bible';
         break;
-      case 27:
+      case 26:
         teachesInstitutionsValue = 'Jerusalem Academy of Music and Dance';
         break;
-      case 28:
+      case 27:
         teachesInstitutionsValue = 'Jerusalem College of Engineering';
         break;
-      case 29:
+      case 28:
         teachesInstitutionsValue = 'Jerusalem College of Technology';
         break;
-      case 30:
+      case 29:
         teachesInstitutionsValue = 'Jerusalem University College';
+        break;
+      case 30:
+        teachesInstitutionsValue = 'Kfar-Avraham Technology College';
         break;
       case 31:
         teachesInstitutionsValue = 'Kinneret Academic College';
@@ -108,7 +108,7 @@ export class TeachesInstitutionsPipe implements PipeTransform {
         teachesInstitutionsValue = 'Netanya Academic College';
         break;
       case 34:
-        teachesInstitutionsValue = 'Ono Academi cCollege';
+        teachesInstitutionsValue = 'Ono Academi College';
         break;
       case 35:
         teachesInstitutionsValue = 'ORT Braude College of Engineering';
@@ -123,10 +123,10 @@ export class TeachesInstitutionsPipe implements PipeTransform {
         teachesInstitutionsValue = 'Ruppin Academic Center';
         break;
       case 39:
-        teachesInstitutionsValue = 'Sapir Academic College';
+        teachesInstitutionsValue = 'Sami Shamoon College of Engineering';
         break;
       case 40:
-        teachesInstitutionsValue = 'Sami Shamoon College of Engineering';
+        teachesInstitutionsValue = 'Sapir Academic College';
         break;
       case 41:
         teachesInstitutionsValue = 'Shenkar College of Engineering and Design';

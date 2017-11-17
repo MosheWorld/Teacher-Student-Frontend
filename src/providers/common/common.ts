@@ -60,110 +60,110 @@ export class CommonProvider {
   ];
 
   public subjectsArray = [
-    { value: '1', viewValue: 'Programming in C' },
-    { value: '2', viewValue: 'Introduction to Computer Science' },
-    { value: '3', viewValue: 'Data Structures' },
-    { value: '4', viewValue: 'Mathematical Tools for Computer Science' },
-    { value: '5', viewValue: 'Advanced Programming Workshop' },
-    { value: '6', viewValue: 'Computer Organization and Assembly' },
-    { value: '7', viewValue: 'Computer Structure and Switching Theory' },
-    { value: '8', viewValue: 'Operating Systems' },
-    { value: '9', viewValue: 'Automata and Formal Languages' },
-    { value: '10', viewValue: 'Design and Analysis of Algorithms' },
-    { value: '11', viewValue: 'Logic For Computer Science' },
-    { value: '12', viewValue: 'Logic Programming' },
-    { value: '13', viewValue: 'Data Base Systems' },
-    { value: '14', viewValue: 'Compilation Theory' },
-    { value: '15', viewValue: 'Computer Communication Networks' },
-    { value: '16', viewValue: 'Computability and Complexity of Algorithms' },
-    { value: '17', viewValue: 'Object Oriented Programming' },
-    { value: '18', viewValue: 'Foundations of Information Systems' },
-    { value: '19', viewValue: 'Graph Theory' },
-    { value: '20', viewValue: 'Real Time Systems' },
-    { value: '21', viewValue: 'System Programming' },
-    { value: '22', viewValue: 'Design Patterns' },
-    { value: '23', viewValue: 'Data Mining' },
-    { value: '24', viewValue: 'Computer Vision' },
-    { value: '25', viewValue: 'Geometry View Multiple' },
-    { value: '26', viewValue: 'Computer Graphics' },
-    { value: '27', viewValue: 'Introduction to Fuzzy Logic' },
-    { value: '28', viewValue: 'Introduction to Cryptography' },
-    { value: '29', viewValue: 'Data Compression' },
-    { value: '30', viewValue: 'Signal and Image Processing ' },
-    { value: '31', viewValue: 'Computer Architecture' },
-    { value: '32', viewValue: 'Hardware Description Languages' },
-    { value: '33', viewValue: 'Digital Systems' },
-    { value: '34', viewValue: 'Expert Systems' },
-    { value: '35', viewValue: 'Artificial Intelligence' },
-    { value: '36', viewValue: 'Programming in C#' },
-    { value: '37', viewValue: 'Programming in Java' },
-    { value: '38', viewValue: 'Programming in Python' },
-    { value: '39', viewValue: 'Programming in JavaScript' },
-    { value: '40', viewValue: 'Numerical Analysis' },
-    { value: '41', viewValue: 'Numerical algorithms' },
-    { value: '42', viewValue: 'Logic Design' },
-    { value: '43', viewValue: 'Approximation algorithms' },
-    { value: '44', viewValue: 'Secure Quality Programs' },
-    { value: '45', viewValue: 'Introduction to Robotics' },
-    { value: '46', viewValue: 'Semiconductors' },
-    { value: '47', viewValue: 'Electrical Engineering Laboratory' },
-    { value: '48', viewValue: 'Semiconductor Devices' },
-    { value: '49', viewValue: 'Switching and Logic Design' },
-    { value: '50', viewValue: 'Introduction to Linear Systems' },
-    { value: '51', viewValue: 'Analog Linear Electronic Circuits' },
-    { value: '52', viewValue: 'Energy Conversion' },
-    { value: '53', viewValue: 'Signals and Systems' },
-    { value: '54', viewValue: 'Electromagnetic Fields' },
-    { value: '55', viewValue: 'Digital Circuits' },
-    { value: '56', viewValue: 'Introduction to Control Theory' },
-    { value: '57', viewValue: 'Laboratory of Logic Digital Circuits' },
-    { value: '58', viewValue: 'Communication Engineering' },
-    { value: '59', viewValue: 'Electric Drives' },
-    { value: '60', viewValue: 'Microprocessors' },
-    { value: '61', viewValue: 'Introduction to Microwaves' },
-    { value: '62', viewValue: 'Microprocessors Laboratory' },
-    { value: '63', viewValue: 'Waves Propagation' },
-    { value: '64', viewValue: 'Photonics and Electro-optics systems' },
-    { value: '65', viewValue: 'Antennas and Radiation' },
-    { value: '66', viewValue: 'Power Systems' },
-    { value: '67', viewValue: 'Waves and Distributed Systems' },
-    { value: '68', viewValue: 'Conversion Laboratory Energy' },
-    { value: '69', viewValue: 'Filter Design' },
-    { value: '70', viewValue: 'Power Electronics Systems' },
-    { value: '71', viewValue: 'Advanced Control Theory' },
-    { value: '72', viewValue: 'High Voltage Engineering' },
-    { value: '73', viewValue: 'Digital Signal Processing' },
-    { value: '74', viewValue: 'Electronics Computer Aided Design' },
-    { value: '75', viewValue: 'Random Signals' },
-    { value: '76', viewValue: 'Network Theory' },
-    { value: '77', viewValue: 'Neural Networks' },
-    { value: '78', viewValue: 'Dynamics and Control Spacecraft' },
-    { value: '79', viewValue: 'Modern Optics and Electro optics' },
-    { value: '80', viewValue: 'Engineering Economics' },
-    { value: '81', viewValue: 'Introduction to Lasers' },
-    { value: '82', viewValue: 'Electronic Materials' },
-    { value: '83', viewValue: 'Robots Dynamics and Control' },
-    { value: '84', viewValue: 'High and Low Voltages Devices' },
-    { value: '85', viewValue: 'Receiving and Transmitting Techniques' },
-    { value: '86', viewValue: 'Statistics and Probability' },
-    { value: '87', viewValue: 'Linear Algebra' },
-    { value: '88', viewValue: 'Calculus' },
-    { value: '89', viewValue: 'Discrete Mathematics' },
-    { value: '90', viewValue: 'Ordinary Differential Equations' },
-    { value: '91', viewValue: 'Mathematical Modeling' },
-    { value: '92', viewValue: 'Partial Differential Equations' },
-    { value: '93', viewValue: 'Complex Valued Functions' },
-    { value: '94', viewValue: 'Fourier Series and Integral Transforms' },
-    { value: '95', viewValue: 'Introduction to Modern Analysis' },
-    { value: '96', viewValue: 'Algorithm in Optimization' },
-    { value: '97', viewValue: 'Machine Learning' },
-    { value: '98', viewValue: 'Complex Functions' },
-    { value: '99', viewValue: 'Statistical Inference' },
-    { value: '100', viewValue: 'Machine Vision' },
-    { value: '101', viewValue: 'Forecasting Methods' },
-    { value: '102', viewValue: 'Fluid Mechanics' },
-    { value: '103', viewValue: 'Mechanics of Solids' },
-    { value: '104', viewValue: 'Web Programming' },
+    { value: '1', viewValue: 'Advanced Control Theory' },
+    { value: '2', viewValue: 'Advanced Programming Workshop' },
+    { value: '3', viewValue: 'Algorithm in Optimization' },
+    { value: '4', viewValue: 'Analog Linear Electronic Circuits' },
+    { value: '5', viewValue: 'Antennas and Radiation' },
+    { value: '6', viewValue: 'Approximation algorithms' },
+    { value: '7', viewValue: 'Artificial Intelligence' },
+    { value: '8', viewValue: 'Automata and Formal Languages' },
+    { value: '9', viewValue: 'Calculus' },
+    { value: '10', viewValue: 'Communication Engineering' },
+    { value: '11', viewValue: 'Compilation Theory' },
+    { value: '12', viewValue: 'Complex Functions' },
+    { value: '13', viewValue: 'Complex Valued Functions' },
+    { value: '14', viewValue: 'Computability and Complexity of Algorithms' },
+    { value: '15', viewValue: 'Computer Architecture' },
+    { value: '16', viewValue: 'Computer Communication Networks' },
+    { value: '17', viewValue: 'Computer Graphics' },
+    { value: '18', viewValue: 'Computer Organization and Assembly' },
+    { value: '19', viewValue: 'Computer Structure and Switching Theory' },
+    { value: '20', viewValue: 'Computer Vision' },
+    { value: '21', viewValue: 'Conversion Laboratory Energy' },
+    { value: '22', viewValue: 'Data Base Systems' },
+    { value: '23', viewValue: 'Data Compression' },
+    { value: '24', viewValue: 'Data Mining' },
+    { value: '25', viewValue: 'Data Structures' },
+    { value: '26', viewValue: 'Design and Analysis of Algorithms' },
+    { value: '27', viewValue: 'Design Patterns' },
+    { value: '28', viewValue: 'Digital Circuits' },
+    { value: '29', viewValue: 'Digital Signal Processing' },
+    { value: '30', viewValue: 'Digital Systems' },
+    { value: '31', viewValue: 'Discrete Mathematics' },
+    { value: '32', viewValue: 'Dynamics and Control Spacecraft' },
+    { value: '33', viewValue: 'Electric Drives' },
+    { value: '34', viewValue: 'Electrical Engineering Laboratory' },
+    { value: '35', viewValue: 'Electromagnetic Fields' },
+    { value: '36', viewValue: 'Electronic Materials' },
+    { value: '37', viewValue: 'Electronics Computer Aided Design' },
+    { value: '38', viewValue: 'Energy Conversion' },
+    { value: '39', viewValue: 'Engineering Economics' },
+    { value: '40', viewValue: 'Expert Systems' },
+    { value: '41', viewValue: 'Filter Design' },
+    { value: '42', viewValue: 'Fluid Mechanics' },
+    { value: '43', viewValue: 'Forecasting Methods' },
+    { value: '44', viewValue: 'Foundations of Information Systems' },
+    { value: '45', viewValue: 'Fourier Series and Integral Transforms' },
+    { value: '46', viewValue: 'Geometry View Multiple' },
+    { value: '47', viewValue: 'Graph Theory' },
+    { value: '48', viewValue: 'Hardware Description Languages' },
+    { value: '49', viewValue: 'High and Low Voltages Devices' },
+    { value: '50', viewValue: 'High Voltage Engineering' },
+    { value: '51', viewValue: 'Introduction to Computer Science' },
+    { value: '52', viewValue: 'Introduction to Control Theory' },
+    { value: '53', viewValue: 'Introduction to Cryptography' },
+    { value: '54', viewValue: 'Introduction to Fuzzy Logic' },
+    { value: '55', viewValue: 'Introduction to Lasers' },
+    { value: '56', viewValue: 'Introduction to Linear Systems' },
+    { value: '57', viewValue: 'Introduction to Microwaves' },
+    { value: '58', viewValue: 'Introduction to Modern Analysis' },
+    { value: '59', viewValue: 'Introduction to Robotics' },
+    { value: '60', viewValue: 'Laboratory of Logic Digital Circuits' },
+    { value: '61', viewValue: 'Linear Algebra' },
+    { value: '62', viewValue: 'Logic Design' },
+    { value: '63', viewValue: 'Logic For Computer Science' },
+    { value: '64', viewValue: 'Logic Programming' },
+    { value: '65', viewValue: 'Machine Learning' },
+    { value: '66', viewValue: 'Machine Vision' },
+    { value: '67', viewValue: 'Mathematical Modeling' },
+    { value: '68', viewValue: 'Mathematical Tools for Computer Science' },
+    { value: '69', viewValue: 'Mechanics of Solids' },
+    { value: '70', viewValue: 'Microprocessors' },
+    { value: '71', viewValue: 'Microprocessors Laboratory' },
+    { value: '72', viewValue: 'Modern Optics and Electro optics' },
+    { value: '73', viewValue: 'Network Theory' },
+    { value: '74', viewValue: 'Neural Networks' },
+    { value: '75', viewValue: 'Numerical algorithms' },
+    { value: '76', viewValue: 'Numerical Analysis' },
+    { value: '77', viewValue: 'Object Oriented Programming' },
+    { value: '78', viewValue: 'Operating Systems' },
+    { value: '79', viewValue: 'Ordinary Differential Equations' },
+    { value: '80', viewValue: 'Partial Differential Equations' },
+    { value: '81', viewValue: 'Photonics and Electro-optics systems' },
+    { value: '82', viewValue: 'Power Electronics Systems' },
+    { value: '83', viewValue: 'Power Systems' },
+    { value: '84', viewValue: 'Programming in C' },
+    { value: '85', viewValue: 'Programming in C#' },
+    { value: '86', viewValue: 'Programming in Java' },
+    { value: '87', viewValue: 'Programming in JavaScript' },
+    { value: '88', viewValue: 'Programming in Python' },
+    { value: '89', viewValue: 'Random Signals' },
+    { value: '90', viewValue: 'Real Time Systems' },
+    { value: '91', viewValue: 'Receiving and Transmitting Techniques' },
+    { value: '92', viewValue: 'Robots Dynamics and Control' },
+    { value: '93', viewValue: 'Secure Quality Programs' },
+    { value: '94', viewValue: 'Semiconductor Devices' },
+    { value: '95', viewValue: 'Semiconductors' },
+    { value: '96', viewValue: 'Signal and Image Processing ' },
+    { value: '97', viewValue: 'Signals and Systems' },
+    { value: '98', viewValue: 'Statistical Inference' },
+    { value: '99', viewValue: 'Statistics and Probability' },
+    { value: '100', viewValue: 'Switching and Logic Design' },
+    { value: '101', viewValue: 'System Programming' },
+    { value: '102', viewValue: 'Waves and Distributed Systems' },
+    { value: '103', viewValue: 'Waves Propagation' },
+    { value: '104', viewValue: 'Web Programming' }
   ];
 
   public reasonToContactArray = [
@@ -173,6 +173,193 @@ export class CommonProvider {
     { value: 'Complain', viewValue: 'Complain' },
     { value: 'Bug report', viewValue: 'Bug report' },
     { value: 'Other', viewValue: 'Other' }
+  ];
+
+  teachesSubjectsGroupsArray = [
+    {
+      name: 'A',
+      subjects: [
+        { value: '1', viewValue: 'Advanced Control Theory' },
+        { value: '2', viewValue: 'Advanced Programming Workshop' },
+        { value: '3', viewValue: 'Algorithm in Optimization' },
+        { value: '4', viewValue: 'Analog Linear Electronic Circuits' },
+        { value: '5', viewValue: 'Antennas and Radiation' },
+        { value: '6', viewValue: 'Approximation algorithms' },
+        { value: '7', viewValue: 'Artificial Intelligence' },
+        { value: '8', viewValue: 'Automata and Formal Languages' }
+      ]
+    },
+    {
+      name: 'C',
+      subjects: [
+        { value: '9', viewValue: 'Calculus' },
+        { value: '10', viewValue: 'Communication Engineering' },
+        { value: '11', viewValue: 'Compilation Theory' },
+        { value: '12', viewValue: 'Complex Functions' },
+        { value: '13', viewValue: 'Complex Valued Functions' },
+        { value: '14', viewValue: 'Computability and Complexity of Algorithms' },
+        { value: '15', viewValue: 'Computer Architecture' },
+        { value: '16', viewValue: 'Computer Communication Networks' },
+        { value: '17', viewValue: 'Computer Graphics' },
+        { value: '18', viewValue: 'Computer Organization and Assembly' },
+        { value: '19', viewValue: 'Computer Structure and Switching Theory' },
+        { value: '20', viewValue: 'Computer Vision' },
+        { value: '21', viewValue: 'Conversion Laboratory Energy' }
+      ]
+    },
+    {
+      name: 'D',
+      subjects: [
+        { value: '22', viewValue: 'Data Base Systems' },
+        { value: '23', viewValue: 'Data Compression' },
+        { value: '24', viewValue: 'Data Mining' },
+        { value: '25', viewValue: 'Data Structures' },
+        { value: '26', viewValue: 'Design and Analysis of Algorithms' },
+        { value: '27', viewValue: 'Design Patterns' },
+        { value: '28', viewValue: 'Digital Circuits' },
+        { value: '29', viewValue: 'Digital Signal Processing' },
+        { value: '30', viewValue: 'Digital Systems' },
+        { value: '31', viewValue: 'Discrete Mathematics' },
+        { value: '32', viewValue: 'Dynamics and Control Spacecraft' }
+      ]
+    },
+    {
+      name: 'E',
+      subjects: [
+        { value: '33', viewValue: 'Electric Drives' },
+        { value: '34', viewValue: 'Electrical Engineering Laboratory' },
+        { value: '35', viewValue: 'Electromagnetic Fields' },
+        { value: '36', viewValue: 'Electronic Materials' },
+        { value: '37', viewValue: 'Electronics Computer Aided Design' },
+        { value: '38', viewValue: 'Energy Conversion' },
+        { value: '39', viewValue: 'Engineering Economics' },
+        { value: '40', viewValue: 'Expert Systems' }
+      ]
+    },
+    {
+      name: 'F',
+      subjects: [
+        { value: '41', viewValue: 'Filter Design' },
+        { value: '42', viewValue: 'Fluid Mechanics' },
+        { value: '43', viewValue: 'Forecasting Methods' },
+        { value: '44', viewValue: 'Foundations of Information Systems' },
+        { value: '45', viewValue: 'Fourier Series and Integral Transforms' }
+      ]
+    },
+    {
+      name: 'G',
+      subjects: [
+        { value: '46', viewValue: 'Geometry View Multiple' },
+        { value: '47', viewValue: 'Graph Theory' }
+      ]
+    },
+    {
+      name: 'H',
+      subjects: [
+        { value: '48', viewValue: 'Hardware Description Languages' },
+        { value: '49', viewValue: 'High and Low Voltages Devices' },
+        { value: '50', viewValue: 'High Voltage Engineering' }
+      ]
+    },
+    {
+      name: 'I',
+      subjects: [
+        { value: '51', viewValue: 'Introduction to Computer Science' },
+        { value: '52', viewValue: 'Introduction to Control Theory' },
+        { value: '53', viewValue: 'Introduction to Cryptography' },
+        { value: '54', viewValue: 'Introduction to Fuzzy Logic' },
+        { value: '55', viewValue: 'Introduction to Lasers' },
+        { value: '56', viewValue: 'Introduction to Linear Systems' },
+        { value: '57', viewValue: 'Introduction to Microwaves' },
+        { value: '58', viewValue: 'Introduction to Modern Analysis' },
+        { value: '59', viewValue: 'Introduction to Robotics' }
+      ]
+    },
+    {
+      name: 'L',
+      subjects: [
+        { value: '60', viewValue: 'Laboratory of Logic Digital Circuits' },
+        { value: '61', viewValue: 'Linear Algebra' },
+        { value: '62', viewValue: 'Logic Design' },
+        { value: '63', viewValue: 'Logic For Computer Science' },
+        { value: '64', viewValue: 'Logic Programming' }
+      ]
+    },
+    {
+      name: 'M',
+      subjects: [
+        { value: '65', viewValue: 'Machine Learning' },
+        { value: '66', viewValue: 'Machine Vision' },
+        { value: '67', viewValue: 'Mathematical Modeling' },
+        { value: '68', viewValue: 'Mathematical Tools for Computer Science' },
+        { value: '69', viewValue: 'Mechanics of Solids' },
+        { value: '70', viewValue: 'Microprocessors' },
+        { value: '71', viewValue: 'Microprocessors Laboratory' },
+        { value: '72', viewValue: 'Modern Optics and Electro optics' }
+      ]
+    },
+    {
+      name: 'N',
+      subjects: [
+        { value: '73', viewValue: 'Network Theory' },
+        { value: '74', viewValue: 'Neural Networks' },
+        { value: '75', viewValue: 'Numerical algorithms' },
+        { value: '76', viewValue: 'Numerical Analysis' }
+      ]
+    },
+    {
+      name: 'O',
+      subjects: [
+        { value: '77', viewValue: 'Object Oriented Programming' },
+        { value: '78', viewValue: 'Operating Systems' },
+        { value: '79', viewValue: 'Ordinary Differential Equations' }
+      ]
+    },
+    {
+      name: 'P',
+      subjects: [
+        { value: '80', viewValue: 'Partial Differential Equations' },
+        { value: '81', viewValue: 'Photonics and Electro-optics systems' },
+        { value: '82', viewValue: 'Power Electronics Systems' },
+        { value: '83', viewValue: 'Power Systems' },
+        { value: '84', viewValue: 'Programming in C' },
+        { value: '85', viewValue: 'Programming in C#' },
+        { value: '86', viewValue: 'Programming in Java' },
+        { value: '87', viewValue: 'Programming in JavaScript' },
+        { value: '88', viewValue: 'Programming in Python' }
+      ]
+    },
+    {
+      name: 'R',
+      subjects: [
+        { value: '89', viewValue: 'Random Signals' },
+        { value: '90', viewValue: 'Real Time Systems' },
+        { value: '91', viewValue: 'Receiving and Transmitting Techniques' },
+        { value: '92', viewValue: 'Robots Dynamics and Control' }
+      ]
+    },
+    {
+      name: 'S',
+      subjects: [
+        { value: '93', viewValue: 'Secure Quality Programs' },
+        { value: '94', viewValue: 'Semiconductor Devices' },
+        { value: '95', viewValue: 'Semiconductors' },
+        { value: '96', viewValue: 'Signal and Image Processing ' },
+        { value: '97', viewValue: 'Signals and Systems' },
+        { value: '98', viewValue: 'Statistical Inference' },
+        { value: '99', viewValue: 'Statistics and Probability' },
+        { value: '100', viewValue: 'Switching and Logic Design' },
+        { value: '101', viewValue: 'System Programming' }
+      ]
+    },
+    {
+      name: 'W',
+      subjects: [
+        { value: '102', viewValue: 'Waves and Distributed Systems' },
+        { value: '103', viewValue: 'Waves Propagation' },
+        { value: '104', viewValue: 'Web Programming' }
+      ]
+    }
   ];
 
   constructor() {

@@ -357,6 +357,7 @@ var JointeacherPage = (function () {
         this.ageFormControl = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormControl */]('', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["h" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["h" /* Validators */].minLength(1), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["h" /* Validators */].maxLength(3), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["h" /* Validators */].min(1), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["h" /* Validators */].max(120)]);
         this.genderAtFormControl = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormControl */]('', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["h" /* Validators */].required]);
         this.teachesInstitutionsFormControl = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormControl */]('', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["h" /* Validators */].required]);
+        this.teachesSubjectsFormControl = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormControl */]('', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["h" /* Validators */].required]);
         this.image = null;
         this.matcher = new MyErrorStateMatcher();
         this.showErrorMessagePrices = false;
@@ -517,7 +518,7 @@ __decorate([
 ], JointeacherPage.prototype, "elViewImage", void 0);
 JointeacherPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["Component"])({
-        selector: 'page-jointeacher',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\jointeacher\jointeacher.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Join as Teacher</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-35px m-font-weight-300">Become a next-generation teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          In order to join as teacher you must fill all the following fields. Be specific with your information to gain more good resume\n          and comments from students. Remember, good instructor is remembered for lifetime.\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font>\n          Give full information at the relevant fields to interest more students.\n        </ion-col>\n      </ion-row>\n\n      <!-- Price warning -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-red">*The price per lesson is for one hour*</font>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- StudyHub for individuals title -->\n      <ion-row text-center class="m-padding-top-15px m-padding-buttom-15px">\n        <ion-col col-12>\n          <u>\n            <b>Fill teacher form</b>\n          </u>\n        </ion-col>\n      </ion-row>\n\n      <!-- Form -->\n      <form class="m-form">\n\n        <!-- First name and Last name -->\n        <ion-row>\n          <ion-col col-6>\n            <!-- First name-->\n            <mat-form-field class="m-full-width">\n              <input type="text" matInput placeholder="First name" [formControl]="firstNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal first name</mat-hint>\n              <mat-error *ngIf="firstNameFormControl.hasError(\'required\')">\n                First name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Last name -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" matInput placeholder="Last name" [formControl]="lastNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal last name</mat-hint>\n              <mat-error *ngIf="lastNameFormControl.hasError(\'required\')">\n                Last name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Age and Gender -->\n        <ion-row>\n          <!-- Age -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" maxlength="3" matInput placeholder="Age" [formControl]="ageFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>What\'s your age?</mat-hint>\n              <mat-error *ngIf="ageFormControl.hasError(\'minlength\') || ageFormControl.hasError(\'maxlength\') && !ageFormControl.hasError(\'required\')">\n                Type proper age.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'min\') && !ageFormControl.hasError(\'required\')">\n                Age cannot be less than 1.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'max\') && !ageFormControl.hasError(\'required\')">\n                Age cannot be greater than 120.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'required\')">\n                Age is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Gender -->\n          <ion-col col-6>\n            <mat-form-field>\n              <mat-select placeholder="Gender" [formControl]="genderAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.genderArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>What is your gender?</mat-hint>\n              <mat-error *ngIf="genderAtFormControl.hasError(\'required\')">Male or Female?</mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Email and phone number -->\n        <ion-row>\n          <!-- Email -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"\n                [errorStateMatcher]="matcher">\n              <mat-hint>Ex: Email@gmail.com</mat-hint>\n              <mat-error *ngIf="emailFormControl.hasError(\'email\') && !emailFormControl.hasError(\'required\')">\n                Please enter a valid email address.\n              </mat-error>\n              <mat-error *ngIf="emailFormControl.hasError(\'required\')">\n                Email is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Phone -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="tel" maxlength="10" matInput placeholder="Phone" [formControl]="phoneFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal phone number</mat-hint>\n              <mat-error *ngIf="phoneFormControl.hasError(\'minlength\') || phoneFormControl.hasError(\'maxlength\') && !phoneFormControl.hasError(\'required\')">\n                Phone is not valid.\n              </mat-error>\n              <mat-error *ngIf="phoneFormControl.hasError(\'required\')">\n                Phone is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- From price and To price -->\n        <ion-row>\n          <ion-col col-6>\n            <!-- From price -->\n            <mat-form-field class="m-full-width">\n              <input type="tel" matInput maxlength="3" placeholder="From price" [formControl]="fromPriceFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>1 is Minimum.</mat-hint>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'minlength\') || fromPriceFormControl.hasError(\'maxlength\') && !fromPriceFormControl.hasError(\'required\')">\n                Please fix the number.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'min\') && !fromPriceFormControl.hasError(\'required\')">\n                Minimum is 1.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'max\') && !fromPriceFormControl.hasError(\'required\')">\n                Maximum is 200.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'required\')">\n                From price is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- To Price -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="tel" matInput maxlength="3" placeholder="To price" [formControl]="toPriceFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>200 is Maximum.</mat-hint>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'minlength\') || toPriceFormControl.hasError(\'maxlength\') && !toPriceFormControl.hasError(\'required\')">\n                Please fix the number.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'min\') && !toPriceFormControl.hasError(\'required\')">\n                Minimum is 1.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'max\') && !toPriceFormControl.hasError(\'required\')">\n                Maximum is 200.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'required\')">\n                To price is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teach at and Teaches institutions -->\n        <ion-row>\n          <!-- Teach at -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teach at" [formControl]="teachesAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesAtArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>What places do you teach at?</mat-hint>\n              <mat-error *ngIf="teachesAtFormControl.hasError(\'required\')">You must make a selection.</mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Teaches institutions -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teaches institutions" [formControl]="teachesInstitutionsFormControl" multiple>\n                <mat-option *ngFor="let item of commonProvider.teachesInstitutionsArray" [value]="item.value">{{item.viewValue}}</mat-option>\n              </mat-select>\n              <mat-hint>What institutions do you teach at?</mat-hint>\n              <mat-error *ngIf="teachesInstitutionsFormControl.hasError(\'required\')">You must make a selection.</mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teaches Subjects -->\n        <ion-row>\n          <ion-col col-12>\n            <font style="color: red;">Wokring on subjects, bug currently.</font>\n          </ion-col>\n        </ion-row>\n\n        <!-- Personal Message -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <textarea matInput maxlength="200" rows="4" placeholder="Personal Message" [formControl]="personalMessageFormControl" [errorStateMatcher]="matcher"></textarea>\n              <mat-hint align="start">Say something about your self.</mat-hint>\n              <mat-hint align="end">{{personalMessageFormControl.value.length}} / 200</mat-hint>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'minlength\') && !personalMessageFormControl.hasError(\'required\')">\n                Minimum words are 10.\n              </mat-error>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'maxlength\') && !personalMessageFormControl.hasError(\'required\')">\n                Maximum words are 200.\n              </mat-error>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'required\')">\n                You must say few words about yourself.\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Get image button and clear button -->\n        <ion-row>\n          <ion-col col-6>\n            <input #inputImage type="file" id="inputImageid" class="m-display-none" (change)="readImageBase64($event)" accept="image/*">\n            <button ion-button outline block icon-start small color="dark" onclick="document.getElementById(\'inputImageid\').click();">\n              <ion-icon name="ios-camera-outline"></ion-icon>\n              Add Image\n            </button>\n          </ion-col>\n          <ion-col col-6 *ngIf="image != null && image.length > 0">\n            <button ion-button outline block icon-start small color="dark" (click)="clearImage()">\n              <ion-icon name="ios-trash-outline"></ion-icon>\n              Clear\n            </button>\n          </ion-col>\n        </ion-row>\n\n        <!-- Image -->\n        <ion-row text-center #viewImage *ngIf="image != null && image.length > 0" class="animated flash">\n          <ion-col col-12>\n            <img height="{{imageHeight}}" width="{{imageWidth}}" src="{{image}}">\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Prices not valid -->\n      <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">"Price from" cannot be greater from "To price"</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Send form button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button block (click)="createTeacher();">Make me a teacher</button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\jointeacher\jointeacher.html"*/,
+        selector: 'page-jointeacher',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\jointeacher\jointeacher.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Join as Teacher</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-35px m-font-weight-300">Become a next-generation teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          In order to join as teacher you must fill all the following fields. Be specific with your information to gain more good resume\n          and comments from students. Remember, good instructor is remembered for lifetime.\n        </ion-col>\n      </ion-row>\n\n      <!-- Tip -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-orange">*Tip: </font>\n          Give full information at the relevant fields to interest more students.\n        </ion-col>\n      </ion-row>\n\n      <!-- Price warning -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-red">*The price per lesson is for one hour*</font>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- StudyHub for individuals title -->\n      <ion-row text-center class="m-padding-top-15px m-padding-buttom-15px">\n        <ion-col col-12>\n          <u>\n            <b>Fill teacher form</b>\n          </u>\n        </ion-col>\n      </ion-row>\n\n      <!-- Form -->\n      <form class="m-form">\n\n        <!-- First name and Last name -->\n        <ion-row>\n          <ion-col col-6>\n            <!-- First name-->\n            <mat-form-field class="m-full-width">\n              <input type="text" matInput placeholder="First name" [formControl]="firstNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal first name</mat-hint>\n              <mat-error *ngIf="firstNameFormControl.hasError(\'required\')">\n                First name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Last name -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" matInput placeholder="Last name" [formControl]="lastNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal last name</mat-hint>\n              <mat-error *ngIf="lastNameFormControl.hasError(\'required\')">\n                Last name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Age and Gender -->\n        <ion-row>\n          <!-- Age -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" maxlength="3" matInput placeholder="Age" [formControl]="ageFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>What\'s your age?</mat-hint>\n              <mat-error *ngIf="ageFormControl.hasError(\'minlength\') || ageFormControl.hasError(\'maxlength\') && !ageFormControl.hasError(\'required\')">\n                Type proper age.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'min\') && !ageFormControl.hasError(\'required\')">\n                Age cannot be less than 1.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'max\') && !ageFormControl.hasError(\'required\')">\n                Age cannot be greater than 120.\n              </mat-error>\n              <mat-error *ngIf="ageFormControl.hasError(\'required\')">\n                Age is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Gender -->\n          <ion-col col-6>\n            <mat-form-field>\n              <mat-select placeholder="Gender" [formControl]="genderAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.genderArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>What is your gender?</mat-hint>\n              <mat-error *ngIf="genderAtFormControl.hasError(\'required\')">Male or Female?</mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Email and phone number -->\n        <ion-row>\n          <!-- Email -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"\n                [errorStateMatcher]="matcher">\n              <mat-hint>Ex: Email@gmail.com</mat-hint>\n              <mat-error *ngIf="emailFormControl.hasError(\'email\') && !emailFormControl.hasError(\'required\')">\n                Please enter a valid email address.\n              </mat-error>\n              <mat-error *ngIf="emailFormControl.hasError(\'required\')">\n                Email is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Phone -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="tel" maxlength="10" matInput placeholder="Phone" [formControl]="phoneFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Your personal phone number</mat-hint>\n              <mat-error *ngIf="phoneFormControl.hasError(\'minlength\') || phoneFormControl.hasError(\'maxlength\') && !phoneFormControl.hasError(\'required\')">\n                Phone is not valid.\n              </mat-error>\n              <mat-error *ngIf="phoneFormControl.hasError(\'required\')">\n                Phone is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- From price and To price -->\n        <ion-row>\n          <ion-col col-6>\n            <!-- From price -->\n            <mat-form-field class="m-full-width">\n              <input type="tel" matInput maxlength="3" placeholder="From price" [formControl]="fromPriceFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>1 is Minimum.</mat-hint>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'minlength\') || fromPriceFormControl.hasError(\'maxlength\') && !fromPriceFormControl.hasError(\'required\')">\n                Please fix the number.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'min\') && !fromPriceFormControl.hasError(\'required\')">\n                Minimum is 1.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'max\') && !fromPriceFormControl.hasError(\'required\')">\n                Maximum is 200.\n              </mat-error>\n              <mat-error *ngIf="fromPriceFormControl.hasError(\'required\')">\n                From price is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- To Price -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="tel" matInput maxlength="3" placeholder="To price" [formControl]="toPriceFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>200 is Maximum.</mat-hint>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'minlength\') || toPriceFormControl.hasError(\'maxlength\') && !toPriceFormControl.hasError(\'required\')">\n                Please fix the number.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'min\') && !toPriceFormControl.hasError(\'required\')">\n                Minimum is 1.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'max\') && !toPriceFormControl.hasError(\'required\')">\n                Maximum is 200.\n              </mat-error>\n              <mat-error *ngIf="toPriceFormControl.hasError(\'required\')">\n                To price is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teach at and Teaches institutions -->\n        <ion-row>\n          <!-- Teach at -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teach at" [formControl]="teachesAtFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.teachesAtArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>What places do you teach at?</mat-hint>\n              <mat-error *ngIf="teachesAtFormControl.hasError(\'required\')">You must make a selection.</mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Teaches institutions -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teaches institutions" [formControl]="teachesInstitutionsFormControl" multiple>\n                <mat-option *ngFor="let item of commonProvider.teachesInstitutionsArray" [value]="item.value">{{item.viewValue}}</mat-option>\n              </mat-select>\n              <mat-hint>What institutions do you teach at?</mat-hint>\n              <mat-error *ngIf="teachesInstitutionsFormControl.hasError(\'required\')">You must make a selection.</mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Teaches Subjects -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Teach Subjects" [formControl]="teachesSubjectsFormControl" multiple>\n                <mat-optgroup *ngFor="let group of commonProvider.teachesSubjectsGroupsArray" [label]="group.name">\n                  <mat-option *ngFor="let subject of group.subjects" [value]="subject.value">\n                    {{ subject.viewValue }}\n                  </mat-option>\n                </mat-optgroup>\n              </mat-select>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Personal Message -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <textarea matInput maxlength="200" rows="4" placeholder="Personal Message" [formControl]="personalMessageFormControl" [errorStateMatcher]="matcher"></textarea>\n              <mat-hint align="start">Say something about your self.</mat-hint>\n              <mat-hint align="end">{{personalMessageFormControl.value.length}} / 200</mat-hint>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'minlength\') && !personalMessageFormControl.hasError(\'required\')">\n                Minimum words are 10.\n              </mat-error>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'maxlength\') && !personalMessageFormControl.hasError(\'required\')">\n                Maximum words are 200.\n              </mat-error>\n              <mat-error *ngIf="personalMessageFormControl.hasError(\'required\')">\n                You must say few words about yourself.\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Get image button and clear button -->\n        <ion-row>\n          <ion-col col-6>\n            <input #inputImage type="file" id="inputImageid" class="m-display-none" (change)="readImageBase64($event)" accept="image/*">\n            <button ion-button outline block icon-start small color="dark" onclick="document.getElementById(\'inputImageid\').click();">\n              <ion-icon name="ios-camera-outline"></ion-icon>\n              Add Image\n            </button>\n          </ion-col>\n          <ion-col col-6 *ngIf="image != null && image.length > 0">\n            <button ion-button outline block icon-start small color="dark" (click)="clearImage()">\n              <ion-icon name="ios-trash-outline"></ion-icon>\n              Clear\n            </button>\n          </ion-col>\n        </ion-row>\n\n        <!-- Image -->\n        <ion-row text-center #viewImage *ngIf="image != null && image.length > 0" class="animated flash">\n          <ion-col col-12>\n            <img height="{{imageHeight}}" width="{{imageWidth}}" src="{{image}}">\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Prices not valid -->\n      <ion-row *ngIf="showErrorMessagePrices" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">"Price from" cannot be greater from "To price"</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Send form button -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button block (click)="createTeacher();">Make me a teacher</button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\jointeacher\jointeacher.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_api_api__["a" /* ApiProvider */],
         __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__angular_core__["Renderer2"],
@@ -2369,110 +2370,110 @@ var CommonProvider = (function () {
             { value: '42', viewValue: 'Tel-Hai Academic College' },
         ];
         this.subjectsArray = [
-            { value: '1', viewValue: 'Programming in C' },
-            { value: '2', viewValue: 'Introduction to Computer Science' },
-            { value: '3', viewValue: 'Data Structures' },
-            { value: '4', viewValue: 'Mathematical Tools for Computer Science' },
-            { value: '5', viewValue: 'Advanced Programming Workshop' },
-            { value: '6', viewValue: 'Computer Organization and Assembly' },
-            { value: '7', viewValue: 'Computer Structure and Switching Theory' },
-            { value: '8', viewValue: 'Operating Systems' },
-            { value: '9', viewValue: 'Automata and Formal Languages' },
-            { value: '10', viewValue: 'Design and Analysis of Algorithms' },
-            { value: '11', viewValue: 'Logic For Computer Science' },
-            { value: '12', viewValue: 'Logic Programming' },
-            { value: '13', viewValue: 'Data Base Systems' },
-            { value: '14', viewValue: 'Compilation Theory' },
-            { value: '15', viewValue: 'Computer Communication Networks' },
-            { value: '16', viewValue: 'Computability and Complexity of Algorithms' },
-            { value: '17', viewValue: 'Object Oriented Programming' },
-            { value: '18', viewValue: 'Foundations of Information Systems' },
-            { value: '19', viewValue: 'Graph Theory' },
-            { value: '20', viewValue: 'Real Time Systems' },
-            { value: '21', viewValue: 'System Programming' },
-            { value: '22', viewValue: 'Design Patterns' },
-            { value: '23', viewValue: 'Data Mining' },
-            { value: '24', viewValue: 'Computer Vision' },
-            { value: '25', viewValue: 'Geometry View Multiple' },
-            { value: '26', viewValue: 'Computer Graphics' },
-            { value: '27', viewValue: 'Introduction to Fuzzy Logic' },
-            { value: '28', viewValue: 'Introduction to Cryptography' },
-            { value: '29', viewValue: 'Data Compression' },
-            { value: '30', viewValue: 'Signal and Image Processing ' },
-            { value: '31', viewValue: 'Computer Architecture' },
-            { value: '32', viewValue: 'Hardware Description Languages' },
-            { value: '33', viewValue: 'Digital Systems' },
-            { value: '34', viewValue: 'Expert Systems' },
-            { value: '35', viewValue: 'Artificial Intelligence' },
-            { value: '36', viewValue: 'Programming in C#' },
-            { value: '37', viewValue: 'Programming in Java' },
-            { value: '38', viewValue: 'Programming in Python' },
-            { value: '39', viewValue: 'Programming in JavaScript' },
-            { value: '40', viewValue: 'Numerical Analysis' },
-            { value: '41', viewValue: 'Numerical algorithms' },
-            { value: '42', viewValue: 'Logic Design' },
-            { value: '43', viewValue: 'Approximation algorithms' },
-            { value: '44', viewValue: 'Secure Quality Programs' },
-            { value: '45', viewValue: 'Introduction to Robotics' },
-            { value: '46', viewValue: 'Semiconductors' },
-            { value: '47', viewValue: 'Electrical Engineering Laboratory' },
-            { value: '48', viewValue: 'Semiconductor Devices' },
-            { value: '49', viewValue: 'Switching and Logic Design' },
-            { value: '50', viewValue: 'Introduction to Linear Systems' },
-            { value: '51', viewValue: 'Analog Linear Electronic Circuits' },
-            { value: '52', viewValue: 'Energy Conversion' },
-            { value: '53', viewValue: 'Signals and Systems' },
-            { value: '54', viewValue: 'Electromagnetic Fields' },
-            { value: '55', viewValue: 'Digital Circuits' },
-            { value: '56', viewValue: 'Introduction to Control Theory' },
-            { value: '57', viewValue: 'Laboratory of Logic Digital Circuits' },
-            { value: '58', viewValue: 'Communication Engineering' },
-            { value: '59', viewValue: 'Electric Drives' },
-            { value: '60', viewValue: 'Microprocessors' },
-            { value: '61', viewValue: 'Introduction to Microwaves' },
-            { value: '62', viewValue: 'Microprocessors Laboratory' },
-            { value: '63', viewValue: 'Waves Propagation' },
-            { value: '64', viewValue: 'Photonics and Electro-optics systems' },
-            { value: '65', viewValue: 'Antennas and Radiation' },
-            { value: '66', viewValue: 'Power Systems' },
-            { value: '67', viewValue: 'Waves and Distributed Systems' },
-            { value: '68', viewValue: 'Conversion Laboratory Energy' },
-            { value: '69', viewValue: 'Filter Design' },
-            { value: '70', viewValue: 'Power Electronics Systems' },
-            { value: '71', viewValue: 'Advanced Control Theory' },
-            { value: '72', viewValue: 'High Voltage Engineering' },
-            { value: '73', viewValue: 'Digital Signal Processing' },
-            { value: '74', viewValue: 'Electronics Computer Aided Design' },
-            { value: '75', viewValue: 'Random Signals' },
-            { value: '76', viewValue: 'Network Theory' },
-            { value: '77', viewValue: 'Neural Networks' },
-            { value: '78', viewValue: 'Dynamics and Control Spacecraft' },
-            { value: '79', viewValue: 'Modern Optics and Electro optics' },
-            { value: '80', viewValue: 'Engineering Economics' },
-            { value: '81', viewValue: 'Introduction to Lasers' },
-            { value: '82', viewValue: 'Electronic Materials' },
-            { value: '83', viewValue: 'Robots Dynamics and Control' },
-            { value: '84', viewValue: 'High and Low Voltages Devices' },
-            { value: '85', viewValue: 'Receiving and Transmitting Techniques' },
-            { value: '86', viewValue: 'Statistics and Probability' },
-            { value: '87', viewValue: 'Linear Algebra' },
-            { value: '88', viewValue: 'Calculus' },
-            { value: '89', viewValue: 'Discrete Mathematics' },
-            { value: '90', viewValue: 'Ordinary Differential Equations' },
-            { value: '91', viewValue: 'Mathematical Modeling' },
-            { value: '92', viewValue: 'Partial Differential Equations' },
-            { value: '93', viewValue: 'Complex Valued Functions' },
-            { value: '94', viewValue: 'Fourier Series and Integral Transforms' },
-            { value: '95', viewValue: 'Introduction to Modern Analysis' },
-            { value: '96', viewValue: 'Algorithm in Optimization' },
-            { value: '97', viewValue: 'Machine Learning' },
-            { value: '98', viewValue: 'Complex Functions' },
-            { value: '99', viewValue: 'Statistical Inference' },
-            { value: '100', viewValue: 'Machine Vision' },
-            { value: '101', viewValue: 'Forecasting Methods' },
-            { value: '102', viewValue: 'Fluid Mechanics' },
-            { value: '103', viewValue: 'Mechanics of Solids' },
-            { value: '104', viewValue: 'Web Programming' },
+            { value: '1', viewValue: 'Advanced Control Theory' },
+            { value: '2', viewValue: 'Advanced Programming Workshop' },
+            { value: '3', viewValue: 'Algorithm in Optimization' },
+            { value: '4', viewValue: 'Analog Linear Electronic Circuits' },
+            { value: '5', viewValue: 'Antennas and Radiation' },
+            { value: '6', viewValue: 'Approximation algorithms' },
+            { value: '7', viewValue: 'Artificial Intelligence' },
+            { value: '8', viewValue: 'Automata and Formal Languages' },
+            { value: '9', viewValue: 'Calculus' },
+            { value: '10', viewValue: 'Communication Engineering' },
+            { value: '11', viewValue: 'Compilation Theory' },
+            { value: '12', viewValue: 'Complex Functions' },
+            { value: '13', viewValue: 'Complex Valued Functions' },
+            { value: '14', viewValue: 'Computability and Complexity of Algorithms' },
+            { value: '15', viewValue: 'Computer Architecture' },
+            { value: '16', viewValue: 'Computer Communication Networks' },
+            { value: '17', viewValue: 'Computer Graphics' },
+            { value: '18', viewValue: 'Computer Organization and Assembly' },
+            { value: '19', viewValue: 'Computer Structure and Switching Theory' },
+            { value: '20', viewValue: 'Computer Vision' },
+            { value: '21', viewValue: 'Conversion Laboratory Energy' },
+            { value: '22', viewValue: 'Data Base Systems' },
+            { value: '23', viewValue: 'Data Compression' },
+            { value: '24', viewValue: 'Data Mining' },
+            { value: '25', viewValue: 'Data Structures' },
+            { value: '26', viewValue: 'Design and Analysis of Algorithms' },
+            { value: '27', viewValue: 'Design Patterns' },
+            { value: '28', viewValue: 'Digital Circuits' },
+            { value: '29', viewValue: 'Digital Signal Processing' },
+            { value: '30', viewValue: 'Digital Systems' },
+            { value: '31', viewValue: 'Discrete Mathematics' },
+            { value: '32', viewValue: 'Dynamics and Control Spacecraft' },
+            { value: '33', viewValue: 'Electric Drives' },
+            { value: '34', viewValue: 'Electrical Engineering Laboratory' },
+            { value: '35', viewValue: 'Electromagnetic Fields' },
+            { value: '36', viewValue: 'Electronic Materials' },
+            { value: '37', viewValue: 'Electronics Computer Aided Design' },
+            { value: '38', viewValue: 'Energy Conversion' },
+            { value: '39', viewValue: 'Engineering Economics' },
+            { value: '40', viewValue: 'Expert Systems' },
+            { value: '41', viewValue: 'Filter Design' },
+            { value: '42', viewValue: 'Fluid Mechanics' },
+            { value: '43', viewValue: 'Forecasting Methods' },
+            { value: '44', viewValue: 'Foundations of Information Systems' },
+            { value: '45', viewValue: 'Fourier Series and Integral Transforms' },
+            { value: '46', viewValue: 'Geometry View Multiple' },
+            { value: '47', viewValue: 'Graph Theory' },
+            { value: '48', viewValue: 'Hardware Description Languages' },
+            { value: '49', viewValue: 'High and Low Voltages Devices' },
+            { value: '50', viewValue: 'High Voltage Engineering' },
+            { value: '51', viewValue: 'Introduction to Computer Science' },
+            { value: '52', viewValue: 'Introduction to Control Theory' },
+            { value: '53', viewValue: 'Introduction to Cryptography' },
+            { value: '54', viewValue: 'Introduction to Fuzzy Logic' },
+            { value: '55', viewValue: 'Introduction to Lasers' },
+            { value: '56', viewValue: 'Introduction to Linear Systems' },
+            { value: '57', viewValue: 'Introduction to Microwaves' },
+            { value: '58', viewValue: 'Introduction to Modern Analysis' },
+            { value: '59', viewValue: 'Introduction to Robotics' },
+            { value: '60', viewValue: 'Laboratory of Logic Digital Circuits' },
+            { value: '61', viewValue: 'Linear Algebra' },
+            { value: '62', viewValue: 'Logic Design' },
+            { value: '63', viewValue: 'Logic For Computer Science' },
+            { value: '64', viewValue: 'Logic Programming' },
+            { value: '65', viewValue: 'Machine Learning' },
+            { value: '66', viewValue: 'Machine Vision' },
+            { value: '67', viewValue: 'Mathematical Modeling' },
+            { value: '68', viewValue: 'Mathematical Tools for Computer Science' },
+            { value: '69', viewValue: 'Mechanics of Solids' },
+            { value: '70', viewValue: 'Microprocessors' },
+            { value: '71', viewValue: 'Microprocessors Laboratory' },
+            { value: '72', viewValue: 'Modern Optics and Electro optics' },
+            { value: '73', viewValue: 'Network Theory' },
+            { value: '74', viewValue: 'Neural Networks' },
+            { value: '75', viewValue: 'Numerical algorithms' },
+            { value: '76', viewValue: 'Numerical Analysis' },
+            { value: '77', viewValue: 'Object Oriented Programming' },
+            { value: '78', viewValue: 'Operating Systems' },
+            { value: '79', viewValue: 'Ordinary Differential Equations' },
+            { value: '80', viewValue: 'Partial Differential Equations' },
+            { value: '81', viewValue: 'Photonics and Electro-optics systems' },
+            { value: '82', viewValue: 'Power Electronics Systems' },
+            { value: '83', viewValue: 'Power Systems' },
+            { value: '84', viewValue: 'Programming in C' },
+            { value: '85', viewValue: 'Programming in C#' },
+            { value: '86', viewValue: 'Programming in Java' },
+            { value: '87', viewValue: 'Programming in JavaScript' },
+            { value: '88', viewValue: 'Programming in Python' },
+            { value: '89', viewValue: 'Random Signals' },
+            { value: '90', viewValue: 'Real Time Systems' },
+            { value: '91', viewValue: 'Receiving and Transmitting Techniques' },
+            { value: '92', viewValue: 'Robots Dynamics and Control' },
+            { value: '93', viewValue: 'Secure Quality Programs' },
+            { value: '94', viewValue: 'Semiconductor Devices' },
+            { value: '95', viewValue: 'Semiconductors' },
+            { value: '96', viewValue: 'Signal and Image Processing ' },
+            { value: '97', viewValue: 'Signals and Systems' },
+            { value: '98', viewValue: 'Statistical Inference' },
+            { value: '99', viewValue: 'Statistics and Probability' },
+            { value: '100', viewValue: 'Switching and Logic Design' },
+            { value: '101', viewValue: 'System Programming' },
+            { value: '102', viewValue: 'Waves and Distributed Systems' },
+            { value: '103', viewValue: 'Waves Propagation' },
+            { value: '104', viewValue: 'Web Programming' }
         ];
         this.reasonToContactArray = [
             { value: 'Suggestion', viewValue: 'Suggestion' },
@@ -2481,6 +2482,192 @@ var CommonProvider = (function () {
             { value: 'Complain', viewValue: 'Complain' },
             { value: 'Bug report', viewValue: 'Bug report' },
             { value: 'Other', viewValue: 'Other' }
+        ];
+        this.teachesSubjectsGroupsArray = [
+            {
+                name: 'A',
+                subjects: [
+                    { value: '1', viewValue: 'Advanced Control Theory' },
+                    { value: '2', viewValue: 'Advanced Programming Workshop' },
+                    { value: '3', viewValue: 'Algorithm in Optimization' },
+                    { value: '4', viewValue: 'Analog Linear Electronic Circuits' },
+                    { value: '5', viewValue: 'Antennas and Radiation' },
+                    { value: '6', viewValue: 'Approximation algorithms' },
+                    { value: '7', viewValue: 'Artificial Intelligence' },
+                    { value: '8', viewValue: 'Automata and Formal Languages' }
+                ]
+            },
+            {
+                name: 'C',
+                subjects: [
+                    { value: '9', viewValue: 'Calculus' },
+                    { value: '10', viewValue: 'Communication Engineering' },
+                    { value: '11', viewValue: 'Compilation Theory' },
+                    { value: '12', viewValue: 'Complex Functions' },
+                    { value: '13', viewValue: 'Complex Valued Functions' },
+                    { value: '14', viewValue: 'Computability and Complexity of Algorithms' },
+                    { value: '15', viewValue: 'Computer Architecture' },
+                    { value: '16', viewValue: 'Computer Communication Networks' },
+                    { value: '17', viewValue: 'Computer Graphics' },
+                    { value: '18', viewValue: 'Computer Organization and Assembly' },
+                    { value: '19', viewValue: 'Computer Structure and Switching Theory' },
+                    { value: '20', viewValue: 'Computer Vision' },
+                    { value: '21', viewValue: 'Conversion Laboratory Energy' }
+                ]
+            },
+            {
+                name: 'D',
+                subjects: [
+                    { value: '22', viewValue: 'Data Base Systems' },
+                    { value: '23', viewValue: 'Data Compression' },
+                    { value: '24', viewValue: 'Data Mining' },
+                    { value: '25', viewValue: 'Data Structures' },
+                    { value: '26', viewValue: 'Design and Analysis of Algorithms' },
+                    { value: '27', viewValue: 'Design Patterns' },
+                    { value: '28', viewValue: 'Digital Circuits' },
+                    { value: '29', viewValue: 'Digital Signal Processing' },
+                    { value: '30', viewValue: 'Digital Systems' },
+                    { value: '31', viewValue: 'Discrete Mathematics' },
+                    { value: '32', viewValue: 'Dynamics and Control Spacecraft' }
+                ]
+            },
+            {
+                name: 'E',
+                subjects: [
+                    { value: '33', viewValue: 'Electric Drives' },
+                    { value: '34', viewValue: 'Electrical Engineering Laboratory' },
+                    { value: '35', viewValue: 'Electromagnetic Fields' },
+                    { value: '36', viewValue: 'Electronic Materials' },
+                    { value: '37', viewValue: 'Electronics Computer Aided Design' },
+                    { value: '38', viewValue: 'Energy Conversion' },
+                    { value: '39', viewValue: 'Engineering Economics' },
+                    { value: '40', viewValue: 'Expert Systems' }
+                ]
+            },
+            {
+                name: 'F',
+                subjects: [
+                    { value: '41', viewValue: 'Filter Design' },
+                    { value: '42', viewValue: 'Fluid Mechanics' },
+                    { value: '43', viewValue: 'Forecasting Methods' },
+                    { value: '44', viewValue: 'Foundations of Information Systems' },
+                    { value: '45', viewValue: 'Fourier Series and Integral Transforms' }
+                ]
+            },
+            {
+                name: 'G',
+                subjects: [
+                    { value: '46', viewValue: 'Geometry View Multiple' },
+                    { value: '47', viewValue: 'Graph Theory' }
+                ]
+            },
+            {
+                name: 'H',
+                subjects: [
+                    { value: '48', viewValue: 'Hardware Description Languages' },
+                    { value: '49', viewValue: 'High and Low Voltages Devices' },
+                    { value: '50', viewValue: 'High Voltage Engineering' }
+                ]
+            },
+            {
+                name: 'I',
+                subjects: [
+                    { value: '51', viewValue: 'Introduction to Computer Science' },
+                    { value: '52', viewValue: 'Introduction to Control Theory' },
+                    { value: '53', viewValue: 'Introduction to Cryptography' },
+                    { value: '54', viewValue: 'Introduction to Fuzzy Logic' },
+                    { value: '55', viewValue: 'Introduction to Lasers' },
+                    { value: '56', viewValue: 'Introduction to Linear Systems' },
+                    { value: '57', viewValue: 'Introduction to Microwaves' },
+                    { value: '58', viewValue: 'Introduction to Modern Analysis' },
+                    { value: '59', viewValue: 'Introduction to Robotics' }
+                ]
+            },
+            {
+                name: 'L',
+                subjects: [
+                    { value: '60', viewValue: 'Laboratory of Logic Digital Circuits' },
+                    { value: '61', viewValue: 'Linear Algebra' },
+                    { value: '62', viewValue: 'Logic Design' },
+                    { value: '63', viewValue: 'Logic For Computer Science' },
+                    { value: '64', viewValue: 'Logic Programming' }
+                ]
+            },
+            {
+                name: 'M',
+                subjects: [
+                    { value: '65', viewValue: 'Machine Learning' },
+                    { value: '66', viewValue: 'Machine Vision' },
+                    { value: '67', viewValue: 'Mathematical Modeling' },
+                    { value: '68', viewValue: 'Mathematical Tools for Computer Science' },
+                    { value: '69', viewValue: 'Mechanics of Solids' },
+                    { value: '70', viewValue: 'Microprocessors' },
+                    { value: '71', viewValue: 'Microprocessors Laboratory' },
+                    { value: '72', viewValue: 'Modern Optics and Electro optics' }
+                ]
+            },
+            {
+                name: 'N',
+                subjects: [
+                    { value: '73', viewValue: 'Network Theory' },
+                    { value: '74', viewValue: 'Neural Networks' },
+                    { value: '75', viewValue: 'Numerical algorithms' },
+                    { value: '76', viewValue: 'Numerical Analysis' }
+                ]
+            },
+            {
+                name: 'O',
+                subjects: [
+                    { value: '77', viewValue: 'Object Oriented Programming' },
+                    { value: '78', viewValue: 'Operating Systems' },
+                    { value: '79', viewValue: 'Ordinary Differential Equations' }
+                ]
+            },
+            {
+                name: 'P',
+                subjects: [
+                    { value: '80', viewValue: 'Partial Differential Equations' },
+                    { value: '81', viewValue: 'Photonics and Electro-optics systems' },
+                    { value: '82', viewValue: 'Power Electronics Systems' },
+                    { value: '83', viewValue: 'Power Systems' },
+                    { value: '84', viewValue: 'Programming in C' },
+                    { value: '85', viewValue: 'Programming in C#' },
+                    { value: '86', viewValue: 'Programming in Java' },
+                    { value: '87', viewValue: 'Programming in JavaScript' },
+                    { value: '88', viewValue: 'Programming in Python' }
+                ]
+            },
+            {
+                name: 'R',
+                subjects: [
+                    { value: '89', viewValue: 'Random Signals' },
+                    { value: '90', viewValue: 'Real Time Systems' },
+                    { value: '91', viewValue: 'Receiving and Transmitting Techniques' },
+                    { value: '92', viewValue: 'Robots Dynamics and Control' }
+                ]
+            },
+            {
+                name: 'S',
+                subjects: [
+                    { value: '93', viewValue: 'Secure Quality Programs' },
+                    { value: '94', viewValue: 'Semiconductor Devices' },
+                    { value: '95', viewValue: 'Semiconductors' },
+                    { value: '96', viewValue: 'Signal and Image Processing ' },
+                    { value: '97', viewValue: 'Signals and Systems' },
+                    { value: '98', viewValue: 'Statistical Inference' },
+                    { value: '99', viewValue: 'Statistics and Probability' },
+                    { value: '100', viewValue: 'Switching and Logic Design' },
+                    { value: '101', viewValue: 'System Programming' }
+                ]
+            },
+            {
+                name: 'W',
+                subjects: [
+                    { value: '102', viewValue: 'Waves and Distributed Systems' },
+                    { value: '103', viewValue: 'Waves Propagation' },
+                    { value: '104', viewValue: 'Web Programming' }
+                ]
+            }
         ];
     }
     return CommonProvider;

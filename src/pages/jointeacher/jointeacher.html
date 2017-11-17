@@ -234,7 +234,15 @@
         <!-- Teaches Subjects -->
         <ion-row>
           <ion-col col-12>
-            <font style="color: red;">Wokring on subjects, bug currently.</font>
+            <mat-form-field class="m-full-width">
+              <mat-select placeholder="Teach Subjects" [formControl]="teachesSubjectsFormControl" multiple>
+                <mat-optgroup *ngFor="let group of commonProvider.teachesSubjectsGroupsArray" [label]="group.name">
+                  <mat-option *ngFor="let subject of group.subjects" [value]="subject.value">
+                    {{ subject.viewValue }}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
           </ion-col>
         </ion-row>
 

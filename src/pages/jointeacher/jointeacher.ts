@@ -33,6 +33,7 @@ export class JointeacherPage {
   public ageFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(1), Validators.max(120)]);
   public genderAtFormControl = new FormControl('', [Validators.required]);
   public teachesInstitutionsFormControl = new FormControl('', [Validators.required]);
+  public teachesSubjectsFormControl = new FormControl('', [Validators.required]);
 
   public image: String = null;
   public matcher = new MyErrorStateMatcher();

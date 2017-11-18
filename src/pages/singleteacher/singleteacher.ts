@@ -22,6 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class SingleteacherPage {
+  //#region Members
   public teacher: any;
 
   public fullNameFormControl = new FormControl('', [Validators.required]);
@@ -37,7 +38,9 @@ export class SingleteacherPage {
   @ViewChild('addRecommend') elAddRecommend: ElementRef;
 
   public matcher = new MyErrorStateMatcher();
+  //#endregion
 
+  //#region Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
     public apiProvider: ApiProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
     public favoritesManagerProvider: FavoritesManagerProvider, public toasterProvider: ToasterProvider,
@@ -45,7 +48,9 @@ export class SingleteacherPage {
     this.teacher = this.navParams.get('teacher');
     this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
   }
+  //#endregion
 
+  //#region Public Methods
   public dismiss() {
     this.viewCtrl.dismiss(this.isTeacherFavorited);
   }
@@ -124,7 +129,9 @@ export class SingleteacherPage {
       }
     }
   }
+  //#endregion
 
+  //#region Private Methods
   private isModelValid() {
     this.convertRateToInteger();
     if (this.rate == null || this.rate < 0 || this.rate > 5 ||
@@ -150,4 +157,5 @@ export class SingleteacherPage {
     });
     return alert;
   }
+  //#endregion
 }

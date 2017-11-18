@@ -25,6 +25,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class SearchPage {
+  //#region Members
   public brightness: number = 20;
   public saturation: number = 0;
   public warmth: number = 1300;
@@ -40,14 +41,18 @@ export class SearchPage {
   public matcher = new MyErrorStateMatcher();
 
   public filteredStates: Observable<any[]>;
+  //#endregion
 
+  //#region Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController, public commonProvider: CommonProvider) {
     this.filteredStates = this.teachesSubjectsFormControl.valueChanges
       .startWith(null)
       .map((subject) => subject ? this.filterStates(subject) : this.commonProvider.subjectsArray.slice());
   }
+  //#endregion
 
+  //#region Public Methods
   public filterStates(input: string) {
     return this.commonProvider.subjectsArray.filter((subject) =>
       subject.viewValue.toLowerCase().includes(input.toLowerCase()));
@@ -130,7 +135,9 @@ export class SearchPage {
         break;
     }
   }
+  //#endregion
 
+  //#region Private Methods
   private isModelValid() {
     if (
       this.structure == null ||
@@ -170,4 +177,5 @@ export class SearchPage {
 
     return subjectID == null ? null : parseInt(subjectID.value);
   }
+  //#endregion
 }

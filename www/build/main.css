@@ -30436,6 +30436,10 @@ ul.rating li ion-icon {
   margin-top: 0;
 }
 
+.m-margin-top-min15 {
+  margin-top: -15px;
+}
+
 .m-font-size-43px {
   font-size: 43px;
 }
@@ -30478,6 +30482,10 @@ ul.rating li ion-icon {
 
 .m-font-size-10px {
   font-size: 10px;
+}
+
+.m-font-size-0 {
+  font-size: 0;
 }
 
 .m-font-weight-300 {
@@ -30545,6 +30553,14 @@ ul.rating li ion-icon {
 
 .m-full-width {
   width: 100%;
+}
+
+.m-border-color-white {
+  border-color: white;
+}
+
+.m-display-inline-block {
+  display: inline-block;
 }
 
 page-favorites ul {

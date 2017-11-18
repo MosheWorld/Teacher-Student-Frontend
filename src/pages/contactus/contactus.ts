@@ -21,7 +21,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class ContactusPage {
-
+  //#region Members
   public fullNameFormControl = new FormControl('', [Validators.required]);
   public contactReasonFormControl = new FormControl('', [Validators.required]);
   public messageFormControl = new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]);
@@ -29,11 +29,15 @@ export class ContactusPage {
 
   public showErrorMessage: boolean = false;
   public matcher = new MyErrorStateMatcher();
+  //#endregion
 
+  //#region Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController, public commonProvider: CommonProvider) {
   }
+  //#endregion
 
+  //#region Public Methods
   public sendContactUsForm() {
     this.showErrorMessage = false;
 
@@ -72,7 +76,9 @@ export class ContactusPage {
   public openWhatsApp() {
     window.open('https://api.whatsapp.com/send?phone=972542477052');
   }
+  //#endregion
 
+  //#region Private Methods
   private isFormValid() {
     if (
       !this.fullNameFormControl.valid ||
@@ -94,4 +100,5 @@ export class ContactusPage {
     });
     return alert;
   }
+  //#endregion
 }

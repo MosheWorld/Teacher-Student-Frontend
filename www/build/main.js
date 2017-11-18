@@ -41,6 +41,8 @@ var MyErrorStateMatcher = (function () {
 }());
 
 var SingleteacherPage = (function () {
+    //#endregion
+    //#region Constructor
     function SingleteacherPage(navCtrl, navParams, viewCtrl, apiProvider, loadingCtrl, alertCtrl, favoritesManagerProvider, toasterProvider, rd) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -63,6 +65,8 @@ var SingleteacherPage = (function () {
         this.teacher = this.navParams.get('teacher');
         this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
     }
+    //#endregion
+    //#region Public Methods
     SingleteacherPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss(this.isTeacherFavorited);
     };
@@ -132,6 +136,8 @@ var SingleteacherPage = (function () {
             }
         }
     };
+    //#endregion
+    //#region Private Methods
     SingleteacherPage.prototype.isModelValid = function () {
         this.convertRateToInteger();
         if (this.rate == null || this.rate < 0 || this.rate > 5 ||
@@ -165,7 +171,7 @@ __decorate([
 ], SingleteacherPage.prototype, "elAddRecommend", void 0);
 SingleteacherPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-singleteacher',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\singleteacher\singleteacher.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-buttons start>\n      <button ion-button (click)="dismiss();">\n        <font class="m-color-white">Close</font>\n      </button>\n    </ion-buttons>\n    <ion-title text-center>\n      <font class="m-color-white">{{teacher.firstName}} {{teacher.lastName}}</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <!-- Image and add recommend button -->\n    <ion-row>\n      <ion-col col-7 text-left *ngIf="teacher.image == null">\n        <img class="m-default-image-cards-singleteacher" src="assets\\imgs\\imageNotFound.jpg" />\n      </ion-col>\n      <ion-col col-7 text-left *ngIf="teacher.image != null">\n        <img class="m-default-image-cards-singleteacher" src="{{teacher.image}}" />\n      </ion-col>\n      <ion-col *ngIf="!isTeacherFavorited" col-5 text-right>\n        <button ion-button icon-end small outline color="dark" (click)="addFavorite()">\n          Add favorite\n          <ion-icon name="star"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col *ngIf="isTeacherFavorited" col-5 text-right>\n        <button ion-button icon-end small outline color="dark" (click)="removeFavorite()">\n          Remove favorite\n          <ion-icon name="star"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n\n    <!-- First name and Last name and Gender and Age -->\n    <ion-row>\n      <ion-col col-12>\n        <font class="m-font-size-20px">\n          <i>{{teacher.firstName}} {{teacher.lastName}}</i>\n        </font> -\n        <i>{{teacher.gender | gender}}, {{teacher.age}}</i>\n      </ion-col>\n    </ion-row>\n\n    <!-- Phone -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Phone: </b>\n        <i>{{teacher.phone}}</i>\n        <ion-icon class="m-padding-left-7px" color="secondary" name="logo-whatsapp" (click)="openWhatsApp()"></ion-icon>\n      </ion-col>\n    </ion-row>\n\n    <!-- Email -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Email: </b>\n        <i>{{teacher.email}}</i>\n      </ion-col>\n    </ion-row>\n\n    <!-- Prices -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Price: </b>\n        <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>\n        <font class="m-font-size-10px">ILS</font>\n      </ion-col>\n    </ion-row>\n\n    <!-- Rate -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Rate: </b>\n        <i>{{teacher.rate}}</i>\n        <font *ngIf="teacher.recommendations.length === 1">\n          <i>( {{teacher.recommendations.length}} person rated )</i>\n        </font>\n        <font *ngIf="teacher.recommendations.length !== 1">\n          <i>( {{teacher.recommendations.length}} people rated )</i>\n        </font>\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches At -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches at:</b> {{teacher.teachesAt|teachesAt}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches Institutions -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches at Institutions:</b>\n      </ion-col>\n      <ion-col col-12 *ngFor="let institution of teacher.teachesInstitutions">\n        - {{institution | teachesInstitutions}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches Subjects -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches Subjects:</b>\n      </ion-col>\n      <ion-col col-12 *ngFor="let subject of teacher.teachesSubjects">\n        - {{subject | teachesSubjects}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Message -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Personal message: </b>{{teacher.personalMessage}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Recommendations Text and Add recommend icon -->\n    <ion-row>\n      <ion-col col-6 text-left>\n        <b>\n          <u>Recommendations:</u>\n        </b>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && !showRecommendationsBoolean">\n        <button ion-button outline icon-end small color="dark" (click)="openRecommendations()">\n          Add\n          <ion-icon name="ios-add-outline"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && showRecommendationsBoolean">\n        <button ion-button outline icon-end small color="dark" (click)="closeRecommendations()">\n          Close\n          <ion-icon name="ios-close-outline"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="alreadyAddedRecommend">\n        <ion-icon class="m-font-size-30px" name="md-done-all"></ion-icon>\n      </ion-col>\n    </ion-row>\n\n    <!-- Show recommendation -->\n    <div #addRecommend class="animated bounceInDown" *ngIf="showRecommendationsBoolean" text-center>\n\n      <form class="m-form">\n\n      <!-- Add Recommendations text -->\n      <ion-row>\n        <ion-col col-12>\n          <b>\n            <u>Add recommendations:</u>\n          </b>\n        </ion-col>\n      </ion-row>\n\n      <!-- Full name and Email -->\n      <ion-row>\n        <!-- Full name -->\n        <ion-col col-6>\n          <mat-form-field class="m-full-width">\n            <input type="text" matInput placeholder="Full name" [formControl]="fullNameFormControl" [errorStateMatcher]="matcher">\n            <mat-hint>First name and Last name</mat-hint>\n            <mat-error *ngIf="fullNameFormControl.hasError(\'required\')">\n              Full name is\n              <strong>required</strong>\n            </mat-error>\n          </mat-form-field>\n        </ion-col>\n        <!-- Email -->\n        <ion-col col-6>\n          <mat-form-field class="m-full-width">\n            <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"\n              [errorStateMatcher]="matcher">\n            <mat-hint>Ex: Email@gmail.com</mat-hint>\n            <mat-error *ngIf="emailFormControl.hasError(\'email\') && !emailFormControl.hasError(\'required\')">\n              Please enter a valid email address.\n            </mat-error>\n            <mat-error *ngIf="emailFormControl.hasError(\'required\')">\n              Email is\n              <strong>required</strong>\n            </mat-error>\n          </mat-form-field>\n        </ion-col>\n      </ion-row>\n\n      <!-- Rate input -->\n      <ion-row>\n        <ion-col col-12>\n          <rating [(ngModel)]="rate" [ngModelOptions]="{standalone: true}" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"\n            nullable="false"></rating>\n        </ion-col>\n      </ion-row>\n\n      <!-- Message -->\n      <ion-row>\n        <ion-col col-12>\n          <mat-form-field class="m-full-width">\n            <textarea matInput maxlength="100" rows="3" placeholder="Message" [formControl]="messageFormControl" [errorStateMatcher]="matcher"></textarea>\n            <mat-hint align="start">Please be kind :)</mat-hint>\n            <mat-hint align="end">{{messageFormControl.value.length}} / 100</mat-hint>\n            <mat-error *ngIf="messageFormControl.hasError(\'minlength\') && !messageFormControl.hasError(\'required\')">\n              Minimum number is 1\n            </mat-error>\n            <mat-error *ngIf="messageFormControl.hasError(\'maxlength\') && !messageFormControl.hasError(\'required\')">\n              Maximum number is 100\n            </mat-error>\n            <mat-error *ngIf="messageFormControl.hasError(\'required\')">\n              Write down something.\n            </mat-error>\n          </mat-form-field>\n        </ion-col>\n      </ion-row>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Add button message -->\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button block outline (click)="addNewRecommend()" icon-start>\n            <ion-icon name="add"></ion-icon>Add</button>\n        </ion-col>\n      </ion-row>\n\n      </form>\n\n    </div>\n\n    <!-- Recommendations List -->\n    <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">\n      <ion-col col-12>\n        {{recommend.fullName}} - {{recommend.rate}}\n      </ion-col>\n      <ion-col col-12>\n        - {{recommend.message}}\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\singleteacher\singleteacher.html"*/,
+        selector: 'page-singleteacher',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\singleteacher\singleteacher.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-buttons start>\n      <button ion-button (click)="dismiss();">\n        <font class="m-color-white">Close</font>\n      </button>\n    </ion-buttons>\n    <ion-title text-center>\n      <font class="m-color-white">{{teacher.firstName}} {{teacher.lastName}}</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Image and add recommend button -->\n      <ion-row>\n        <ion-col col-6 text-left *ngIf="teacher.image == null">\n          <img class="m-default-image-cards-singleteacher" src="assets\\imgs\\imageNotFound.jpg" />\n        </ion-col>\n        <ion-col col-6 text-left *ngIf="teacher.image != null">\n          <img class="m-default-image-cards-singleteacher" src="{{teacher.image}}" />\n        </ion-col>\n        <ion-col *ngIf="!isTeacherFavorited" col-6 text-right>\n          <button ion-button icon-end small outline class="m-color-white m-border-color-white" (click)="addFavorite()">\n            Add favorite\n            <ion-icon name="star"></ion-icon>\n          </button>\n        </ion-col>\n        <ion-col *ngIf="isTeacherFavorited" col-6 text-right>\n          <button ion-button icon-end small outline class="m-color-white m-border-color-white" (click)="removeFavorite()">\n            Remove favorite\n            <ion-icon name="star"></ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n\n      <!-- First name and Last name and Gender and Age -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-font-size-20px">\n            <i>{{teacher.firstName}} {{teacher.lastName}}</i>\n          </font> -\n          <i>{{teacher.gender | gender}}, {{teacher.age}}</i>\n        </ion-col>\n      </ion-row>\n\n      <!-- Rate -->\n      <ion-row>\n        <ion-col col-12>\n          <rating class="m-display-inline-block m-margin-top-min15 m-font-size-0" [(ngModel)]="teacher.rate" readOnly="true" max="5"\n            emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>\n          <i>{{teacher.rate}}</i>\n          <font *ngIf="teacher.recommendations.length === 1">\n            <i>( {{teacher.recommendations.length}} person rated )</i>\n          </font>\n          <font *ngIf="teacher.recommendations.length !== 1">\n            <i>( {{teacher.recommendations.length}} people rated )</i>\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Prices -->\n      <ion-row>\n        <ion-col col-12>\n          <i class="m-font-size-17px">{{teacher.priceFrom}} - {{teacher.priceTo}}</i>\n          <font class="m-font-size-10px">ILS</font>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <ion-grid padding>\n\n    <!-- Phone -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Phone: </b>\n        <i>{{teacher.phone}}</i>\n        <ion-icon class="m-padding-left-7px" color="secondary" name="logo-whatsapp" (click)="openWhatsApp()"></ion-icon>\n      </ion-col>\n    </ion-row>\n\n    <!-- Email -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Email: </b>\n        <i>{{teacher.email}}</i>\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches At -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches at:</b> {{teacher.teachesAt|teachesAt}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches Institutions -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches at Institutions:</b>\n      </ion-col>\n      <ion-col col-12 *ngFor="let institution of teacher.teachesInstitutions">\n        - {{institution | teachesInstitutions}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Teaches Subjects -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Teaches Subjects:</b>\n      </ion-col>\n      <ion-col col-12 *ngFor="let subject of teacher.teachesSubjects">\n        - {{subject | teachesSubjects}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Message -->\n    <ion-row>\n      <ion-col col-12>\n        <b>Personal message: </b>{{teacher.personalMessage}}\n      </ion-col>\n    </ion-row>\n\n    <!-- Recommendations Text and Add recommend icon -->\n    <ion-row>\n      <ion-col col-6 text-left>\n        <b>\n          <u>Recommendations:</u>\n        </b>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && !showRecommendationsBoolean">\n        <button ion-button outline icon-end small color="dark" (click)="openRecommendations()">\n          Add\n          <ion-icon name="ios-add-outline"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && showRecommendationsBoolean">\n        <button ion-button outline icon-end small color="dark" (click)="closeRecommendations()">\n          Close\n          <ion-icon name="ios-close-outline"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 text-right *ngIf="alreadyAddedRecommend">\n        <ion-icon class="m-font-size-30px" name="md-done-all"></ion-icon>\n      </ion-col>\n    </ion-row>\n\n    <!-- Show recommendation -->\n    <div #addRecommend class="animated bounceInDown" *ngIf="showRecommendationsBoolean" text-center>\n\n      <form class="m-form">\n\n        <!-- Add Recommendations text -->\n        <ion-row>\n          <ion-col col-12>\n            <b>\n              <u>Add recommendations:</u>\n            </b>\n          </ion-col>\n        </ion-row>\n\n        <!-- Full name and Email -->\n        <ion-row>\n          <!-- Full name -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" matInput placeholder="Full name" [formControl]="fullNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>First name and Last name</mat-hint>\n              <mat-error *ngIf="fullNameFormControl.hasError(\'required\')">\n                Full name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Email -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"\n                [errorStateMatcher]="matcher">\n              <mat-hint>Ex: Email@gmail.com</mat-hint>\n              <mat-error *ngIf="emailFormControl.hasError(\'email\') && !emailFormControl.hasError(\'required\')">\n                Please enter a valid email address.\n              </mat-error>\n              <mat-error *ngIf="emailFormControl.hasError(\'required\')">\n                Email is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Rate input -->\n        <ion-row>\n          <ion-col col-12>\n            <rating [(ngModel)]="rate" [ngModelOptions]="{standalone: true}" readOnly="false" max="5" emptyStarIconName="star-outline"\n              halfStarIconName="star-half" starIconName="star" nullable="false"></rating>\n          </ion-col>\n        </ion-row>\n\n        <!-- Message -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <textarea matInput maxlength="100" rows="3" placeholder="Message" [formControl]="messageFormControl" [errorStateMatcher]="matcher"></textarea>\n              <mat-hint align="start">Please be kind :)</mat-hint>\n              <mat-hint align="end">{{messageFormControl.value.length}} / 100</mat-hint>\n              <mat-error *ngIf="messageFormControl.hasError(\'minlength\') && !messageFormControl.hasError(\'required\')">\n                Minimum number is 1\n              </mat-error>\n              <mat-error *ngIf="messageFormControl.hasError(\'maxlength\') && !messageFormControl.hasError(\'required\')">\n                Maximum number is 100\n              </mat-error>\n              <mat-error *ngIf="messageFormControl.hasError(\'required\')">\n                Write down something.\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Error message - Fields -->\n        <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n          <ion-col col-12>\n            <font class="m-color-red">Please fill the requested fields.</font>\n          </ion-col>\n        </ion-row>\n\n        <!-- Add button message -->\n        <ion-row>\n          <ion-col col-12>\n            <button ion-button block outline (click)="addNewRecommend()" icon-start>\n              <ion-icon name="add"></ion-icon>Add</button>\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n    </div>\n\n    <!-- Recommendations List -->\n    <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">\n      <ion-col col-12>\n        {{recommend.fullName}} - {{recommend.rate}}\n      </ion-col>\n      <ion-col col-12>\n        - {{recommend.message}}\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\singleteacher\singleteacher.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ViewController */],
         __WEBPACK_IMPORTED_MODULE_4__providers_api_api__["a" /* ApiProvider */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */],
@@ -216,6 +222,8 @@ var MyErrorStateMatcher = (function () {
 }());
 
 var ContactusPage = (function () {
+    //#endregion
+    //#region Constructor
     function ContactusPage(navCtrl, navParams, apiProvider, loadingCtrl, alertCtrl, commonProvider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -223,6 +231,7 @@ var ContactusPage = (function () {
         this.loadingCtrl = loadingCtrl;
         this.alertCtrl = alertCtrl;
         this.commonProvider = commonProvider;
+        //#region Members
         this.fullNameFormControl = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormControl */]('', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required]);
         this.contactReasonFormControl = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormControl */]('', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required]);
         this.messageFormControl = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormControl */]('', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].minLength(10), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].maxLength(200)]);
@@ -230,6 +239,8 @@ var ContactusPage = (function () {
         this.showErrorMessage = false;
         this.matcher = new MyErrorStateMatcher();
     }
+    //#endregion
+    //#region Public Methods
     ContactusPage.prototype.sendContactUsForm = function () {
         var _this = this;
         this.showErrorMessage = false;
@@ -262,6 +273,8 @@ var ContactusPage = (function () {
     ContactusPage.prototype.openWhatsApp = function () {
         window.open('https://api.whatsapp.com/send?phone=972542477052');
     };
+    //#endregion
+    //#region Private Methods
     ContactusPage.prototype.isFormValid = function () {
         if (!this.fullNameFormControl.valid ||
             !this.emailFormControl.valid || !__WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail___default()(this.emailFormControl.value) ||
@@ -610,6 +623,8 @@ var MyErrorStateMatcher = (function () {
 }());
 
 var SearchPage = (function () {
+    //#endregion
+    //#region Constructor
     function SearchPage(navCtrl, navParams, apiProvider, loadingCtrl, alertCtrl, commonProvider) {
         var _this = this;
         this.navCtrl = navCtrl;
@@ -618,6 +633,7 @@ var SearchPage = (function () {
         this.loadingCtrl = loadingCtrl;
         this.alertCtrl = alertCtrl;
         this.commonProvider = commonProvider;
+        //#region Members
         this.brightness = 20;
         this.saturation = 0;
         this.warmth = 1300;
@@ -633,6 +649,8 @@ var SearchPage = (function () {
             .startWith(null)
             .map(function (subject) { return subject ? _this.filterStates(subject) : _this.commonProvider.subjectsArray.slice(); });
     }
+    //#endregion
+    //#region Public Methods
     SearchPage.prototype.filterStates = function (input) {
         return this.commonProvider.subjectsArray.filter(function (subject) {
             return subject.viewValue.toLowerCase().includes(input.toLowerCase());
@@ -704,6 +722,8 @@ var SearchPage = (function () {
                 break;
         }
     };
+    //#endregion
+    //#region Private Methods
     SearchPage.prototype.isModelValid = function () {
         if (this.structure == null ||
             !this.genderFormControl.valid ||
@@ -780,13 +800,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var TeacherslistPage = (function () {
+    //#endregion
+    //#region Constructor
     function TeacherslistPage(navCtrl, navParams, modalCtrl, favoritesManagerProvider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.modalCtrl = modalCtrl;
         this.favoritesManagerProvider = favoritesManagerProvider;
-        this.teachersListNotChange = [];
         this.teachers = [];
+        this.teachersListNotChange = [];
         var tempArray = this.navParams.get('teacherSearchList');
         for (var _i = 0, tempArray_1 = tempArray; _i < tempArray_1.length; _i++) {
             var item = tempArray_1[_i];
@@ -802,6 +824,8 @@ var TeacherslistPage = (function () {
             }]);
         this.teachersListNotChange = this.teachers.slice();
     }
+    //#endregion
+    //#region Public Methods
     TeacherslistPage.prototype.expandTeacherInformation = function (index) {
         var _this = this;
         var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_3__singleteacher_singleteacher__["a" /* SingleteacherPage */], { teacher: this.teachers[index] });
@@ -846,6 +870,8 @@ var TeacherslistPage = (function () {
             }
         }
     };
+    //#endregion
+    //#region Private Methods
     TeacherslistPage.prototype.sortByName = function () {
         this.teachers.sort(function (a, b) {
             var first = (a.firstName + " " + a.lastName).toLowerCase();
@@ -945,11 +971,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var SettingsPage = (function () {
+    //#region Constructor
     function SettingsPage(navCtrl, navParams, favoritesManagerProvider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.favoritesManagerProvider = favoritesManagerProvider;
     }
+    //#endregion
+    //#region Public Methods
     SettingsPage.prototype.goPage = function (page) {
         switch (page) {
             case 'favorites':
@@ -1154,7 +1183,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var TabsPage = (function () {
+    //#endregion
+    //#region Constructor
     function TabsPage() {
+        //#region Members
         this.tab1Root = __WEBPACK_IMPORTED_MODULE_1__home_home__["a" /* HomePage */];
         this.tab2Root = __WEBPACK_IMPORTED_MODULE_2__search_search__["a" /* SearchPage */];
         this.tab3Root = __WEBPACK_IMPORTED_MODULE_3__settings_settings__["a" /* SettingsPage */];
@@ -1196,10 +1228,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = (function () {
+    //#endregion
+    //#region Constructor
     function HomePage(navCtrl) {
         this.navCtrl = navCtrl;
+        //#region Members
         this.tabRef = this.navCtrl.parent;
     }
+    //#endregion
+    //#region Public Methods
     HomePage.prototype.goPage = function (page) {
         switch (page) {
             case 'search':
@@ -1439,7 +1476,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var MyApp = (function () {
+    //#endregion
+    //#region Constructor
     function MyApp(platform, statusBar, splashScreen) {
+        //#region Members
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__["a" /* TabsPage */];
         platform.ready().then(function () {
             statusBar.styleDefault();
@@ -2246,6 +2286,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var FavoritesPage = (function () {
+    //#endregion
+    //#region Constructor
     function FavoritesPage(navCtrl, navParams, favoritesManagerProvider, apiProvider, modalCtrl, loadingCtrl, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -2254,12 +2296,15 @@ var FavoritesPage = (function () {
         this.modalCtrl = modalCtrl;
         this.loadingCtrl = loadingCtrl;
         this.alertCtrl = alertCtrl;
+        //#region Members
         this.tabRef = this.navCtrl.parent;
         this.userHaveFavorites = false;
         this.teachers = [];
         var listOfTeacherID = this.favoritesManagerProvider.getFavorites();
         this.bootstrapFavoritePage(listOfTeacherID);
     }
+    //#endregion
+    //#region Public Methods
     FavoritesPage.prototype.goPage = function (page) {
         switch (page) {
             case 'search':
@@ -2284,6 +2329,8 @@ var FavoritesPage = (function () {
         });
         modal.present();
     };
+    //#endregion
+    //#region Private Methods
     FavoritesPage.prototype.bootstrapFavoritePage = function (listOfTeacherID) {
         if (listOfTeacherID == null || listOfTeacherID.length == 0) {
             this.userHaveFavorites = false;

@@ -12,10 +12,13 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 })
 
 export class TeacherslistPage {
-  public teachersListNotChange: any[] = [];
-  public teachers: any[] = [];
+  //#region Members
   public sortByType: string;
+  public teachers: any[] = [];
+  public teachersListNotChange: any[] = [];
+  //#endregion
 
+  //#region Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
     public favoritesManagerProvider: FavoritesManagerProvider) {
     let tempArray = this.navParams.get('teacherSearchList');
@@ -33,7 +36,9 @@ export class TeacherslistPage {
     }])
     this.teachersListNotChange = this.teachers.slice();
   }
+  //#endregion
 
+  //#region Public Methods
   public expandTeacherInformation(index: number) {
     let modal = this.modalCtrl.create(SingleteacherPage, { teacher: this.teachers[index] });
     modal.onDidDismiss((data) => {
@@ -77,7 +82,9 @@ export class TeacherslistPage {
       }
     }
   }
+  //#endregion
 
+  //#region Private Methods
   private sortByName() {
     this.teachers.sort((a, b) => {
       let first = (a.firstName + " " + a.lastName).toLowerCase();
@@ -138,4 +145,5 @@ export class TeacherslistPage {
       }
     });
   }
+  //#endregion
 }

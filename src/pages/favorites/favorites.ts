@@ -12,18 +12,23 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 })
 
 export class FavoritesPage {
+  //#region Members
   private tabRef: Tabs = this.navCtrl.parent;
   public userHaveFavorites: boolean = false;
 
   public teachers: any[] = [];
+  //#endregion
 
+  //#region Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider,
     public apiProvider: ApiProvider, public modalCtrl: ModalController, public loadingCtrl: LoadingController,
     public alertCtrl: AlertController) {
     let listOfTeacherID = this.favoritesManagerProvider.getFavorites();
     this.bootstrapFavoritePage(listOfTeacherID);
   }
+  //#endregion
 
+  //#region Public Methods
   public goPage(page: any) {
     switch (page) {
       case 'search':
@@ -48,7 +53,9 @@ export class FavoritesPage {
     });
     modal.present();
   }
+  //#endregion
 
+  //#region Private Methods
   private bootstrapFavoritePage(listOfTeacherID: any) {
     if (listOfTeacherID == null || listOfTeacherID.length == 0) {
       this.userHaveFavorites = false;
@@ -88,4 +95,5 @@ export class FavoritesPage {
     });
     return alert;
   }
+  //#endregion
 }

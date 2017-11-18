@@ -11,10 +11,12 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 })
 
 export class SettingsPage {
-
+  //#region Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider) {
   }
+  //#endregion
 
+  //#region Public Methods
   public goPage(page: any) {
     switch (page) {
       case 'favorites':
@@ -29,4 +31,5 @@ export class SettingsPage {
   public clearIDLocalStorage() {
     this.favoritesManagerProvider.removeAll();
   }
+  //#endregion
 }

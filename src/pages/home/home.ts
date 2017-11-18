@@ -11,11 +11,16 @@ import { JointeacherPage } from './../jointeacher/jointeacher';
 })
 
 export class HomePage {
+  //#region Members
   private tabRef: Tabs = this.navCtrl.parent;
+  //#endregion
 
+  //#region Constructor
   constructor(public navCtrl: NavController) {
   }
+  //#endregion
 
+  //#region Public Methods
   public goPage(page: any) {
     switch (page) {
       case 'search':
@@ -35,4 +40,5 @@ export class HomePage {
         break;
     }
   }
+  //#endregion
 }

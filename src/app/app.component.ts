@@ -10,12 +10,16 @@ import { TabsPage } from '../pages/tabs/tabs';
 })
 
 export class MyApp {
+  //#region Members
   rootPage: any = TabsPage;
+  //#endregion
 
+  //#region Constructor
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
     });
   }
+  //#endregion
 }

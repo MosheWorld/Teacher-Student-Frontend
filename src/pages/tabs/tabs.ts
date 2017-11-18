@@ -9,10 +9,14 @@ import { SettingsPage } from './../settings/settings';
 })
 
 export class TabsPage {
+  //#region Members
   tab1Root = HomePage;
   tab2Root = SearchPage;
   tab3Root = SettingsPage;
+  //#endregion
 
+  //#region Constructor
   constructor() {
   }
+  //#endregion
 }

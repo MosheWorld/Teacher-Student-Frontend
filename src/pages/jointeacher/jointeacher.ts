@@ -31,7 +31,7 @@ export class JointeacherPage {
   public toPriceFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(1), Validators.max(200)]);
   public fromPriceFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(1), Validators.max(200)]);
   public teachesAtFormControl = new FormControl(null, [Validators.required]);
-  public ageFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(1), Validators.max(120)]);
+  public ageFormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.min(16), Validators.max(120)]);
   public genderAtFormControl = new FormControl(null, [Validators.required]);
   public teachesInstitutionsFormControl = new FormControl(null, [Validators.required]);
   public teachesSubjectsFormControl = new FormControl(null, [Validators.required]);

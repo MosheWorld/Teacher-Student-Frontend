@@ -79,6 +79,9 @@ export class FavoritesPage {
       .subscribe(
       (teachersList) => {
         this.teachers = teachersList;
+        for (let teacher of this.teachers) {
+          this.GetImageForTeacher(teacher);
+        }
         loading.dismiss();
       },
       (failure) => {
@@ -94,6 +97,13 @@ export class FavoritesPage {
       buttons: ['Ok']
     });
     return alert;
+  }
+
+  private async GetImageForTeacher(teacher) {
+    this.apiProvider.httpPost("image/getimagebyid", { "imagePath": teacher.image })
+      .subscribe(
+      (success) => { teacher.image = success.image; },
+      (failure) => { teacher.image = "assets\\imgs\\imageNotFound.jpg"; });
   }
   //#endregion
 }

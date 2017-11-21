@@ -25,9 +25,9 @@ export class TeacherslistPage {
     let tempArray = this.navParams.get('teacherSearchList');
 
     for (let item of tempArray) {
+      this.GetImageForTeacher(item);
       if (this.favoritesManagerProvider.isIDExist(item._id)) {
         item.isTeacherFavorited = true;
-        this.GetImageForTeacher(item);
       } else {
         item.isTeacherFavorited = false;
       }
@@ -38,13 +38,6 @@ export class TeacherslistPage {
     }])
 
     this.teachersListNotChange = this.teachers.slice();
-  }
-
-  private GetImageForTeacher(teacher) {
-    this.apiProvider.httpPost("image/getimagebyid", JSON.stringify({ imagePath: teacher.image }))
-      .subscribe(
-      (success) => { console.log(success); },
-      (failure) => { console.log(failure); });
   }
   //#endregion
 
@@ -154,6 +147,13 @@ export class TeacherslistPage {
         }
       }
     });
+  }
+
+  private async GetImageForTeacher(teacher) {
+    this.apiProvider.httpPost("image/getimagebyid", { "imagePath": teacher.image })
+      .subscribe(
+      (success) => { teacher.image = success.image; },
+      (failure) => { teacher.image = "assets\\imgs\\imageNotFound.jpg"; });
   }
   //#endregion
 }

@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
+import { ApiProvider } from './../../providers/api/api';
 import { SingleteacherPage } from './../singleteacher/singleteacher';
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
@@ -20,12 +21,13 @@ export class TeacherslistPage {
 
   //#region Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
-    public favoritesManagerProvider: FavoritesManagerProvider) {
+    public favoritesManagerProvider: FavoritesManagerProvider, public apiProvider: ApiProvider) {
     let tempArray = this.navParams.get('teacherSearchList');
 
     for (let item of tempArray) {
       if (this.favoritesManagerProvider.isIDExist(item._id)) {
         item.isTeacherFavorited = true;
+        this.GetImageForTeacher(item);
       } else {
         item.isTeacherFavorited = false;
       }
@@ -34,7 +36,15 @@ export class TeacherslistPage {
     this.teachers = _.sortBy(tempArray, [function (o) {
       return o.firstName;
     }])
+
     this.teachersListNotChange = this.teachers.slice();
+  }
+
+  private GetImageForTeacher(teacher) {
+    this.apiProvider.httpPost("image/getimagebyid", JSON.stringify({ imagePath: teacher.image }))
+      .subscribe(
+      (success) => { console.log(success); },
+      (failure) => { console.log(failure); });
   }
   //#endregion
 

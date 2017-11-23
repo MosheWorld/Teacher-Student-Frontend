@@ -14,7 +14,6 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 
 export class TeacherslistPage {
   //#region Members
-  public sortByType: string;
   public teachers: any[] = [];
   public teachersListNotChange: any[] = [];
   //#endregion
@@ -72,15 +71,15 @@ export class TeacherslistPage {
     }
   }
 
-  public sortByTeacherList() {
-    if (this.sortByType != null && this.sortByType.length > 1) {
-      if (this.sortByType === "Name") {
+  public sortByTeacherList(sortByType) {
+    if (sortByType != null && sortByType.length > 1) {
+      if (sortByType === "Name") {
         this.sortByName();
-      } else if (this.sortByType === "Rate") {
+      } else if (sortByType === "Rate") {
         this.sortByRate();
-      } else if (this.sortByType === "Recommendations") {
+      } else if (sortByType === "Recommendations") {
         this.sortByRecommendations();
-      } else if (this.sortByType === "RecommendationsRate") {
+      } else if (sortByType === "RecommendationsRate") {
         this.sortByRecommendationsRate();
       }
     }

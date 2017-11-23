@@ -28,6 +28,7 @@ import { TeachesSubjectsPipe } from './../pipes/teaches-subjects/teaches-subject
 import { FavoritesManagerProvider } from '../providers/favorites-manager/favorites-manager';
 import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
 
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -62,6 +63,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     }),
     BrowserAnimationsModule,
     MatTabsModule,
+    MatMenuModule,
     MatInputModule,
     MatSelectModule,
     MatAutocompleteModule

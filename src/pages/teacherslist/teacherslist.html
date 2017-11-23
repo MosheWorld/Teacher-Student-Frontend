@@ -5,21 +5,25 @@
       <font class="m-color-white">Teacher List</font>
     </ion-title>
     <ion-buttons end icon-only class="m-color-white">
-      <div onclick="document.getElementById('selectOrderByID').click();">
-        <ion-icon name="md-reorder"></ion-icon>
+      <div [matMenuTriggerFor]="menu">
+        <ion-icon name="md-more"></ion-icon>
       </div>
     </ion-buttons>
 
-    <!-- List of orders - Display is none always -->
-    <ion-item class="m-display-none">
-      <ion-label>Sort By</ion-label>
-      <ion-select [(ngModel)]="sortByType" id="selectOrderByID" interface="action-sheet" (ionChange)="sortByTeacherList()">
-        <ion-option value="Name">Name</ion-option>
-        <ion-option value="Rate">Rate</ion-option>
-        <ion-option value="Recommendations">Recommendations</ion-option>
-        <ion-option value="RecommendationsRate">Recommendations + Rate</ion-option>
-      </ion-select>
-    </ion-item>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="sortByTeacherList('Name')">
+        <span>Name</span>
+      </button>
+      <button mat-menu-item (click)="sortByTeacherList('Rate')">
+        <span>Rate</span>
+      </button>
+      <button mat-menu-item (click)="sortByTeacherList('Recommendations')">
+          <span>Recommendations</span>
+        </button>
+      <button mat-menu-item (click)="sortByTeacherList('RecommendationsRate')">
+        <span>Recommendations + Rate</span>
+      </button>
+    </mat-menu>
 
   </ion-navbar>
 

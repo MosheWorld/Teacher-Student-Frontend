@@ -11,6 +11,9 @@
     </ion-buttons>
 
     <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled>
+        <span>Sort By</span>
+      </button>
       <button mat-menu-item (click)="sortByTeacherList('Name')">
         <span>Name</span>
       </button>
@@ -18,8 +21,8 @@
         <span>Rate</span>
       </button>
       <button mat-menu-item (click)="sortByTeacherList('Recommendations')">
-          <span>Recommendations</span>
-        </button>
+        <span>Recommendations</span>
+      </button>
       <button mat-menu-item (click)="sortByTeacherList('RecommendationsRate')">
         <span>Recommendations + Rate</span>
       </button>

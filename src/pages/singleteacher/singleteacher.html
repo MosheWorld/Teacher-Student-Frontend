@@ -107,27 +107,46 @@
     </ion-row>
 
     <!-- Teaches Institutions -->
-    <ion-row>
+    <!-- <ion-row>
       <ion-col col-12>
         <b>Teaches at Institutions:</b>
       </ion-col>
       <ion-col col-12 *ngFor="let institution of teacher.teachesInstitutions">
         - {{institution | teachesInstitutions}}
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
     <!-- Teaches Subjects -->
-    <ion-row>
+    <!-- <ion-row>
       <ion-col col-12>
         <b>Teaches Subjects:</b>
       </ion-col>
       <ion-col col-12 *ngFor="let subject of teacher.teachesSubjects">
         - {{subject | teachesSubjects}}
       </ion-col>
+    </ion-row> -->
+
+    <ion-row>
+      <ion-col col-12>
+        <mat-tab-group>
+          <!-- Teaches Institutions -->
+          <mat-tab label="Institutions" padding>
+            <ul *ngFor="let institution of teacher.teachesInstitutions">
+              <li>- {{institution | teachesInstitutions}}</li>
+            </ul>
+          </mat-tab>
+          <!-- Teaches Subjects -->
+          <mat-tab label="Subjects" padding>
+            <ul *ngFor="let subject of teacher.teachesSubjects">
+              <li>- {{subject | teachesSubjects}}</li>
+            </ul>
+          </mat-tab>
+        </mat-tab-group>
+      </ion-col>
     </ion-row>
 
     <!-- Message -->
-    <ion-row>
+    <ion-row style="padding-top: 15px;">
       <ion-col col-12>
         <b>Personal message: </b>{{teacher.personalMessage}}
       </ion-col>

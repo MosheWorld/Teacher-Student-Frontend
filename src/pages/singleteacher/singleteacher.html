@@ -127,8 +127,8 @@
           Close recommendation
         </button>
       </ion-col>
-      <ion-col col-6 offset-6 text-right *ngIf="alreadyAddedRecommend">
-        <ion-icon class="m-font-size-30px" name="md-done-all"></ion-icon>
+      <ion-col col-12 text-center *ngIf="alreadyAddedRecommend">
+        <font class="m-color-c2bbbb"> * Your recommendation has been added *</font>
       </ion-col>
     </ion-row>
 
@@ -233,12 +233,13 @@
           <ion-segment-button value="2" class="m-font-size-10px-impo">
             Subjects
           </ion-segment-button>
-          <ion-segment-button value="3" class="m-font-size-10px-impo">
+          <ion-segment-button [hidden]="teacher.recommendations == null || teacher.recommendations.length === 0" value="3" class="m-font-size-10px-impo">
             Recommendations
           </ion-segment-button>
         </ion-segment>
       </ion-col>
     </ion-row>
+
     <!-- Institutions + Subjects + Recommendations Content-->
     <div>
 

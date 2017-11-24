@@ -106,26 +106,6 @@
       </ion-col>
     </ion-row>
 
-    <!-- Teaches Institutions -->
-    <!-- <ion-row>
-      <ion-col col-12>
-        <b>Teaches at Institutions:</b>
-      </ion-col>
-      <ion-col col-12 *ngFor="let institution of teacher.teachesInstitutions">
-        - {{institution | teachesInstitutions}}
-      </ion-col>
-    </ion-row> -->
-
-    <!-- Teaches Subjects -->
-    <!-- <ion-row>
-      <ion-col col-12>
-        <b>Teaches Subjects:</b>
-      </ion-col>
-      <ion-col col-12 *ngFor="let subject of teacher.teachesSubjects">
-        - {{subject | teachesSubjects}}
-      </ion-col>
-    </ion-row> -->
-
     <!-- Message -->
     <ion-row>
       <ion-col col-12>
@@ -243,34 +223,51 @@
 
     </div>
 
-    <!-- Recommendations List -->
-    <!-- <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">
-      <ion-col col-12>
-        {{recommend.fullName}} - {{recommend.rate}}
-      </ion-col>
-      <ion-col col-12>
-        - {{recommend.message}}
-      </ion-col>
-    </ion-row> -->
-
-    <!-- Institutions + Subjects + Recommendations -->
+    <!-- Institutions + Subjects + Recommendations Header-->
     <ion-row>
       <ion-col col-12>
-        <mat-tab-group>
-          <!-- Teaches Institutions -->
-          <mat-tab label="Institutions" padding>
+        <ion-segment [(ngModel)]="currentChosenType">
+          <ion-segment-button value="1" class="m-font-size-10px-impo">
+            Institutions
+          </ion-segment-button>
+          <ion-segment-button value="2" class="m-font-size-10px-impo">
+            Subjects
+          </ion-segment-button>
+          <ion-segment-button value="3" class="m-font-size-10px-impo">
+            Recommendations
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+    <!-- Institutions + Subjects + Recommendations Content-->
+    <div>
+
+      <!-- Institution -->
+      <ion-row *ngIf="currentChosenType === '1'">
+        <ion-col col-12>
+          <ion-list>
             <ul *ngFor="let institution of teacher.teachesInstitutions">
-              <li>- {{institution | teachesInstitutions}}</li>
+              <li>{{institution | teachesInstitutions}}</li>
             </ul>
-          </mat-tab>
-          <!-- Teaches Subjects -->
-          <mat-tab label="Subjects" padding>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <!-- Subjects -->
+      <ion-row *ngIf="currentChosenType === '2'">
+        <ion-col col-12>
+          <ion-list>
             <ul *ngFor="let subject of teacher.teachesSubjects">
-              <li>- {{subject | teachesSubjects}}</li>
+              <li>{{subject | teachesSubjects}}</li>
             </ul>
-          </mat-tab>
-          <!-- Recommendations -->
-          <mat-tab label="Recommendations" padding>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <!-- Recommendations -->
+      <ion-row *ngIf="currentChosenType === '3'">
+        <ion-col col-12>
+          <ion-list>
             <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">
               <ion-col col-12>
                 {{recommend.fullName}} - {{recommend.rate}}
@@ -279,10 +276,11 @@
                 - {{recommend.message}}
               </ion-col>
             </ion-row>
-          </mat-tab>
-        </mat-tab-group>
-      </ion-col>
-    </ion-row>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+    </div>
 
   </ion-grid>
 

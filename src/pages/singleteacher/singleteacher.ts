@@ -38,6 +38,8 @@ export class SingleteacherPage {
   @ViewChild('addRecommend') elAddRecommend: ElementRef;
 
   public matcher = new MyErrorStateMatcher();
+
+  public currentChosenType = "1";
   //#endregion
 
   //#region Constructor

@@ -30484,6 +30484,10 @@ ul.rating li ion-icon {
   font-size: 10px;
 }
 
+.m-font-size-10px-impo {
+  font-size: 10px !important;
+}
+
 .m-font-size-0 {
   font-size: 0;
 }

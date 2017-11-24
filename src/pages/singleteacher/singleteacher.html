@@ -126,27 +126,8 @@
       </ion-col>
     </ion-row> -->
 
-    <ion-row>
-      <ion-col col-12>
-        <mat-tab-group>
-          <!-- Teaches Institutions -->
-          <mat-tab label="Institutions" padding>
-            <ul *ngFor="let institution of teacher.teachesInstitutions">
-              <li>- {{institution | teachesInstitutions}}</li>
-            </ul>
-          </mat-tab>
-          <!-- Teaches Subjects -->
-          <mat-tab label="Subjects" padding>
-            <ul *ngFor="let subject of teacher.teachesSubjects">
-              <li>- {{subject | teachesSubjects}}</li>
-            </ul>
-          </mat-tab>
-        </mat-tab-group>
-      </ion-col>
-    </ion-row>
-
     <!-- Message -->
-    <ion-row style="padding-top: 15px;">
+    <ion-row>
       <ion-col col-12>
         <b>Personal message: </b>{{teacher.personalMessage}}
       </ion-col>
@@ -154,24 +135,19 @@
 
     <!-- Recommendations Text and Add recommend icon -->
     <ion-row>
-      <ion-col col-6 text-left>
-        <b>
-          <u>Recommendations:</u>
-        </b>
-      </ion-col>
-      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && !showRecommendationsBoolean">
-        <button ion-button outline icon-end small color="dark" (click)="openRecommendations()">
-          Add
+      <ion-col col-12 text-center *ngIf="!alreadyAddedRecommend && !showRecommendationsBoolean">
+        <button ion-button outline icon-start small color="dark" (click)="openRecommendations()">
           <ion-icon name="ios-add-outline"></ion-icon>
+          Add recommendation
         </button>
       </ion-col>
-      <ion-col col-6 text-right *ngIf="!alreadyAddedRecommend && showRecommendationsBoolean">
-        <button ion-button outline icon-end small color="dark" (click)="closeRecommendations()">
-          Close
+      <ion-col col-12 text-center *ngIf="!alreadyAddedRecommend && showRecommendationsBoolean">
+        <button ion-button outline icon-start small color="dark" (click)="closeRecommendations()">
           <ion-icon name="ios-close-outline"></ion-icon>
+          Close recommendation
         </button>
       </ion-col>
-      <ion-col col-6 text-right *ngIf="alreadyAddedRecommend">
+      <ion-col col-6 offset-6 text-right *ngIf="alreadyAddedRecommend">
         <ion-icon class="m-font-size-30px" name="md-done-all"></ion-icon>
       </ion-col>
     </ion-row>
@@ -268,12 +244,43 @@
     </div>
 
     <!-- Recommendations List -->
-    <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">
+    <!-- <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">
       <ion-col col-12>
         {{recommend.fullName}} - {{recommend.rate}}
       </ion-col>
       <ion-col col-12>
         - {{recommend.message}}
+      </ion-col>
+    </ion-row> -->
+
+    <!-- Institutions + Subjects + Recommendations -->
+    <ion-row>
+      <ion-col col-12>
+        <mat-tab-group>
+          <!-- Teaches Institutions -->
+          <mat-tab label="Institutions" padding>
+            <ul *ngFor="let institution of teacher.teachesInstitutions">
+              <li>- {{institution | teachesInstitutions}}</li>
+            </ul>
+          </mat-tab>
+          <!-- Teaches Subjects -->
+          <mat-tab label="Subjects" padding>
+            <ul *ngFor="let subject of teacher.teachesSubjects">
+              <li>- {{subject | teachesSubjects}}</li>
+            </ul>
+          </mat-tab>
+          <!-- Recommendations -->
+          <mat-tab label="Recommendations" padding>
+            <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">
+              <ion-col col-12>
+                {{recommend.fullName}} - {{recommend.rate}}
+              </ion-col>
+              <ion-col col-12>
+                - {{recommend.message}}
+              </ion-col>
+            </ion-row>
+          </mat-tab>
+        </mat-tab-group>
       </ion-col>
     </ion-row>
 

@@ -149,7 +149,7 @@ export class TeacherslistPage {
   }
 
   private async GetImageForTeacher(teacher) {
-    this.apiProvider.httpPost("image/getimagebyid", { "imagePath": teacher.image })
+    this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)
       .subscribe(
       (success) => { teacher.image = success.image; },
       (failure) => { teacher.image = "assets\\imgs\\imageNotFound.jpg"; });

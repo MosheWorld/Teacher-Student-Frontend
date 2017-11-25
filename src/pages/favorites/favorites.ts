@@ -78,10 +78,13 @@ export class FavoritesPage {
     this.apiProvider.httpPost('teacher/getlistofteachersbyid', data)
       .subscribe(
       (teachersList) => {
+        teachersList = teachersList.filter((teacher) => {return teacher != null;});
         this.teachers = teachersList;
+      
         for (let teacher of this.teachers) {
           this.GetImageForTeacher(teacher);
         }
+        
         loading.dismiss();
       },
       (failure) => {
@@ -100,7 +103,7 @@ export class FavoritesPage {
   }
 
   private async GetImageForTeacher(teacher) {
-    this.apiProvider.httpPost("image/getimagebyid", { "imagePath": teacher.image })
+    this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)
       .subscribe(
       (success) => { teacher.image = success.image; },
       (failure) => { teacher.image = "assets\\imgs\\imageNotFound.jpg"; });

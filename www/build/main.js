@@ -978,7 +978,7 @@ var TeacherslistPage = (function () {
     TeacherslistPage.prototype.GetImageForTeacher = function (teacher) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.apiProvider.httpPost("image/getimagebyid", { "imagePath": teacher.image })
+                this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)
                     .subscribe(function (success) { teacher.image = success.image; }, function (failure) { teacher.image = "assets\\imgs\\imageNotFound.jpg"; });
                 return [2 /*return*/];
             });
@@ -2439,6 +2439,7 @@ var FavoritesPage = (function () {
         loading.present();
         this.apiProvider.httpPost('teacher/getlistofteachersbyid', data)
             .subscribe(function (teachersList) {
+            teachersList = teachersList.filter(function (teacher) { return teacher != null; });
             _this.teachers = teachersList;
             for (var _i = 0, _a = _this.teachers; _i < _a.length; _i++) {
                 var teacher = _a[_i];
@@ -2461,7 +2462,7 @@ var FavoritesPage = (function () {
     FavoritesPage.prototype.GetImageForTeacher = function (teacher) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.apiProvider.httpPost("image/getimagebyid", { "imagePath": teacher.image })
+                this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)
                     .subscribe(function (success) { teacher.image = success.image; }, function (failure) { teacher.image = "assets\\imgs\\imageNotFound.jpg"; });
                 return [2 /*return*/];
             });

@@ -274,7 +274,7 @@
         <!-- Get image button and clear button -->
         <ion-row>
           <ion-col col-6>
-            <input #inputImage type="file" id="inputImageid" class="m-display-none" (change)="readImageBase64($event)" accept="image/*;capture=camera">
+            <input #inputImage type="file" id="inputImageid" class="m-display-none" (change)="readImageBase64($event)" accept="image/*">
             <button ion-button outline block icon-start small color="dark" onclick="document.getElementById('inputImageid').click();">
               <ion-icon name="ios-camera-outline"></ion-icon>
               Add Image

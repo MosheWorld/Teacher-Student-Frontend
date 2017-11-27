@@ -92,6 +92,29 @@ export class JointeacherPage {
       );
   }
 
+  public rotateBase64Image90deg(base64Image, isClockwise) {
+    var offScreenCanvas = document.createElement('canvas');
+    var offScreenCanvasCtx = offScreenCanvas.getContext('2d');
+
+    var img = new Image();
+    img.src = base64Image;
+
+    offScreenCanvas.height = img.width;
+    offScreenCanvas.width = img.height;
+
+    // rotate and draw source image into the off-screen canvas:
+    if (isClockwise) {
+      offScreenCanvasCtx.rotate(90 * Math.PI / 180);
+      offScreenCanvasCtx.translate(0, -offScreenCanvas.width);
+    } else {
+      offScreenCanvasCtx.rotate(-90 * Math.PI / 180);
+      offScreenCanvasCtx.translate(-offScreenCanvas.height, 0);
+    }
+    offScreenCanvasCtx.drawImage(img, 0, 0);
+
+    this.image =  offScreenCanvas.toDataURL("image/jpeg", 100);
+  }
+
   public readImageBase64($event) {
     ImageCompressService.filesToCompressedImageSource($event.target.files).
       then((observableImages) => {
@@ -225,7 +248,7 @@ export class JointeacherPage {
       } else if (phone.substring(0, 4) === "+972") {
         return true;
       } else {
-        this.phoneFormControl.setErrors({"badphonenumber":true});
+        this.phoneFormControl.setErrors({ "badphonenumber": true });
         return false;
       }
     }

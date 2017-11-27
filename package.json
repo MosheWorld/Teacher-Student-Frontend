@@ -50,6 +50,6 @@
     },
     "description": "Teacher and students idea application, to find each other easily for private lessons.",
     "config": {
-        "ionic_copy":"./config/copy.config.js"
+        "ionic_copy": "./config/copy.config.js"
     }
 }

@@ -288,10 +288,24 @@
           </ion-col>
         </ion-row>
 
-        <!-- Image -->
+        <!-- Image + Left Rotation + Right Rotation -->
         <ion-row text-center #viewImage *ngIf="image != null && image.length > 0" class="animated flash">
           <ion-col col-12>
             <img height="{{imageHeight}}" width="{{imageWidth}}" src="{{image}}">
+          </ion-col>
+          <!-- Left Rotation -->
+          <ion-col col-6>
+            <button ion-button outline block icon-start small color="dark" (click)="rotateBase64Image90deg(image, false)">
+              <ion-icon name="ios-return-left"></ion-icon>
+              Rotate Left
+            </button>
+          </ion-col>
+          <!-- Right Rotation -->
+          <ion-col col-6>
+            <button ion-button outline block icon-end small color="dark" (click)="rotateBase64Image90deg(image, true)">
+              Rotate Right
+              <ion-icon name="ios-return-right"></ion-icon>
+            </button>
           </ion-col>
         </ion-row>
 

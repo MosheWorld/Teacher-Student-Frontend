@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
@@ -41,14 +41,24 @@ export class SearchPage {
   public matcher = new MyErrorStateMatcher();
 
   public filteredStates: Observable<any[]>;
+
+  @ViewChild('getTeachersAnimation') getTeachersAnimation: ElementRef;
   //#endregion
 
   //#region Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public commonProvider: CommonProvider) {
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public commonProvider: CommonProvider,
+    public rd: Renderer2) {
     this.filteredStates = this.teachesSubjectsFormControl.valueChanges
       .startWith(null)
       .map((subject) => subject ? this.filterStates(subject) : this.commonProvider.subjectsArray.slice());
+  }
+
+  public ionViewDidEnter() {
+    setTimeout(() => {
+      this.rd.removeClass(this.getTeachersAnimation.nativeElement, "m-opacity-0");
+      this.rd.addClass(this.getTeachersAnimation.nativeElement, "fadeIn");
+    }, 700);
   }
   //#endregion
 

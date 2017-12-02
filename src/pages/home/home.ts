@@ -19,7 +19,7 @@ export class HomePage {
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public rd: Renderer2) {}
+  constructor(public navCtrl: NavController, public rd: Renderer2) { }
 
   public ionViewDidEnter() {
     setTimeout(() => {
@@ -29,6 +29,7 @@ export class HomePage {
       setTimeout(() => {
         this.rd.removeClass(this.buttonuAnimation.nativeElement, "m-opacity-0");
         this.rd.addClass(this.buttonuAnimation.nativeElement, "fadeInDownBig");
+        
         setTimeout(() => {
           this.rd.removeClass(this.buttonuAnimation.nativeElement, "fadeInDownBig");
           this.rd.addClass(this.buttonuAnimation.nativeElement, "bounce");
@@ -38,10 +39,8 @@ export class HomePage {
   }
 
   public ionViewDidLeave() {
-    this.rd.removeClass(this.subtitleAnimation.nativeElement, "fadeInDownBig");
-    this.rd.removeClass(this.buttonuAnimation.nativeElement, "bounce");
-    this.rd.addClass(this.buttonuAnimation.nativeElement, "m-opacity-0");
-    this.rd.addClass(this.subtitleAnimation.nativeElement, "m-opacity-0");
+    this.rd.removeClass(this.subtitleAnimation.nativeElement, "animated");
+    this.rd.removeClass(this.buttonuAnimation.nativeElement, "animated");
   }
   //#endregion
 

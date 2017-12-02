@@ -4,6 +4,10 @@ ion-header span.back-button-text.back-button-text-ios {
   color: white;
 }
 
+ion-tabs > div {
+  border-radius: 13px 13px 0 0;
+}
+
 ul {
   padding: 0px;
   &.rating li {
@@ -73,7 +77,7 @@ ul {
   margin-top: 0;
 }
 
-.m-margin-top-min15{
+.m-margin-top-min15 {
   margin-top: -15px;
 }
 
@@ -210,9 +214,7 @@ ul {
   border-color: white;
 }
 
-.m-display-inline-block{
+.m-display-inline-block {
   display: inline-block;
 }
-
-
 

@@ -30500,6 +30500,10 @@ ul.rating li ion-icon {
   opacity: 0.6;
 }
 
+.m-opacity-0 {
+  opacity: 0;
+}
+
 .m-padding-top-15px {
   padding-top: 15px;
 }

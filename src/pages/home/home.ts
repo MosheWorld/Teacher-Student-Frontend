@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { NavController, Tabs } from 'ionic-angular';
 
 import { FavoritesPage } from '../favorites/favorites';
@@ -13,10 +13,35 @@ import { JointeacherPage } from './../jointeacher/jointeacher';
 export class HomePage {
   //#region Members
   private tabRef: Tabs = this.navCtrl.parent;
+
+  @ViewChild('subtitleAnimation') subtitleAnimation: ElementRef;
+  @ViewChild('buttonuAnimation') buttonuAnimation: ElementRef;
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public rd: Renderer2) {}
+
+  public ionViewDidEnter() {
+    setTimeout(() => {
+      this.rd.removeClass(this.subtitleAnimation.nativeElement, "m-opacity-0");
+      this.rd.addClass(this.subtitleAnimation.nativeElement, "fadeInDownBig");
+
+      setTimeout(() => {
+        this.rd.removeClass(this.buttonuAnimation.nativeElement, "m-opacity-0");
+        this.rd.addClass(this.buttonuAnimation.nativeElement, "fadeInDownBig");
+        setTimeout(() => {
+          this.rd.removeClass(this.buttonuAnimation.nativeElement, "fadeInDownBig");
+          this.rd.addClass(this.buttonuAnimation.nativeElement, "bounce");
+        }, 2000);
+      }, 800);
+    }, 600);
+  }
+
+  public ionViewDidLeave() {
+    this.rd.removeClass(this.subtitleAnimation.nativeElement, "fadeInDownBig");
+    this.rd.removeClass(this.buttonuAnimation.nativeElement, "bounce");
+    this.rd.addClass(this.buttonuAnimation.nativeElement, "m-opacity-0");
+    this.rd.addClass(this.subtitleAnimation.nativeElement, "m-opacity-0");
   }
   //#endregion
 

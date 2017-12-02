@@ -26,7 +26,7 @@
       </ion-row>
 
       <!-- Subtitle -->
-      <ion-row>
+      <ion-row #subtitleAnimation class="animated m-opacity-0">
         <ion-col col-12>
           <div class="m-font-size-20px m-color-white m-font-weight-300 m-opacity-6">
             StudyHub is a study platform inspired by the way you work. You can find teachers
@@ -41,7 +41,7 @@
       </ion-row>
 
       <!-- Start using button -->
-      <ion-row>
+      <ion-row #buttonuAnimation class="animated m-opacity-0">
         <ion-col col-12>
           <button ion-button color="secondary" (click)="goPage('search');">
             <b>Start using StudyHub</b>

@@ -30369,10 +30369,6 @@ ion-header span.back-button-text.back-button-text-ios {
   color: white;
 }
 
-ion-tabs > div {
-  border-radius: 13px 13px 0 0;
-}
-
 ul {
   padding: 0px;
 }

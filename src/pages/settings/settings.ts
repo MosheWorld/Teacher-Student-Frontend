@@ -34,11 +34,8 @@ export class SettingsPage {
     this.favoritesManagerProvider.removeAll();
   }
 
-  public Test() {
-    this.apiProvider.httpGet('auth/facebook')
-      .subscribe(
-      (success) => { console.log(success); },
-      (failure) => { console.log(failure) });
+  public FaceBookAuth() {
+    window.open(this.apiProvider.endPoint + "auth/facebook");
   }
   //#endregion
 }

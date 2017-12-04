@@ -1640,10 +1640,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ApiProvider = (function () {
-    // public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
     function ApiProvider(http) {
         this.http = http;
-        this.endPoint = "http://localhost:8000/";
+        // public endPoint: string = "http://localhost:8000/";
+        this.endPoint = "https://teacher-student-backend.herokuapp.com/";
     }
     ApiProvider.prototype.httpGet = function (path) {
         var _this = this;

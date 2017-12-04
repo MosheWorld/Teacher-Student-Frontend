@@ -4,8 +4,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiProvider {
-  public endPoint: string = "http://localhost:8000/";
-  // public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
+  // public endPoint: string = "http://localhost:8000/";
+  public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
 
   constructor(public http: Http) {
   }

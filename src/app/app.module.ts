@@ -84,7 +84,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
     GenderPipe,
     ApiProvider,
     TeachesAtPipe,
@@ -94,7 +93,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LocalStorageProvider,
     ImageCompressService,
     TeachesInstitutionsPipe,
-    FavoritesManagerProvider
+    FavoritesManagerProvider,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule { }

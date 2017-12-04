@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { ApiProvider } from '../../providers/api/api';
 import { FavoritesPage } from './../favorites/favorites';
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
@@ -12,7 +13,8 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 
 export class SettingsPage {
   //#region Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider,
+    public apiProvider: ApiProvider) {
   }
   //#endregion
 
@@ -30,6 +32,13 @@ export class SettingsPage {
 
   public clearIDLocalStorage() {
     this.favoritesManagerProvider.removeAll();
+  }
+
+  public Test() {
+    this.apiProvider.httpGet('auth/facebook')
+      .subscribe(
+      (success) => { console.log(success); },
+      (failure) => { console.log(failure) });
   }
   //#endregion
 }

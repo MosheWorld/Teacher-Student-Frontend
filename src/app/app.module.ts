@@ -56,7 +56,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     HttpModule,
     Ionic2RatingModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      locationStrategy: 'path'
+    }, {
+        links: [
+          { component: HomePage, name: 'Home', segment: 'home' },
+          { component: SearchPage, name: 'Search', segment: 'search' },
+          { component: SettingsPage, name: 'Settings', segment: 'settings' },
+          { component: ContactusPage, name: 'Contactus', segment: 'contactus' },
+          { component: FavoritesPage, name: 'Favorites', segment: 'favorites' },
+          { component: JointeacherPage, name: 'Jointeacher', segment: 'jointeacher' },
+          { component: SingleteacherPage, name: 'Singleteacher', segment: 'singleteacher' },
+          { component: TeacherslistPage, name: 'Teacherslist', segment: 'teacherslist' },
+        ]
+      }),
     LocalStorageModule.withConfig({
       prefix: 'StudyHub',
       storageType: 'localStorage'

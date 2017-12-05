@@ -1,5 +1,6 @@
+import { NavController } from 'ionic-angular';
+import { SearchPage } from './../search/search';
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
-import { NavController, Tabs } from 'ionic-angular';
 
 import { FavoritesPage } from '../favorites/favorites';
 import { ContactusPage } from './../contactus/contactus';
@@ -12,8 +13,6 @@ import { JointeacherPage } from './../jointeacher/jointeacher';
 
 export class HomePage {
   //#region Members
-  private tabRef: Tabs = this.navCtrl.parent;
-
   @ViewChild('subtitleAnimation') subtitleAnimation: ElementRef;
   @ViewChild('buttonuAnimation') buttonuAnimation: ElementRef;
   //#endregion
@@ -29,7 +28,7 @@ export class HomePage {
       setTimeout(() => {
         this.rd.removeClass(this.buttonuAnimation.nativeElement, "m-opacity-0");
         this.rd.addClass(this.buttonuAnimation.nativeElement, "fadeInDownBig");
-        
+
         setTimeout(() => {
           this.rd.removeClass(this.buttonuAnimation.nativeElement, "fadeInDownBig");
           this.rd.addClass(this.buttonuAnimation.nativeElement, "bounce");
@@ -48,7 +47,7 @@ export class HomePage {
   public goPage(page: any) {
     switch (page) {
       case 'search':
-        this.tabRef.select(1);
+        this.navCtrl.setRoot(SearchPage);
         break;
       case 'contactme':
         this.navCtrl.push(ContactusPage);

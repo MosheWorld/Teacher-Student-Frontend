@@ -191,6 +191,12 @@ ul {
   max-width: 150px;
 }
 
+.m-sticky-search-bar {
+  position: sticky;
+  top: -2px;
+  z-index: 1;
+}
+
 // Display
 .m-display-none {
   display: none;

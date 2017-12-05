@@ -1,10 +1,10 @@
-import { SearchPage } from './../pages/search/search';
 import { Platform, Nav } from 'ionic-angular';
 import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { SearchPage } from './../pages/search/search';
 import { SettingsPage } from '../pages/settings/settings';
 
 @Component({
@@ -30,6 +30,7 @@ export class MyApp {
         { title: 'Search', component: SearchPage },
         { title: 'Settings', component: SettingsPage }
       ];
+
     });
   }
 

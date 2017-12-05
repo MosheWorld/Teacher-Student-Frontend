@@ -30549,6 +30549,13 @@ ul.rating li ion-icon {
   max-width: 150px;
 }
 
+.m-sticky-search-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: -2px;
+  z-index: 1;
+}
+
 .m-display-none {
   display: none;
 }

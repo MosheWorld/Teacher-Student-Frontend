@@ -1,6 +1,6 @@
-import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';

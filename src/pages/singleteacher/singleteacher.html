@@ -228,10 +228,10 @@
       <ion-col col-12>
         <ion-segment [(ngModel)]="currentChosenType">
           <ion-segment-button value="1" class="m-font-size-10px-impo">
-            Institutions
+            Subjects
           </ion-segment-button>
           <ion-segment-button value="2" class="m-font-size-10px-impo">
-            Subjects
+            Institutions
           </ion-segment-button>
           <ion-segment-button [hidden]="teacher.recommendations == null || teacher.recommendations.length === 0" value="3" class="m-font-size-10px-impo">
             Recommendations
@@ -243,23 +243,23 @@
     <!-- Institutions + Subjects + Recommendations Content-->
     <div>
 
-      <!-- Institution -->
+      <!-- Subjects -->
       <ion-row *ngIf="currentChosenType === '1'">
+          <ion-col col-12>
+            <ion-list>
+              <ul *ngFor="let subject of teacher.teachesSubjects">
+                <li>{{subject | teachesSubjects}}</li>
+              </ul>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+
+      <!-- Institution -->
+      <ion-row *ngIf="currentChosenType === '2'">
         <ion-col col-12>
           <ion-list>
             <ul *ngFor="let institution of teacher.teachesInstitutions">
               <li>{{institution | teachesInstitutions}}</li>
-            </ul>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-
-      <!-- Subjects -->
-      <ion-row *ngIf="currentChosenType === '2'">
-        <ion-col col-12>
-          <ion-list>
-            <ul *ngFor="let subject of teacher.teachesSubjects">
-              <li>{{subject | teachesSubjects}}</li>
             </ul>
           </ion-list>
         </ion-col>

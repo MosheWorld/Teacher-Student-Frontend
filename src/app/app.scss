@@ -130,6 +130,10 @@ ul {
   font-size: 0;
 }
 
+.m-font-size-0-impo {
+  font-size: 0 !important;
+}
+
 .m-font-weight-300 {
   font-weight: 300;
 }
@@ -148,12 +152,24 @@ ul {
   padding-top: 15px;
 }
 
+.m-padding-top-10px {
+  padding-top: 10px;
+}
+
+.m-padding-top-3px {
+  padding-top: 3px;
+}
+
 .m-padding-buttom-15px {
   padding-bottom: 15px;
 }
 
 .m-padding-left-7px {
   padding-left: 7px;
+}
+
+.m-padding-0-impo {
+  padding: 0 !important;
 }
 
 // General
@@ -178,10 +194,11 @@ ul {
 }
 
 .m-default-image-cards-teacherlist {
-  max-height: 165px;
-  height: 165px;
-  width: 165px;
-  max-width: 165px;
+  max-height: 150px;
+  height: 150px;
+  width: 150px;
+  max-width: 150px;
+  border-radius: 100px;
 }
 
 .m-default-image-cards-singleteacher {

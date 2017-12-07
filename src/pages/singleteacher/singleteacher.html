@@ -20,58 +20,55 @@
 
     <ion-grid>
 
-      <!-- Image and add recommend button -->
+      <!-- Teacher details + Image + Recommendation button -->
       <ion-row>
-        <ion-col col-6 text-left *ngIf="teacher.image == null">
+        <ion-col col-7>
+          <!-- Name and LastName -->
+          <b class="m-font-size-21px">{{teacher.firstName}} {{teacher.lastName}}, </b>
+          <!-- Gender and Age -->
+          <i>{{teacher.gender | gender}}, {{teacher.age}}</i>
+          <!-- Rate stars -->
+          <h6>
+            <rating class="m-display-inline-block m-margin-top-min15 m-font-size-0" [(ngModel)]="teacher.rate" readOnly="true" max="5"
+              emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+          </h6>
+          <!-- Rate text -->
+          <font class="m-font-size-15px">
+            <i>{{teacher.rate}}</i>
+            <font *ngIf="teacher.recommendations.length === 1">
+              <i>( {{teacher.recommendations.length}} person rated )</i>
+            </font>
+            <font *ngIf="teacher.recommendations.length !== 1">
+              <i>( {{teacher.recommendations.length}} people rated )</i>
+            </font>
+          </font>
+          <!-- Price -->
+          <font class="m-display-block m-padding-top-10px">
+            <i class="m-font-size-15px">{{teacher.priceFrom}} - {{teacher.priceTo}}</i>
+            <font class="m-font-size-10px">
+              <u>ILS</u>
+            </font>
+          </font>
+          <!-- Recommendation button -->
+          <div *ngIf="!isTeacherFavorited" class="m-padding-top-10px">
+            <button ion-button icon-start small outline class="m-color-white m-border-color-white" (click)="addFavorite()">
+              <ion-icon name="star"></ion-icon>
+              Add favorite
+            </button>
+          </div>
+          <div *ngIf="isTeacherFavorited" class="m-padding-top-10px">
+            <button ion-button icon-start small outline class="m-color-white m-border-color-white" (click)="removeFavorite()">
+              <ion-icon name="star"></ion-icon>
+              Remove favorite
+            </button>
+          </div>
+        </ion-col>
+        <!-- Image -->
+        <ion-col col-5 text-left *ngIf="teacher.image == null">
           <img class="m-default-image-cards-singleteacher" src="assets\\imgs\\imageNotFound.jpg" />
         </ion-col>
-        <ion-col col-6 text-left *ngIf="teacher.image != null">
+        <ion-col col-5 text-left *ngIf="teacher.image != null">
           <img class="m-default-image-cards-singleteacher" src="{{teacher.image}}" />
-        </ion-col>
-        <ion-col *ngIf="!isTeacherFavorited" col-6 text-right>
-          <button ion-button icon-end small outline class="m-color-white m-border-color-white" (click)="addFavorite()">
-            Add favorite
-            <ion-icon name="star"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col *ngIf="isTeacherFavorited" col-6 text-right>
-          <button ion-button icon-end small outline class="m-color-white m-border-color-white" (click)="removeFavorite()">
-            Remove favorite
-            <ion-icon name="star"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
-
-      <!-- First name and Last name and Gender and Age -->
-      <ion-row>
-        <ion-col col-12>
-          <font class="m-font-size-20px">
-            <i>{{teacher.firstName}} {{teacher.lastName}}</i>
-          </font> -
-          <i>{{teacher.gender | gender}}, {{teacher.age}}</i>
-        </ion-col>
-      </ion-row>
-
-      <!-- Rate -->
-      <ion-row>
-        <ion-col col-12>
-          <rating class="m-display-inline-block m-margin-top-min15 m-font-size-0" [(ngModel)]="teacher.rate" readOnly="true" max="5"
-            emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
-          <i>{{teacher.rate}}</i>
-          <font *ngIf="teacher.recommendations.length === 1">
-            <i>( {{teacher.recommendations.length}} person rated )</i>
-          </font>
-          <font *ngIf="teacher.recommendations.length !== 1">
-            <i>( {{teacher.recommendations.length}} people rated )</i>
-          </font>
-        </ion-col>
-      </ion-row>
-
-      <!-- Prices -->
-      <ion-row>
-        <ion-col col-12>
-          <i class="m-font-size-17px">{{teacher.priceFrom}} - {{teacher.priceTo}}</i>
-          <font class="m-font-size-10px">ILS</font>
         </ion-col>
       </ion-row>
 
@@ -245,14 +242,14 @@
 
       <!-- Subjects -->
       <ion-row *ngIf="currentChosenType === '1'">
-          <ion-col col-12>
-            <ion-list>
-              <ul *ngFor="let subject of teacher.teachesSubjects">
-                <li>{{subject | teachesSubjects}}</li>
-              </ul>
-            </ion-list>
-          </ion-col>
-        </ion-row>
+        <ion-col col-12>
+          <ion-list>
+            <ul *ngFor="let subject of teacher.teachesSubjects">
+              <li>{{subject | teachesSubjects}}</li>
+            </ul>
+          </ion-list>
+        </ion-col>
+      </ion-row>
 
       <!-- Institution -->
       <ion-row *ngIf="currentChosenType === '2'">
@@ -286,3 +283,4 @@
   </ion-grid>
 
 </ion-content>
+

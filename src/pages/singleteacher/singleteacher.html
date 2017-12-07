@@ -245,7 +245,10 @@
         <ion-col col-12>
           <ion-list>
             <ul *ngFor="let subject of teacher.teachesSubjects">
-              <li>{{subject | teachesSubjects}}</li>
+              <li *ngIf="searchedSubject === subject.toString();else othercontent">
+                <b>{{subject | teachesSubjects}}</b>
+              </li>
+              <ng-template #othercontent><li>{{subject | teachesSubjects}}</li></ng-template>
             </ul>
           </ion-list>
         </ion-col>
@@ -256,7 +259,10 @@
         <ion-col col-12>
           <ion-list>
             <ul *ngFor="let institution of teacher.teachesInstitutions">
-              <li>{{institution | teachesInstitutions}}</li>
+              <li *ngIf="searchedInstitute === institution.toString();else othercontent">
+                <b>{{institution | teachesInstitutions}}</b>
+              </li>
+              <ng-template #othercontent><li>{{institution | teachesInstitutions}}</li></ng-template>
             </ul>
           </ion-list>
         </ion-col>
@@ -283,4 +289,3 @@
   </ion-grid>
 
 </ion-content>
-

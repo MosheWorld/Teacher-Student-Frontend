@@ -31,10 +31,10 @@ export class SearchPage {
   public warmth: number = 1300;
   public structure: any = { lower: 30, upper: 140 };
 
-  public teachesSubjectsFormControl = new FormControl(null);
-  public teachesAtFormControl = new FormControl(null);
-  public teachesInstitutionsFormControl = new FormControl(null);
   public genderFormControl = new FormControl(null);
+  public teachesAtFormControl = new FormControl(null);
+  public teachesSubjectsFormControl = new FormControl(null);
+  public teachesInstitutionsFormControl = new FormControl(null);
 
   public showErrorMessagePrices: boolean = false;
   public showErrorMessage: boolean = false;
@@ -91,12 +91,20 @@ export class SearchPage {
     });
     loading.present();
 
+    let searchedSubject = this.getsearchedSubject();
+    let searchedInstitute = this.getsearchedInstitute();
+
     this.apiProvider.httpPost('teacher/search', searchTeacherModel)
       .subscribe(
       (success) => {
         loading.dismiss();
         if (success && success.length > 0) {
-          this.navCtrl.push(TeacherslistPage, { teacherSearchList: success });
+          this.navCtrl.push(TeacherslistPage, {
+            teacherSearchList: success,
+            subject: searchedSubject,
+            institute: searchedInstitute
+          });
+
           return;
         }
         const alert = this.createAlert('Couldn\'t find the teachers', 'Please make the search filters to aim to more options, the teachers you asked for doesn\'t exist yet.');
@@ -186,6 +194,33 @@ export class SearchPage {
     }
 
     return subjectID == null ? null : parseInt(subjectID.value);
+  }
+
+  private getsearchedSubject() {
+    let result = null;
+
+    if (this.teachesSubjectsFormControl.value && this.teachesSubjectsFormControl.value != null && this.teachesSubjectsFormControl.value !== "") {
+      result = this.teachesSubjectsFormControl.value;
+    }
+
+    if (result && result != "") {
+      result = this.commonProvider.subjectsArray.find((data) => {
+        return data.viewValue === this.teachesSubjectsFormControl.value;
+      });
+      result = result.value;
+    }
+
+    return result;
+  }
+
+  private getsearchedInstitute() {
+    let result = null;
+
+    if (this.teachesInstitutionsFormControl.value && this.teachesInstitutionsFormControl.value != null && this.teachesInstitutionsFormControl.value !== "") {
+      result = this.teachesInstitutionsFormControl.value;
+    }
+
+    return result;
   }
   //#endregion
 }

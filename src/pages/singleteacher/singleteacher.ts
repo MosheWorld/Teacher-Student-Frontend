@@ -35,11 +35,15 @@ export class SingleteacherPage {
   public alreadyAddedRecommend: boolean = false;
 
   public isTeacherFavorited: boolean = false;
+
   @ViewChild('addRecommend') elAddRecommend: ElementRef;
 
   public matcher = new MyErrorStateMatcher();
 
   public currentChosenType = "1";
+
+  public searchedSubject: string = null;
+  public searchedInstitute: string = null;
   //#endregion
 
   //#region Constructor
@@ -48,6 +52,8 @@ export class SingleteacherPage {
     public favoritesManagerProvider: FavoritesManagerProvider, public toasterProvider: ToasterProvider,
     public rd: Renderer2) {
     this.teacher = this.navParams.get('teacher');
+    this.searchedSubject = this.navParams.get('subject');
+    this.searchedInstitute = this.navParams.get('institute');
     this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
   }
   //#endregion

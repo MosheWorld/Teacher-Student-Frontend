@@ -78,13 +78,13 @@ export class FavoritesPage {
     this.apiProvider.httpPost('teacher/getlistofteachersbyid', data)
       .subscribe(
       (teachersList) => {
-        teachersList = teachersList.filter((teacher) => {return teacher != null;});
+        teachersList = teachersList.filter((teacher) => { return teacher != null; });
         this.teachers = teachersList;
-      
+
         for (let teacher of this.teachers) {
           this.GetImageForTeacher(teacher);
         }
-        
+
         loading.dismiss();
       },
       (failure) => {

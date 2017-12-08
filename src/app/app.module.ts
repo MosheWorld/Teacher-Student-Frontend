@@ -66,8 +66,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
           { component: ContactusPage, name: 'Contactus', segment: 'contactus' },
           { component: FavoritesPage, name: 'Favorites', segment: 'favorites' },
           { component: JointeacherPage, name: 'Jointeacher', segment: 'jointeacher' },
-          { component: SingleteacherPage, name: 'Singleteacher', segment: 'singleteacher' },
           { component: TeacherslistPage, name: 'Teacherslist', segment: 'teacherslist' },
+          { component: SingleteacherPage, name: 'Singleteacher', segment: 'singleteacher' },
         ]
       }),
     LocalStorageModule.withConfig({

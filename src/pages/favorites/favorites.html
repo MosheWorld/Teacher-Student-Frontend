@@ -27,14 +27,6 @@
         </ion-col>
       </ion-row>
 
-      <!-- Tip -->
-      <ion-row>
-        <ion-col col-12>
-          <font class="m-color-orange">*Tip: </font>
-          In order to keep your teachers quickly accessed, do not remove StudyHub cache from your app.
-        </ion-col>
-      </ion-row>
-
     </ion-grid>
 
   </div>
@@ -66,32 +58,35 @@
 
       <!-- There are teachers in favorites list -->
       <div *ngIf="userHaveFavorites">
+
         <ion-row>
           <ion-col col-6 class="animated zoomIn" *ngFor="let teacher of teachers;let i = index;">
             <ion-card (click)="expandTeacherInformation(i);" text-center>
-              <!-- Name -->
-              <ion-card-header >
-                {{teacher.firstName}} {{teacher.lastName}}
-              </ion-card-header>
-              <ion-card-content>
-                <!-- Image -->
-                <ion-col col-12 *ngIf="teacher.image == null">
-                  <img class="m-default-image-cards" src="assets\\imgs\\imageNotFound.jpg" />
-                </ion-col>
-                <ion-col col-12 *ngIf="teacher.image != null">
-                    <img class="m-default-image-cards-favorite" src="{{teacher.image}}" />
-                  </ion-col>
-                <!-- Price -->
-                <ion-col col-12>
+              <!-- Image -->
+              <ion-col col-12 class="m-padding-0-impo" *ngIf="teacher.image == null">
+                <img class="m-default-image-cards" src="assets\\imgs\\imageNotFound.jpg" />
+              </ion-col>
+              <ion-col col-12 class="m-padding-0-impo" *ngIf="teacher.image != null">
+                <img class="m-default-image-cards-favorite" src="{{teacher.image}}" />
+              </ion-col>
+
+              <!-- Name and Last Name-->
+              <ion-col col-12>
+                <h2>{{teacher.firstName}} {{teacher.lastName}}</h2>
+              </ion-col>
+              <!-- Price -->
+              <ion-col col-12>
+                <h2>
                   <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>
                   <font class="m-font-size-10px">ILS</font>
-                </ion-col>
-                <!-- Rate -->
-                <ion-col col-12>
-                  <rating [(ngModel)]="teachers[i].rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
-                    starIconName="star" nullable="false"></rating>
-                </ion-col>
-              </ion-card-content>
+                </h2>
+              </ion-col>
+              <!-- Rate -->
+              <ion-col col-12>
+                <rating [(ngModel)]="teachers[i].rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+                  starIconName="star" nullable="false"></rating>
+              </ion-col>
+
             </ion-card>
           </ion-col>
         </ion-row>

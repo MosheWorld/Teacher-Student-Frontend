@@ -52,13 +52,13 @@
           <!-- Recommendation button -->
           <div *ngIf="!isTeacherFavorited" class="m-padding-top-10px">
             <button ion-button icon-start small outline class="m-color-white m-border-color-white" (click)="addFavorite()">
-              <ion-icon name="star"></ion-icon>
+              <ion-icon name="ios-bookmark-outline"></ion-icon>
               Add favorite
             </button>
           </div>
           <div *ngIf="isTeacherFavorited" class="m-padding-top-10px">
             <button ion-button icon-start small outline class="m-color-white m-border-color-white" (click)="removeFavorite()">
-              <ion-icon name="star"></ion-icon>
+              <ion-icon name="ios-bookmark-outline"></ion-icon>
               Remove favorite
             </button>
           </div>

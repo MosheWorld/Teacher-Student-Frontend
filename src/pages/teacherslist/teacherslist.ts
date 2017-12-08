@@ -42,11 +42,12 @@ export class TeacherslistPage {
 
   //#region Public Methods
   public expandTeacherInformation(index: number) {
-    let modal = this.modalCtrl.create(SingleteacherPage, { 
+    let modal = this.modalCtrl.create(SingleteacherPage, {
       teacher: this.teachers[index],
       subject: this.navParams.get('subject'),
       institute: this.navParams.get('institute')
-     });
+    });
+    
     modal.onDidDismiss((data) => {
       this.teachers[index].isTeacherFavorited = data;
       for (let teacher of this.teachersListNotChange) {

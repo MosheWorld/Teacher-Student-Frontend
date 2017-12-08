@@ -1,10 +1,11 @@
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/startWith';
+
+import { Observable } from 'rxjs/Observable';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map';
 
 import { ApiProvider } from './../../providers/api/api';
 import { FavoritesPage } from './../favorites/favorites';

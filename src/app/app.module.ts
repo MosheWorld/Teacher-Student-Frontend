@@ -34,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RateShowComponent } from '../components/rate-show/rate-show';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     JointeacherPage,
     TeacherslistPage,
     SingleteacherPage,
+    RateShowComponent,
     TeachesSubjectsPipe,
     TeachesInstitutionsPipe
   ],

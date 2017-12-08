@@ -248,7 +248,9 @@
               <li *ngIf="searchedSubject === subject.toString();else othercontent">
                 <b>{{subject | teachesSubjects}}</b>
               </li>
-              <ng-template #othercontent><li>{{subject | teachesSubjects}}</li></ng-template>
+              <ng-template #othercontent>
+                <li>{{subject | teachesSubjects}}</li>
+              </ng-template>
             </ul>
           </ion-list>
         </ion-col>
@@ -262,7 +264,9 @@
               <li *ngIf="searchedInstitute === institution.toString();else othercontent">
                 <b>{{institution | teachesInstitutions}}</b>
               </li>
-              <ng-template #othercontent><li>{{institution | teachesInstitutions}}</li></ng-template>
+              <ng-template #othercontent>
+                <li>{{institution | teachesInstitutions}}</li>
+              </ng-template>
             </ul>
           </ion-list>
         </ion-col>
@@ -271,16 +275,15 @@
       <!-- Recommendations -->
       <ion-row *ngIf="currentChosenType === '3'">
         <ion-col col-12>
-          <ion-list>
-            <ion-row *ngFor="let recommend of teacher.recommendations" class="m-border-bottom-1px-solid-b18b22">
-              <ion-col col-12>
-                {{recommend.fullName}} - {{recommend.rate}}
-              </ion-col>
-              <ion-col col-12>
-                - {{recommend.message}}
-              </ion-col>
-            </ion-row>
-          </ion-list>
+          <ion-card *ngFor="let recommend of teacher.recommendations">
+            <ion-card-header class="m-padding-top-0 m-padding-buttom-0">
+              {{recommend.fullName}} -
+              <rate-show [stars]="recommend.rate"></rate-show>
+            </ion-card-header>
+            <ion-card-content>
+              {{recommend.message}}
+            </ion-card-content>
+          </ion-card>
         </ion-col>
       </ion-row>
 

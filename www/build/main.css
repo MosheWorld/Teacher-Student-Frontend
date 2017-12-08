@@ -30524,8 +30524,16 @@ ul.rating li ion-icon {
   padding-top: 3px;
 }
 
+.m-padding-top-0 {
+  padding-top: 0;
+}
+
 .m-padding-buttom-15px {
   padding-bottom: 15px;
+}
+
+.m-padding-buttom-0 {
+  padding-bottom: 0;
 }
 
 .m-padding-left-7px {
@@ -30600,6 +30608,24 @@ ul.rating li ion-icon {
 
 .m-display-inline-block {
   display: inline-block;
+}
+
+.m-text-align-center {
+  text-align: center;
+}
+
+rate-show ul {
+  padding: 0px;
+}
+
+rate-show ul.rating li {
+  padding: 2px 1px 0 1px !important;
+  background: none;
+  color: #ffb400;
+}
+
+rate-show ul.rating li ion-icon {
+  font-size: 15px;
 }
 
 page-favorites ul {

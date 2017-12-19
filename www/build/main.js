@@ -329,14 +329,11 @@ var SettingsPage = (function () {
     SettingsPage.prototype.clearIDLocalStorage = function () {
         this.favoritesManagerProvider.removeAll();
     };
-    SettingsPage.prototype.FaceBookAuth = function () {
-        window.open(this.apiProvider.endPoint + "auth/facebook");
-    };
     return SettingsPage;
 }());
 SettingsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-white">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-bookmarks"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n      <ion-col col-12>\n        Settings page, go away, it\'s not ready!\n      </ion-col>\n      <ion-col col-12>\n        <button ion-button outline small color="danger" (click)="clearIDLocalStorage()">Clear favorites</button>\n      </ion-col>\n    </ion-row>\n\n    <ion-row text-center>\n\n      <ion-col col-12>\n        Test Buttons - Not in use\n      </ion-col>\n\n      <ion-col col-12>\n        <button (click)="FaceBookAuth()" class="loginBtn loginBtn--facebook">\n          Login with Facebook\n        </button>\n      </ion-col>\n\n      <ion-col col-12>\n        <button class="loginBtn loginBtn--google">\n          Login with Google\n        </button>\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
+        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-white">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-bookmarks"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n      <ion-col col-12>\n        Settings page, go away, it\'s not ready!\n      </ion-col>\n      <ion-col col-12>\n        <button ion-button outline small color="danger" (click)="clearIDLocalStorage()">Clear favorites</button>\n      </ion-col>\n    </ion-row>\n\n    <ion-row text-center>\n\n      <ion-col col-12>\n        Test Buttons - Not in use\n      </ion-col>\n\n      <ion-col col-12>\n        <button class="loginBtn loginBtn--facebook">\n          Login with Facebook\n        </button>\n      </ion-col>\n\n      <ion-col col-12>\n        <button class="loginBtn loginBtn--google">\n          Login with Google\n        </button>\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */],
         __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */]])
@@ -1385,11 +1382,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ApiProvider = (function () {
+    //#endregion
+    //#region Constructor
     function ApiProvider(http) {
         this.http = http;
+        //#region Members
         // public endPoint: string = "http://localhost:8000/";
         this.endPoint = "https://teacher-student-backend.herokuapp.com/";
     }
+    //#endregion
+    //#region Public Methods
     ApiProvider.prototype.httpGet = function (path) {
         var _this = this;
         var url = this.endPoint + path;
@@ -1401,6 +1403,8 @@ var ApiProvider = (function () {
         var header = this.buildHeader();
         return this.http.post(url, JSON.stringify(data), { headers: header }).map(function (res) { return _this.checkResultModel(res); });
     };
+    //#endregion
+    //#region Private Methods
     ApiProvider.prototype.buildHeader = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({
             'Content-Type': 'application/json'

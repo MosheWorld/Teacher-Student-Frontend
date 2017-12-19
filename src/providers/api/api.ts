@@ -4,12 +4,17 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiProvider {
+  //#region Members
   // public endPoint: string = "http://localhost:8000/";
   public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
+  //#endregion
 
+  //#region Constructor
   constructor(public http: Http) {
   }
+  //#endregion
 
+  //#region Public Methods
   public httpGet(path: string) {
     const url = this.endPoint + path;
     return this.http.get(url, null).map(res => this.checkResultModel(res));
@@ -20,7 +25,9 @@ export class ApiProvider {
     let header = this.buildHeader();
     return this.http.post(url, JSON.stringify(data), { headers: header }).map(res => this.checkResultModel(res));
   }
+  //#endregion
 
+  //#region Private Methods
   private buildHeader() {
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -36,4 +43,5 @@ export class ApiProvider {
       return null;
     }
   }
+  //#endregion
 }

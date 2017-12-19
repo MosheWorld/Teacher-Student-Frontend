@@ -33,9 +33,5 @@ export class SettingsPage {
   public clearIDLocalStorage() {
     this.favoritesManagerProvider.removeAll();
   }
-
-  public FaceBookAuth() {
-    window.open(this.apiProvider.endPoint + "auth/facebook");
-  }
   //#endregion
 }

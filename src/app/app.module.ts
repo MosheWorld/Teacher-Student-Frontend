@@ -35,6 +35,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RateShowComponent } from '../components/rate-show/rate-show';
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
+
+let config = new AuthServiceConfig([
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("200690180499086")
+  }
+]);
 
 @NgModule({
   declarations: [
@@ -58,6 +66,7 @@ import { RateShowComponent } from '../components/rate-show/rate-show';
     BrowserModule,
     HttpModule,
     Ionic2RatingModule,
+    SocialLoginModule.initialize(config),
     IonicModule.forRoot(MyApp, {
       locationStrategy: 'path'
     }, {

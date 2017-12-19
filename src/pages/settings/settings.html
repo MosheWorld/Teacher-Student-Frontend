@@ -34,7 +34,7 @@
       </ion-col>
 
       <ion-col col-12>
-        <button class="loginBtn loginBtn--facebook">
+        <button (click)="SignInWithFB()" class="loginBtn loginBtn--facebook">
           Login with Facebook
         </button>
       </ion-col>
@@ -45,8 +45,18 @@
         </button>
       </ion-col>
 
+      <ion-col col-12 *ngIf="firstName && lastName">
+        {{firstName}} {{lastName}}
+      </ion-col>
+      <ion-col col-12 *ngIf="email">
+        {{email}}
+      </ion-col>
+      <ion-col col-12 *ngIf="photoUrl">
+        <img src="{{photoUrl}}">
+      </ion-col>
     </ion-row>
 
   </ion-grid>
 
 </ion-content>
+

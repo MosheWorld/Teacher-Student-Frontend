@@ -291,7 +291,9 @@ SingleteacherPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__favorites_favorites__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_favorites_manager_favorites_manager__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular4_social_login__ = __webpack_require__(375);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular4_social_login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angular4_social_login__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_favorites_manager_favorites_manager__ = __webpack_require__(69);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -306,13 +308,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SettingsPage = (function () {
+    //#endregion
     //#region Constructor
-    function SettingsPage(navCtrl, navParams, favoritesManagerProvider, apiProvider) {
+    function SettingsPage(navCtrl, navParams, favoritesManagerProvider, apiProvider, authService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.favoritesManagerProvider = favoritesManagerProvider;
         this.apiProvider = apiProvider;
+        this.authService = authService;
+        //#region Members
+        this.firstName = "";
+        this.lastName = "";
+        this.email = "";
+        this.photoUrl = "";
     }
     //#endregion
     //#region Public Methods
@@ -329,14 +339,24 @@ var SettingsPage = (function () {
     SettingsPage.prototype.clearIDLocalStorage = function () {
         this.favoritesManagerProvider.removeAll();
     };
+    SettingsPage.prototype.SignInWithFB = function () {
+        var _this = this;
+        this.authService.signIn(__WEBPACK_IMPORTED_MODULE_4_angular4_social_login__["FacebookLoginProvider"].PROVIDER_ID)
+            .then(function (u) {
+            _this.firstName = u.firstName;
+            _this.lastName = u.lastName;
+            _this.email = u.email;
+            _this.photoUrl = u.photoUrl;
+        });
+    };
     return SettingsPage;
 }());
 SettingsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-white">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-bookmarks"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n      <ion-col col-12>\n        Settings page, go away, it\'s not ready!\n      </ion-col>\n      <ion-col col-12>\n        <button ion-button outline small color="danger" (click)="clearIDLocalStorage()">Clear favorites</button>\n      </ion-col>\n    </ion-row>\n\n    <ion-row text-center>\n\n      <ion-col col-12>\n        Test Buttons - Not in use\n      </ion-col>\n\n      <ion-col col-12>\n        <button class="loginBtn loginBtn--facebook">\n          Login with Facebook\n        </button>\n      </ion-col>\n\n      <ion-col col-12>\n        <button class="loginBtn loginBtn--google">\n          Login with Google\n        </button>\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
+        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-white">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-bookmarks"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n      <ion-col col-12>\n        Settings page, go away, it\'s not ready!\n      </ion-col>\n      <ion-col col-12>\n        <button ion-button outline small color="danger" (click)="clearIDLocalStorage()">Clear favorites</button>\n      </ion-col>\n    </ion-row>\n\n    <ion-row text-center>\n\n      <ion-col col-12>\n        Test Buttons - Not in use\n      </ion-col>\n\n      <ion-col col-12>\n        <button (click)="SignInWithFB()" class="loginBtn loginBtn--facebook">\n          Login with Facebook\n        </button>\n      </ion-col>\n\n      <ion-col col-12>\n        <button class="loginBtn loginBtn--google">\n          Login with Google\n        </button>\n      </ion-col>\n\n      <ion-col col-12 *ngIf="firstName && lastName">\n        {{firstName}} {{lastName}}\n      </ion-col>\n      <ion-col col-12 *ngIf="email">\n        {{email}}\n      </ion-col>\n      <ion-col col-12 *ngIf="photoUrl">\n        <img src="{{photoUrl}}">\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */],
-        __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */],
+        __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */], __WEBPACK_IMPORTED_MODULE_4_angular4_social_login__["AuthService"]])
 ], SettingsPage);
 
 //# sourceMappingURL=settings.js.map
@@ -471,7 +491,7 @@ LocalStorageProvider = __decorate([
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeacherslistPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(431);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(433);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(24);
@@ -1106,16 +1126,16 @@ JointeacherPage = __decorate([
 
 /***/ }),
 
-/***/ 376:
+/***/ 378:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hammerjs__ = __webpack_require__(377);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hammerjs__ = __webpack_require__(379);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hammerjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_hammerjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__ = __webpack_require__(380);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_module__ = __webpack_require__(382);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__ = __webpack_require__(382);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_module__ = __webpack_require__(384);
 
 
 
@@ -1126,14 +1146,14 @@ Object(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 382:
+/***/ 384:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_component__ = __webpack_require__(383);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_component__ = __webpack_require__(385);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__ = __webpack_require__(708);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__ = __webpack_require__(709);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_image_compress__ = __webpack_require__(292);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_image_compress___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_image_compress__);
@@ -1142,10 +1162,10 @@ Object(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular_2_local_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_angular_2_local_storage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ionic_angular__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_home_home__ = __webpack_require__(156);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__ = __webpack_require__(710);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__ = __webpack_require__(711);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_api_api__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pipes_gender_gender__ = __webpack_require__(711);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pipes_gender_gender__ = __webpack_require__(712);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_search_search__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_settings_settings__ = __webpack_require__(174);
@@ -1153,21 +1173,23 @@ Object(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_favorites_favorites__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_toaster_toaster__ = __webpack_require__(284);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_contactus_contactus__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pipes_teaches_at_teaches_at__ = __webpack_require__(712);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pipes_teaches_at_teaches_at__ = __webpack_require__(713);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_jointeacher_jointeacher__ = __webpack_require__(291);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_teacherslist_teacherslist__ = __webpack_require__(289);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_singleteacher_singleteacher__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_local_storage_local_storage__ = __webpack_require__(285);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pipes_teaches_subjects_teaches_subjects__ = __webpack_require__(713);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pipes_teaches_subjects_teaches_subjects__ = __webpack_require__(714);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__providers_favorites_manager_favorites_manager__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pipes_teaches_institutions_teaches_institutions__ = __webpack_require__(714);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__angular_material_menu__ = __webpack_require__(715);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__angular_material_tabs__ = __webpack_require__(716);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__angular_material_input__ = __webpack_require__(718);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__angular_material_select__ = __webpack_require__(719);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__angular_material_autocomplete__ = __webpack_require__(721);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__angular_platform_browser_animations__ = __webpack_require__(722);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_rate_show_rate_show__ = __webpack_require__(724);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pipes_teaches_institutions_teaches_institutions__ = __webpack_require__(715);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__angular_material_menu__ = __webpack_require__(716);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__angular_material_tabs__ = __webpack_require__(717);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__angular_material_input__ = __webpack_require__(719);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__angular_material_select__ = __webpack_require__(720);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__angular_material_autocomplete__ = __webpack_require__(722);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__angular_platform_browser_animations__ = __webpack_require__(723);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_rate_show_rate_show__ = __webpack_require__(725);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_angular4_social_login__ = __webpack_require__(375);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_angular4_social_login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35_angular4_social_login__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1209,6 +1231,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+var config = new __WEBPACK_IMPORTED_MODULE_35_angular4_social_login__["AuthServiceConfig"]([
+    {
+        id: __WEBPACK_IMPORTED_MODULE_35_angular4_social_login__["FacebookLoginProvider"].PROVIDER_ID,
+        provider: new __WEBPACK_IMPORTED_MODULE_35_angular4_social_login__["FacebookLoginProvider"]("200690180499086")
+    }
+]);
 var AppModule = (function () {
     function AppModule() {
     }
@@ -1237,6 +1266,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_2_ionic2_rating__["a" /* Ionic2RatingModule */],
+            __WEBPACK_IMPORTED_MODULE_35_angular4_social_login__["SocialLoginModule"].initialize(config),
             __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */], {
                 locationStrategy: 'path'
             }, {
@@ -1297,7 +1327,7 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 383:
+/***/ 385:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1517,7 +1547,7 @@ FavoritesManagerProvider = __decorate([
 
 /***/ }),
 
-/***/ 710:
+/***/ 711:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1560,7 +1590,7 @@ TabsPage = __decorate([
 
 /***/ }),
 
-/***/ 711:
+/***/ 712:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1606,7 +1636,7 @@ GenderPipe = __decorate([
 
 /***/ }),
 
-/***/ 712:
+/***/ 713:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1653,7 +1683,7 @@ TeachesAtPipe = __decorate([
 
 /***/ }),
 
-/***/ 713:
+/***/ 714:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2006,7 +2036,7 @@ TeachesSubjectsPipe = __decorate([
 
 /***/ }),
 
-/***/ 714:
+/***/ 715:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2173,7 +2203,7 @@ TeachesInstitutionsPipe = __decorate([
 
 /***/ }),
 
-/***/ 724:
+/***/ 725:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3013,5 +3043,5 @@ CommonProvider = __decorate([
 
 /***/ })
 
-},[376]);
+},[378]);
 //# sourceMappingURL=main.js.map

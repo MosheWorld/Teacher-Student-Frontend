@@ -1406,13 +1406,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ApiProvider = (function () {
-    // public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
     //#endregion
     //#region Constructor
     function ApiProvider(http) {
         this.http = http;
         //#region Members
-        this.endPoint = "http://localhost:8000/";
+        // public endPoint: string = "http://localhost:8000/";
+        this.endPoint = "https://teacher-student-backend.herokuapp.com/";
     }
     //#endregion
     //#region Public Methods

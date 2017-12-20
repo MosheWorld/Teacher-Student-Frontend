@@ -45,18 +45,17 @@
         </button>
       </ion-col>
 
-      <ion-col col-12 *ngIf="firstName && lastName">
-        {{firstName}} {{lastName}}
+      <ion-col col-12>
+        {{user?.firstName}} {{user?.lastName}}
       </ion-col>
-      <ion-col col-12 *ngIf="email">
-        {{email}}
+      <ion-col col-12>
+        {{user?.email}}
       </ion-col>
-      <ion-col col-12 *ngIf="photoUrl">
-        <img src="{{photoUrl}}">
+      <ion-col col-12>
+        <img src="{{user?.photoUrl}}">
       </ion-col>
     </ion-row>
 
   </ion-grid>
 
 </ion-content>
-

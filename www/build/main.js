@@ -318,11 +318,6 @@ var SettingsPage = (function () {
         this.favoritesManagerProvider = favoritesManagerProvider;
         this.apiProvider = apiProvider;
         this.authService = authService;
-        //#region Members
-        this.firstName = "";
-        this.lastName = "";
-        this.email = "";
-        this.photoUrl = "";
     }
     //#endregion
     //#region Public Methods
@@ -342,18 +337,17 @@ var SettingsPage = (function () {
     SettingsPage.prototype.SignInWithFB = function () {
         var _this = this;
         this.authService.signIn(__WEBPACK_IMPORTED_MODULE_4_angular4_social_login__["FacebookLoginProvider"].PROVIDER_ID)
-            .then(function (u) {
-            _this.firstName = u.firstName;
-            _this.lastName = u.lastName;
-            _this.email = u.email;
-            _this.photoUrl = u.photoUrl;
+            .then(function (signedInUser) {
+            _this.user = signedInUser;
+            _this.apiProvider.httpPost('auth/createfacebookuser', _this.user)
+                .subscribe(function (success) { console.log(success); }, function (failure) { console.log(failure); });
         });
     };
     return SettingsPage;
 }());
 SettingsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-white">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-bookmarks"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n      <ion-col col-12>\n        Settings page, go away, it\'s not ready!\n      </ion-col>\n      <ion-col col-12>\n        <button ion-button outline small color="danger" (click)="clearIDLocalStorage()">Clear favorites</button>\n      </ion-col>\n    </ion-row>\n\n    <ion-row text-center>\n\n      <ion-col col-12>\n        Test Buttons - Not in use\n      </ion-col>\n\n      <ion-col col-12>\n        <button (click)="SignInWithFB()" class="loginBtn loginBtn--facebook">\n          Login with Facebook\n        </button>\n      </ion-col>\n\n      <ion-col col-12>\n        <button class="loginBtn loginBtn--google">\n          Login with Google\n        </button>\n      </ion-col>\n\n      <ion-col col-12 *ngIf="firstName && lastName">\n        {{firstName}} {{lastName}}\n      </ion-col>\n      <ion-col col-12 *ngIf="email">\n        {{email}}\n      </ion-col>\n      <ion-col col-12 *ngIf="photoUrl">\n        <img src="{{photoUrl}}">\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
+        selector: 'page-settings',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Settings</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-white">\n      <div (click)="goPage(\'favorites\');">\n        <ion-icon name="ios-bookmarks"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n      <ion-col col-12>\n        Settings page, go away, it\'s not ready!\n      </ion-col>\n      <ion-col col-12>\n        <button ion-button outline small color="danger" (click)="clearIDLocalStorage()">Clear favorites</button>\n      </ion-col>\n    </ion-row>\n\n    <ion-row text-center>\n\n      <ion-col col-12>\n        Test Buttons - Not in use\n      </ion-col>\n\n      <ion-col col-12>\n        <button (click)="SignInWithFB()" class="loginBtn loginBtn--facebook">\n          Login with Facebook\n        </button>\n      </ion-col>\n\n      <ion-col col-12>\n        <button class="loginBtn loginBtn--google">\n          Login with Google\n        </button>\n      </ion-col>\n\n      <ion-col col-12>\n        {{user?.firstName}} {{user?.lastName}}\n      </ion-col>\n      <ion-col col-12>\n        {{user?.email}}\n      </ion-col>\n      <ion-col col-12>\n        <img src="{{user?.photoUrl}}">\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\settings\settings.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */],
         __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */], __WEBPACK_IMPORTED_MODULE_4_angular4_social_login__["AuthService"]])
@@ -1412,13 +1406,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ApiProvider = (function () {
+    // public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
     //#endregion
     //#region Constructor
     function ApiProvider(http) {
         this.http = http;
         //#region Members
-        // public endPoint: string = "http://localhost:8000/";
-        this.endPoint = "https://teacher-student-backend.herokuapp.com/";
+        this.endPoint = "http://localhost:8000/";
     }
     //#endregion
     //#region Public Methods

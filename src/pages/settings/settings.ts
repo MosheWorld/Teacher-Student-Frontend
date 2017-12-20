@@ -15,10 +15,7 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 
 export class SettingsPage {
   //#region Members
-  public firstName: string = "";
-  public lastName: string = "";
-  public email: string = "";
-  public photoUrl: string = "";
+  public user: SocialUser;
   //#endregion
 
   //#region Constructor
@@ -45,11 +42,13 @@ export class SettingsPage {
 
   public SignInWithFB() {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
-      .then((u: SocialUser) => {
-        this.firstName = u.firstName;
-        this.lastName = u.lastName;
-        this.email = u.email;
-        this.photoUrl = u.photoUrl;
+      .then((signedInUser: SocialUser) => {
+        this.user = signedInUser;
+        this.apiProvider.httpPost('auth/createfacebookuser', this.user)
+          .subscribe(
+          (success) => { console.log(success); },
+          (failure) => { console.log(failure); }
+          );
       });
   }
   //#endregion

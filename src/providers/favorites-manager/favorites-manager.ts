@@ -5,10 +5,13 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class FavoritesManagerProvider {
 
+  //#region Constructor
   constructor(public localStorage: LocalStorageProvider) {
   }
+  //#endregion
 
-  public addID(id: string) {
+  //#region Public Methods
+  public addID(id: string): any {
     if (id == null || id === "") {
       return false;
     }
@@ -24,7 +27,7 @@ export class FavoritesManagerProvider {
     this.setFavorites(favoritesList);
   }
 
-  public isIDExist(id: string) {
+  public isIDExist(id: string): boolean {
     let favoritesList: any = this.getFavorites();
     if (favoritesList == null) {
       return false;
@@ -38,7 +41,7 @@ export class FavoritesManagerProvider {
     return false;
   }
 
-  public removeID(id: string) {
+  public removeID(id: string): any {
     let favoritesList: any = this.getFavorites();
 
     if (favoritesList == null) {
@@ -54,16 +57,19 @@ export class FavoritesManagerProvider {
     }
   }
 
-  public getFavorites() {
+  public getFavorites(): any {
     let favoritesID = this.localStorage.Get('FavoritesIDs');
     return favoritesID;
   }
 
-  public removeAll() {
+  public removeAll(): void {
     this.setFavorites([]);
   }
+  //#endregion
 
-  private setFavorites(value: any) {
+  //#region Private Methods
+  private setFavorites(value: any): void {
     this.localStorage.Set('FavoritesIDs', value);
   }
+  //#endregion
 }

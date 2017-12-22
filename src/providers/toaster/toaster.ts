@@ -4,10 +4,12 @@ import { ToastController } from 'ionic-angular';
 @Injectable()
 export class ToasterProvider {
 
-  constructor(public toastCtrl: ToastController) {
-  }2000
+  //#region Constructor
+  constructor(public toastCtrl: ToastController) { }
+  //#endregion
 
-  public presentToast(message: string, time: number = 2000, location: string = "buttom") {
+  //#region Public Methods
+  public presentToast(message: string, time: number = 2000, location: string = "buttom"): void {
     const toast = this.toastCtrl.create({
       message: message,
       duration: time,
@@ -16,4 +18,5 @@ export class ToasterProvider {
 
     toast.present();
   }
+  //#endregion
 }

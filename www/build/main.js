@@ -410,9 +410,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ToasterProvider = (function () {
+    //#region Constructor
     function ToasterProvider(toastCtrl) {
         this.toastCtrl = toastCtrl;
     }
+    //#endregion
+    //#region Public Methods
     ToasterProvider.prototype.presentToast = function (message, time, location) {
         if (time === void 0) { time = 2000; }
         if (location === void 0) { location = "buttom"; }
@@ -457,9 +460,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var LocalStorageProvider = (function () {
+    //#region Constructor
     function LocalStorageProvider(localStorageService) {
         this.localStorageService = localStorageService;
     }
+    //#endregion
+    //#region Public Methods
     LocalStorageProvider.prototype.Set = function (key, value) {
         this.localStorageService.set(key, value);
     };
@@ -1419,13 +1425,15 @@ var ApiProvider = (function () {
     ApiProvider.prototype.httpGet = function (path) {
         var _this = this;
         var url = this.endPoint + path;
-        return this.http.get(url, null).map(function (res) { return _this.checkResultModel(res); });
+        return this.http.get(url, null)
+            .map(function (res) { return _this.checkResultModel(res); });
     };
     ApiProvider.prototype.httpPost = function (path, data) {
         var _this = this;
         var url = this.endPoint + path;
         var header = this.buildHeader();
-        return this.http.post(url, JSON.stringify(data), { headers: header }).map(function (res) { return _this.checkResultModel(res); });
+        return this.http.post(url, JSON.stringify(data), { headers: header })
+            .map(function (res) { return _this.checkResultModel(res); });
     };
     //#endregion
     //#region Private Methods
@@ -1477,9 +1485,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var FavoritesManagerProvider = (function () {
+    //#region Constructor
     function FavoritesManagerProvider(localStorage) {
         this.localStorage = localStorage;
     }
+    //#endregion
+    //#region Public Methods
     FavoritesManagerProvider.prototype.addID = function (id) {
         if (id == null || id === "") {
             return false;
@@ -1527,6 +1538,8 @@ var FavoritesManagerProvider = (function () {
     FavoritesManagerProvider.prototype.removeAll = function () {
         this.setFavorites([]);
     };
+    //#endregion
+    //#region Private Methods
     FavoritesManagerProvider.prototype.setFavorites = function (value) {
         this.localStorage.Set('FavoritesIDs', value);
     };

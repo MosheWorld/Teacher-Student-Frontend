@@ -1,4 +1,5 @@
 <ion-menu [content]="content">
+    <!-- Title -->
     <ion-header>
         <ion-toolbar>
             <ion-title text-center>
@@ -8,6 +9,26 @@
     </ion-header>
 
     <ion-content>
+
+        <!-- Loggin in teacher -->
+        <ion-row text-center *ngIf="profileProvider.isLoggedIn == true">
+            <ion-col col-12>
+                <img style="border-radius: 100%;" src="{{profileProvider.profile.photoUrl}}" />
+            </ion-col>
+            <ion-col col-12>
+                <label style="font-family: fantasy;font-size: 22px;">
+                    Welcome {{profileProvider.profile.firstName}} {{profileProvider.profile.lastName}}
+                </label>
+            </ion-col>
+            <ion-col col-12>
+                <button ion-button outline icon-start small color="dark">
+                    <ion-icon name="ios-person-outline"></ion-icon>
+                    Edit profile
+                </button>
+            </ion-col>
+        </ion-row>
+
+        <!-- Buttons -->
         <ion-list>
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
                 {{p.title}}

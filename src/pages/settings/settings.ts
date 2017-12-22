@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { FavoritesPage } from './../favorites/favorites';
 import { SocialUser } from 'angular4-social-login/entities/user';
+import { ProfileProvider } from '../../providers/profile/profile';
+import { ProfileInterface } from '../../interface/Profile.interface';
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-login";
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
@@ -20,7 +22,7 @@ export class SettingsPage {
 
   //#region Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider,
-    public apiProvider: ApiProvider, private authService: AuthService) {
+    public apiProvider: ApiProvider, private authService: AuthService, public profileProvider: ProfileProvider) {
   }
   //#endregion
 
@@ -44,12 +46,25 @@ export class SettingsPage {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
       .then((signedInUser: SocialUser) => {
         this.user = signedInUser;
+        this.CreateUser(signedInUser);
         this.apiProvider.httpPost('auth/createfacebookuser', this.user)
           .subscribe(
           (success) => { console.log(success); },
           (failure) => { console.log(failure); }
           );
       });
+  }
+  //#endregion
+
+  //#region Private Methods
+  private CreateUser(user: SocialUser) {
+    let newUser: ProfileInterface = {
+      email: user.email,
+      photoUrl: user.photoUrl,
+      lastName: user.lastName,
+      firstName: user.firstName
+    };
+    this.profileProvider.SetUserLoggedIn(newUser);
   }
   //#endregion
 }

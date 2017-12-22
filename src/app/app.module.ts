@@ -1,5 +1,5 @@
 import { MyApp } from './app.component';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Headers } from '@angular/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { ImageCompressService } from 'ng2-image-compress';
@@ -32,10 +32,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { RateShowComponent } from '../components/rate-show/rate-show';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RateShowComponent } from '../components/rate-show/rate-show';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
+import { ProfileProvider } from '../providers/profile/profile';
 
 let config = new AuthServiceConfig([
   {
@@ -118,7 +119,8 @@ let config = new AuthServiceConfig([
     ImageCompressService,
     TeachesInstitutionsPipe,
     FavoritesManagerProvider,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ProfileProvider
   ]
 })
 export class AppModule { }

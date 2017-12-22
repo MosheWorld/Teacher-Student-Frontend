@@ -16,7 +16,6 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 export class SettingsPage {
   //#region Members
   public user: SocialUser;
-  public attach:string;
   //#endregion
 
   //#region Constructor
@@ -45,7 +44,6 @@ export class SettingsPage {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
       .then((signedInUser: SocialUser) => {
         this.user = signedInUser;
-        this.attach = JSON.stringify(signedInUser);
         this.apiProvider.httpPost('auth/createfacebookuser', this.user)
           .subscribe(
           (success) => { console.log(success); },

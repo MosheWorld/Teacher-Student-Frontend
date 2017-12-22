@@ -1,40 +1,48 @@
 <ion-menu [content]="content">
-    <!-- Title -->
-    <ion-header>
-        <ion-toolbar>
-            <ion-title text-center>
-                <font class="m-color-white">StudyHub</font>
-            </ion-title>
-        </ion-toolbar>
-    </ion-header>
+  <!-- Title -->
+  <ion-header>
+    <ion-toolbar>
+      <ion-title text-center>
+        <font class="m-color-white">StudyHub</font>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-    <ion-content>
+  <ion-content>
 
-        <!-- Loggin in teacher -->
-        <ion-row text-center *ngIf="profileProvider.isLoggedIn == true">
-            <ion-col col-12>
-                <img style="border-radius: 100%;" src="{{profileProvider.profile.photoUrl}}" />
-            </ion-col>
-            <ion-col col-12>
-                <label style="font-family: fantasy;font-size: 22px;">
-                    Welcome {{profileProvider.profile.firstName}} {{profileProvider.profile.lastName}}
-                </label>
-            </ion-col>
-            <ion-col col-12>
-                <button ion-button outline icon-start small color="dark">
-                    <ion-icon name="ios-person-outline"></ion-icon>
-                    Edit profile
-                </button>
-            </ion-col>
-        </ion-row>
+    <!-- Loggin in teacher -->
+    <ion-row text-center *ngIf="profileProvider.isLoggedIn == true">
+      <ion-col col-12>
+        <img style="border-radius: 100%;" src="{{profileProvider.profile.photoUrl}}" />
+      </ion-col>
+      <ion-col col-12>
+        <label style="font-family: fantasy;font-size: 22px;">
+          Welcome {{profileProvider.profile.firstName}} {{profileProvider.profile.lastName}}
+        </label>
+      </ion-col>
 
-        <!-- Buttons -->
-        <ion-list>
-            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-                {{p.title}}
-            </button>
-        </ion-list>
-    </ion-content>
+      <ion-col col-6>
+        <button ion-button outline icon-start small color="dark">
+          <ion-icon name="ios-person-outline"></ion-icon>
+          Edit profile
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button outline icon-end small color="danger" (click)="signOut()">
+          Log out
+          <ion-icon name="ios-exit-outline"></ion-icon>
+        </button>
+      </ion-col>
+
+    </ion-row>
+
+    <!-- Buttons -->
+    <ion-list>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
 </ion-menu>
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

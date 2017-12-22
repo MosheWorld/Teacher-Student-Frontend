@@ -17,5 +17,11 @@ export class ProfileProvider {
     this.profile = newProfile;
     this.isLoggedIn = true;
   }
+
+  public SetUserLoggedOut() {
+    let demo: ProfileInterface;
+    this.profile = demo;
+    this.isLoggedIn = false;
+  }
   //#endregion
 }

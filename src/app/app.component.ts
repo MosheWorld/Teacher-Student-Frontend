@@ -8,6 +8,8 @@ import { HomePage } from '../pages/home/home';
 import { SearchPage } from './../pages/search/search';
 import { SettingsPage } from '../pages/settings/settings';
 
+import { AuthService } from 'angular4-social-login';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -21,7 +23,8 @@ export class MyApp {
   //#endregion
 
   //#region Constructor
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public profileProvider: ProfileProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public profileProvider: ProfileProvider,
+    public authService: AuthService) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
@@ -37,6 +40,11 @@ export class MyApp {
 
   public openPage(page) {
     this.nav.setRoot(page.component);
+  }
+
+  public signOut(): void {
+    this.authService.signOut()
+      .then(() => this.profileProvider.SetUserLoggedOut());
   }
   //#endregion
 }

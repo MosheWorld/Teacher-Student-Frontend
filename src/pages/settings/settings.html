@@ -45,19 +45,20 @@
         </button>
       </ion-col>
 
-      <ion-col col-12>
-        {{user?.firstName}} {{user?.lastName}}
-      </ion-col>
-      <ion-col col-12>
-        {{user?.email}}
-      </ion-col>
-      <ion-col col-12>
-        <img src="{{user?.photoUrl}}">
-      </ion-col>
+      <div *ngIf="profileProvider.isLoggedIn">
+        <ion-col col-12>
+          {{user?.firstName}} {{user?.lastName}}
+        </ion-col>
+        <ion-col col-12>
+          {{user?.email}}
+        </ion-col>
+        <ion-col col-12>
+          <img src="{{user?.photoUrl}}">
+        </ion-col>
+      </div>
 
     </ion-row>
 
   </ion-grid>
 
 </ion-content>
-

@@ -5,8 +5,7 @@ import { ApiProvider } from '../../providers/api/api';
 import { FavoritesPage } from './../favorites/favorites';
 import { SocialUser } from 'angular4-social-login/entities/user';
 import { ProfileProvider } from '../../providers/profile/profile';
-import { ProfileInterface } from '../../interface/Profile.interface';
-import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-login";
+import { AuthService, GoogleLoginProvider } from "angular4-social-login";
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
 @IonicPage()
@@ -42,29 +41,11 @@ export class SettingsPage {
     this.favoritesManagerProvider.removeAll();
   }
 
-  public SignInWithFB() {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
-      .then((signedInUser: SocialUser) => {
-        this.user = signedInUser;
-        this.CreateUser(signedInUser);
-        this.apiProvider.httpPost('auth/createfacebookuser', this.user)
-          .subscribe(
-          (success) => { console.log(success); },
-          (failure) => { console.log(failure); }
-          );
+  public SignInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then((user) => {
+        console.log(user);
       });
-  }
-  //#endregion
-
-  //#region Private Methods
-  private CreateUser(user: SocialUser) {
-    let newUser: ProfileInterface = {
-      email: user.email,
-      photoUrl: user.photoUrl,
-      lastName: user.lastName,
-      firstName: user.firstName
-    };
-    this.profileProvider.SetUserLoggedIn(newUser);
   }
   //#endregion
 }

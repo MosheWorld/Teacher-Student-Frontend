@@ -4,7 +4,9 @@ import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 
 import { FavoritesPage } from '../favorites/favorites';
 import { ContactusPage } from './../contactus/contactus';
-import { JointeacherPage } from './../jointeacher/jointeacher';
+import { ProfileProvider } from './../../providers/profile/profile';
+import { NewTeacherFormPage } from './../new-teacher-form/new-teacher-form';
+import { NewTeacherLoginPage } from './../new-teacher-login/new-teacher-login';
 
 @Component({
   selector: 'page-home',
@@ -18,7 +20,7 @@ export class HomePage {
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public rd: Renderer2) { }
+  constructor(public navCtrl: NavController, public rd: Renderer2, public profileProvider: ProfileProvider) { }
 
   public ionViewDidEnter() {
     setTimeout(() => {
@@ -53,7 +55,11 @@ export class HomePage {
         this.navCtrl.push(ContactusPage);
         break;
       case 'joinasteacher':
-        this.navCtrl.push(JointeacherPage);
+        if (this.profileProvider.isLoggedIn == true) {
+          this.navCtrl.push(NewTeacherFormPage);
+        } else {
+          this.navCtrl.push(NewTeacherLoginPage);
+        }
         break;
       case 'favorites':
         this.navCtrl.push(FavoritesPage);

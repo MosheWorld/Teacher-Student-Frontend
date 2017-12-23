@@ -1,5 +1,5 @@
 import { MyApp } from './app.component';
-import { HttpModule, Headers } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { ImageCompressService } from 'ng2-image-compress';
@@ -19,12 +19,14 @@ import { CommonProvider } from '../providers/common/common';
 import { FavoritesPage } from './../pages/favorites/favorites';
 import { ToasterProvider } from '../providers/toaster/toaster';
 import { ContactusPage } from './../pages/contactus/contactus';
+import { ProfileProvider } from '../providers/profile/profile';
 import { TeachesAtPipe } from './../pipes/teaches-at/teaches-at';
-import { JointeacherPage } from './../pages/jointeacher/jointeacher';
 import { TeacherslistPage } from './../pages/teacherslist/teacherslist';
 import { SingleteacherPage } from './../pages/singleteacher/singleteacher';
 import { LocalStorageProvider } from '../providers/local-storage/local-storage';
+import { NewTeacherFormPage } from './../pages/new-teacher-form/new-teacher-form';
 import { TeachesSubjectsPipe } from './../pipes/teaches-subjects/teaches-subjects';
+import { NewTeacherLoginPage } from './../pages/new-teacher-login/new-teacher-login';
 import { FavoritesManagerProvider } from '../providers/favorites-manager/favorites-manager';
 import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
 
@@ -36,12 +38,15 @@ import { RateShowComponent } from '../components/rate-show/rate-show';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
-import { ProfileProvider } from '../providers/profile/profile';
 
 let config = new AuthServiceConfig([
   {
     id: FacebookLoginProvider.PROVIDER_ID,
     provider: new FacebookLoginProvider("200690180499086")
+  },
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("391786601238-qdgnckjfrqrbsqia2nup1ds4ecjsbora.apps.googleusercontent.com")
   }
 ]);
 
@@ -56,10 +61,11 @@ let config = new AuthServiceConfig([
     ContactusPage,
     FavoritesPage,
     TeachesAtPipe,
-    JointeacherPage,
     TeacherslistPage,
     SingleteacherPage,
     RateShowComponent,
+    NewTeacherFormPage,
+    NewTeacherLoginPage,
     TeachesSubjectsPipe,
     TeachesInstitutionsPipe
   ],
@@ -77,9 +83,10 @@ let config = new AuthServiceConfig([
           { component: SettingsPage, name: 'Settings', segment: 'settings' },
           { component: ContactusPage, name: 'Contactus', segment: 'contactus' },
           { component: FavoritesPage, name: 'Favorites', segment: 'favorites' },
-          { component: JointeacherPage, name: 'Jointeacher', segment: 'jointeacher' },
           { component: TeacherslistPage, name: 'Teacherslist', segment: 'teacherslist' },
           { component: SingleteacherPage, name: 'Singleteacher', segment: 'singleteacher' },
+          { component: NewTeacherFormPage, name: 'NewTeacherForm', segment: 'newteacherform' },
+          { component: NewTeacherLoginPage, name: 'NewTeacherLogin', segment: 'newteacherlogin' },
         ]
       }),
     LocalStorageModule.withConfig({
@@ -102,25 +109,27 @@ let config = new AuthServiceConfig([
     SettingsPage,
     FavoritesPage,
     ContactusPage,
-    JointeacherPage,
     TeacherslistPage,
-    SingleteacherPage
+    SingleteacherPage,
+    NewTeacherFormPage,
+    NewTeacherLoginPage
   ],
   providers: [
     StatusBar,
-    SplashScreen,
     GenderPipe,
     ApiProvider,
+    SplashScreen,
     TeachesAtPipe,
     CommonProvider,
     ToasterProvider,
+    ProfileProvider,
     TeachesSubjectsPipe,
     LocalStorageProvider,
     ImageCompressService,
     TeachesInstitutionsPipe,
     FavoritesManagerProvider,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
-    ProfileProvider
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
+
 export class AppModule { }

@@ -6,6 +6,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { IonicPage, NavController, NavParams, AlertController, LoadingController, Platform } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
+import { Alert } from 'ionic-angular/components/alert/alert';
 import { CommonProvider } from './../../providers/common/common';
 import { ProfileProvider } from './../../providers/profile/profile';
 
@@ -59,12 +60,12 @@ export class NewTeacherFormPage {
     this.imageWidth = platform.width() - 20;
     this.imageHeight = platform.width() - 20;
 
-    this.InitInputs();
+    this.initInputs();
   }
   //#endregion
 
   //#region Public Methods
-  public createTeacher() {
+  public createTeacher(): void {
     this.showErrorMessage = false;
     this.showErrorMessagePrices = false;
 
@@ -77,6 +78,7 @@ export class NewTeacherFormPage {
     let newTeacherData = this.createNewTeacherDataJson();
 
     const loading = this.loadingCtrl.create({
+      spinner: 'dots',
       content: 'Sending information, please wait...'
     });
     loading.present();
@@ -96,7 +98,7 @@ export class NewTeacherFormPage {
       );
   }
 
-  public rotateBase64Image90deg(base64Image, isClockwise) {
+  public rotateBase64Image90deg(base64Image, isClockwise): void {
     var offScreenCanvas = document.createElement('canvas');
     var offScreenCanvasCtx = offScreenCanvas.getContext('2d');
 
@@ -119,7 +121,7 @@ export class NewTeacherFormPage {
     this.image = offScreenCanvas.toDataURL("image/jpeg", 100);
   }
 
-  public readImageBase64($event) {
+  public readImageBase64($event): void {
     ImageCompressService.filesToCompressedImageSource($event.target.files).
       then((observableImages) => {
         observableImages.subscribe((compressedObject) => {
@@ -130,7 +132,7 @@ export class NewTeacherFormPage {
       });
   }
 
-  public clearImage() {
+  public clearImage(): void {
     if (this.image && this.image.length > 0) {
       this.rd.removeClass(this.elViewImage.nativeElement, "flash");
       this.rd.addClass(this.elViewImage.nativeElement, "fadeOutLeft");
@@ -143,13 +145,13 @@ export class NewTeacherFormPage {
   //#endregion
 
   //#region Private Methods
-  private convertStringToInteger() {
+  private convertStringToInteger(): void {
     if (this.fromPriceFormControl.valid) { this.fromPriceFormControl.setValue(parseInt(this.fromPriceFormControl.value)); }
     if (this.toPriceFormControl.valid) { this.toPriceFormControl.setValue(parseInt(this.toPriceFormControl.value)); }
     if (this.ageFormControl.valid) { this.ageFormControl.setValue(parseInt(this.ageFormControl.value)); }
   }
 
-  private isModelValid() {
+  private isModelValid(): boolean {
     if (!this.isFormsValid() ||
       this.isFormsNullOrEmpty() ||
       this.fromPriceFormControl.value > this.toPriceFormControl.value ||
@@ -166,7 +168,7 @@ export class NewTeacherFormPage {
     }
   }
 
-  private isStringNullOrEmpty(str: string) {
+  private isStringNullOrEmpty(str: string): boolean {
     if (str == null || str === "") {
       return true;
     } else {
@@ -174,7 +176,7 @@ export class NewTeacherFormPage {
     }
   }
 
-  private createNewTeacherDataJson() {
+  private createNewTeacherDataJson(): any {
     this.teachesInstitutionsFormControl.value.forEach((value, index) => {
       this.teachesInstitutionsFormControl.value[index] = parseInt(value.toString());
     });
@@ -183,53 +185,56 @@ export class NewTeacherFormPage {
     });
 
     let newTeacher = {
+      rate: 0,
+      image: this.image,
       age: this.ageFormControl.value,
-      priceTo: this.toPriceFormControl.value,
-      priceFrom: this.fromPriceFormControl.value,
       phone: this.phoneFormControl.value,
       email: this.emailFormControl.value,
-      gender: parseInt(this.genderAtFormControl.value),
+      priceTo: this.toPriceFormControl.value,
       lastName: this.lastNameFormControl.value,
       firstName: this.firstNameFormControl.value,
-      personalMessage: this.personalMessageFormControl.value,
+      priceFrom: this.fromPriceFormControl.value,
+      gender: parseInt(this.genderAtFormControl.value),
       teachesAt: parseInt(this.teachesAtFormControl.value),
-      teachesInstitutions: this.teachesInstitutionsFormControl.value,
+      personalMessage: this.personalMessageFormControl.value,
       teachesSubjects: this.teachesSubjectsFormControl.value,
-      rate: 0,
-      image: this.image
+      teachesInstitutions: this.teachesInstitutionsFormControl.value
     };
+
     return newTeacher;
   }
 
-  private createAlert(titleInput: string, subTitleInput: string) {
+  private createAlert(titleInput: string, subTitleInput: string): Alert {
     const alert = this.alertCtrl.create({
       title: titleInput,
       subTitle: subTitleInput,
       buttons: ['Ok']
     });
+
     return alert;
   }
 
-  private isFormsValid() {
-    if (!this.firstNameFormControl.valid ||
-      !this.lastNameFormControl.valid ||
+  private isFormsValid(): boolean {
+    if (
       !this.ageFormControl.valid ||
-      !this.genderAtFormControl.valid ||
       !this.emailFormControl.valid ||
       !this.phoneFormControl.valid ||
       !this.toPriceFormControl.valid ||
+      !this.genderAtFormControl.valid ||
+      !this.lastNameFormControl.valid ||
+      !this.firstNameFormControl.valid ||
       !this.fromPriceFormControl.valid ||
       !this.teachesAtFormControl.valid ||
+      !this.personalMessageFormControl.valid ||
       !this.teachesSubjectsFormControl.valid ||
-      !this.teachesInstitutionsFormControl.valid ||
-      !this.personalMessageFormControl.valid) {
+      !this.teachesInstitutionsFormControl.valid) {
       return false;
     } else {
       return true;
     }
   }
 
-  private isFormsNullOrEmpty() {
+  private isFormsNullOrEmpty(): boolean {
     if (this.isStringNullOrEmpty(this.firstNameFormControl.value) ||
       this.isStringNullOrEmpty(this.lastNameFormControl.value) ||
       this.isStringNullOrEmpty(this.emailFormControl.value) ||
@@ -241,7 +246,7 @@ export class NewTeacherFormPage {
     }
   }
 
-  private isPhoneValid(phone: string) {
+  private isPhoneValid(phone: string): boolean {
     if (this.isStringNullOrEmpty(phone) || phone.length < 9) {
       return false;
     } else {
@@ -258,7 +263,7 @@ export class NewTeacherFormPage {
     }
   }
 
-  private InitInputs() {
+  private initInputs(): void {
     if (this.profileProvider.isLoggedIn) {
       if (this.profileProvider.profile.firstName) {
         this.firstNameFormControl.setValue(this.profileProvider.profile.firstName);

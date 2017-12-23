@@ -26,7 +26,7 @@ export class SettingsPage {
   //#endregion
 
   //#region Public Methods
-  public goPage(page: any) {
+  public goPage(page: any): void {
     switch (page) {
       case 'favorites':
         this.navCtrl.push(FavoritesPage);
@@ -37,7 +37,7 @@ export class SettingsPage {
     }
   }
 
-  public clearIDLocalStorage() {
+  public clearIDLocalStorage(): void {
     this.favoritesManagerProvider.removeAll();
   }
 

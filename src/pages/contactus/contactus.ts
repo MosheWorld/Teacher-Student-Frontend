@@ -5,6 +5,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
+import { Alert } from 'ionic-angular/components/alert/alert';
 import { CommonProvider } from './../../providers/common/common';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -38,7 +39,7 @@ export class ContactusPage {
   //#endregion
 
   //#region Public Methods
-  public sendContactUsForm() {
+  public sendContactUsForm(): void {
     this.showErrorMessage = false;
 
     if (!this.isFormValid()) {
@@ -54,6 +55,7 @@ export class ContactusPage {
     };
 
     const loading = this.loadingCtrl.create({
+      spinner: 'dots',
       content: 'Sending the information, please wait...'
     });
     loading.present();
@@ -73,13 +75,13 @@ export class ContactusPage {
       });
   }
 
-  public openWhatsApp() {
+  public openWhatsApp(): void {
     window.open('https://api.whatsapp.com/send?phone=972542477052');
   }
   //#endregion
 
   //#region Private Methods
-  private isFormValid() {
+  private isFormValid(): boolean {
     if (
       !this.fullNameFormControl.valid ||
       !this.emailFormControl.valid || !isEmail(this.emailFormControl.value) ||
@@ -92,7 +94,7 @@ export class ContactusPage {
     }
   }
 
-  private createAlert(titleInput: string, subTitleInput: string) {
+  private createAlert(titleInput: string, subTitleInput: string): Alert {
     const alert = this.alertCtrl.create({
       title: titleInput,
       subTitle: subTitleInput,

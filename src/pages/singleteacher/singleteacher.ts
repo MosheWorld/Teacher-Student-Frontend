@@ -5,6 +5,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
+import { Alert } from 'ionic-angular/components/alert/alert';
 import { ToasterProvider } from './../../providers/toaster/toaster';
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
@@ -59,15 +60,15 @@ export class SingleteacherPage {
   //#endregion
 
   //#region Public Methods
-  public dismiss() {
+  public dismiss(): void {
     this.viewCtrl.dismiss(this.isTeacherFavorited);
   }
 
-  public openRecommendations() {
+  public openRecommendations(): void {
     this.showRecommendationsBoolean = true;
   }
 
-  public closeRecommendations() {
+  public closeRecommendations(): void {
     this.rd.removeClass(this.elAddRecommend.nativeElement, "bounceInDown");
     this.rd.addClass(this.elAddRecommend.nativeElement, "bounceOutUp");
     setTimeout(() => {
@@ -75,7 +76,7 @@ export class SingleteacherPage {
     }, 1000);
   }
 
-  public addNewRecommend() {
+  public addNewRecommend(): void {
     this.showErrorMessage = false;
 
     if (!this.isModelValid()) {
@@ -94,6 +95,7 @@ export class SingleteacherPage {
     };
 
     const loading = this.loadingCtrl.create({
+      spinner: 'dots',
       content: 'Adding your recommendation, please wait...'
     });
     loading.present();
@@ -115,19 +117,19 @@ export class SingleteacherPage {
       });
   }
 
-  public addFavorite() {
+  public addFavorite(): void {
     this.favoritesManagerProvider.addID(this.teacher._id);
     this.isTeacherFavorited = true;
     this.toasterProvider.presentToast(this.teacher.firstName + " " + this.teacher.lastName + " " + " has been added to favorites.");
   }
 
-  public removeFavorite() {
+  public removeFavorite(): void {
     this.favoritesManagerProvider.removeID(this.teacher._id);
     this.isTeacherFavorited = false;
     this.toasterProvider.presentToast(this.teacher.firstName + " " + this.teacher.lastName + " " + " has been removed from favorites.");
   }
 
-  public openWhatsApp() {
+  public openWhatsApp(): void {
     if (this.teacher && this.teacher.phone) {
       if ((this.teacher.phone).indexOf("972") !== -1) {
         window.open('https://api.whatsapp.com/send?phone=' + this.teacher.phone);
@@ -140,7 +142,7 @@ export class SingleteacherPage {
   //#endregion
 
   //#region Private Methods
-  private isModelValid() {
+  private isModelValid(): boolean {
     this.convertRateToInteger();
     if (this.rate == null || this.rate < 0 || this.rate > 5 ||
       !this.emailFormControl.valid || !isEmail(this.emailFormControl.value) ||
@@ -153,11 +155,13 @@ export class SingleteacherPage {
     }
   }
 
-  private convertRateToInteger() {
-    if (this.rate != null) { this.rate = parseInt(this.rate.toString()); }
+  private convertRateToInteger(): void {
+    if (this.rate != null) {
+      this.rate = parseInt(this.rate.toString());
+    }
   }
 
-  private createAlert(titleInput: string, subTitleInput: string) {
+  private createAlert(titleInput: string, subTitleInput: string): Alert {
     const alert = this.alertCtrl.create({
       title: titleInput,
       subTitle: subTitleInput,

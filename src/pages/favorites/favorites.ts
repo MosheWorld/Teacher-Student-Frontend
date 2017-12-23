@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Tabs, ModalController, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
+import { Alert } from 'ionic-angular/components/alert/alert';
 import { SingleteacherPage } from './../singleteacher/singleteacher';
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
@@ -29,7 +30,7 @@ export class FavoritesPage {
   //#endregion
 
   //#region Public Methods
-  public goPage(page: any) {
+  public goPage(page: any): void {
     switch (page) {
       case 'search':
         this.navCtrl.pop();
@@ -41,7 +42,7 @@ export class FavoritesPage {
     }
   }
 
-  public expandTeacherInformation(index: number) {
+  public expandTeacherInformation(index: number): void {
     let modal = this.modalCtrl.create(SingleteacherPage, { teacher: this.teachers[index] });
     modal.onDidDismiss((data) => {
       if (data === false) {
@@ -56,7 +57,7 @@ export class FavoritesPage {
   //#endregion
 
   //#region Private Methods
-  private bootstrapFavoritePage(listOfTeacherID: any) {
+  private bootstrapFavoritePage(listOfTeacherID: any): void {
     if (listOfTeacherID == null || listOfTeacherID.length == 0) {
       this.userHaveFavorites = false;
     } else {
@@ -65,12 +66,13 @@ export class FavoritesPage {
     }
   }
 
-  private getTeachersByID(listOfTeacherID: any) {
+  private getTeachersByID(listOfTeacherID: any): void {
     let data = {
       "listOfTeacherID": listOfTeacherID
     };
 
     const loading = this.loadingCtrl.create({
+      spinner: 'dots',
       content: 'Loading favorites, please wait...'
     });
     loading.present();
@@ -93,7 +95,7 @@ export class FavoritesPage {
       });
   }
 
-  private createAlert(titleInput: string, subTitleInput: string) {
+  private createAlert(titleInput: string, subTitleInput: string): Alert {
     const alert = this.alertCtrl.create({
       title: titleInput,
       subTitle: subTitleInput,
@@ -102,7 +104,7 @@ export class FavoritesPage {
     return alert;
   }
 
-  private async GetImageForTeacher(teacher) {
+  private async GetImageForTeacher(teacher): Promise<void> {
     this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)
       .subscribe(
       (success) => { teacher.image = success.image; },

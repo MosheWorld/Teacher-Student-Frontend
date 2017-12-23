@@ -41,13 +41,13 @@ export class TeacherslistPage {
   //#endregion
 
   //#region Public Methods
-  public expandTeacherInformation(index: number) {
+  public expandTeacherInformation(index: number): void {
     let modal = this.modalCtrl.create(SingleteacherPage, {
       teacher: this.teachers[index],
       subject: this.navParams.get('subject'),
       institute: this.navParams.get('institute')
     });
-    
+
     modal.onDidDismiss((data) => {
       this.teachers[index].isTeacherFavorited = data;
       for (let teacher of this.teachersListNotChange) {
@@ -60,7 +60,7 @@ export class TeacherslistPage {
     modal.present();
   }
 
-  public onInput(event: any) {
+  public onInput(event: any): void {
     let val = event.target.value;
 
     if (val == null || val === '') {
@@ -76,7 +76,7 @@ export class TeacherslistPage {
     }
   }
 
-  public sortByTeacherList(sortByType) {
+  public sortByTeacherList(sortByType): void {
     if (sortByType != null && sortByType.length > 1) {
       if (sortByType === "Name") {
         this.sortByName();
@@ -92,7 +92,7 @@ export class TeacherslistPage {
   //#endregion
 
   //#region Private Methods
-  private sortByName() {
+  private sortByName(): void {
     this.teachers.sort((a, b) => {
       let first = (a.firstName + " " + a.lastName).toLowerCase();
       let second = (b.firstName + " " + b.lastName).toLowerCase();
@@ -108,7 +108,7 @@ export class TeacherslistPage {
     });
   }
 
-  private sortByRate() {
+  private sortByRate(): void {
     this.teachers.sort((a, b) => {
       if (a.rate < b.rate) {
         return 1;
@@ -121,7 +121,7 @@ export class TeacherslistPage {
     });
   }
 
-  private sortByRecommendations() {
+  private sortByRecommendations(): void {
     this.teachers.sort((a, b) => {
       if (a.recommendations.length < b.recommendations.length) {
         return 1;
@@ -134,7 +134,7 @@ export class TeacherslistPage {
     });
   }
 
-  private sortByRecommendationsRate() {
+  private sortByRecommendationsRate(): void {
     this.teachers.sort((a, b) => {
       if (a.recommendations.length < b.recommendations.length) {
         return 1;
@@ -153,7 +153,7 @@ export class TeacherslistPage {
     });
   }
 
-  private async GetImageForTeacher(teacher) {
+  private async GetImageForTeacher(teacher): Promise<void> {
     this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)
       .subscribe(
       (success) => { teacher.image = success.image; },

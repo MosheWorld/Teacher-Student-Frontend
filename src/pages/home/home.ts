@@ -46,7 +46,7 @@ export class HomePage {
   //#endregion
 
   //#region Public Methods
-  public goPage(page: any) {
+  public goPage(page: any): void {
     switch (page) {
       case 'search':
         this.navCtrl.setRoot(SearchPage);

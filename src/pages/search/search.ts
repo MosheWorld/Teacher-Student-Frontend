@@ -9,6 +9,7 @@ import { IonicPage, NavController, NavParams, LoadingController, AlertController
 
 import { ApiProvider } from './../../providers/api/api';
 import { FavoritesPage } from './../favorites/favorites';
+import { Alert } from 'ionic-angular/components/alert/alert';
 import { CommonProvider } from './../../providers/common/common';
 import { TeacherslistPage } from './../teacherslist/teacherslist';
 
@@ -64,12 +65,12 @@ export class SearchPage {
   //#endregion
 
   //#region Public Methods
-  public filterStates(input: string) {
+  public filterStates(input: string): any[] {
     return this.commonProvider.subjectsArray.filter((subject) =>
       subject.viewValue.toLowerCase().includes(input.toLowerCase()));
   }
 
-  public searchTeachers() {
+  public searchTeachers(): void {
     this.showErrorMessage = false;
     this.showErrorMessagePrices = false;
 
@@ -88,6 +89,7 @@ export class SearchPage {
     };
 
     const loading = this.loadingCtrl.create({
+      spinner: 'dots',
       content: 'Getting teachers, please wait...'
     });
     loading.present();
@@ -119,8 +121,9 @@ export class SearchPage {
       );
   }
 
-  public getAllTeachers() {
+  public getAllTeachers(): void {
     const loading = this.loadingCtrl.create({
+      spinner: 'dots',
       content: 'Getting teachers, please wait...'
     });
     loading.present();
@@ -144,7 +147,7 @@ export class SearchPage {
       );
   }
 
-  public goPage(page: any) {
+  public goPage(page: any): void {
     switch (page) {
       case 'favorites':
         this.navCtrl.push(FavoritesPage);
@@ -157,7 +160,7 @@ export class SearchPage {
   //#endregion
 
   //#region Private Methods
-  private isModelValid() {
+  private isModelValid(): boolean {
     if (
       this.structure == null ||
       !this.genderFormControl.valid ||
@@ -176,7 +179,7 @@ export class SearchPage {
     }
   }
 
-  private createAlert(titleInput: string, subTitleInput: string) {
+  private createAlert(titleInput: string, subTitleInput: string): Alert {
     const alert = this.alertCtrl.create({
       title: titleInput,
       subTitle: subTitleInput,
@@ -185,7 +188,7 @@ export class SearchPage {
     return alert;
   }
 
-  private getSubjectID() {
+  private getSubjectID(): number {
     let subjectID;
 
     if (this.teachesSubjectsFormControl.value != null) {
@@ -197,7 +200,7 @@ export class SearchPage {
     return subjectID == null ? null : parseInt(subjectID.value);
   }
 
-  private getsearchedSubject() {
+  private getsearchedSubject(): any {
     let result = null;
 
     if (this.teachesSubjectsFormControl.value && this.teachesSubjectsFormControl.value != null && this.teachesSubjectsFormControl.value !== "") {
@@ -214,7 +217,7 @@ export class SearchPage {
     return result;
   }
 
-  private getsearchedInstitute() {
+  private getsearchedInstitute(): any {
     let result = null;
 
     if (this.teachesInstitutionsFormControl.value && this.teachesInstitutionsFormControl.value != null && this.teachesInstitutionsFormControl.value !== "") {

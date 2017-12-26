@@ -52,10 +52,17 @@ export class NewTeacherFormPage {
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public rd: Renderer2,
-    public platform: Platform, public commonProvider: CommonProvider, public profileProvider: ProfileProvider) {
-
+  constructor(
+    public rd: Renderer2,
+    public platform: Platform,
+    public navParams: NavParams,
+    public navCtrl: NavController,
+    public apiProvider: ApiProvider,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public commonProvider: CommonProvider,
+    public profileProvider: ProfileProvider
+  ) {
     // We take minutes 20 in the calculation to take the padding at calculation.
     this.imageWidth = platform.width() - 20;
     this.imageHeight = platform.width() - 20;

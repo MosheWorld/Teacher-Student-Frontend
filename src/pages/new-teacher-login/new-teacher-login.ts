@@ -1,15 +1,18 @@
-import { NewTeacherFormPage } from './../new-teacher-form/new-teacher-form';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ApiProvider } from '../../providers/api/api';
+import { PageType } from './../../common/PageType.Enum';
+import { Navigationer } from './../../common/Navigationer';
 import { SocialUser } from 'angular4-social-login/entities/user';
 import { ProfileProvider } from '../../providers/profile/profile';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { ProfileInterface } from '../../interface/Profile.interface';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
-import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-login";
+
+import { AuthService, FacebookLoginProvider } from "angular4-social-login";
+// GoogleLoginProvider
 
 @IonicPage()
 @Component({
@@ -19,13 +22,24 @@ import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular
 
 export class NewTeacherLoginPage {
   //#region Members
+  public pageEnum = PageType;
+  public navigationer: Navigationer;
+
   public user: SocialUser;
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
-    private authService: AuthService, public profileProvider: ProfileProvider, public loadingCtrl: LoadingController,
-    private alertCtrl: AlertController) { }
+  constructor(
+    public navParams: NavParams,
+    public navCtrl: NavController,
+    public apiProvider: ApiProvider,
+    private authService: AuthService,
+    private alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public profileProvider: ProfileProvider
+  ) {
+    this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewTeacherLoginPage');
@@ -68,7 +82,7 @@ export class NewTeacherLoginPage {
   private goToTeaherFormPage(loader: Loading): void {
     loader.dismiss();
     this.navCtrl.pop();
-    this.navCtrl.push(NewTeacherFormPage);
+    this.navigationer.navigateToPage(this.pageEnum.NewTeacherForm);
   }
 
   private failureResponse(loader: Loading): void {

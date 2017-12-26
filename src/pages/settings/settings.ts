@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ApiProvider } from '../../providers/api/api';
-import { FavoritesPage } from './../favorites/favorites';
+import { PageType } from './../../common/PageType.Enum';
+import { Navigationer } from './../../common/Navigationer';
 import { SocialUser } from 'angular4-social-login/entities/user';
 import { ProfileProvider } from '../../providers/profile/profile';
 import { AuthService, GoogleLoginProvider } from "angular4-social-login";
@@ -16,27 +17,26 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 
 export class SettingsPage {
   //#region Members
+  public pageEnum = PageType;
+  public navigationer: Navigationer;
+
   public user: SocialUser;
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider,
-    public apiProvider: ApiProvider, private authService: AuthService, public profileProvider: ProfileProvider) {
+  constructor(
+    public navParams: NavParams,
+    public navCtrl: NavController,
+    public apiProvider: ApiProvider,
+    private authService: AuthService,
+    public profileProvider: ProfileProvider,
+    public favoritesManagerProvider: FavoritesManagerProvider
+  ) {
+    this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
   }
   //#endregion
 
   //#region Public Methods
-  public goPage(page: any): void {
-    switch (page) {
-      case 'favorites':
-        this.navCtrl.push(FavoritesPage);
-        break;
-      default:
-        console.log('Not found the requested page ' + page);
-        break;
-    }
-  }
-
   public clearIDLocalStorage(): void {
     this.favoritesManagerProvider.removeAll();
   }

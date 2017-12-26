@@ -8,10 +8,11 @@ import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 import { ApiProvider } from './../../providers/api/api';
-import { FavoritesPage } from './../favorites/favorites';
+import { PageType } from './../../common/PageType.Enum';
+import { Navigationer } from './../../common/Navigationer';
 import { Alert } from 'ionic-angular/components/alert/alert';
 import { CommonProvider } from './../../providers/common/common';
-import { TeacherslistPage } from './../teacherslist/teacherslist';
+import { ProfileProvider } from '../../providers/profile/profile';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -28,6 +29,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class SearchPage {
   //#region Members
+  public pageEnum = PageType;
+  public navigationer: Navigationer;
+
   public brightness: number = 20;
   public saturation: number = 0;
   public warmth: number = 1300;
@@ -48,9 +52,18 @@ export class SearchPage {
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public commonProvider: CommonProvider,
-    public rd: Renderer2) {
+  constructor(
+    public rd: Renderer2,
+    public navParams: NavParams,
+    public navCtrl: NavController,
+    public apiProvider: ApiProvider,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public commonProvider: CommonProvider,
+    public profileProvider: ProfileProvider
+  ) {
+    this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
+
     this.filteredStates = this.teachesSubjectsFormControl.valueChanges
       .startWith(null)
       .map((subject) => subject ? this.filterStates(subject) : this.commonProvider.subjectsArray.slice());
@@ -102,7 +115,7 @@ export class SearchPage {
       (success) => {
         loading.dismiss();
         if (success && success.length > 0) {
-          this.navCtrl.push(TeacherslistPage, {
+          this.navigationer.navigateToPage(this.pageEnum.TeacherList, {
             teacherSearchList: success,
             subject: searchedSubject,
             institute: searchedInstitute
@@ -133,7 +146,8 @@ export class SearchPage {
       (success) => {
         loading.dismiss();
         if (success && success.length > 0) {
-          this.navCtrl.push(TeacherslistPage, { teacherSearchList: success });
+          this.navigationer.navigateToPage(this.pageEnum.TeacherList, { teacherSearchList: success });
+
           return;
         }
         const alert = this.createAlert('Couldn\'t find the teachers', 'Please make the search filters to aim to more options, the teachers you asked for doesn\'t exist yet.');
@@ -145,17 +159,6 @@ export class SearchPage {
         alert.present();
       }
       );
-  }
-
-  public goPage(page: any): void {
-    switch (page) {
-      case 'favorites':
-        this.navCtrl.push(FavoritesPage);
-        break;
-      default:
-        console.log('Not found the requested page ' + page);
-        break;
-    }
   }
   //#endregion
 

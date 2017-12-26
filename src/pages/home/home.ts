@@ -1,12 +1,9 @@
+import { PageType } from './../../common/PageType.Enum';
 import { NavController } from 'ionic-angular';
-import { SearchPage } from './../search/search';
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 
-import { FavoritesPage } from '../favorites/favorites';
-import { ContactusPage } from './../contactus/contactus';
+import { Navigationer } from './../../common/Navigationer';
 import { ProfileProvider } from './../../providers/profile/profile';
-import { NewTeacherFormPage } from './../new-teacher-form/new-teacher-form';
-import { NewTeacherLoginPage } from './../new-teacher-login/new-teacher-login';
 
 @Component({
   selector: 'page-home',
@@ -15,12 +12,21 @@ import { NewTeacherLoginPage } from './../new-teacher-login/new-teacher-login';
 
 export class HomePage {
   //#region Members
+  public pageEnum = PageType;
+  public navigationer: Navigationer;
+
   @ViewChild('subtitleAnimation') subtitleAnimation: ElementRef;
   @ViewChild('buttonuAnimation') buttonuAnimation: ElementRef;
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public rd: Renderer2, public profileProvider: ProfileProvider) { }
+  constructor(
+    public rd: Renderer2,
+    public navCtrl: NavController,
+    public profileProvider: ProfileProvider
+  ) {
+    this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
+  }
 
   public ionViewDidEnter() {
     setTimeout(() => {
@@ -42,32 +48,6 @@ export class HomePage {
   public ionViewDidLeave() {
     this.rd.removeClass(this.subtitleAnimation.nativeElement, "animated");
     this.rd.removeClass(this.buttonuAnimation.nativeElement, "animated");
-  }
-  //#endregion
-
-  //#region Public Methods
-  public goPage(page: any): void {
-    switch (page) {
-      case 'search':
-        this.navCtrl.setRoot(SearchPage);
-        break;
-      case 'contactme':
-        this.navCtrl.push(ContactusPage);
-        break;
-      case 'joinasteacher':
-        if (this.profileProvider.isLoggedIn == true) {
-          this.navCtrl.push(NewTeacherFormPage);
-        } else {
-          this.navCtrl.push(NewTeacherLoginPage);
-        }
-        break;
-      case 'favorites':
-        this.navCtrl.push(FavoritesPage);
-        break;
-      default:
-        console.log('Not found the requested page ' + page);
-        break;
-    }
   }
   //#endregion
 }

@@ -8,7 +8,6 @@ import { LocalStorageModule } from 'angular-2-local-storage';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
 import { ApiProvider } from '../providers/api/api';
 import { StatusBar } from '@ionic-native/status-bar';
 import { GenderPipe } from './../pipes/gender/gender';
@@ -54,7 +53,6 @@ let config = new AuthServiceConfig([
   declarations: [
     MyApp,
     HomePage,
-    TabsPage,
     SearchPage,
     GenderPipe,
     SettingsPage,
@@ -104,7 +102,6 @@ let config = new AuthServiceConfig([
   entryComponents: [
     MyApp,
     HomePage,
-    TabsPage,
     SearchPage,
     SettingsPage,
     FavoritesPage,

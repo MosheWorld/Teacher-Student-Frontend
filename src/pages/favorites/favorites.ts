@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Tabs, ModalController, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, AlertController } from 'ionic-angular';
 
+import { PageType } from './../../common/PageType.Enum';
 import { ApiProvider } from './../../providers/api/api';
+import { Navigationer } from './../../common/Navigationer';
 import { Alert } from 'ionic-angular/components/alert/alert';
+import { ProfileProvider } from '../../providers/profile/profile';
 import { SingleteacherPage } from './../singleteacher/singleteacher';
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
@@ -14,36 +17,34 @@ import { FavoritesManagerProvider } from './../../providers/favorites-manager/fa
 
 export class FavoritesPage {
   //#region Members
-  private tabRef: Tabs = this.navCtrl.parent;
-  public userHaveFavorites: boolean = false;
+  public pageEnum = PageType;
+  public navigationer: Navigationer;
 
   public teachers: any[] = [];
+  public userHaveFavorites: boolean = false;
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, public favoritesManagerProvider: FavoritesManagerProvider,
-    public apiProvider: ApiProvider, public modalCtrl: ModalController, public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController) {
+  constructor(
+    public navParams: NavParams,
+    public navCtrl: NavController,
+    public apiProvider: ApiProvider,
+    public modalCtrl: ModalController,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public profileProvider: ProfileProvider,
+    public favoritesManagerProvider: FavoritesManagerProvider
+  ) {
+    this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
     let listOfTeacherID = this.favoritesManagerProvider.getFavorites();
     this.bootstrapFavoritePage(listOfTeacherID);
   }
   //#endregion
 
   //#region Public Methods
-  public goPage(page: any): void {
-    switch (page) {
-      case 'search':
-        this.navCtrl.pop();
-        this.tabRef.select(1);
-        break;
-      default:
-        console.log('Not found the requested page ' + page);
-        break;
-    }
-  }
-
   public expandTeacherInformation(index: number): void {
     let modal = this.modalCtrl.create(SingleteacherPage, { teacher: this.teachers[index] });
+
     modal.onDidDismiss((data) => {
       if (data === false) {
         this.teachers.splice(index, 1);
@@ -52,6 +53,7 @@ export class FavoritesPage {
         }
       }
     });
+    
     modal.present();
   }
   //#endregion

@@ -7,7 +7,7 @@
       <font class="m-color-white">StudyHub</font>
     </ion-title>
     <ion-buttons end icon-only class="m-color-white">
-      <div (click)="goPage('favorites');" class="animated flip">
+      <div (click)="navigationer.navigateToPage(pageEnum.Favorites)" class="animated flip">
         <ion-icon name="ios-bookmarks"></ion-icon>
       </div>
     </ion-buttons>
@@ -48,7 +48,7 @@
       <!-- Start using button -->
       <ion-row #buttonuAnimation class="animated m-opacity-0">
         <ion-col col-12>
-          <button ion-button color="secondary" (click)="goPage('search');">
+          <button ion-button color="secondary" (click)="navigationer.navigateToPage(pageEnum.Search)">
             <b>Start using StudyHub</b>
           </button>
         </ion-col>
@@ -99,7 +99,7 @@
       <!-- Join as teacher button -->
       <ion-row text-center>
         <ion-col col-12>
-          <button ion-button outline color="primary" (click)="goPage('joinasteacher');" icon-start>
+          <button ion-button outline color="primary" (click)="navigationer.navigateToPage(pageEnum.JoinAsTeacher)" icon-start>
             <ion-icon name="ios-person-add-outline"></ion-icon>
             Join as teacher
           </button>
@@ -147,7 +147,7 @@
         </ion-col>
         <ion-col col-12>
 
-          <button ion-button outline color="dark" small icon-start (click)="goPage('contactme');">
+          <button ion-button outline color="dark" small icon-start (click)="navigationer.navigateToPage(pageEnum.ContactUs)">
             <ion-icon name="ios-contacts"></ion-icon>Contact us</button>
 
         </ion-col>

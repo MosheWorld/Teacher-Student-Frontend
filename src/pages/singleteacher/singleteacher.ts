@@ -7,6 +7,7 @@ import { IonicPage, NavController, NavParams, ViewController, LoadingController,
 import { ApiProvider } from './../../providers/api/api';
 import { Alert } from 'ionic-angular/components/alert/alert';
 import { ToasterProvider } from './../../providers/toaster/toaster';
+import { RecommendInterface } from './../../interface/Recommend.interface';
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -48,10 +49,17 @@ export class SingleteacherPage {
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-    public apiProvider: ApiProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-    public favoritesManagerProvider: FavoritesManagerProvider, public toasterProvider: ToasterProvider,
-    public rd: Renderer2) {
+  constructor(
+    public rd: Renderer2,
+    public navParams: NavParams,
+    public navCtrl: NavController,
+    public apiProvider: ApiProvider,
+    public viewCtrl: ViewController,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public toasterProvider: ToasterProvider,
+    public favoritesManagerProvider: FavoritesManagerProvider
+  ) {
     this.teacher = this.navParams.get('teacher');
     this.searchedSubject = this.navParams.get('subject');
     this.searchedInstitute = this.navParams.get('institute');
@@ -84,14 +92,12 @@ export class SingleteacherPage {
       return;
     }
 
-    let newRecommendData = {
+    let newRecommendation: RecommendInterface = {
       id: this.teacher._id,
-      recommendData: {
-        fullName: this.fullNameFormControl.value,
-        email: this.emailFormControl.value,
-        message: this.messageFormControl.value,
-        rate: this.rate
-      }
+      rate: this.rate,
+      email: this.emailFormControl.value,
+      message: this.messageFormControl.value,
+      fullName: this.fullNameFormControl.value
     };
 
     const loading = this.loadingCtrl.create({
@@ -100,7 +106,7 @@ export class SingleteacherPage {
     });
     loading.present();
 
-    this.apiProvider.httpPost('teacher/addrecommend', newRecommendData)
+    this.apiProvider.httpPost('teacher/addrecommend', newRecommendation)
       .subscribe(
       (success) => {
         loading.dismiss();
@@ -108,7 +114,7 @@ export class SingleteacherPage {
         alert.present();
         this.alreadyAddedRecommend = true;
         this.showRecommendationsBoolean = false;
-        this.teacher.recommendations.push(newRecommendData.recommendData);
+        this.teacher.recommendations.push(newRecommendation);
       },
       (failure) => {
         loading.dismiss();

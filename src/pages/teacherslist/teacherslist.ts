@@ -19,8 +19,13 @@ export class TeacherslistPage {
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
-    public favoritesManagerProvider: FavoritesManagerProvider, public apiProvider: ApiProvider) {
+  constructor(
+    public navParams: NavParams,
+    public navCtrl: NavController,
+    public apiProvider: ApiProvider,
+    public modalCtrl: ModalController,
+    public favoritesManagerProvider: FavoritesManagerProvider
+  ) {
     let tempArray = this.navParams.get('teacherSearchList');
 
     for (let item of tempArray) {

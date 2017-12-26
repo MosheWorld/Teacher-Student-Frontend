@@ -33,8 +33,14 @@ export class ContactusPage {
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public commonProvider: CommonProvider) {
+  constructor(
+    public navParams: NavParams,
+    public navCtrl: NavController,
+    public apiProvider: ApiProvider,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public commonProvider: CommonProvider
+  ) {
   }
   //#endregion
 

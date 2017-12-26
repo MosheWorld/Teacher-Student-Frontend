@@ -48,7 +48,7 @@
         <!-- Search for teachers button -->
         <ion-row text-center>
           <ion-col col-12>
-            <button ion-button icon-start outline (click)="goPage('search');">
+            <button ion-button icon-start outline (click)="navigationer.navigateToPage(pageEnum.Search)">
               <ion-icon name="ios-search"></ion-icon>
               Search for teacher
             </button>
@@ -72,7 +72,9 @@
 
               <!-- Name and Last Name-->
               <ion-col col-12>
-                <h2><b>{{teacher.firstName}} {{teacher.lastName}}</b></h2>
+                <h2>
+                  <b>{{teacher.firstName}} {{teacher.lastName}}</b>
+                </h2>
               </ion-col>
               <!-- Price -->
               <ion-col col-12 class="m-padding-0-impo">
@@ -83,7 +85,7 @@
               </ion-col>
               <!-- Rate -->
               <ion-col col-12 class="m-padding-0-impo">
-                  <rate-show [stars]="teachers[i].rate"></rate-show>
+                <rate-show [stars]="teachers[i].rate"></rate-show>
               </ion-col>
             </ion-card>
           </ion-col>

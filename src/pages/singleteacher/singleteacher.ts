@@ -92,13 +92,7 @@ export class SingleteacherPage {
       return;
     }
 
-    let newRecommendation: RecommendInterface = {
-      id: this.teacher._id,
-      rate: this.rate,
-      email: this.emailFormControl.value,
-      message: this.messageFormControl.value,
-      fullName: this.fullNameFormControl.value
-    };
+    let newRecommendation: RecommendInterface = this.buildNewRecommendation();
 
     const loading = this.loadingCtrl.create({
       spinner: 'dots',
@@ -137,12 +131,14 @@ export class SingleteacherPage {
 
   public openWhatsApp(): void {
     if (this.teacher && this.teacher.phone) {
+      
       if ((this.teacher.phone).indexOf("972") !== -1) {
         window.open('https://api.whatsapp.com/send?phone=' + this.teacher.phone);
       } else if (this.teacher.phone[0] === "0") {
         let number = "972" + this.teacher.phone;
         window.open('https://api.whatsapp.com/send?phone=' + number);
       }
+
     }
   }
   //#endregion
@@ -150,6 +146,7 @@ export class SingleteacherPage {
   //#region Private Methods
   private isModelValid(): boolean {
     this.convertRateToInteger();
+
     if (this.rate == null || this.rate < 0 || this.rate > 5 ||
       !this.emailFormControl.valid || !isEmail(this.emailFormControl.value) ||
       !this.fullNameFormControl.valid ||
@@ -174,6 +171,18 @@ export class SingleteacherPage {
       buttons: ['Ok']
     });
     return alert;
+  }
+
+  private buildNewRecommendation(): RecommendInterface {
+    let newRecommendation: RecommendInterface = {
+      id: this.teacher._id,
+      rate: this.rate,
+      email: this.emailFormControl.value,
+      message: this.messageFormControl.value,
+      fullName: this.fullNameFormControl.value
+    };
+
+    return newRecommendation;
   }
   //#endregion
 }

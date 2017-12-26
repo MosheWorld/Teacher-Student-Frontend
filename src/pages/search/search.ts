@@ -13,6 +13,8 @@ import { Navigationer } from './../../common/Navigationer';
 import { Alert } from 'ionic-angular/components/alert/alert';
 import { CommonProvider } from './../../providers/common/common';
 import { ProfileProvider } from '../../providers/profile/profile';
+import { Loading } from 'ionic-angular/components/loading/loading';
+import { SearchInterface } from '../../interface/Search.interface';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -92,19 +94,9 @@ export class SearchPage {
       return;
     }
 
-    let searchTeacherModel = {
-      fromPrice: this.structure.lower,
-      toPrice: this.structure.upper,
-      teachesAt: this.teachesAtFormControl.value == null ? this.teachesAtFormControl.value : parseInt(this.teachesAtFormControl.value),
-      teachesInstitutions: this.teachesInstitutionsFormControl.value == null ? this.teachesInstitutionsFormControl.value : parseInt(this.teachesInstitutionsFormControl.value),
-      teachesSubjects: this.getSubjectID(),
-      gender: this.genderFormControl.value == null ? this.genderFormControl.value : parseInt(this.genderFormControl.value)
-    };
+    let searchTeacherModel: SearchInterface = this.buildSearchInterface();
 
-    const loading = this.loadingCtrl.create({
-      spinner: 'dots',
-      content: 'Getting teachers, please wait...'
-    });
+    const loading = this.buildLoadingDialog();
     loading.present();
 
     let searchedSubject = this.getsearchedSubject();
@@ -135,10 +127,7 @@ export class SearchPage {
   }
 
   public getAllTeachers(): void {
-    const loading = this.loadingCtrl.create({
-      spinner: 'dots',
-      content: 'Getting teachers, please wait...'
-    });
+    const loading = this.buildLoadingDialog();
     loading.present();
 
     this.apiProvider.httpGet('teacher/getall')
@@ -188,6 +177,7 @@ export class SearchPage {
       subTitle: subTitleInput,
       buttons: ['Ok']
     });
+
     return alert;
   }
 
@@ -228,6 +218,28 @@ export class SearchPage {
     }
 
     return result;
+  }
+
+  private buildLoadingDialog(): Loading {
+    let loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Getting teachers, please wait...'
+    });
+
+    return loading;
+  }
+
+  private buildSearchInterface(): SearchInterface {
+    let searchTeacherModel: SearchInterface = {
+      toPrice: this.structure.upper,
+      fromPrice: this.structure.lower,
+      teachesSubjects: this.getSubjectID(),
+      gender: this.genderFormControl.value == null ? this.genderFormControl.value : parseInt(this.genderFormControl.value),
+      teachesAt: this.teachesAtFormControl.value == null ? this.teachesAtFormControl.value : parseInt(this.teachesAtFormControl.value),
+      teachesInstitutions: this.teachesInstitutionsFormControl.value == null ? this.teachesInstitutionsFormControl.value : parseInt(this.teachesInstitutionsFormControl.value)
+    };
+
+    return searchTeacherModel;
   }
   //#endregion
 }

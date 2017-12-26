@@ -100,18 +100,8 @@ var SearchPage = (function () {
             this.showErrorMessage = true;
             return;
         }
-        var searchTeacherModel = {
-            fromPrice: this.structure.lower,
-            toPrice: this.structure.upper,
-            teachesAt: this.teachesAtFormControl.value == null ? this.teachesAtFormControl.value : parseInt(this.teachesAtFormControl.value),
-            teachesInstitutions: this.teachesInstitutionsFormControl.value == null ? this.teachesInstitutionsFormControl.value : parseInt(this.teachesInstitutionsFormControl.value),
-            teachesSubjects: this.getSubjectID(),
-            gender: this.genderFormControl.value == null ? this.genderFormControl.value : parseInt(this.genderFormControl.value)
-        };
-        var loading = this.loadingCtrl.create({
-            spinner: 'dots',
-            content: 'Getting teachers, please wait...'
-        });
+        var searchTeacherModel = this.buildSearchInterface();
+        var loading = this.buildLoadingDialog();
         loading.present();
         var searchedSubject = this.getsearchedSubject();
         var searchedInstitute = this.getsearchedInstitute();
@@ -136,10 +126,7 @@ var SearchPage = (function () {
     };
     SearchPage.prototype.getAllTeachers = function () {
         var _this = this;
-        var loading = this.loadingCtrl.create({
-            spinner: 'dots',
-            content: 'Getting teachers, please wait...'
-        });
+        var loading = this.buildLoadingDialog();
         loading.present();
         this.apiProvider.httpGet('teacher/getall')
             .subscribe(function (success) {
@@ -214,6 +201,24 @@ var SearchPage = (function () {
             result = this.teachesInstitutionsFormControl.value;
         }
         return result;
+    };
+    SearchPage.prototype.buildLoadingDialog = function () {
+        var loading = this.loadingCtrl.create({
+            spinner: 'dots',
+            content: 'Getting teachers, please wait...'
+        });
+        return loading;
+    };
+    SearchPage.prototype.buildSearchInterface = function () {
+        var searchTeacherModel = {
+            toPrice: this.structure.upper,
+            fromPrice: this.structure.lower,
+            teachesSubjects: this.getSubjectID(),
+            gender: this.genderFormControl.value == null ? this.genderFormControl.value : parseInt(this.genderFormControl.value),
+            teachesAt: this.teachesAtFormControl.value == null ? this.teachesAtFormControl.value : parseInt(this.teachesAtFormControl.value),
+            teachesInstitutions: this.teachesInstitutionsFormControl.value == null ? this.teachesInstitutionsFormControl.value : parseInt(this.teachesInstitutionsFormControl.value)
+        };
+        return searchTeacherModel;
     };
     return SearchPage;
 }());
@@ -332,13 +337,7 @@ var SingleteacherPage = (function () {
             this.showErrorMessage = true;
             return;
         }
-        var newRecommendation = {
-            id: this.teacher._id,
-            rate: this.rate,
-            email: this.emailFormControl.value,
-            message: this.messageFormControl.value,
-            fullName: this.fullNameFormControl.value
-        };
+        var newRecommendation = this.buildNewRecommendation();
         var loading = this.loadingCtrl.create({
             spinner: 'dots',
             content: 'Adding your recommendation, please wait...'
@@ -405,6 +404,16 @@ var SingleteacherPage = (function () {
             buttons: ['Ok']
         });
         return alert;
+    };
+    SingleteacherPage.prototype.buildNewRecommendation = function () {
+        var newRecommendation = {
+            id: this.teacher._id,
+            rate: this.rate,
+            email: this.emailFormControl.value,
+            message: this.messageFormControl.value,
+            fullName: this.fullNameFormControl.value
+        };
+        return newRecommendation;
     };
     return SingleteacherPage;
 }());
@@ -1506,13 +1515,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ApiProvider = (function () {
-    // public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
     //#endregion
     //#region Constructor
     function ApiProvider(http) {
         this.http = http;
         //#region Members
-        this.endPoint = "http://localhost:8000/";
+        // public endPoint: string = "http://localhost:8000/";
+        this.endPoint = "https://teacher-student-backend.herokuapp.com/";
     }
     //#endregion
     //#region Public Methods

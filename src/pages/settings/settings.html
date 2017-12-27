@@ -8,13 +8,13 @@
     </ion-title>
     <ion-buttons end icon-only class="m-color-white">
       <div (click)="navigationer.navigateToPage(pageEnum.Favorites)">
-        <ion-icon name="ios-bookmarks"></ion-icon>
+        <ion-icon name="ios-bookmark-outline"></ion-icon>
       </div>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding text-center>
 
   <ion-grid>
 
@@ -25,20 +25,6 @@
       <ion-col col-12>
         <button ion-button outline small color="danger" (click)="clearIDLocalStorage()">Clear favorites</button>
       </ion-col>
-    </ion-row>
-
-    <ion-row text-center>
-
-      <ion-col col-12>
-        Test Buttons - Not in use
-      </ion-col>
-
-      <ion-col col-12>
-        <button (click)="SignInWithGoogle()" class="loginBtn loginBtn--google">
-          Login with Google
-        </button>
-      </ion-col>
-
     </ion-row>
 
   </ion-grid>

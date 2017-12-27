@@ -8,7 +8,7 @@
     </ion-title>
     <ion-buttons end icon-only class="m-color-white">
       <div (click)="navigationer.navigateToPage(pageEnum.Favorites)">
-        <ion-icon name="ios-bookmarks"></ion-icon>
+        <ion-icon name="ios-bookmark-outline"></ion-icon>
       </div>
     </ion-buttons>
   </ion-navbar>
@@ -25,7 +25,7 @@
       <!-- Title -->
       <ion-row text-center>
         <ion-col col-12>
-          <font class="m-color-white m-font-weight-300 m-font-size-35px">Search for a teacher</font>
+          <font class="m-color-white m-font-weight-300 m-font-size-30px">Search for a teacher</font>
         </ion-col>
       </ion-row>
 
@@ -64,7 +64,7 @@
             <ion-badge item-end color="dark">To: {{structure.upper}}</ion-badge>
           </ion-list-header>
           <ion-item>
-            <ion-range dualKnobs="true" pin="true" [(ngModel)]="structure" color="dark" min="0" max="200">
+            <ion-range class="m-padding-top-0-impo" dualKnobs="true" pin="true" [(ngModel)]="structure" color="dark" min="0" max="200">
               <ion-label range-left>0</ion-label>
               <ion-label range-right>200</ion-label>
             </ion-range>
@@ -149,7 +149,7 @@
       </ion-row>
 
       <!-- Search teachers button -->
-      <ion-row text-center>
+      <ion-row text-center class="m-padding-top-10px">
         <ion-col col-12>
           <button ion-button (click)="searchTeachers()" block>Search for teacher</button>
         </ion-col>

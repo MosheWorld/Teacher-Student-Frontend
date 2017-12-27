@@ -10,9 +10,7 @@ import { Loading } from 'ionic-angular/components/loading/loading';
 import { ProfileInterface } from '../../interface/Profile.interface';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
-
-import { AuthService, FacebookLoginProvider } from "angular4-social-login";
-// GoogleLoginProvider
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-login";
 
 @IonicPage()
 @Component({
@@ -47,7 +45,7 @@ export class NewTeacherLoginPage {
   //#endregion
 
   //#region Public Methods
-  public SignInWithFB(): void {
+  public signInWithFB(): void {
     const loading: Loading = this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Verifying, please wait...'
@@ -64,6 +62,13 @@ export class NewTeacherLoginPage {
           (success) => { console.log(success); this.goToTeaherFormPage(loading); },
           (failure) => { console.log(failure); this.failureResponse(loading); }
           );
+      });
+  }
+
+  public signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then((user) => {
+        console.log(user);
       });
   }
   //#endregion

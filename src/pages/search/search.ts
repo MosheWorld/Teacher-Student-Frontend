@@ -80,11 +80,20 @@ export class SearchPage {
   //#endregion
 
   //#region Public Methods
+  /**
+   * Checks whether one of the teacher names includes the input string.
+   * Filters on all the teacher list and returns teachers that includes the input string.
+   * @param input The string we will check on.
+   * @returns {any[]} Filtered teachers.
+   */
   public filterStates(input: string): any[] {
     return this.commonProvider.subjectsArray.filter((subject) =>
       subject.viewValue.toLowerCase().includes(input.toLowerCase()));
   }
 
+  /**
+   * Searches for teacher on specific details that are passed by client side.
+   */
   public searchTeachers(): void {
     this.showErrorMessage = false;
     this.showErrorMessagePrices = false;
@@ -126,6 +135,9 @@ export class SearchPage {
       );
   }
 
+  /**
+   * Receives all teachers from the database.
+   */
   public getAllTeachers(): void {
     const loading = this.buildLoadingDialog();
     loading.present();
@@ -220,6 +232,10 @@ export class SearchPage {
     return result;
   }
 
+  /**
+   * Create dialog with the values dots icon and waiting text.
+   * @returns {Loading} The model.
+   */
   private buildLoadingDialog(): Loading {
     let loading = this.loadingCtrl.create({
       spinner: 'dots',
@@ -229,6 +245,10 @@ export class SearchPage {
     return loading;
   }
 
+  /**
+   * Builds teacher search model from dedicated parameters
+   * @return {SearchInterface} The mode.
+   */
   private buildSearchInterface(): SearchInterface {
     let searchTeacherModel: SearchInterface = {
       toPrice: this.structure.upper,

@@ -28,6 +28,9 @@ export class HomePage {
     this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
   }
 
+  /**
+   * Activated animations to make the UI awesome.
+   */
   public ionViewDidEnter() {
     setTimeout(() => {
       this.rd.removeClass(this.subtitleAnimation.nativeElement, "m-opacity-0");
@@ -45,6 +48,9 @@ export class HomePage {
     }, 600);
   }
 
+  /**
+   * Removes animated classes from the inputs.
+   */
   public ionViewDidLeave() {
     this.rd.removeClass(this.subtitleAnimation.nativeElement, "animated");
     this.rd.removeClass(this.buttonuAnimation.nativeElement, "animated");

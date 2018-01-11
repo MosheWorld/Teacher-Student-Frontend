@@ -87,11 +87,20 @@ var SearchPage = (function () {
     };
     //#endregion
     //#region Public Methods
+    /**
+     * Checks whether one of the teacher names includes the input string.
+     * Filters on all the teacher list and returns teachers that includes the input string.
+     * @param input The string we will check on.
+     * @returns {any[]} Filtered teachers.
+     */
     SearchPage.prototype.filterStates = function (input) {
         return this.commonProvider.subjectsArray.filter(function (subject) {
             return subject.viewValue.toLowerCase().includes(input.toLowerCase());
         });
     };
+    /**
+     * Searches for teacher on specific details that are passed by client side.
+     */
     SearchPage.prototype.searchTeachers = function () {
         var _this = this;
         this.showErrorMessage = false;
@@ -124,6 +133,9 @@ var SearchPage = (function () {
             alert.present();
         });
     };
+    /**
+     * Receives all teachers from the database.
+     */
     SearchPage.prototype.getAllTeachers = function () {
         var _this = this;
         var loading = this.buildLoadingDialog();
@@ -202,6 +214,10 @@ var SearchPage = (function () {
         }
         return result;
     };
+    /**
+     * Create dialog with the values dots icon and waiting text.
+     * @returns {Loading} The model.
+     */
     SearchPage.prototype.buildLoadingDialog = function () {
         var loading = this.loadingCtrl.create({
             spinner: 'dots',
@@ -209,6 +225,10 @@ var SearchPage = (function () {
         });
         return loading;
     };
+    /**
+     * Builds teacher search model from dedicated parameters
+     * @return {SearchInterface} The mode.
+     */
     SearchPage.prototype.buildSearchInterface = function () {
         var searchTeacherModel = {
             toPrice: this.structure.upper,
@@ -509,6 +529,9 @@ var HomePage = (function () {
         this.pageEnum = __WEBPACK_IMPORTED_MODULE_0__common_PageType_Enum__["a" /* PageType */];
         this.navigationer = new __WEBPACK_IMPORTED_MODULE_3__common_Navigationer__["a" /* Navigationer */](this.navCtrl, this.profileProvider);
     }
+    /**
+     * Activated animations to make the UI awesome.
+     */
     HomePage.prototype.ionViewDidEnter = function () {
         var _this = this;
         setTimeout(function () {
@@ -524,6 +547,9 @@ var HomePage = (function () {
             }, 800);
         }, 600);
     };
+    /**
+     * Removes animated classes from the inputs.
+     */
     HomePage.prototype.ionViewDidLeave = function () {
         this.rd.removeClass(this.subtitleAnimation.nativeElement, "animated");
         this.rd.removeClass(this.buttonuAnimation.nativeElement, "animated");

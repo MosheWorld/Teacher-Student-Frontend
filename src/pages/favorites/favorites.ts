@@ -42,6 +42,11 @@ export class FavoritesPage {
   //#endregion
 
   //#region Public Methods
+  /**
+   * Opens favorites page with the teacher the user choose.
+   * When the user dismiss the modal we detect it.
+   * - If the user removed the teacher from his favorites list we'll remove the teacher from the view.
+   */
   public expandTeacherInformation(index: number): void {
     let modal = this.modalCtrl.create(SingleteacherPage, { teacher: this.teachers[index] });
 

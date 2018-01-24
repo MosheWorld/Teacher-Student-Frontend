@@ -111,6 +111,10 @@ export class FavoritesPage {
     return alert;
   }
 
+  /**
+   * Attaches image to specific teacher async.
+   * @param teacher 
+   */
   private async GetImageForTeacher(teacher): Promise<void> {
     this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)
       .subscribe(

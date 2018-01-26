@@ -113,7 +113,7 @@ export class FavoritesPage {
 
   /**
    * Attaches image to specific teacher async.
-   * @param teacher 
+   * @param teacher Teacher ID
    */
   private async GetImageForTeacher(teacher): Promise<void> {
     this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)

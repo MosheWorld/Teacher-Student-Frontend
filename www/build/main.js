@@ -157,6 +157,10 @@ var SearchPage = (function () {
     };
     //#endregion
     //#region Private Methods
+    /**
+     * Validates whether the model is valid.
+     * @returns {boolean}
+     */
     SearchPage.prototype.isModelValid = function () {
         if (this.structure == null ||
             !this.genderFormControl.valid ||
@@ -175,6 +179,11 @@ var SearchPage = (function () {
             return true;
         }
     };
+    /**
+     * Creates ionic alert.
+     * @param titleInput Title of the alert.
+     * @param subTitleInput Sub-Title of the alert.
+     */
     SearchPage.prototype.createAlert = function (titleInput, subTitleInput) {
         var alert = this.alertCtrl.create({
             title: titleInput,
@@ -183,6 +192,10 @@ var SearchPage = (function () {
         });
         return alert;
     };
+    /**
+     * Receives subject ID as parsed int.
+     * @returns Subject ID as integer.
+     */
     SearchPage.prototype.getSubjectID = function () {
         var _this = this;
         var subjectID;
@@ -193,6 +206,10 @@ var SearchPage = (function () {
         }
         return subjectID == null ? null : parseInt(subjectID.value);
     };
+    /**
+     * Receives search subject from input.
+     * @returns teachesSubjectsFormControl.value
+     */
     SearchPage.prototype.getsearchedSubject = function () {
         var _this = this;
         var result = null;
@@ -207,6 +224,10 @@ var SearchPage = (function () {
         }
         return result;
     };
+    /**
+     * Receives search institute from input.
+     * @returns teachesInstitutionsFormControl.value
+     */
     SearchPage.prototype.getsearchedInstitute = function () {
         var result = null;
         if (this.teachesInstitutionsFormControl.value && this.teachesInstitutionsFormControl.value != null && this.teachesInstitutionsFormControl.value !== "") {
@@ -227,7 +248,7 @@ var SearchPage = (function () {
     };
     /**
      * Builds teacher search model from dedicated parameters
-     * @return {SearchInterface} The mode.
+     * @return {SearchInterface} The model.
      */
     SearchPage.prototype.buildSearchInterface = function () {
         var searchTeacherModel = {
@@ -336,12 +357,21 @@ var SingleteacherPage = (function () {
     }
     //#endregion
     //#region Public Methods
+    /**
+     * Close the modal with teacher info if he is favorited or not, to remove from favorite list or not.
+     */
     SingleteacherPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss(this.isTeacherFavorited);
     };
+    /**
+     * Opens recommendation section.
+     */
     SingleteacherPage.prototype.openRecommendations = function () {
         this.showRecommendationsBoolean = true;
     };
+    /**
+     * Close recommendation section.
+     */
     SingleteacherPage.prototype.closeRecommendations = function () {
         var _this = this;
         this.rd.removeClass(this.elAddRecommend.nativeElement, "bounceInDown");
@@ -350,6 +380,9 @@ var SingleteacherPage = (function () {
             _this.showRecommendationsBoolean = false;
         }, 1000);
     };
+    /**
+     * Creates new recommendation and send it to back-end.
+     */
     SingleteacherPage.prototype.addNewRecommend = function () {
         var _this = this;
         this.showErrorMessage = false;
@@ -377,16 +410,25 @@ var SingleteacherPage = (function () {
             alert.present();
         });
     };
+    /**
+     * Adds new favorite teacher to list and shows toast.
+     */
     SingleteacherPage.prototype.addFavorite = function () {
         this.favoritesManagerProvider.addID(this.teacher._id);
         this.isTeacherFavorited = true;
         this.toasterProvider.presentToast(this.teacher.firstName + " " + this.teacher.lastName + " " + " has been added to favorites.");
     };
+    /**
+     * Remove teacher from favorites list and shows toast.
+     */
     SingleteacherPage.prototype.removeFavorite = function () {
         this.favoritesManagerProvider.removeID(this.teacher._id);
         this.isTeacherFavorited = false;
         this.toasterProvider.presentToast(this.teacher.firstName + " " + this.teacher.lastName + " " + " has been removed from favorites.");
     };
+    /**
+     * Open whatsapp application with teacher number.
+     */
     SingleteacherPage.prototype.openWhatsApp = function () {
         if (this.teacher && this.teacher.phone) {
             if ((this.teacher.phone).indexOf("972") !== -1) {
@@ -400,6 +442,10 @@ var SingleteacherPage = (function () {
     };
     //#endregion
     //#region Private Methods
+    /**
+     * Validates whether the model is valid.
+     * @returns True or false if the model is valid.
+     */
     SingleteacherPage.prototype.isModelValid = function () {
         this.convertRateToInteger();
         if (this.rate == null || this.rate < 0 || this.rate > 5 ||
@@ -412,11 +458,19 @@ var SingleteacherPage = (function () {
             return true;
         }
     };
+    /**
+     * Convert string rate to integer rate.
+     */
     SingleteacherPage.prototype.convertRateToInteger = function () {
         if (this.rate != null) {
             this.rate = parseInt(this.rate.toString());
         }
     };
+    /**
+     * Creates ionic alert dialog.
+     * @param titleInput Title of the dialog.
+     * @param subTitleInput Sub-Title of the dialog.
+     */
     SingleteacherPage.prototype.createAlert = function (titleInput, subTitleInput) {
         var alert = this.alertCtrl.create({
             title: titleInput,
@@ -425,6 +479,10 @@ var SingleteacherPage = (function () {
         });
         return alert;
     };
+    /**
+     * Creates new object of recommendation.
+     * @returns {RecommendInterface} Recommendation model.
+     */
     SingleteacherPage.prototype.buildNewRecommendation = function () {
         var newRecommendation = {
             id: this.teacher._id,
@@ -635,6 +693,9 @@ var ContactusPage = (function () {
     }
     //#endregion
     //#region Public Methods
+    /**
+     * Send contact form to backend and stores it inside database.
+     */
     ContactusPage.prototype.sendContactUsForm = function () {
         var _this = this;
         this.showErrorMessage = false;
@@ -665,11 +726,18 @@ var ContactusPage = (function () {
             alert.present();
         });
     };
+    /**
+     * Open whatsApp in device on given phone number "972542477052".
+     */
     ContactusPage.prototype.openWhatsApp = function () {
         window.open('https://api.whatsapp.com/send?phone=972542477052');
     };
     //#endregion
     //#region Private Methods
+    /**
+     * Validates whether the form is valid or not.
+     * @returns {boolean}
+     */
     ContactusPage.prototype.isFormValid = function () {
         if (!this.fullNameFormControl.valid ||
             !this.emailFormControl.valid || !__WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail___default()(this.emailFormControl.value) ||
@@ -681,6 +749,11 @@ var ContactusPage = (function () {
             return true;
         }
     };
+    /**
+     * Creates ionic alert.
+     * @param titleInput Title for the alert.
+     * @param subTitleInput Sub-Title for the alert.
+     */
     ContactusPage.prototype.createAlert = function (titleInput, subTitleInput) {
         var alert = this.alertCtrl.create({
             title: titleInput,
@@ -814,6 +887,10 @@ var FavoritesPage = (function () {
     };
     //#endregion
     //#region Private Methods
+    /**
+     * Initialization function for the page.
+     * @param listOfTeacherID List of teachers IDs.
+     */
     FavoritesPage.prototype.bootstrapFavoritePage = function (listOfTeacherID) {
         if (listOfTeacherID == null || listOfTeacherID.length == 0) {
             this.userHaveFavorites = false;
@@ -823,6 +900,9 @@ var FavoritesPage = (function () {
             this.getTeachersByID(listOfTeacherID);
         }
     };
+    /**
+     * Receives list of teachers according to list of given teachers IDs.
+     */
     FavoritesPage.prototype.getTeachersByID = function (listOfTeacherID) {
         var _this = this;
         var data = {
@@ -847,6 +927,11 @@ var FavoritesPage = (function () {
             alert.present();
         });
     };
+    /**
+     * Creates ionic alert.
+     * @param titleInput Title for the alert.
+     * @param subTitleInput Sub-Title for the alert.
+     */
     FavoritesPage.prototype.createAlert = function (titleInput, subTitleInput) {
         var alert = this.alertCtrl.create({
             title: titleInput,
@@ -913,6 +998,12 @@ var ToasterProvider = (function () {
     }
     //#endregion
     //#region Public Methods
+    /**
+     * Presents toast on screen of the device.
+     * @param message Message of the toast.
+     * @param time How much time it will be shown.
+     * @param location Where the toast will be represented.
+     */
     ToasterProvider.prototype.presentToast = function (message, time, location) {
         if (time === void 0) { time = 2000; }
         if (location === void 0) { location = "buttom"; }
@@ -963,12 +1054,25 @@ var LocalStorageProvider = (function () {
     }
     //#endregion
     //#region Public Methods
+    /**
+     * Settings new value at local storage.
+     * @param key Key in local storage.
+     * @param value Value in local storage according to Key.
+     */
     LocalStorageProvider.prototype.Set = function (key, value) {
         this.localStorageService.set(key, value);
     };
+    /**
+     * Receive value from localstorage according to given Key.
+     * @param key Key in local storage.
+     */
     LocalStorageProvider.prototype.Get = function (key) {
         return this.localStorageService.get(key);
     };
+    /**
+     * Removes value from local storage according to given Key.
+     * @param key Key in local storage.
+     */
     LocalStorageProvider.prototype.Remove = function (key) {
         this.localStorageService.remove(key);
     };
@@ -1075,6 +1179,10 @@ var TeacherslistPage = (function () {
     }
     //#endregion
     //#region Public Methods
+    /**
+     * Opens teacher with his details.
+     * @param index Teacher index at array.
+     */
     TeacherslistPage.prototype.expandTeacherInformation = function (index) {
         var _this = this;
         var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__singleteacher_singleteacher__["a" /* SingleteacherPage */], {
@@ -1094,6 +1202,10 @@ var TeacherslistPage = (function () {
         });
         modal.present();
     };
+    /**
+     * Filters on teachers when searching for teacher at searchbar.
+     * @param event Angular event.
+     */
     TeacherslistPage.prototype.onInput = function (event) {
         var val = event.target.value;
         if (val == null || val === '') {
@@ -1107,6 +1219,11 @@ var TeacherslistPage = (function () {
             });
         }
     };
+    // Implement strategy pattern here.
+    /**
+     * Sorts the array by some sort algorithm selected.
+     * @param sortByType How to sort the array.
+     */
     TeacherslistPage.prototype.sortByTeacherList = function (sortByType) {
         if (sortByType != null && sortByType.length > 1) {
             if (sortByType === "Name") {
@@ -1125,6 +1242,9 @@ var TeacherslistPage = (function () {
     };
     //#endregion
     //#region Private Methods
+    /**
+     * Sort by name algorithm.
+     */
     TeacherslistPage.prototype.sortByName = function () {
         this.teachers.sort(function (a, b) {
             var first = (a.firstName + " " + a.lastName).toLowerCase();
@@ -1140,6 +1260,9 @@ var TeacherslistPage = (function () {
             }
         });
     };
+    /**
+     * Sort by rate algorithm.
+     */
     TeacherslistPage.prototype.sortByRate = function () {
         this.teachers.sort(function (a, b) {
             if (a.rate < b.rate) {
@@ -1153,6 +1276,9 @@ var TeacherslistPage = (function () {
             }
         });
     };
+    /**
+     * Sort by recommendations algorithm.
+     */
     TeacherslistPage.prototype.sortByRecommendations = function () {
         this.teachers.sort(function (a, b) {
             if (a.recommendations.length < b.recommendations.length) {
@@ -1166,6 +1292,9 @@ var TeacherslistPage = (function () {
             }
         });
     };
+    /**
+     * Sort by recommendations & rate algorithm.
+     */
     TeacherslistPage.prototype.sortByRecommendationsRate = function () {
         this.teachers.sort(function (a, b) {
             if (a.recommendations.length < b.recommendations.length) {
@@ -1187,6 +1316,10 @@ var TeacherslistPage = (function () {
             }
         });
     };
+    /**
+     * Receives image for the tacher.
+     * @param teacher Teacher object.
+     */
     TeacherslistPage.prototype.GetImageForTeacher = function (teacher) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -1293,6 +1426,9 @@ var NewTeacherFormPage = (function () {
     }
     //#endregion
     //#region Public Methods
+    /**
+     * Creates new teacher interface and sends it to back-end.
+     */
     NewTeacherFormPage.prototype.createTeacher = function () {
         var _this = this;
         this.showErrorMessage = false;
@@ -1319,6 +1455,11 @@ var NewTeacherFormPage = (function () {
             alert.present();
         });
     };
+    /**
+     * Rotate base64 image to right or left.
+     * @param base64Image Image string in base64.
+     * @param isClockwise Which clock direction to rotate the image.
+     */
     NewTeacherFormPage.prototype.rotateBase64Image90deg = function (base64Image, isClockwise) {
         var offScreenCanvas = document.createElement('canvas');
         var offScreenCanvasCtx = offScreenCanvas.getContext('2d');
@@ -1338,6 +1479,10 @@ var NewTeacherFormPage = (function () {
         offScreenCanvasCtx.drawImage(img, 0, 0);
         this.image = offScreenCanvas.toDataURL("image/jpeg", 100);
     };
+    /**
+     * Reads image in base64 and use compression algorithm to make it smaller.
+     * @param $event Angular event.
+     */
     NewTeacherFormPage.prototype.readImageBase64 = function ($event) {
         var _this = this;
         __WEBPACK_IMPORTED_MODULE_1_ng2_image_compress__["ImageCompressService"].filesToCompressedImageSource($event.target.files).
@@ -1349,6 +1494,9 @@ var NewTeacherFormPage = (function () {
             });
         });
     };
+    /**
+     * Clears the image.
+     */
     NewTeacherFormPage.prototype.clearImage = function () {
         var _this = this;
         if (this.image && this.image.length > 0) {
@@ -1362,6 +1510,9 @@ var NewTeacherFormPage = (function () {
     };
     //#endregion
     //#region Private Methods
+    /**
+     * Convert from strings to integers to send it to backend in proper form.
+     */
     NewTeacherFormPage.prototype.convertStringToInteger = function () {
         if (this.fromPriceFormControl.valid) {
             this.fromPriceFormControl.setValue(parseInt(this.fromPriceFormControl.value));
@@ -1373,6 +1524,9 @@ var NewTeacherFormPage = (function () {
             this.ageFormControl.setValue(parseInt(this.ageFormControl.value));
         }
     };
+    /**
+     * Validates whether the model is valid.
+     */
     NewTeacherFormPage.prototype.isModelValid = function () {
         if (!this.isFormsValid() ||
             this.isFormsNullOrEmpty() ||
@@ -1390,6 +1544,10 @@ var NewTeacherFormPage = (function () {
             return true;
         }
     };
+    /**
+     * Validates whether string is null or empty.
+     * @param str Given string.
+     */
     NewTeacherFormPage.prototype.isStringNullOrEmpty = function (str) {
         if (str == null || str === "") {
             return true;
@@ -1398,6 +1556,9 @@ var NewTeacherFormPage = (function () {
             return false;
         }
     };
+    /**
+     * Creates all inputs data in JSON format to send it to backend.
+     */
     NewTeacherFormPage.prototype.createNewTeacherDataJson = function () {
         var _this = this;
         this.teachesInstitutionsFormControl.value.forEach(function (value, index) {
@@ -1424,6 +1585,11 @@ var NewTeacherFormPage = (function () {
         };
         return newTeacher;
     };
+    /**
+     * Creates ionic alert.
+     * @param titleInput Title for the message.
+     * @param subTitleInput Sub-Title for the message.
+     */
     NewTeacherFormPage.prototype.createAlert = function (titleInput, subTitleInput) {
         var alert = this.alertCtrl.create({
             title: titleInput,
@@ -1432,6 +1598,10 @@ var NewTeacherFormPage = (function () {
         });
         return alert;
     };
+    /**
+     * Checking all inputs if they are not empty.
+     * @returns {boolean}
+     */
     NewTeacherFormPage.prototype.isFormsValid = function () {
         if (!this.ageFormControl.valid ||
             !this.emailFormControl.valid ||
@@ -1451,6 +1621,10 @@ var NewTeacherFormPage = (function () {
             return true;
         }
     };
+    /**
+     * Checking all inputs if they are not empty.
+     * @returns {boolean}
+     */
     NewTeacherFormPage.prototype.isFormsNullOrEmpty = function () {
         if (this.isStringNullOrEmpty(this.firstNameFormControl.value) ||
             this.isStringNullOrEmpty(this.lastNameFormControl.value) ||
@@ -1463,6 +1637,10 @@ var NewTeacherFormPage = (function () {
             return false;
         }
     };
+    /**
+     * Validates whether the phone number is valid.
+     * @returns {boolean}
+     */
     NewTeacherFormPage.prototype.isPhoneValid = function (phone) {
         if (this.isStringNullOrEmpty(phone) || phone.length < 9) {
             return false;
@@ -1483,6 +1661,9 @@ var NewTeacherFormPage = (function () {
             }
         }
     };
+    /**
+     * Initialize inputs at HTML from profile of facebook or google API.
+     */
     NewTeacherFormPage.prototype.initInputs = function () {
         if (this.profileProvider.isLoggedIn) {
             if (this.profileProvider.profile.firstName) {
@@ -1560,12 +1741,21 @@ var ApiProvider = (function () {
     }
     //#endregion
     //#region Public Methods
+    /**
+     * HTTP Get function.
+     * @param path What path to add to call.
+     */
     ApiProvider.prototype.httpGet = function (path) {
         var _this = this;
         var url = this.endPoint + path;
         return this.http.get(url, null)
             .map(function (res) { return _this.checkResultModel(res); });
     };
+    /**
+     * HTTP Post function.
+     * @param path What path to add to call.
+     * @param data Data to send.
+     */
     ApiProvider.prototype.httpPost = function (path, data) {
         var _this = this;
         var url = this.endPoint + path;
@@ -1575,12 +1765,21 @@ var ApiProvider = (function () {
     };
     //#endregion
     //#region Private Methods
+    /**
+     * Builds headers for API request.
+     * @returns {Headers} The new header.
+     */
     ApiProvider.prototype.buildHeader = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({
             'Content-Type': 'application/json'
         });
         return headers;
     };
+    /**
+     * Inspect what has been returned from backend.
+     * @param result The data from backend.
+     * @returns Returns formatted JSON or nothing, according to function algorithm.
+     */
     ApiProvider.prototype.checkResultModel = function (result) {
         try {
             var dataCovertedToJson = result.json();
@@ -1594,10 +1793,9 @@ var ApiProvider = (function () {
 }());
 ApiProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
 ], ApiProvider);
 
-var _a;
 //# sourceMappingURL=api.js.map
 
 /***/ }),
@@ -1655,6 +1853,9 @@ var NewTeacherLoginPage = (function () {
     };
     //#endregion
     //#region Public Methods
+    /**
+     * Logging in with facebook, using facebook API.
+     */
     NewTeacherLoginPage.prototype.signInWithFB = function () {
         var _this = this;
         var loading = this.loadingCtrl.create({
@@ -1670,6 +1871,9 @@ var NewTeacherLoginPage = (function () {
                 .subscribe(function (success) { console.log(success); _this.goToTeaherFormPage(loading); }, function (failure) { console.log(failure); _this.failureResponse(loading); });
         });
     };
+    /**
+     * Logging in with google, using google API.
+     */
     NewTeacherLoginPage.prototype.signInWithGoogle = function () {
         this.authService.signIn(__WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["GoogleLoginProvider"].PROVIDER_ID)
             .then(function (user) {
@@ -1678,6 +1882,10 @@ var NewTeacherLoginPage = (function () {
     };
     //#endregion
     //#region Private Methods
+    /**
+     * Creates new profile interface of APP according to given social interface.
+     * @param user Social model.
+     */
     NewTeacherLoginPage.prototype.createUser = function (user) {
         var newUser = {
             email: user.email,
@@ -1687,11 +1895,19 @@ var NewTeacherLoginPage = (function () {
         };
         this.profileProvider.SetUserLoggedIn(newUser);
     };
+    /**
+     * Moves to another page and dismiss loading model
+     * @param loader Ionic loader.
+     */
     NewTeacherLoginPage.prototype.goToTeaherFormPage = function (loader) {
         loader.dismiss();
         this.navCtrl.pop();
         this.navigationer.navigateToPage(this.pageEnum.NewTeacherForm);
     };
+    /**
+     * Failure response for the user.
+     * @param loader Ionic loader.
+     */
     NewTeacherLoginPage.prototype.failureResponse = function (loader) {
         loader.dismiss();
         var alert = this.alertCtrl.create({
@@ -1763,6 +1979,9 @@ var SettingsPage = (function () {
     }
     //#endregion
     //#region Public Methods
+    /**
+     * Remove all favorites from local storage.
+     */
     SettingsPage.prototype.clearIDLocalStorage = function () {
         this.favoritesManagerProvider.removeAll();
     };
@@ -2092,10 +2311,17 @@ var ProfileProvider = (function () {
     }
     //#endregion
     //#region Public Methods
+    /**
+     * Setting teacher status boolean to true and adding the new profile data.
+     * @param newProfile New profile.
+     */
     ProfileProvider.prototype.SetUserLoggedIn = function (newProfile) {
         this.profile = newProfile;
         this.isLoggedIn = true;
     };
+    /**
+     * Settings user as logged out.
+     */
     ProfileProvider.prototype.SetUserLoggedOut = function () {
         var demo;
         this.profile = demo;
@@ -2836,6 +3062,10 @@ var FavoritesManagerProvider = (function () {
     }
     //#endregion
     //#region Public Methods
+    /**
+     * Adding new teacher ID at local storage.
+     * @param id Teacher ID.
+     */
     FavoritesManagerProvider.prototype.addID = function (id) {
         if (id == null || id === "") {
             return false;
@@ -2850,6 +3080,11 @@ var FavoritesManagerProvider = (function () {
         favoritesList.push(id);
         this.setFavorites(favoritesList);
     };
+    /**
+     * Checks whether some ID exists in favorites list.
+     * @param id What ID to check.
+     * @returns {boolean}
+     */
     FavoritesManagerProvider.prototype.isIDExist = function (id) {
         var favoritesList = this.getFavorites();
         if (favoritesList == null) {
@@ -2863,6 +3098,9 @@ var FavoritesManagerProvider = (function () {
         }
         return false;
     };
+    /**
+     * Remove specific ID from local storage.
+     */
     FavoritesManagerProvider.prototype.removeID = function (id) {
         var favoritesList = this.getFavorites();
         if (favoritesList == null) {
@@ -2876,15 +3114,26 @@ var FavoritesManagerProvider = (function () {
             }
         }
     };
+    /**
+     * Receives favorites from local storage.
+     * @returns Favorites
+     */
     FavoritesManagerProvider.prototype.getFavorites = function () {
         var favoritesID = this.localStorage.Get('FavoritesIDs');
         return favoritesID;
     };
+    /**
+     *
+     */
     FavoritesManagerProvider.prototype.removeAll = function () {
         this.setFavorites([]);
     };
     //#endregion
     //#region Private Methods
+    /**
+     * Settings favorite at local storage.
+     * @param value The new value to set.
+     */
     FavoritesManagerProvider.prototype.setFavorites = function (value) {
         this.localStorage.Set('FavoritesIDs', value);
     };
@@ -2967,16 +3216,20 @@ var CommonProvider = (function () {
     //   var buildString = "{ value: '" + i + "', viewValue: '" + subjectsArray[i - 1].viewValue + "' },<br>";
     //   document.getElementById("test").innerHTML += buildString;
     // }
+    //#region Constructor
     function CommonProvider() {
+        // Teaches at array Json.
         this.teachesAtArray = [
             { value: '1', viewValue: 'Student\'s house' },
             { value: '2', viewValue: 'Academic institution' },
             { value: '3', viewValue: 'Both' }
         ];
+        // Gender array Json.
         this.genderArray = [
             { value: '1', viewValue: 'Male' },
             { value: '2', viewValue: 'Female' }
         ];
+        // Teaches institutions array Json.
         this.teachesInstitutionsArray = [
             { value: '1', viewValue: 'Holon Institute Of Technology' },
             { value: '2', viewValue: 'Technion' },
@@ -3021,6 +3274,7 @@ var CommonProvider = (function () {
             { value: '41', viewValue: 'Shenkar College of Engineering and Design' },
             { value: '42', viewValue: 'Tel-Hai Academic College' }
         ];
+        // Subjects array Json.
         this.subjectsArray = [
             { value: '1', viewValue: 'Advanced Control Theory' },
             { value: '2', viewValue: 'Advanced Programming Workshop' },
@@ -3127,6 +3381,7 @@ var CommonProvider = (function () {
             { value: '103', viewValue: 'Waves Propagation' },
             { value: '104', viewValue: 'Web Programming' }
         ];
+        // Subjects teaching array Json.
         this.teachesSubjectsGroupsArray = [
             {
                 name: 'A',
@@ -3313,6 +3568,7 @@ var CommonProvider = (function () {
                 ]
             }
         ];
+        // Reason to contact array Json.
         this.reasonToContactArray = [
             { value: 'Suggestion', viewValue: 'Suggestion' },
             { value: 'Investment', viewValue: 'Investment' },

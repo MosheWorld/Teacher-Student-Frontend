@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CommonProvider {
 
+  // Teaches at array Json.
   public teachesAtArray = [
     { value: '1', viewValue: 'Student\'s house' },
     { value: '2', viewValue: 'Academic institution' },
@@ -12,7 +13,7 @@ export class CommonProvider {
 
 
 
-
+  // Gender array Json.
   public genderArray = [
     { value: '1', viewValue: 'Male' },
     { value: '2', viewValue: 'Female' }
@@ -21,7 +22,7 @@ export class CommonProvider {
 
 
 
-
+  // Teaches institutions array Json.
   public teachesInstitutionsArray = [
     { value: '1', viewValue: 'Holon Institute Of Technology' },
     { value: '2', viewValue: 'Technion' },
@@ -70,7 +71,7 @@ export class CommonProvider {
 
 
 
-
+  // Subjects array Json.
   public subjectsArray = [
     { value: '1', viewValue: 'Advanced Control Theory' },
     { value: '2', viewValue: 'Advanced Programming Workshop' },
@@ -181,7 +182,7 @@ export class CommonProvider {
 
 
 
-
+  // Subjects teaching array Json.
   teachesSubjectsGroupsArray = [
     {
       name: 'A',
@@ -371,7 +372,7 @@ export class CommonProvider {
 
 
 
-
+  // Reason to contact array Json.
   public reasonToContactArray = [
     { value: 'Suggestion', viewValue: 'Suggestion' },
     { value: 'Investment', viewValue: 'Investment' },
@@ -397,7 +398,8 @@ export class CommonProvider {
   //   document.getElementById("test").innerHTML += buildString;
   // }
 
-  
+  //#region Constructor
   constructor() {
   }
+  //#endregion
 }

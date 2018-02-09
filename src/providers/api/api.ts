@@ -15,12 +15,21 @@ export class ApiProvider {
   //#endregion
 
   //#region Public Methods
+  /**
+   * HTTP Get function.
+   * @param path What path to add to call.
+   */
   public httpGet(path: string): any {
     const url = this.endPoint + path;
     return this.http.get(url, null)
       .map(res => this.checkResultModel(res));
   }
 
+  /**
+   * HTTP Post function.
+   * @param path What path to add to call.
+   * @param data Data to send.
+   */
   public httpPost(path: string, data: any): any {
     const url = this.endPoint + path;
     let header = this.buildHeader();
@@ -31,6 +40,10 @@ export class ApiProvider {
   //#endregion
 
   //#region Private Methods
+  /**
+   * Builds headers for API request.
+   * @returns {Headers} The new header.
+   */
   private buildHeader(): Headers {
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -38,6 +51,11 @@ export class ApiProvider {
     return headers;
   }
 
+  /**
+   * Inspect what has been returned from backend.
+   * @param result The data from backend.
+   * @returns Returns formatted JSON or nothing, according to function algorithm.
+   */
   private checkResultModel(result: any): any {
     try {
       let dataCovertedToJson = result.json();

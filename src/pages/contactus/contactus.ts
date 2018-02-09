@@ -45,6 +45,9 @@ export class ContactusPage {
   //#endregion
 
   //#region Public Methods
+  /**
+   * Send contact form to backend and stores it inside database.
+   */
   public sendContactUsForm(): void {
     this.showErrorMessage = false;
 
@@ -81,12 +84,19 @@ export class ContactusPage {
       });
   }
 
+  /**
+   * Open whatsApp in device on given phone number "972542477052".
+   */
   public openWhatsApp(): void {
     window.open('https://api.whatsapp.com/send?phone=972542477052');
   }
   //#endregion
 
   //#region Private Methods
+  /**
+   * Validates whether the form is valid or not.
+   * @returns {boolean}
+   */
   private isFormValid(): boolean {
     if (
       !this.fullNameFormControl.valid ||
@@ -100,6 +110,11 @@ export class ContactusPage {
     }
   }
 
+  /**
+   * Creates ionic alert.
+   * @param titleInput Title for the alert.
+   * @param subTitleInput Sub-Title for the alert.
+   */
   private createAlert(titleInput: string, subTitleInput: string): Alert {
     const alert = this.alertCtrl.create({
       title: titleInput,

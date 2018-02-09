@@ -9,6 +9,12 @@ export class ToasterProvider {
   //#endregion
 
   //#region Public Methods
+  /**
+   * Presents toast on screen of the device.
+   * @param message Message of the toast.
+   * @param time How much time it will be shown.
+   * @param location Where the toast will be represented.
+   */
   public presentToast(message: string, time: number = 2000, location: string = "buttom"): void {
     const toast = this.toastCtrl.create({
       message: message,

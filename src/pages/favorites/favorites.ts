@@ -58,12 +58,16 @@ export class FavoritesPage {
         }
       }
     });
-    
+
     modal.present();
   }
   //#endregion
 
   //#region Private Methods
+  /**
+   * Initialization function for the page.
+   * @param listOfTeacherID List of teachers IDs.
+   */
   private bootstrapFavoritePage(listOfTeacherID: any): void {
     if (listOfTeacherID == null || listOfTeacherID.length == 0) {
       this.userHaveFavorites = false;
@@ -73,6 +77,9 @@ export class FavoritesPage {
     }
   }
 
+  /**
+   * Receives list of teachers according to list of given teachers IDs.
+   */
   private getTeachersByID(listOfTeacherID: any): void {
     let data = {
       "listOfTeacherID": listOfTeacherID
@@ -102,6 +109,11 @@ export class FavoritesPage {
       });
   }
 
+  /**
+   * Creates ionic alert.
+   * @param titleInput Title for the alert.
+   * @param subTitleInput Sub-Title for the alert.
+   */
   private createAlert(titleInput: string, subTitleInput: string): Alert {
     const alert = this.alertCtrl.create({
       title: titleInput,

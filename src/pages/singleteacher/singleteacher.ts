@@ -68,14 +68,23 @@ export class SingleteacherPage {
   //#endregion
 
   //#region Public Methods
+  /**
+   * Close the modal with teacher info if he is favorited or not, to remove from favorite list or not.
+   */
   public dismiss(): void {
     this.viewCtrl.dismiss(this.isTeacherFavorited);
   }
 
+  /**
+   * Opens recommendation section.
+   */
   public openRecommendations(): void {
     this.showRecommendationsBoolean = true;
   }
 
+  /**
+   * Close recommendation section.
+   */
   public closeRecommendations(): void {
     this.rd.removeClass(this.elAddRecommend.nativeElement, "bounceInDown");
     this.rd.addClass(this.elAddRecommend.nativeElement, "bounceOutUp");
@@ -84,6 +93,9 @@ export class SingleteacherPage {
     }, 1000);
   }
 
+  /**
+   * Creates new recommendation and send it to back-end.
+   */
   public addNewRecommend(): void {
     this.showErrorMessage = false;
 
@@ -117,21 +129,30 @@ export class SingleteacherPage {
       });
   }
 
+  /**
+   * Adds new favorite teacher to list and shows toast.
+   */
   public addFavorite(): void {
     this.favoritesManagerProvider.addID(this.teacher._id);
     this.isTeacherFavorited = true;
     this.toasterProvider.presentToast(this.teacher.firstName + " " + this.teacher.lastName + " " + " has been added to favorites.");
   }
 
+  /**
+   * Remove teacher from favorites list and shows toast.
+   */
   public removeFavorite(): void {
     this.favoritesManagerProvider.removeID(this.teacher._id);
     this.isTeacherFavorited = false;
     this.toasterProvider.presentToast(this.teacher.firstName + " " + this.teacher.lastName + " " + " has been removed from favorites.");
   }
 
+  /**
+   * Open whatsapp application with teacher number.
+   */
   public openWhatsApp(): void {
     if (this.teacher && this.teacher.phone) {
-      
+
       if ((this.teacher.phone).indexOf("972") !== -1) {
         window.open('https://api.whatsapp.com/send?phone=' + this.teacher.phone);
       } else if (this.teacher.phone[0] === "0") {
@@ -144,6 +165,10 @@ export class SingleteacherPage {
   //#endregion
 
   //#region Private Methods
+  /**
+   * Validates whether the model is valid.
+   * @returns True or false if the model is valid.
+   */
   private isModelValid(): boolean {
     this.convertRateToInteger();
 
@@ -158,12 +183,20 @@ export class SingleteacherPage {
     }
   }
 
+  /**
+   * Convert string rate to integer rate.
+   */
   private convertRateToInteger(): void {
     if (this.rate != null) {
       this.rate = parseInt(this.rate.toString());
     }
   }
 
+  /**
+   * Creates ionic alert dialog.
+   * @param titleInput Title of the dialog.
+   * @param subTitleInput Sub-Title of the dialog.
+   */
   private createAlert(titleInput: string, subTitleInput: string): Alert {
     const alert = this.alertCtrl.create({
       title: titleInput,
@@ -173,6 +206,10 @@ export class SingleteacherPage {
     return alert;
   }
 
+  /**
+   * Creates new object of recommendation.
+   * @returns {RecommendInterface} Recommendation model.
+   */
   private buildNewRecommendation(): RecommendInterface {
     let newRecommendation: RecommendInterface = {
       id: this.teacher._id,

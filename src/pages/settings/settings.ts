@@ -32,6 +32,9 @@ export class SettingsPage {
   //#endregion
 
   //#region Public Methods
+  /**
+   * Remove all favorites from local storage.
+   */
   public clearIDLocalStorage(): void {
     this.favoritesManagerProvider.removeAll();
   }

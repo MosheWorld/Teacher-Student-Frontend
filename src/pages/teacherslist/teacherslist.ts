@@ -46,6 +46,10 @@ export class TeacherslistPage {
   //#endregion
 
   //#region Public Methods
+  /**
+   * Opens teacher with his details.
+   * @param index Teacher index at array.
+   */
   public expandTeacherInformation(index: number): void {
     let modal = this.modalCtrl.create(SingleteacherPage, {
       teacher: this.teachers[index],
@@ -65,6 +69,10 @@ export class TeacherslistPage {
     modal.present();
   }
 
+  /**
+   * Filters on teachers when searching for teacher at searchbar.
+   * @param event Angular event.
+   */
   public onInput(event: any): void {
     let val = event.target.value;
 
@@ -81,6 +89,11 @@ export class TeacherslistPage {
     }
   }
 
+  // Implement strategy pattern here.
+  /**
+   * Sorts the array by some sort algorithm selected.
+   * @param sortByType How to sort the array.
+   */
   public sortByTeacherList(sortByType): void {
     if (sortByType != null && sortByType.length > 1) {
       if (sortByType === "Name") {
@@ -97,6 +110,9 @@ export class TeacherslistPage {
   //#endregion
 
   //#region Private Methods
+  /**
+   * Sort by name algorithm.
+   */
   private sortByName(): void {
     this.teachers.sort((a, b) => {
       let first = (a.firstName + " " + a.lastName).toLowerCase();
@@ -113,6 +129,9 @@ export class TeacherslistPage {
     });
   }
 
+  /**
+   * Sort by rate algorithm.
+   */
   private sortByRate(): void {
     this.teachers.sort((a, b) => {
       if (a.rate < b.rate) {
@@ -126,6 +145,9 @@ export class TeacherslistPage {
     });
   }
 
+  /**
+   * Sort by recommendations algorithm.
+   */
   private sortByRecommendations(): void {
     this.teachers.sort((a, b) => {
       if (a.recommendations.length < b.recommendations.length) {
@@ -139,6 +161,9 @@ export class TeacherslistPage {
     });
   }
 
+  /**
+   * Sort by recommendations & rate algorithm.
+   */
   private sortByRecommendationsRate(): void {
     this.teachers.sort((a, b) => {
       if (a.recommendations.length < b.recommendations.length) {
@@ -158,6 +183,10 @@ export class TeacherslistPage {
     });
   }
 
+  /**
+   * Receives image for the tacher.
+   * @param teacher Teacher object.
+   */
   private async GetImageForTeacher(teacher): Promise<void> {
     this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)
       .subscribe(

@@ -164,6 +164,10 @@ export class SearchPage {
   //#endregion
 
   //#region Private Methods
+  /**
+   * Validates whether the model is valid.
+   * @returns {boolean}
+   */
   private isModelValid(): boolean {
     if (
       this.structure == null ||
@@ -183,6 +187,11 @@ export class SearchPage {
     }
   }
 
+  /**
+   * Creates ionic alert.
+   * @param titleInput Title of the alert.
+   * @param subTitleInput Sub-Title of the alert.
+   */
   private createAlert(titleInput: string, subTitleInput: string): Alert {
     const alert = this.alertCtrl.create({
       title: titleInput,
@@ -193,6 +202,10 @@ export class SearchPage {
     return alert;
   }
 
+  /**
+   * Receives subject ID as parsed int.
+   * @returns Subject ID as integer.
+   */
   private getSubjectID(): number {
     let subjectID;
 
@@ -205,6 +218,10 @@ export class SearchPage {
     return subjectID == null ? null : parseInt(subjectID.value);
   }
 
+  /**
+   * Receives search subject from input.
+   * @returns teachesSubjectsFormControl.value
+   */
   private getsearchedSubject(): any {
     let result = null;
 
@@ -222,6 +239,10 @@ export class SearchPage {
     return result;
   }
 
+  /**
+   * Receives search institute from input.
+   * @returns teachesInstitutionsFormControl.value
+   */
   private getsearchedInstitute(): any {
     let result = null;
 
@@ -247,7 +268,7 @@ export class SearchPage {
 
   /**
    * Builds teacher search model from dedicated parameters
-   * @return {SearchInterface} The mode.
+   * @return {SearchInterface} The model.
    */
   private buildSearchInterface(): SearchInterface {
     let searchTeacherModel: SearchInterface = {

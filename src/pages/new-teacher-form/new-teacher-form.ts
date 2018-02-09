@@ -72,6 +72,9 @@ export class NewTeacherFormPage {
   //#endregion
 
   //#region Public Methods
+  /**
+   * Creates new teacher interface and sends it to back-end.
+   */
   public createTeacher(): void {
     this.showErrorMessage = false;
     this.showErrorMessagePrices = false;
@@ -105,6 +108,11 @@ export class NewTeacherFormPage {
       );
   }
 
+  /**
+   * Rotate base64 image to right or left.
+   * @param base64Image Image string in base64.
+   * @param isClockwise Which clock direction to rotate the image.
+   */
   public rotateBase64Image90deg(base64Image, isClockwise): void {
     var offScreenCanvas = document.createElement('canvas');
     var offScreenCanvasCtx = offScreenCanvas.getContext('2d');
@@ -128,6 +136,10 @@ export class NewTeacherFormPage {
     this.image = offScreenCanvas.toDataURL("image/jpeg", 100);
   }
 
+  /**
+   * Reads image in base64 and use compression algorithm to make it smaller.
+   * @param $event Angular event.
+   */
   public readImageBase64($event): void {
     ImageCompressService.filesToCompressedImageSource($event.target.files).
       then((observableImages) => {
@@ -139,6 +151,9 @@ export class NewTeacherFormPage {
       });
   }
 
+  /**
+   * Clears the image.
+   */
   public clearImage(): void {
     if (this.image && this.image.length > 0) {
       this.rd.removeClass(this.elViewImage.nativeElement, "flash");
@@ -152,12 +167,18 @@ export class NewTeacherFormPage {
   //#endregion
 
   //#region Private Methods
+  /**
+   * Convert from strings to integers to send it to backend in proper form.
+   */
   private convertStringToInteger(): void {
     if (this.fromPriceFormControl.valid) { this.fromPriceFormControl.setValue(parseInt(this.fromPriceFormControl.value)); }
     if (this.toPriceFormControl.valid) { this.toPriceFormControl.setValue(parseInt(this.toPriceFormControl.value)); }
     if (this.ageFormControl.valid) { this.ageFormControl.setValue(parseInt(this.ageFormControl.value)); }
   }
 
+  /**
+   * Validates whether the model is valid.
+   */
   private isModelValid(): boolean {
     if (!this.isFormsValid() ||
       this.isFormsNullOrEmpty() ||
@@ -175,6 +196,10 @@ export class NewTeacherFormPage {
     }
   }
 
+  /**
+   * Validates whether string is null or empty.
+   * @param str Given string.
+   */
   private isStringNullOrEmpty(str: string): boolean {
     if (str == null || str === "") {
       return true;
@@ -183,6 +208,9 @@ export class NewTeacherFormPage {
     }
   }
 
+  /**
+   * Creates all inputs data in JSON format to send it to backend.
+   */
   private createNewTeacherDataJson(): any {
     this.teachesInstitutionsFormControl.value.forEach((value, index) => {
       this.teachesInstitutionsFormControl.value[index] = parseInt(value.toString());
@@ -211,6 +239,11 @@ export class NewTeacherFormPage {
     return newTeacher;
   }
 
+  /**
+   * Creates ionic alert.
+   * @param titleInput Title for the message.
+   * @param subTitleInput Sub-Title for the message.
+   */
   private createAlert(titleInput: string, subTitleInput: string): Alert {
     const alert = this.alertCtrl.create({
       title: titleInput,
@@ -221,6 +254,10 @@ export class NewTeacherFormPage {
     return alert;
   }
 
+  /**
+   * Checking all inputs if they are not empty.
+   * @returns {boolean}
+   */
   private isFormsValid(): boolean {
     if (
       !this.ageFormControl.valid ||
@@ -241,6 +278,10 @@ export class NewTeacherFormPage {
     }
   }
 
+  /**
+   * Checking all inputs if they are not empty.
+   * @returns {boolean}
+   */
   private isFormsNullOrEmpty(): boolean {
     if (this.isStringNullOrEmpty(this.firstNameFormControl.value) ||
       this.isStringNullOrEmpty(this.lastNameFormControl.value) ||
@@ -253,6 +294,10 @@ export class NewTeacherFormPage {
     }
   }
 
+  /**
+   * Validates whether the phone number is valid.
+   * @returns {boolean}
+   */
   private isPhoneValid(phone: string): boolean {
     if (this.isStringNullOrEmpty(phone) || phone.length < 9) {
       return false;
@@ -270,6 +315,9 @@ export class NewTeacherFormPage {
     }
   }
 
+  /**
+   * Initialize inputs at HTML from profile of facebook or google API.
+   */
   private initInputs(): void {
     if (this.profileProvider.isLoggedIn) {
       if (this.profileProvider.profile.firstName) {

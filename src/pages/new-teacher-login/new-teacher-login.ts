@@ -45,6 +45,9 @@ export class NewTeacherLoginPage {
   //#endregion
 
   //#region Public Methods
+  /**
+   * Logging in with facebook, using facebook API.
+   */
   public signInWithFB(): void {
     const loading: Loading = this.loadingCtrl.create({
       spinner: 'dots',
@@ -65,6 +68,9 @@ export class NewTeacherLoginPage {
       });
   }
 
+  /**
+   * Logging in with google, using google API.
+   */
   public signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((user) => {
@@ -74,6 +80,10 @@ export class NewTeacherLoginPage {
   //#endregion
 
   //#region Private Methods
+  /**
+   * Creates new profile interface of APP according to given social interface.
+   * @param user Social model.
+   */
   private createUser(user: SocialUser): void {
     let newUser: ProfileInterface = {
       email: user.email,
@@ -84,12 +94,20 @@ export class NewTeacherLoginPage {
     this.profileProvider.SetUserLoggedIn(newUser);
   }
 
+  /**
+   * Moves to another page and dismiss loading model
+   * @param loader Ionic loader.
+   */
   private goToTeaherFormPage(loader: Loading): void {
     loader.dismiss();
     this.navCtrl.pop();
     this.navigationer.navigateToPage(this.pageEnum.NewTeacherForm);
   }
 
+  /**
+   * Failure response for the user.
+   * @param loader Ionic loader.
+   */
   private failureResponse(loader: Loading): void {
     loader.dismiss();
     let alert = this.alertCtrl.create({

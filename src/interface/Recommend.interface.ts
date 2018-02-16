@@ -1,5 +1,5 @@
 export interface RecommendInterface {
-    id: string;
+    teacherID: string;
     rate: number;
     email: string;
     message: string;

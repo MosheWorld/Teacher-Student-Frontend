@@ -354,6 +354,7 @@ var SingleteacherPage = (function () {
         this.searchedSubject = this.navParams.get('subject');
         this.searchedInstitute = this.navParams.get('institute');
         this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
+        this.getRecommendationsForTeacher();
     }
     //#endregion
     //#region Public Methods
@@ -396,7 +397,7 @@ var SingleteacherPage = (function () {
             content: 'Adding your recommendation, please wait...'
         });
         loading.present();
-        this.apiProvider.httpPost('teacher/addrecommend', newRecommendation)
+        this.apiProvider.httpPost('recommendation/create', newRecommendation)
             .subscribe(function (success) {
             loading.dismiss();
             var alert = _this.createAlert('Your recommendation has been added', 'Thank you for posting recommendation for this teacher, thanks for making our community better.');
@@ -485,13 +486,25 @@ var SingleteacherPage = (function () {
      */
     SingleteacherPage.prototype.buildNewRecommendation = function () {
         var newRecommendation = {
-            id: this.teacher._id,
+            teacherID: this.teacher._id,
             rate: this.rate,
             email: this.emailFormControl.value,
             message: this.messageFormControl.value,
             fullName: this.fullNameFormControl.value
         };
         return newRecommendation;
+    };
+    /**
+     * Gets recommendations from backend by list of ID's of recommendations.
+    */
+    SingleteacherPage.prototype.getRecommendationsForTeacher = function () {
+        var _this = this;
+        this.apiProvider.httpGet('recommendation/getrecommendationbyid/' + this.teacher._id)
+            .subscribe(function (recommendationsList) {
+            _this.teacher.recommendations = recommendationsList;
+        }, function (failure) {
+            _this.teacher.recommendations = null;
+        });
     };
     return SingleteacherPage;
 }());

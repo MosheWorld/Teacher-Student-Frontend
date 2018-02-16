@@ -64,6 +64,7 @@ export class SingleteacherPage {
     this.searchedSubject = this.navParams.get('subject');
     this.searchedInstitute = this.navParams.get('institute');
     this.isTeacherFavorited = this.favoritesManagerProvider.isIDExist(this.teacher._id);
+    this.getRecommendationsForTeacher();
   }
   //#endregion
 
@@ -112,21 +113,21 @@ export class SingleteacherPage {
     });
     loading.present();
 
-    this.apiProvider.httpPost('teacher/addrecommend', newRecommendation)
+    this.apiProvider.httpPost('recommendation/create', newRecommendation)
       .subscribe(
-      (success) => {
-        loading.dismiss();
-        const alert = this.createAlert('Your recommendation has been added', 'Thank you for posting recommendation for this teacher, thanks for making our community better.');
-        alert.present();
-        this.alreadyAddedRecommend = true;
-        this.showRecommendationsBoolean = false;
-        this.teacher.recommendations.push(newRecommendation);
-      },
-      (failure) => {
-        loading.dismiss();
-        const alert = this.createAlert('Failed to add recommendation', 'The request has been failed for some reason, please try again later.');
-        alert.present();
-      });
+        (success) => {
+          loading.dismiss();
+          const alert = this.createAlert('Your recommendation has been added', 'Thank you for posting recommendation for this teacher, thanks for making our community better.');
+          alert.present();
+          this.alreadyAddedRecommend = true;
+          this.showRecommendationsBoolean = false;
+          this.teacher.recommendations.push(newRecommendation);
+        },
+        (failure) => {
+          loading.dismiss();
+          const alert = this.createAlert('Failed to add recommendation', 'The request has been failed for some reason, please try again later.');
+          alert.present();
+        });
   }
 
   /**
@@ -212,7 +213,7 @@ export class SingleteacherPage {
    */
   private buildNewRecommendation(): RecommendInterface {
     let newRecommendation: RecommendInterface = {
-      id: this.teacher._id,
+      teacherID: this.teacher._id,
       rate: this.rate,
       email: this.emailFormControl.value,
       message: this.messageFormControl.value,
@@ -220,6 +221,19 @@ export class SingleteacherPage {
     };
 
     return newRecommendation;
+  }
+
+  /** 
+   * Gets recommendations from backend by list of ID's of recommendations.
+  */
+  private getRecommendationsForTeacher() {
+    this.apiProvider.httpGet('recommendation/getrecommendationbyid/' + this.teacher._id)
+      .subscribe(
+        (recommendationsList) => {
+          this.teacher.recommendations = recommendationsList;
+        }, (failure) => {
+          this.teacher.recommendations = null;
+        });
   }
   //#endregion
 }

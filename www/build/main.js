@@ -1744,13 +1744,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ApiProvider = (function () {
-    // public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
     //#endregion
     //#region Constructor
     function ApiProvider(http) {
         this.http = http;
         //#region Members
-        this.endPoint = "http://localhost:8000/";
+        // public endPoint: string = "http://localhost:8000/";
+        this.endPoint = "https://teacher-student-backend.herokuapp.com/";
     }
     //#endregion
     //#region Public Methods
@@ -1806,9 +1806,10 @@ var ApiProvider = (function () {
 }());
 ApiProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], ApiProvider);
 
+var _a;
 //# sourceMappingURL=api.js.map
 
 /***/ }),

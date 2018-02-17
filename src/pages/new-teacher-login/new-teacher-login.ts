@@ -23,7 +23,7 @@ export class NewTeacherLoginPage {
   public pageEnum = PageType;
   public navigationer: Navigationer;
 
-  public user: SocialUser;
+  public user: ProfileInterface;
   //#endregion
 
   //#region Constructor
@@ -48,7 +48,7 @@ export class NewTeacherLoginPage {
   /**
    * Logging in with facebook, using facebook API.
    */
-  public signInWithFB(): void {
+  public signInWithFacebook(): void {
     const loading: Loading = this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Verifying, please wait...'
@@ -57,14 +57,17 @@ export class NewTeacherLoginPage {
 
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
       .then((signedInUser: SocialUser) => {
-        this.user = signedInUser;
-        this.createUser(signedInUser);
+        // Receives necessary information, now sending it to backend and register at frontend.
+         this.user = this.createUser(signedInUser);
 
-        this.apiProvider.httpPost('auth/createfacebookuser', this.user)
+        this.apiProvider.httpPost('auth/createnewuser', this.user)
           .subscribe(
-          (success) => { console.log(success); this.goToTeaherFormPage(loading); },
-          (failure) => { console.log(failure); this.failureResponse(loading); }
+            (success) => { console.log(success); this.goToTeaherFormPage(loading); },
+            (failure) => { console.log(failure); this.failureResponse(loading); }
           );
+      }, (error) => {
+        console.log("Error occured when signing in to facebook.");
+        console.log(error);
       });
   }
 
@@ -72,9 +75,25 @@ export class NewTeacherLoginPage {
    * Logging in with google, using google API.
    */
   public signInWithGoogle(): void {
+    const loading: Loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Verifying, please wait...'
+    });
+    loading.present();
+
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then((user) => {
-        console.log(user);
+      .then((signedInUser: SocialUser) => {
+        // Receives necessary information, now sending it to backend and register at frontend.
+        this.user = this.createUser(signedInUser);
+
+        this.apiProvider.httpPost('auth/createnewuser', this.user)
+          .subscribe(
+            (success) => { console.log(success); this.goToTeaherFormPage(loading); },
+            (failure) => { console.log(failure); this.failureResponse(loading); }
+          );
+      }, (error) => {
+        console.log("Error occured when signing in to google.");
+        console.log(error);
       });
   }
   //#endregion
@@ -83,15 +102,24 @@ export class NewTeacherLoginPage {
   /**
    * Creates new profile interface of APP according to given social interface.
    * @param user Social model.
+   * @returns {ProfileInterface} Returning this model to send to backend.
    */
-  private createUser(user: SocialUser): void {
+  private createUser(user: SocialUser): ProfileInterface {
     let newUser: ProfileInterface = {
+      role: 1,
+      id: user.id,
+      name: user.name,
       email: user.email,
       photoUrl: user.photoUrl,
       lastName: user.lastName,
-      firstName: user.firstName
+      provider: user.provider,
+      firstName: user.firstName,
+      authToken: user.authToken
     };
+
     this.profileProvider.SetUserLoggedIn(newUser);
+
+    return newUser;
   }
 
   /**

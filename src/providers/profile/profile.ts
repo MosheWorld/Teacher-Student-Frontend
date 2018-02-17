@@ -27,8 +27,7 @@ export class ProfileProvider {
    * Settings user as logged out.
    */
   public SetUserLoggedOut() {
-    let demo: ProfileInterface;
-    this.profile = demo;
+    this.profile = null;
     this.isLoggedIn = false;
   }
   //#endregion

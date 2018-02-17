@@ -1744,13 +1744,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ApiProvider = (function () {
+    // public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
     //#endregion
     //#region Constructor
     function ApiProvider(http) {
         this.http = http;
         //#region Members
-        // public endPoint: string = "http://localhost:8000/";
-        this.endPoint = "https://teacher-student-backend.herokuapp.com/";
+        this.endPoint = "http://localhost:8000/";
     }
     //#endregion
     //#region Public Methods
@@ -1869,7 +1869,7 @@ var NewTeacherLoginPage = (function () {
     /**
      * Logging in with facebook, using facebook API.
      */
-    NewTeacherLoginPage.prototype.signInWithFB = function () {
+    NewTeacherLoginPage.prototype.signInWithFacebook = function () {
         var _this = this;
         var loading = this.loadingCtrl.create({
             spinner: 'dots',
@@ -1878,19 +1878,34 @@ var NewTeacherLoginPage = (function () {
         loading.present();
         this.authService.signIn(__WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["FacebookLoginProvider"].PROVIDER_ID)
             .then(function (signedInUser) {
-            _this.user = signedInUser;
-            _this.createUser(signedInUser);
-            _this.apiProvider.httpPost('auth/createfacebookuser', _this.user)
+            // Receives necessary information, now sending it to backend and register at frontend.
+            _this.user = _this.createUser(signedInUser);
+            _this.apiProvider.httpPost('auth/createnewuser', _this.user)
                 .subscribe(function (success) { console.log(success); _this.goToTeaherFormPage(loading); }, function (failure) { console.log(failure); _this.failureResponse(loading); });
+        }, function (error) {
+            console.log("Error occured when signing in to facebook.");
+            console.log(error);
         });
     };
     /**
      * Logging in with google, using google API.
      */
     NewTeacherLoginPage.prototype.signInWithGoogle = function () {
+        var _this = this;
+        var loading = this.loadingCtrl.create({
+            spinner: 'dots',
+            content: 'Verifying, please wait...'
+        });
+        loading.present();
         this.authService.signIn(__WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["GoogleLoginProvider"].PROVIDER_ID)
-            .then(function (user) {
-            console.log(user);
+            .then(function (signedInUser) {
+            // Receives necessary information, now sending it to backend and register at frontend.
+            _this.user = _this.createUser(signedInUser);
+            _this.apiProvider.httpPost('auth/createnewuser', _this.user)
+                .subscribe(function (success) { console.log(success); _this.goToTeaherFormPage(loading); }, function (failure) { console.log(failure); _this.failureResponse(loading); });
+        }, function (error) {
+            console.log("Error occured when signing in to google.");
+            console.log(error);
         });
     };
     //#endregion
@@ -1898,15 +1913,22 @@ var NewTeacherLoginPage = (function () {
     /**
      * Creates new profile interface of APP according to given social interface.
      * @param user Social model.
+     * @returns {ProfileInterface} Returning this model to send to backend.
      */
     NewTeacherLoginPage.prototype.createUser = function (user) {
         var newUser = {
+            role: 1,
+            id: user.id,
+            name: user.name,
             email: user.email,
             photoUrl: user.photoUrl,
             lastName: user.lastName,
-            firstName: user.firstName
+            provider: user.provider,
+            firstName: user.firstName,
+            authToken: user.authToken
         };
         this.profileProvider.SetUserLoggedIn(newUser);
+        return newUser;
     };
     /**
      * Moves to another page and dismiss loading model
@@ -1934,17 +1956,12 @@ var NewTeacherLoginPage = (function () {
 }());
 NewTeacherLoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-new-teacher-login',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\new-teacher-login\new-teacher-login.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Login</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-35px m-font-weight-300">Hello teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          Please choose your login method and continue the process.\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <ion-row text-center>\n\n        <!-- Facebook authentication -->\n        <ion-col col-12>\n          <button (click)="signInWithFB()" class="loginBtn loginBtn--facebook">\n            Login with Facebook\n          </button>\n        </ion-col>\n\n        <ion-col col-12>\n          Google authentication not is use for now\n        </ion-col>\n\n        <!-- Google authentication -->\n        <ion-col col-12>\n          <button (click)="signInWithGoogle()" class="loginBtn loginBtn--google">\n            Login with Google\n          </button>\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\new-teacher-login\new-teacher-login.html"*/,
+        selector: 'page-new-teacher-login',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\new-teacher-login\new-teacher-login.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Login</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-35px m-font-weight-300">Hello teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          Please choose your login method and continue the process.\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <ion-row text-center>\n\n        <!-- Facebook authentication -->\n        <ion-col col-12>\n          <button (click)="signInWithFacebook()" class="loginBtn loginBtn--facebook">\n            Login with Facebook\n          </button>\n        </ion-col>\n\n        <!-- Google authentication -->\n        <ion-col col-12>\n          <button (click)="signInWithGoogle()" class="loginBtn loginBtn--google">\n            Login with Google\n          </button>\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\new-teacher-login\new-teacher-login.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */],
-        __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["AuthService"],
-        __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__["a" /* LoadingController */],
-        __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__["a" /* ProfileProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["AuthService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["AuthService"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__["a" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__["a" /* LoadingController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__["a" /* ProfileProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__["a" /* ProfileProvider */]) === "function" && _g || Object])
 ], NewTeacherLoginPage);
 
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=new-teacher-login.js.map
 
 /***/ }),
@@ -2336,8 +2353,7 @@ var ProfileProvider = (function () {
      * Settings user as logged out.
      */
     ProfileProvider.prototype.SetUserLoggedOut = function () {
-        var demo;
-        this.profile = demo;
+        this.profile = null;
         this.isLoggedIn = false;
     };
     return ProfileProvider;

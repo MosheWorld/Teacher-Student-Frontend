@@ -46,54 +46,43 @@ export class NewTeacherLoginPage {
 
   //#region Public Methods
   /**
-   * Logging in with facebook, using facebook API.
+   * Logging in with facebook or Google provider, using facebook or google API.
    */
-  public signInWithFacebook(): void {
+  public signIn(signInProvider: string): void {
     const loading: Loading = this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Verifying, please wait...'
     });
     loading.present();
 
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
+    let providerSignInMethod = this.getProviderMethod(signInProvider);
+
+    if (providerSignInMethod === null) {
+      console.log("Bad provider has been passed, aborting.");
+      return;
+    }
+
+    this.authService.signIn(providerSignInMethod)
       .then((signedInUser: SocialUser) => {
-        // Receives necessary information, now sending it to backend and register at frontend.
-         this.user = this.createUser(signedInUser);
 
-        this.apiProvider.httpPost('auth/createnewuser', this.user)
+        let isUserExistModel = {
+          id: signedInUser.id,
+          token: signedInUser.authToken,
+          provider: signedInUser.provider
+        }
+
+        this.apiProvider.httpPost('auth/doesuserexistbyid', isUserExistModel)
           .subscribe(
-            (success) => { console.log(success); this.goToTeaherFormPage(loading); },
-            (failure) => { console.log(failure); this.failureResponse(loading); }
+            (success) => {
+              this.ResultFromUserExistEndpoint(signedInUser, success, loading);
+            },
+            (failure) => { console.log(failure); loading.dismiss(); this.failureResponse(); }
           );
+
       }, (error) => {
-        console.log("Error occured when signing in to facebook.");
+        console.log("Error occured when signing in to " + signInProvider + ".");
         console.log(error);
-      });
-  }
-
-  /**
-   * Logging in with google, using google API.
-   */
-  public signInWithGoogle(): void {
-    const loading: Loading = this.loadingCtrl.create({
-      spinner: 'dots',
-      content: 'Verifying, please wait...'
-    });
-    loading.present();
-
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then((signedInUser: SocialUser) => {
-        // Receives necessary information, now sending it to backend and register at frontend.
-        this.user = this.createUser(signedInUser);
-
-        this.apiProvider.httpPost('auth/createnewuser', this.user)
-          .subscribe(
-            (success) => { console.log(success); this.goToTeaherFormPage(loading); },
-            (failure) => { console.log(failure); this.failureResponse(loading); }
-          );
-      }, (error) => {
-        console.log("Error occured when signing in to google.");
-        console.log(error);
+        loading.dismiss();
       });
   }
   //#endregion
@@ -117,8 +106,6 @@ export class NewTeacherLoginPage {
       authToken: user.authToken
     };
 
-    this.profileProvider.SetUserLoggedIn(newUser);
-
     return newUser;
   }
 
@@ -126,8 +113,7 @@ export class NewTeacherLoginPage {
    * Moves to another page and dismiss loading model
    * @param loader Ionic loader.
    */
-  private goToTeaherFormPage(loader: Loading): void {
-    loader.dismiss();
+  private goToTeaherFormPage(): void {
     this.navCtrl.pop();
     this.navigationer.navigateToPage(this.pageEnum.NewTeacherForm);
   }
@@ -136,14 +122,70 @@ export class NewTeacherLoginPage {
    * Failure response for the user.
    * @param loader Ionic loader.
    */
-  private failureResponse(loader: Loading): void {
-    loader.dismiss();
+  private failureResponse(): void {
     let alert = this.alertCtrl.create({
       title: 'Error',
       subTitle: 'Failed to create as teacher, please try again.',
       buttons: ['Ok']
     });
     alert.present();
+  }
+
+  /**
+   * Decides on provider type and returns the actual variable to use it.
+   * @param signInProvider 
+   */
+  private getProviderMethod(signInProvider: string): any {
+    if (signInProvider === null || signInProvider === undefined) {
+      console.log("signInProvider is null or empty.");
+      return null;
+    }
+
+    let providerSignInMethod = null;
+
+    switch (signInProvider) {
+      case "FACEBOOK":
+        providerSignInMethod = FacebookLoginProvider.PROVIDER_ID;
+        break;
+      case "GOOGLE":
+        providerSignInMethod = GoogleLoginProvider.PROVIDER_ID;
+        break;
+      default:
+        console.log("Provider wasn't found, aborting.");
+        providerSignInMethod = null;
+        break;
+    }
+
+    return providerSignInMethod;
+  }
+
+  /**
+   * The function will be activated when result came from api of 'auth/doesuserexistbyid'.
+   * @param success exist: {boolean} , role: {His role from database}
+   */
+  private ResultFromUserExistEndpoint(signedInUser: SocialUser, success: any, loading: Loading): void {
+    this.user = this.createUser(signedInUser);
+
+    // Exist is true, therefore we exist and we will be moved to details page.
+    // Exist is false, therefore we will be moved to create new teacher
+    if (success.exist === true) {
+
+      this.user.role = success.role;
+      this.profileProvider.SetUserLoggedIn(this.user);
+      loading.dismiss();
+      this.navigationer.navigateToPage(this.pageEnum.TeacherDetails);
+
+    } else {
+
+      this.profileProvider.SetUserLoggedIn(this.user);
+
+      this.apiProvider.httpPost('auth/createnewuser', this.user)
+        .subscribe(
+          (success) => { console.log(success); loading.dismiss(); this.goToTeaherFormPage(); },
+          (failure) => { console.log(failure); loading.dismiss(); this.failureResponse(); }
+        );
+
+    }
   }
   //#endregion
 }

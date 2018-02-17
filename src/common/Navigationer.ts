@@ -8,6 +8,7 @@ import { ProfileProvider } from "../providers/profile/profile";
 import { TeacherslistPage } from "../pages/teacherslist/teacherslist";
 import { NewTeacherFormPage } from './../pages/new-teacher-form/new-teacher-form';
 import { NewTeacherLoginPage } from './../pages/new-teacher-login/new-teacher-login';
+import { TeacherPersonalDetailsPage } from './../pages/teacher-personal-details/teacher-personal-details';
 
 export class Navigationer {
     //#region Constructor
@@ -46,6 +47,10 @@ export class Navigationer {
 
             case PageType.NewTeacherForm:
                 this.navCtrl.push(NewTeacherFormPage, params);
+                break;
+
+            case PageType.TeacherDetails:
+                this.navCtrl.push(TeacherPersonalDetailsPage, params);
                 break;
 
             default:

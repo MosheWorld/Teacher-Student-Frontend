@@ -9,6 +9,8 @@ import { ApiProvider } from './../../providers/api/api';
 import { Alert } from 'ionic-angular/components/alert/alert';
 import { CommonProvider } from './../../providers/common/common';
 import { ProfileProvider } from './../../providers/profile/profile';
+import { Navigationer } from './../../common/Navigationer';
+import { PageType } from './../../common/PageType.Enum';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -25,6 +27,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class NewTeacherFormPage {
   //#region Members
+  public pageEnum = PageType;
+  public navigationer: Navigationer;
+
   public lastNameFormControl = new FormControl(null, [Validators.required]);
   public firstNameFormControl = new FormControl(null, [Validators.required]);
   public teachesAtFormControl = new FormControl(null, [Validators.required]);
@@ -63,6 +68,8 @@ export class NewTeacherFormPage {
     public commonProvider: CommonProvider,
     public profileProvider: ProfileProvider
   ) {
+    this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
+
     // We take minutes 20 in the calculation to take the padding at calculation.
     this.imageWidth = platform.width() - 20;
     this.imageHeight = platform.width() - 20;
@@ -95,16 +102,17 @@ export class NewTeacherFormPage {
 
     this.apiProvider.httpPost('teacher/create', newTeacherData)
       .subscribe(
-      (success) => {
-        loading.dismiss();
-        const alert = this.createAlert('Welcome new teacher', 'Your account has been created successfully, this is your teacher page, thank you and good luck.');
-        alert.present();
-      },
-      (failure) => {
-        loading.dismiss();
-        const alert = this.createAlert('Something went wrong', 'Please try again later, we have some server issues.');
-        alert.present();
-      }
+        (success) => {
+          loading.dismiss();
+          const alert = this.createAlert('Welcome new teacher', 'Your account has been created successfully, this is your teacher page, thank you and good luck.');
+          alert.present();
+          this.navigationer.navigateToPage(this.pageEnum.TeacherDetails);
+        },
+        (failure) => {
+          loading.dismiss();
+          const alert = this.createAlert('Something went wrong', 'Please try again later, we have some server issues.');
+          alert.present();
+        }
       );
   }
 
@@ -233,7 +241,8 @@ export class NewTeacherFormPage {
       teachesAt: parseInt(this.teachesAtFormControl.value),
       personalMessage: this.personalMessageFormControl.value,
       teachesSubjects: this.teachesSubjectsFormControl.value,
-      teachesInstitutions: this.teachesInstitutionsFormControl.value
+      teachesInstitutions: this.teachesInstitutionsFormControl.value,
+      userID: this.profileProvider.profile.id
     };
 
     return newTeacher;

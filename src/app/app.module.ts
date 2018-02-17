@@ -28,6 +28,7 @@ import { TeachesSubjectsPipe } from './../pipes/teaches-subjects/teaches-subject
 import { NewTeacherLoginPage } from './../pages/new-teacher-login/new-teacher-login';
 import { FavoritesManagerProvider } from '../providers/favorites-manager/favorites-manager';
 import { TeachesInstitutionsPipe } from './../pipes/teaches-institutions/teaches-institutions';
+import { TeacherPersonalDetailsPage } from './../pages/teacher-personal-details/teacher-personal-details';
 
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -65,7 +66,8 @@ let config = new AuthServiceConfig([
     NewTeacherFormPage,
     NewTeacherLoginPage,
     TeachesSubjectsPipe,
-    TeachesInstitutionsPipe
+    TeachesInstitutionsPipe,
+    TeacherPersonalDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -85,6 +87,7 @@ let config = new AuthServiceConfig([
           { component: SingleteacherPage, name: 'Singleteacher', segment: 'singleteacher' },
           { component: NewTeacherFormPage, name: 'NewTeacherForm', segment: 'newteacherform' },
           { component: NewTeacherLoginPage, name: 'NewTeacherLogin', segment: 'newteacherlogin' },
+          { component: TeacherPersonalDetailsPage, name: "TeacherPersonalDetailsPage", segment: "teacherpersonaldetailspage" }
         ]
       }),
     LocalStorageModule.withConfig({
@@ -109,7 +112,8 @@ let config = new AuthServiceConfig([
     TeacherslistPage,
     SingleteacherPage,
     NewTeacherFormPage,
-    NewTeacherLoginPage
+    NewTeacherLoginPage,
+    TeacherPersonalDetailsPage
   ],
   providers: [
     StatusBar,

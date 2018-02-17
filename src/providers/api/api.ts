@@ -1,3 +1,4 @@
+import { ProfileProvider } from './../profile/profile';
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -5,12 +6,13 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ApiProvider {
   //#region Members
-  // public endPoint: string = "http://localhost:8000/";
-  public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
+  public endPoint: string = "http://localhost:8000/";
+  // public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
   //#endregion
 
   //#region Constructor
-  constructor(public http: Http) {
+  constructor(public http: Http,
+    public profileProvider: ProfileProvider) {
   }
   //#endregion
 
@@ -21,7 +23,9 @@ export class ApiProvider {
    */
   public httpGet(path: string): any {
     const url = this.endPoint + path;
-    return this.http.get(url, null)
+    let headers = this.buildHeader();
+
+    return this.http.get(url, { headers: headers })
       .map(res => this.checkResultModel(res));
   }
 
@@ -32,9 +36,9 @@ export class ApiProvider {
    */
   public httpPost(path: string, data: any): any {
     const url = this.endPoint + path;
-    let header = this.buildHeader();
+    let headers = this.buildHeader();
 
-    return this.http.post(url, JSON.stringify(data), { headers: header })
+    return this.http.post(url, JSON.stringify(data), { headers: headers })
       .map(res => this.checkResultModel(res));
   }
   //#endregion
@@ -45,9 +49,18 @@ export class ApiProvider {
    * @returns {Headers} The new header.
    */
   private buildHeader(): Headers {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
+    let headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+
+    if (this.profileProvider.profile && this.profileProvider.profile.authToken) {
+      headers.append('provider', this.profileProvider.profile.provider);
+    }
+
+    if (this.profileProvider.profile && this.profileProvider.profile.authToken) {
+      headers.append('x-auth', this.profileProvider.profile.authToken);
+    }
+
     return headers;
   }
 

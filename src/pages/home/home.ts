@@ -1,4 +1,3 @@
-import { ApiProvider } from './../../providers/api/api';
 import { PageType } from './../../common/PageType.Enum';
 import { NavController } from 'ionic-angular';
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
@@ -24,8 +23,7 @@ export class HomePage {
   constructor(
     public rd: Renderer2,
     public navCtrl: NavController,
-    public profileProvider: ProfileProvider,
-    public apiProvider: ApiProvider
+    public profileProvider: ProfileProvider
   ) {
     this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
   }

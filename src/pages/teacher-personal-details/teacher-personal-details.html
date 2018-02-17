@@ -1,12 +1,21 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>teacher-personal-details</ion-title>
+    <button ion-button menuToggle class="m-color-white">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>
+      <font class="m-color-white">Hello {{this.profileProvider.profile.firstName}}</font>
+    </ion-title>
+    <ion-buttons end icon-only class="m-color-white">
+      <div (click)="navigationer.navigateToPage(pageEnum.Favorites)">
+        <ion-icon name="ios-bookmark-outline"></ion-icon>
+      </div>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  This page is in construction...
+  This page will be constructed soon
+  <br> {{this.profileProvider.profile|json}}
 </ion-content>

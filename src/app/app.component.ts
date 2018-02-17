@@ -1,5 +1,4 @@
-import { ProfileProvider } from './../providers/profile/profile';
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, MenuController } from 'ionic-angular';
 import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -9,6 +8,8 @@ import { SearchPage } from './../pages/search/search';
 import { SettingsPage } from '../pages/settings/settings';
 
 import { AuthService } from 'angular4-social-login';
+import { ProfileProvider } from './../providers/profile/profile';
+import { TeacherPersonalDetailsPage } from './../pages/teacher-personal-details/teacher-personal-details';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,8 +24,13 @@ export class MyApp {
   //#endregion
 
   //#region Constructor
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public profileProvider: ProfileProvider,
-    public authService: AuthService) {
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public menuCtrl: MenuController,
+    public authService: AuthService,
+    public splashScreen: SplashScreen,
+    public profileProvider: ProfileProvider) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
@@ -45,6 +51,11 @@ export class MyApp {
   public signOut(): void {
     this.authService.signOut()
       .then(() => this.profileProvider.SetUserLoggedOut());
+  }
+
+  public goToUserDetailsPage() {
+    this.nav.setRoot(TeacherPersonalDetailsPage);
+    this.menuCtrl.close();
   }
   //#endregion
 }

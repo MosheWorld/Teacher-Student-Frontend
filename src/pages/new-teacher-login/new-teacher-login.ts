@@ -38,10 +38,6 @@ export class NewTeacherLoginPage {
   ) {
     this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NewTeacherLoginPage');
-  }
   //#endregion
 
   //#region Public Methods

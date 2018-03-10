@@ -1,6 +1,7 @@
 import { NavController } from "ionic-angular/navigation/nav-controller";
 
 import { PageType } from "./PageType.Enum";
+import { AdminPage } from './../pages/admin/admin';
 import { SearchPage } from "../pages/search/search";
 import { ContactusPage } from "../pages/contactus/contactus";
 import { FavoritesPage } from "../pages/favorites/favorites";
@@ -51,6 +52,10 @@ export class Navigationer {
 
             case PageType.TeacherDetails:
                 this.navCtrl.push(TeacherPersonalDetailsPage, params);
+                break;
+
+            case PageType.Admin:
+                this.navCtrl.push(AdminPage, params);
                 break;
 
             default:

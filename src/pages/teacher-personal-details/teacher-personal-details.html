@@ -4,18 +4,43 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title text-center>
-      <font class="m-color-white">Hello {{this.profileProvider.profile.firstName}}</font>
+      <font class="m-color-white">Hey {{this.profileProvider.profile.firstName}}</font>
     </ion-title>
-    <ion-buttons end icon-only class="m-color-white">
-      <div (click)="navigationer.navigateToPage(pageEnum.Favorites)">
-        <ion-icon name="ios-bookmark-outline"></ion-icon>
+    <ion-buttons *ngIf="this.profileProvider.profile.role === 2" end icon-only class="m-color-white">
+      <div (click)="navigationer.navigateToPage(pageEnum.Admin)">
+        <ion-icon name="ios-unlock-outline"></ion-icon>
       </div>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
-  This page will be constructed soon
-  <br> {{this.profileProvider.profile|json}}
+  <!-- User + Teacher Header of tabs -->
+  <ion-row>
+    <ion-col col-12>
+      <ion-segment [(ngModel)]="currentChosenTab">
+        <ion-segment-button value="1" class="m-font-size-10px-impo">
+          User
+        </ion-segment-button>
+        <ion-segment-button value="2" class="m-font-size-10px-impo">
+          Teacher
+        </ion-segment-button>
+      </ion-segment>
+    </ion-col>
+  </ion-row>
+
+  <!-- User data -->
+  <ion-row *ngIf="currentChosenTab === '1'">
+    <ion-col col-12>
+      {{this.profileProvider.profile | json}}
+    </ion-col>
+  </ion-row>
+
+  <!-- Teacher data -->
+  <ion-row *ngIf="currentChosenTab === '2'">
+    <ion-col col-12>
+      {{this.teacher | json}}
+    </ion-col>
+  </ion-row>
 </ion-content>

@@ -1,7 +1,7 @@
-import { PageType } from './../../common/PageType.Enum';
 import { NavController } from 'ionic-angular';
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 
+import { PageType } from './../../common/PageType.Enum';
 import { Navigationer } from './../../common/Navigationer';
 import { ProfileProvider } from './../../providers/profile/profile';
 

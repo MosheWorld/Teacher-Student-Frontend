@@ -1,6 +1,89 @@
 webpackJsonp([0],{
 
-/***/ 159:
+/***/ 160:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_PageType_Enum__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_Navigationer__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_profile_profile__ = __webpack_require__(30);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var HomePage = (function () {
+    //#endregion
+    //#region Constructor
+    function HomePage(rd, navCtrl, profileProvider) {
+        this.rd = rd;
+        this.navCtrl = navCtrl;
+        this.profileProvider = profileProvider;
+        //#region Members
+        this.pageEnum = __WEBPACK_IMPORTED_MODULE_2__common_PageType_Enum__["a" /* PageType */];
+        this.navigationer = new __WEBPACK_IMPORTED_MODULE_3__common_Navigationer__["a" /* Navigationer */](this.navCtrl, this.profileProvider);
+    }
+    /**
+     * Activated animations to make the UI awesome.
+     */
+    HomePage.prototype.ionViewDidEnter = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.rd.removeClass(_this.subtitleAnimation.nativeElement, "m-opacity-0");
+            _this.rd.addClass(_this.subtitleAnimation.nativeElement, "fadeInDownBig");
+            setTimeout(function () {
+                _this.rd.removeClass(_this.buttonuAnimation.nativeElement, "m-opacity-0");
+                _this.rd.addClass(_this.buttonuAnimation.nativeElement, "fadeInDownBig");
+                setTimeout(function () {
+                    _this.rd.removeClass(_this.buttonuAnimation.nativeElement, "fadeInDownBig");
+                    _this.rd.addClass(_this.buttonuAnimation.nativeElement, "bounce");
+                }, 2000);
+            }, 800);
+        }, 600);
+    };
+    /**
+     * Removes animated classes from the inputs.
+     */
+    HomePage.prototype.ionViewDidLeave = function () {
+        this.rd.removeClass(this.subtitleAnimation.nativeElement, "animated");
+        this.rd.removeClass(this.buttonuAnimation.nativeElement, "animated");
+    };
+    return HomePage;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewChild"])('subtitleAnimation'),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"])
+], HomePage.prototype, "subtitleAnimation", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewChild"])('buttonuAnimation'),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"])
+], HomePage.prototype, "buttonuAnimation", void 0);
+HomePage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">StudyHub</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-white">\n      <div (click)="navigationer.navigateToPage(pageEnum.Favorites)" class="animated flip">\n        <ion-icon name="ios-bookmark-outline"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div text-center class="m-background-2b3137 m-margin-top0">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-43px m-font-weight-300">\n            For students and private teachers\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row #subtitleAnimation class="animated m-opacity-0">\n        <ion-col col-12>\n          <div class="m-font-size-20px m-color-white m-font-weight-300 m-opacity-6">\n            StudyHub is a study platform where you can find teachers\n            <font class="m-color-white">from your home</font>. Manage your teachers & Teach other people.\n          </div>\n        </ion-col>\n        <ion-col col-12>\n          <div class="m-font-size-20px m-color-white m-font-weight-300">\n            <b>Keep it simple and fun</b>\n          </div>\n        </ion-col>\n      </ion-row>\n\n      <!-- Start using button -->\n      <ion-row #buttonuAnimation class="animated m-opacity-0">\n        <ion-col col-12>\n          <button ion-button color="secondary" (click)="navigationer.navigateToPage(pageEnum.Search)">\n            <b>Start using StudyHub</b>\n          </button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n    <ion-grid>\n\n      <!-- StudyHub for individuals title -->\n      <ion-row text-center class="m-padding-buttom-15px m-padding-top-15px">\n        <ion-col col-12>\n          StudyHub for individuals\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for individuals subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n\n          <font class="m-font-size-17px m-font-weight-300 m-color-586069">As individual user at StudyHub you can find teachers around Israel, talk with them directly at WhatsApp, rank teachers\n            and tell your opinion about them.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for teachers title -->\n      <ion-row text-center class="m-padding-buttom-15px m-padding-top-15px">\n        <ion-col col-12>\n          StudyHub for teachers\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for teachers subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n\n          <font class="m-font-size-17px m-font-weight-300 m-color-586069">\n            As a teacher at StudyHub you\'ll be shown at students searches over the app, you will have your own profile and you will be\n            able to manage it as you wish.\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Join as teacher button -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <button ion-button outline color="primary" (click)="navigationer.navigateToPage(pageEnum.JoinAsTeacher)" icon-start>\n            <ion-icon name="ios-person-add-outline"></ion-icon>\n            Join as teacher\n          </button>\n        </ion-col>\n      </ion-row>\n\n      <!-- Slider -->\n      <ion-row>\n        <ion-col col-12>\n          <ion-slides autoplay="3000" effect="slider" centeredSlides="true" loop="true" pager="true" speed="800">\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider1.jpeg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider4.jpg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider3.jpeg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider2.jpg" />\n            </ion-slide>\n          </ion-slides>\n        </ion-col>\n      </ion-row>\n\n      <hr>\n\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-font-size-25px">\n            <b>StudyHub - Owner</b>\n          </font>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col col-12>\n          Moshe Binieli\n        </ion-col>\n        <ion-col col-12>\n          mmoshikoo@gmail.com\n        </ion-col>\n        <ion-col col-12>\n          Computer Science Student and Full Stack Developer.\n        </ion-col>\n        <ion-col col-12>\n\n          <button ion-button outline color="dark" small icon-start (click)="navigationer.navigateToPage(pageEnum.ContactUs)">\n            <ion-icon name="ios-contacts"></ion-icon>Contact us</button>\n\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\home\home.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"],
+        __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["i" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_4__providers_profile_profile__["a" /* ProfileProvider */]])
+], HomePage);
+
+//# sourceMappingURL=home.js.map
+
+/***/ }),
+
+/***/ 161:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -285,13 +368,13 @@ SearchPage = __decorate([
 
 /***/ }),
 
-/***/ 164:
+/***/ 166:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export MyErrorStateMatcher */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SingleteacherPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(17);
@@ -531,7 +614,7 @@ SingleteacherPage = __decorate([
 
 /***/ }),
 
-/***/ 178:
+/***/ 179:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -539,11 +622,12 @@ SingleteacherPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_api_api__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular4_social_login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular4_social_login__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_PageType_Enum__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_Navigationer__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_profile_profile__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_common_common__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_profile_profile__ = __webpack_require__(30);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -560,14 +644,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var TeacherPersonalDetailsPage = (function () {
     //#endregion
     //#region Constructor
-    function TeacherPersonalDetailsPage(navCtrl, authService, apiProvider, alertCtrl, profileProvider) {
+    function TeacherPersonalDetailsPage(navCtrl, authService, apiProvider, alertCtrl, commonProvider, profileProvider) {
         this.navCtrl = navCtrl;
         this.authService = authService;
         this.apiProvider = apiProvider;
         this.alertCtrl = alertCtrl;
+        this.commonProvider = commonProvider;
         this.profileProvider = profileProvider;
         //#region Members
         this.pageEnum = __WEBPACK_IMPORTED_MODULE_4__common_PageType_Enum__["a" /* PageType */];
@@ -592,7 +678,7 @@ var TeacherPersonalDetailsPage = (function () {
     */
     TeacherPersonalDetailsPage.prototype.toggleDisabledAuth = function () {
         if (this.authDisabledBoolean === false) {
-            this.SaveAuthModelChanges();
+            this.saveAuthModelChanges();
         }
         this.authDisabledBoolean = !this.authDisabledBoolean;
     };
@@ -601,7 +687,7 @@ var TeacherPersonalDetailsPage = (function () {
     */
     TeacherPersonalDetailsPage.prototype.toggleDisabledTeacher = function () {
         if (this.teacherDisabledBoolean === false) {
-            this.SaveTeacherModelChanges();
+            this.saveTeacherModelChanges();
         }
         this.teacherDisabledBoolean = !this.teacherDisabledBoolean;
     };
@@ -623,7 +709,8 @@ var TeacherPersonalDetailsPage = (function () {
     /**
      * Opens dialog and asks if the user wants to make the changes, in case he does a HTTP request with changes will occure.
      */
-    TeacherPersonalDetailsPage.prototype.SaveAuthModelChanges = function () {
+    TeacherPersonalDetailsPage.prototype.saveAuthModelChanges = function () {
+        var _this = this;
         var alert = this.alertCtrl.create({
             title: 'Confirm the changes',
             message: 'Are you sure you want to save the user changes?  *You cannot restore your data after the change*',
@@ -638,7 +725,7 @@ var TeacherPersonalDetailsPage = (function () {
                 {
                     text: 'Yes',
                     handler: function () {
-                        console.log('Yes clicked');
+                        _this.updateAuthModelAtServer();
                     }
                 }
             ]
@@ -648,7 +735,8 @@ var TeacherPersonalDetailsPage = (function () {
     /**
      * Opens dialog and asks if the user wants to make the changes, in case he does a HTTP request with changes will occure.
      */
-    TeacherPersonalDetailsPage.prototype.SaveTeacherModelChanges = function () {
+    TeacherPersonalDetailsPage.prototype.saveTeacherModelChanges = function () {
+        var _this = this;
         var alert = this.alertCtrl.create({
             title: 'Confirm the changes',
             message: 'Are you sure you want to save the teacher changes?  *You cannot restore your data after the change*',
@@ -663,28 +751,105 @@ var TeacherPersonalDetailsPage = (function () {
                 {
                     text: 'Yes',
                     handler: function () {
-                        console.log('Yes clicked');
+                        _this.updateTeacherModelAtServer();
                     }
                 }
             ]
         });
         alert.present();
     };
+    /**
+     * Updates model at database.
+     */
+    TeacherPersonalDetailsPage.prototype.updateAuthModelAtServer = function () {
+        if (!this.isAuthModelValidToUpdate()) {
+            // Error Message
+            return;
+        }
+    };
+    /**
+     * Updates model at database.
+     */
+    TeacherPersonalDetailsPage.prototype.updateTeacherModelAtServer = function () {
+        if (!this.isTeacherModelValidToUpdate()) {
+            // Error Message
+            return;
+        }
+        // Update
+    };
+    /**
+     * Validates whether the model can be updated and it's in correct format.
+     */
+    TeacherPersonalDetailsPage.prototype.isAuthModelValidToUpdate = function () {
+        if (this.isPropertyNullOrUndefined(this.profileProvider.profile)
+            || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.email)
+            || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.firstName)
+            || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.lastName)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    /**
+     *
+     */
+    TeacherPersonalDetailsPage.prototype.isTeacherModelValidToUpdate = function () {
+        if (this.isPropertyNullOrUndefined(this.teacher)
+            || this.isPropertyNullOrUndefined(this.teacher.age)
+            || this.isPropertyNullOrUndefined(this.teacher.priceFrom)
+            || this.isPropertyNullOrUndefined(this.teacher.priceTo)
+            || this.teacher.age < 18
+            || this.teacher.priceFrom < 0 || this.teacher.priceFrom > 200
+            || this.teacher.priceTo > 0 || this.teacher.priceTo > 200
+            || this.teacher.priceFrom > this.teacher.priceTo
+            || this.isStringNullOrUndefinedOrEmpty(this.teacher.firstName)
+            || this.isStringNullOrUndefinedOrEmpty(this.teacher.lastName)
+            || this.isStringNullOrUndefinedOrEmpty(this.teacher.email)
+            || this.isStringNullOrUndefinedOrEmpty(this.teacher.personalMessage)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    /**
+     * Checks whether the property is null or undefined.
+     */
+    TeacherPersonalDetailsPage.prototype.isPropertyNullOrUndefined = function (property) {
+        if (property === null || property === undefined) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    /**
+     * Checks whether the property is null or undefined or string is empty.
+     */
+    TeacherPersonalDetailsPage.prototype.isStringNullOrUndefinedOrEmpty = function (property) {
+        if (property === null || property === undefined || property === "") {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
     return TeacherPersonalDetailsPage;
 }());
 TeacherPersonalDetailsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-teacher-personal-details',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacher-personal-details\teacher-personal-details.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Hey {{this.profileProvider.profile.firstName}}</font>\n    </ion-title>\n    <ion-buttons *ngIf="this.profileProvider.profile.role === 2" end icon-only class="m-color-white">\n      <div (click)="navigationer.navigateToPage(pageEnum.Admin)">\n        <ion-icon name="ios-unlock-outline"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- User + Teacher Header of tabs -->\n  <ion-row>\n    <ion-col col-12>\n      <ion-segment [(ngModel)]="currentChosenTab">\n        <ion-segment-button value="1" class="m-font-size-10px-impo">\n          User\n        </ion-segment-button>\n        <ion-segment-button value="2" class="m-font-size-10px-impo">\n          Teacher\n        </ion-segment-button>\n      </ion-segment>\n    </ion-col>\n  </ion-row>\n\n  <!-- User data -->\n  <ion-row *ngIf="currentChosenTab === \'1\'">\n    <!-- Edit and Save buttons -->\n    <ion-col col-12>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledAuth()" *ngIf="this.authDisabledBoolean === true">\n        <ion-icon name="ios-brush-outline"></ion-icon>\n        Edit\n      </button>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledAuth()" *ngIf="this.authDisabledBoolean === false">\n        <ion-icon name="md-checkmark"></ion-icon>\n        Save\n      </button>\n    </ion-col>\n    <!-- First Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="First Name" [(ngModel)]="this.profileProvider.profile.firstName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Last Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="Last Name" [(ngModel)]="this.profileProvider.profile.lastName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Email -->\n    <ion-col col-12>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="Email" [(ngModel)]="this.profileProvider.profile.email">\n      </mat-form-field>\n    </ion-col>\n  </ion-row>\n\n  <!-- Teacher data -->\n  <ion-row *ngIf="currentChosenTab === \'2\'">\n    <ion-col col-12>\n      {{this.teacher | json}}\n    </ion-col>\n    <!-- Edit and Save buttons -->\n    <ion-col col-12>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledTeacher()" *ngIf="this.teacherDisabledBoolean === true">\n        <ion-icon name="ios-brush-outline"></ion-icon>\n        Edit\n      </button>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledTeacher()" *ngIf="this.teacherDisabledBoolean === false">\n        <ion-icon name="md-checkmark"></ion-icon>\n        Save\n      </button>\n    </ion-col>\n    <!-- First Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="First Name" [(ngModel)]="this.teacher.firstName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Last Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Last Name" [(ngModel)]="this.teacher.lastName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Age -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Age" [(ngModel)]="this.teacher.age">\n      </mat-form-field>\n    </ion-col>\n    <!-- Phone Number -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Phone Number" [(ngModel)]="this.teacher.phone">\n      </mat-form-field>\n    </ion-col>\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacher-personal-details\teacher-personal-details.html"*/,
+        selector: 'page-teacher-personal-details',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacher-personal-details\teacher-personal-details.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Hey {{this.profileProvider.profile.firstName}}</font>\n    </ion-title>\n    <ion-buttons *ngIf="this.profileProvider.profile.role === 2" end icon-only class="m-color-white">\n      <div (click)="navigationer.navigateToPage(pageEnum.Admin)">\n        <ion-icon name="ios-unlock-outline"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- User + Teacher Header of tabs -->\n  <ion-row>\n    <ion-col col-12>\n      <ion-segment [(ngModel)]="currentChosenTab">\n        <ion-segment-button value="1" class="m-font-size-10px-impo">\n          User\n        </ion-segment-button>\n        <ion-segment-button value="2" class="m-font-size-10px-impo">\n          Teacher\n        </ion-segment-button>\n      </ion-segment>\n    </ion-col>\n  </ion-row>\n\n  <!-- User data -->\n  <ion-row *ngIf="currentChosenTab === \'1\'">\n    <!-- Edit and Save buttons -->\n    <ion-col col-12>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledAuth()" *ngIf="this.authDisabledBoolean === true">\n        <ion-icon name="ios-brush-outline"></ion-icon>\n        Edit\n      </button>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledAuth()" *ngIf="this.authDisabledBoolean === false">\n        <ion-icon name="md-checkmark"></ion-icon>\n        Save\n      </button>\n    </ion-col>\n    <!-- First Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="First Name" [(ngModel)]="this.profileProvider.profile.firstName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Last Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="Last Name" [(ngModel)]="this.profileProvider.profile.lastName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Email -->\n    <ion-col col-12>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="Email" [(ngModel)]="this.profileProvider.profile.email">\n      </mat-form-field>\n    </ion-col>\n  </ion-row>\n\n  <!-- Teacher data -->\n  <ion-row *ngIf="currentChosenTab === \'2\'">\n    <!-- Edit and Save buttons -->\n    <ion-col col-12>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledTeacher()" *ngIf="this.teacherDisabledBoolean === true">\n        <ion-icon name="ios-brush-outline"></ion-icon>\n        Edit\n      </button>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledTeacher()" *ngIf="this.teacherDisabledBoolean === false">\n        <ion-icon name="md-checkmark"></ion-icon>\n        Save\n      </button>\n    </ion-col>\n    <!-- First Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="First Name" [(ngModel)]="this.teacher.firstName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Last Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Last Name" [(ngModel)]="this.teacher.lastName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Age -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Age" [(ngModel)]="this.teacher.age">\n      </mat-form-field>\n    </ion-col>\n    <!-- Phone Number -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Phone Number" [(ngModel)]="this.teacher.phone">\n      </mat-form-field>\n    </ion-col>\n    <!--From Price -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="From Price" [(ngModel)]="this.teacher.priceFrom">\n      </mat-form-field>\n    </ion-col>\n    <!-- To Price -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="To Price" [(ngModel)]="this.teacher.priceTo">\n      </mat-form-field>\n    </ion-col>\n    <!-- Email -->\n    <ion-col col-12>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="40" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" [disabled]="this.teacherDisabledBoolean"\n          matInput placeholder="Email" [(ngModel)]="this.teacher.email">\n      </mat-form-field>\n    </ion-col>\n    <!-- Personal Message -->\n    <ion-col col-12>\n      <mat-form-field class="m-full-width">\n        <textarea matInput maxlength="200" [disabled]="this.teacherDisabledBoolean" rows="4" placeholder="Personal Message" [(ngModel)]="this.teacher.personalMessage"></textarea>\n      </mat-form-field>\n    </ion-col>\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacher-personal-details\teacher-personal-details.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__["AuthService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__["AuthService"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__providers_profile_profile__["a" /* ProfileProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_profile_profile__["a" /* ProfileProvider */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__["AuthService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__["AuthService"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__providers_common_common__["a" /* CommonProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_common_common__["a" /* CommonProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__providers_profile_profile__["a" /* ProfileProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_profile_profile__["a" /* ProfileProvider */]) === "function" && _f || Object])
 ], TeacherPersonalDetailsPage);
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=teacher-personal-details.js.map
 
 /***/ }),
 
-/***/ 193:
+/***/ 194:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -697,11 +862,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 193;
+webpackEmptyAsyncContext.id = 194;
 
 /***/ }),
 
-/***/ 235:
+/***/ 236:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -714,90 +879,7 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 235;
-
-/***/ }),
-
-/***/ 281:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_PageType_Enum__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_Navigationer__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_profile_profile__ = __webpack_require__(30);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var HomePage = (function () {
-    //#endregion
-    //#region Constructor
-    function HomePage(rd, navCtrl, profileProvider) {
-        this.rd = rd;
-        this.navCtrl = navCtrl;
-        this.profileProvider = profileProvider;
-        //#region Members
-        this.pageEnum = __WEBPACK_IMPORTED_MODULE_2__common_PageType_Enum__["a" /* PageType */];
-        this.navigationer = new __WEBPACK_IMPORTED_MODULE_3__common_Navigationer__["a" /* Navigationer */](this.navCtrl, this.profileProvider);
-    }
-    /**
-     * Activated animations to make the UI awesome.
-     */
-    HomePage.prototype.ionViewDidEnter = function () {
-        var _this = this;
-        setTimeout(function () {
-            _this.rd.removeClass(_this.subtitleAnimation.nativeElement, "m-opacity-0");
-            _this.rd.addClass(_this.subtitleAnimation.nativeElement, "fadeInDownBig");
-            setTimeout(function () {
-                _this.rd.removeClass(_this.buttonuAnimation.nativeElement, "m-opacity-0");
-                _this.rd.addClass(_this.buttonuAnimation.nativeElement, "fadeInDownBig");
-                setTimeout(function () {
-                    _this.rd.removeClass(_this.buttonuAnimation.nativeElement, "fadeInDownBig");
-                    _this.rd.addClass(_this.buttonuAnimation.nativeElement, "bounce");
-                }, 2000);
-            }, 800);
-        }, 600);
-    };
-    /**
-     * Removes animated classes from the inputs.
-     */
-    HomePage.prototype.ionViewDidLeave = function () {
-        this.rd.removeClass(this.subtitleAnimation.nativeElement, "animated");
-        this.rd.removeClass(this.buttonuAnimation.nativeElement, "animated");
-    };
-    return HomePage;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewChild"])('subtitleAnimation'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"])
-], HomePage.prototype, "subtitleAnimation", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewChild"])('buttonuAnimation'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"])
-], HomePage.prototype, "buttonuAnimation", void 0);
-HomePage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">StudyHub</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-white">\n      <div (click)="navigationer.navigateToPage(pageEnum.Favorites)" class="animated flip">\n        <ion-icon name="ios-bookmark-outline"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div text-center class="m-background-2b3137 m-margin-top0">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-43px m-font-weight-300">\n            For students and private teachers\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row #subtitleAnimation class="animated m-opacity-0">\n        <ion-col col-12>\n          <div class="m-font-size-20px m-color-white m-font-weight-300 m-opacity-6">\n            StudyHub is a study platform where you can find teachers\n            <font class="m-color-white">from your home</font>. Manage your teachers & Teach other people.\n          </div>\n        </ion-col>\n        <ion-col col-12>\n          <div class="m-font-size-20px m-color-white m-font-weight-300">\n            <b>Keep it simple and fun</b>\n          </div>\n        </ion-col>\n      </ion-row>\n\n      <!-- Start using button -->\n      <ion-row #buttonuAnimation class="animated m-opacity-0">\n        <ion-col col-12>\n          <button ion-button color="secondary" (click)="navigationer.navigateToPage(pageEnum.Search)">\n            <b>Start using StudyHub</b>\n          </button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n    <ion-grid>\n\n      <!-- StudyHub for individuals title -->\n      <ion-row text-center class="m-padding-buttom-15px m-padding-top-15px">\n        <ion-col col-12>\n          StudyHub for individuals\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for individuals subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n\n          <font class="m-font-size-17px m-font-weight-300 m-color-586069">As individual user at StudyHub you can find teachers around Israel, talk with them directly at WhatsApp, rank teachers\n            and tell your opinion about them.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for teachers title -->\n      <ion-row text-center class="m-padding-buttom-15px m-padding-top-15px">\n        <ion-col col-12>\n          StudyHub for teachers\n        </ion-col>\n      </ion-row>\n\n      <!-- StudyHub for teachers subtitle -->\n      <ion-row text-center>\n        <ion-col col-12>\n\n          <font class="m-font-size-17px m-font-weight-300 m-color-586069">\n            As a teacher at StudyHub you\'ll be shown at students searches over the app, you will have your own profile and you will be\n            able to manage it as you wish.\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Join as teacher button -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <button ion-button outline color="primary" (click)="navigationer.navigateToPage(pageEnum.JoinAsTeacher)" icon-start>\n            <ion-icon name="ios-person-add-outline"></ion-icon>\n            Join as teacher\n          </button>\n        </ion-col>\n      </ion-row>\n\n      <!-- Slider -->\n      <ion-row>\n        <ion-col col-12>\n          <ion-slides autoplay="3000" effect="slider" centeredSlides="true" loop="true" pager="true" speed="800">\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider1.jpeg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider4.jpg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider3.jpeg" />\n            </ion-slide>\n            <ion-slide>\n              <img src="assets\\imgs\\StudySlider2.jpg" />\n            </ion-slide>\n          </ion-slides>\n        </ion-col>\n      </ion-row>\n\n      <hr>\n\n      <ion-row>\n        <ion-col col-12>\n          <font class="m-font-size-25px">\n            <b>StudyHub - Owner</b>\n          </font>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col col-12>\n          Moshe Binieli\n        </ion-col>\n        <ion-col col-12>\n          mmoshikoo@gmail.com\n        </ion-col>\n        <ion-col col-12>\n          Computer Science Student and Full Stack Developer.\n        </ion-col>\n        <ion-col col-12>\n\n          <button ion-button outline color="dark" small icon-start (click)="navigationer.navigateToPage(pageEnum.ContactUs)">\n            <ion-icon name="ios-contacts"></ion-icon>Contact us</button>\n\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\home\home.html"*/
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"],
-        __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["i" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_4__providers_profile_profile__["a" /* ProfileProvider */]])
-], HomePage);
-
-//# sourceMappingURL=home.js.map
+webpackEmptyAsyncContext.id = 236;
 
 /***/ }),
 
@@ -857,7 +939,7 @@ AdminPage = __decorate([
 "use strict";
 /* unused harmony export MyErrorStateMatcher */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactusPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(17);
@@ -1007,7 +1089,7 @@ ContactusPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_api_api__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_Navigationer__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__singleteacher_singleteacher__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__singleteacher_singleteacher__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_favorites_manager_favorites_manager__ = __webpack_require__(72);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1313,7 +1395,7 @@ LocalStorageProvider = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_api_api__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__singleteacher_singleteacher__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__singleteacher_singleteacher__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_favorites_manager_favorites_manager__ = __webpack_require__(72);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1568,7 +1650,7 @@ TeacherslistPage = __decorate([
 "use strict";
 /* unused harmony export MyErrorStateMatcher */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewTeacherFormPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validator_lib_isEmail__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_image_compress__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_image_compress___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_image_compress__);
@@ -2099,6 +2181,7 @@ var PageType;
     PageType[PageType["NewTeacherForm"] = 32] = "NewTeacherForm";
     PageType[PageType["TeacherDetails"] = 64] = "TeacherDetails";
     PageType[PageType["Admin"] = 128] = "Admin";
+    PageType[PageType["Home"] = 256] = "Home";
 })(PageType || (PageType = {}));
 //# sourceMappingURL=PageType.Enum.js.map
 
@@ -2115,9 +2198,9 @@ var PageType;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_PageType_Enum__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_Navigationer__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__ = __webpack_require__(118);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__ = __webpack_require__(133);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular4_social_login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angular4_social_login__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2392,13 +2475,13 @@ Object(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular_2_local_storage__ = __webpack_require__(292);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular_2_local_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_angular_2_local_storage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ionic_angular__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_home_home__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_home_home__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_api_api__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_admin_admin__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__ = __webpack_require__(276);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pipes_gender_gender__ = __webpack_require__(717);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_search_search__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_search_search__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__ = __webpack_require__(281);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_settings_settings__ = __webpack_require__(381);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_common_common__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_favorites_favorites__ = __webpack_require__(289);
@@ -2407,14 +2490,14 @@ Object(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_profile_profile__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pipes_teaches_at_teaches_at__ = __webpack_require__(718);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_teacherslist_teacherslist__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_singleteacher_singleteacher__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_singleteacher_singleteacher__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_local_storage_local_storage__ = __webpack_require__(291);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_new_teacher_form_new_teacher_form__ = __webpack_require__(296);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pipes_teaches_subjects_teaches_subjects__ = __webpack_require__(719);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_new_teacher_login_new_teacher_login__ = __webpack_require__(380);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_favorites_manager_favorites_manager__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pipes_teaches_institutions_teaches_institutions__ = __webpack_require__(720);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_teacher_personal_details_teacher_personal_details__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_teacher_personal_details_teacher_personal_details__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__angular_material_menu__ = __webpack_require__(721);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__angular_material_tabs__ = __webpack_require__(722);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__angular_material_input__ = __webpack_require__(724);
@@ -2422,7 +2505,7 @@ Object(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_rate_show_rate_show__ = __webpack_require__(727);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__angular_material_autocomplete__ = __webpack_require__(728);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__angular_platform_browser_animations__ = __webpack_require__(729);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38_angular4_social_login__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38_angular4_social_login__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38_angular4_social_login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_38_angular4_social_login__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2583,15 +2666,15 @@ AppModule = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(280);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(281);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_search_search__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_search_search__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(381);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular4_social_login__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular4_social_login__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular4_social_login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular4_social_login__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_profile_profile__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_teacher_personal_details_teacher_personal_details__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_teacher_personal_details_teacher_personal_details__ = __webpack_require__(179);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2633,14 +2716,25 @@ var MyApp = (function () {
             ];
         });
     }
+    //#endregion
+    //#region Public Methods
+    /**
+     * Sets the components to be root of the page.
+     */
     MyApp.prototype.openPage = function (page) {
         this.nav.setRoot(page.component);
     };
+    /**
+     * Signed out from auth Service from NPM Package and from provier of Profile.
+     */
     MyApp.prototype.signOut = function () {
         var _this = this;
         this.authService.signOut()
             .then(function () { return _this.profileProvider.SetUserLoggedOut(); });
     };
+    /**
+     * Switches to use details page and close the menu.
+     */
     MyApp.prototype.goToUserDetailsPage = function () {
         this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_9__pages_teacher_personal_details_teacher_personal_details__["a" /* TeacherPersonalDetailsPage */]);
         this.menuCtrl.close();
@@ -2671,15 +2765,17 @@ MyApp = __decorate([
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Navigationer; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PageType_Enum__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_admin_admin__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_search_search__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_contactus_contactus__ = __webpack_require__(287);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_favorites_favorites__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_teacherslist_teacherslist__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_new_teacher_form_new_teacher_form__ = __webpack_require__(296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_new_teacher_login_new_teacher_login__ = __webpack_require__(380);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_teacher_personal_details_teacher_personal_details__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_home_home__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_admin_admin__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_search_search__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_contactus_contactus__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_favorites_favorites__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_teacherslist_teacherslist__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_new_teacher_form_new_teacher_form__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_new_teacher_login_new_teacher_login__ = __webpack_require__(380);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_teacher_personal_details_teacher_personal_details__ = __webpack_require__(179);
+
 
 
 
@@ -2700,34 +2796,37 @@ var Navigationer = (function () {
     Navigationer.prototype.navigateToPage = function (page, params) {
         if (params === void 0) { params = null; }
         switch (page) {
-            case __WEBPACK_IMPORTED_MODULE_0__PageType_Enum__["a" /* PageType */].Search:
-                this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_search_search__["a" /* SearchPage */], params);
+            case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].Home:
+                this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_0__pages_home_home__["a" /* HomePage */], params);
                 break;
-            case __WEBPACK_IMPORTED_MODULE_0__PageType_Enum__["a" /* PageType */].ContactUs:
-                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_contactus_contactus__["a" /* ContactusPage */], params);
+            case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].Search:
+                this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_search_search__["a" /* SearchPage */], params);
                 break;
-            case __WEBPACK_IMPORTED_MODULE_0__PageType_Enum__["a" /* PageType */].JoinAsTeacher:
+            case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].ContactUs:
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__pages_contactus_contactus__["a" /* ContactusPage */], params);
+                break;
+            case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].JoinAsTeacher:
                 if (this.profileProvider.isLoggedIn == true) {
-                    this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__pages_new_teacher_form_new_teacher_form__["a" /* NewTeacherFormPage */], params);
+                    this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__pages_new_teacher_form_new_teacher_form__["a" /* NewTeacherFormPage */], params);
                 }
                 else {
-                    this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__pages_new_teacher_login_new_teacher_login__["a" /* NewTeacherLoginPage */], params);
+                    this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__pages_new_teacher_login_new_teacher_login__["a" /* NewTeacherLoginPage */], params);
                 }
                 break;
-            case __WEBPACK_IMPORTED_MODULE_0__PageType_Enum__["a" /* PageType */].Favorites:
-                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__pages_favorites_favorites__["a" /* FavoritesPage */], params);
+            case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].Favorites:
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__pages_favorites_favorites__["a" /* FavoritesPage */], params);
                 break;
-            case __WEBPACK_IMPORTED_MODULE_0__PageType_Enum__["a" /* PageType */].TeacherList:
-                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__pages_teacherslist_teacherslist__["a" /* TeacherslistPage */], params);
+            case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].TeacherList:
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__pages_teacherslist_teacherslist__["a" /* TeacherslistPage */], params);
                 break;
-            case __WEBPACK_IMPORTED_MODULE_0__PageType_Enum__["a" /* PageType */].NewTeacherForm:
-                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__pages_new_teacher_form_new_teacher_form__["a" /* NewTeacherFormPage */], params);
+            case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].NewTeacherForm:
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__pages_new_teacher_form_new_teacher_form__["a" /* NewTeacherFormPage */], params);
                 break;
-            case __WEBPACK_IMPORTED_MODULE_0__PageType_Enum__["a" /* PageType */].TeacherDetails:
-                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__pages_teacher_personal_details_teacher_personal_details__["a" /* TeacherPersonalDetailsPage */], params);
+            case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].TeacherDetails:
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__pages_teacher_personal_details_teacher_personal_details__["a" /* TeacherPersonalDetailsPage */], params);
                 break;
-            case __WEBPACK_IMPORTED_MODULE_0__PageType_Enum__["a" /* PageType */].Admin:
-                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_1__pages_admin_admin__["a" /* AdminPage */], params);
+            case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].Admin:
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__pages_admin_admin__["a" /* AdminPage */], params);
                 break;
             default:
                 console.log('Not found the requested page ' + page);

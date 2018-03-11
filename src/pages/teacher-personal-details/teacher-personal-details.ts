@@ -5,6 +5,7 @@ import { IonicPage, NavController, AlertController } from 'ionic-angular';
 import { AuthService } from 'angular4-social-login';
 import { PageType } from './../../common/PageType.Enum';
 import { Navigationer } from './../../common/Navigationer';
+import { CommonProvider } from './../../providers/common/common';
 import { ProfileProvider } from './../../providers/profile/profile';
 import { TeacherInterface } from '../../interface/Teacher.interface';
 
@@ -31,6 +32,7 @@ export class TeacherPersonalDetailsPage {
     public authService: AuthService,
     public apiProvider: ApiProvider,
     public alertCtrl: AlertController,
+    public commonProvider: CommonProvider,
     public profileProvider: ProfileProvider
   ) {
     this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
@@ -56,7 +58,7 @@ export class TeacherPersonalDetailsPage {
   */
   public toggleDisabledAuth() {
     if (this.authDisabledBoolean === false) {
-      this.SaveAuthModelChanges();
+      this.saveAuthModelChanges();
     }
     this.authDisabledBoolean = !this.authDisabledBoolean;
   }
@@ -66,7 +68,7 @@ export class TeacherPersonalDetailsPage {
   */
   public toggleDisabledTeacher() {
     if (this.teacherDisabledBoolean === false) {
-      this.SaveTeacherModelChanges();
+      this.saveTeacherModelChanges();
     }
     this.teacherDisabledBoolean = !this.teacherDisabledBoolean;
   }
@@ -76,7 +78,7 @@ export class TeacherPersonalDetailsPage {
   /** 
    * Error function when receiving the teacher information fails.
   */
-  private failureGetDataExecution() {
+  private failureGetDataExecution(): void {
     this.authService.signOut();
     this.navigationer.navigateToPage(this.pageEnum.Home);
 
@@ -91,7 +93,7 @@ export class TeacherPersonalDetailsPage {
   /**
    * Opens dialog and asks if the user wants to make the changes, in case he does a HTTP request with changes will occure.
    */
-  private SaveAuthModelChanges() {
+  private saveAuthModelChanges(): void {
     let alert = this.alertCtrl.create({
       title: 'Confirm the changes',
       message: 'Are you sure you want to save the user changes?  *You cannot restore your data after the change*',
@@ -106,7 +108,7 @@ export class TeacherPersonalDetailsPage {
         {
           text: 'Yes',
           handler: () => {
-            console.log('Yes clicked');
+            this.updateAuthModelAtServer();
           }
         }
       ]
@@ -117,7 +119,7 @@ export class TeacherPersonalDetailsPage {
   /**
    * Opens dialog and asks if the user wants to make the changes, in case he does a HTTP request with changes will occure.
    */
-  private SaveTeacherModelChanges() {
+  private saveTeacherModelChanges(): void {
     let alert = this.alertCtrl.create({
       title: 'Confirm the changes',
       message: 'Are you sure you want to save the teacher changes?  *You cannot restore your data after the change*',
@@ -132,12 +134,95 @@ export class TeacherPersonalDetailsPage {
         {
           text: 'Yes',
           handler: () => {
-            console.log('Yes clicked');
+            this.updateTeacherModelAtServer();
           }
         }
       ]
     });
     alert.present();
+  }
+
+  /**
+   * Updates model at database.
+   */
+  private updateAuthModelAtServer(): void {
+    if (!this.isAuthModelValidToUpdate()) {
+      // Error Message
+      return;
+    }
+  }
+
+  /**
+   * Updates model at database.
+   */
+  private updateTeacherModelAtServer(): void {
+    if (!this.isTeacherModelValidToUpdate()) {
+      // Error Message
+      return;
+    }
+
+    // Update
+  }
+
+  /**
+   * Validates whether the model can be updated and it's in correct format.
+   */
+  private isAuthModelValidToUpdate(): boolean {
+    if (this.isPropertyNullOrUndefined(this.profileProvider.profile)
+      || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.email)
+      || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.firstName)
+      || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.lastName)) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  /**
+   * 
+   */
+  private isTeacherModelValidToUpdate(): boolean {
+    if (this.isPropertyNullOrUndefined(this.teacher)
+      || this.isPropertyNullOrUndefined(this.teacher.age)
+      || this.isPropertyNullOrUndefined(this.teacher.priceFrom)
+      || this.isPropertyNullOrUndefined(this.teacher.priceTo)
+      || this.teacher.age < 18
+      || this.teacher.priceFrom < 0 || this.teacher.priceFrom > 200
+      || this.teacher.priceTo > 0 || this.teacher.priceTo > 200
+      || this.teacher.priceFrom > this.teacher.priceTo
+      || this.isStringNullOrUndefinedOrEmpty(this.teacher.firstName)
+      || this.isStringNullOrUndefinedOrEmpty(this.teacher.lastName)
+      || this.isStringNullOrUndefinedOrEmpty(this.teacher.email)
+      || this.isStringNullOrUndefinedOrEmpty(this.teacher.personalMessage)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /**
+   * Checks whether the property is null or undefined.
+   */
+  private isPropertyNullOrUndefined(property: any): boolean {
+    if (property === null || property === undefined) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  /**
+   * Checks whether the property is null or undefined or string is empty.
+   */
+  private isStringNullOrUndefinedOrEmpty(property: string): boolean {
+    if (property === null || property === undefined || property === "") {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
   //#endregion
 }

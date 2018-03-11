@@ -147,9 +147,12 @@ export class TeacherPersonalDetailsPage {
    */
   private updateAuthModelAtServer(): void {
     if (!this.isAuthModelValidToUpdate()) {
-      // Error Message
+      this.errorAlertBadInputsAtUpdate();
+      this.authDisabledBoolean = false;
       return;
     }
+
+    // Update
   }
 
   /**
@@ -157,7 +160,8 @@ export class TeacherPersonalDetailsPage {
    */
   private updateTeacherModelAtServer(): void {
     if (!this.isTeacherModelValidToUpdate()) {
-      // Error Message
+      this.errorAlertBadInputsAtUpdate();
+      this.teacherDisabledBoolean = false;
       return;
     }
 
@@ -224,5 +228,18 @@ export class TeacherPersonalDetailsPage {
       return true;
     }
   }
+
+  /** 
+   * Alert for bad inputs at update.
+  */
+  private errorAlertBadInputsAtUpdate() {
+    let alert = this.alertCtrl.create({
+      title: 'Incorrect Data',
+      subTitle: 'One or more values are not correct or doesn\'t match at User and Teacher, please fill them correctly.',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+}
   //#endregion
 }

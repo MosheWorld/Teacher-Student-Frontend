@@ -1,3 +1,4 @@
+import { HomePage } from './../pages/home/home';
 import { NavController } from "ionic-angular/navigation/nav-controller";
 
 import { PageType } from "./PageType.Enum";
@@ -22,6 +23,10 @@ export class Navigationer {
     //#region Public Methods
     public navigateToPage(page: number, params: any = null): void {
         switch (page) {
+            case PageType.Home:
+                this.navCtrl.setRoot(HomePage, params);
+                break;
+
             case PageType.Search:
                 this.navCtrl.setRoot(SearchPage, params);
                 break;

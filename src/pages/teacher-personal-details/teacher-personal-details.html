@@ -32,8 +32,34 @@
 
   <!-- User data -->
   <ion-row *ngIf="currentChosenTab === '1'">
+    <!-- Edit and Save buttons -->
     <ion-col col-12>
-      {{this.profileProvider.profile | json}}
+      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledAuth()" *ngIf="this.authDisabledBoolean === true">
+        <ion-icon name="ios-brush-outline"></ion-icon>
+        Edit
+      </button>
+      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledAuth()" *ngIf="this.authDisabledBoolean === false">
+        <ion-icon name="md-checkmark"></ion-icon>
+        Save
+      </button>
+    </ion-col>
+    <!-- First Name -->
+    <ion-col col-6>
+      <mat-form-field class="m-full-width">
+        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="First Name" [(ngModel)]="this.profileProvider.profile.firstName">
+      </mat-form-field>
+    </ion-col>
+    <!-- Last Name -->
+    <ion-col col-6>
+      <mat-form-field class="m-full-width">
+        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="Last Name" [(ngModel)]="this.profileProvider.profile.lastName">
+      </mat-form-field>
+    </ion-col>
+    <!-- Email -->
+    <ion-col col-12>
+      <mat-form-field class="m-full-width">
+        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="Email" [(ngModel)]="this.profileProvider.profile.email">
+      </mat-form-field>
     </ion-col>
   </ion-row>
 
@@ -42,5 +68,41 @@
     <ion-col col-12>
       {{this.teacher | json}}
     </ion-col>
+    <!-- Edit and Save buttons -->
+    <ion-col col-12>
+      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledTeacher()" *ngIf="this.teacherDisabledBoolean === true">
+        <ion-icon name="ios-brush-outline"></ion-icon>
+        Edit
+      </button>
+      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledTeacher()" *ngIf="this.teacherDisabledBoolean === false">
+        <ion-icon name="md-checkmark"></ion-icon>
+        Save
+      </button>
+    </ion-col>
+    <!-- First Name -->
+    <ion-col col-6>
+      <mat-form-field class="m-full-width">
+        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="First Name" [(ngModel)]="this.teacher.firstName">
+      </mat-form-field>
+    </ion-col>
+    <!-- Last Name -->
+    <ion-col col-6>
+      <mat-form-field class="m-full-width">
+        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Last Name" [(ngModel)]="this.teacher.lastName">
+      </mat-form-field>
+    </ion-col>
+    <!-- Age -->
+    <ion-col col-6>
+      <mat-form-field class="m-full-width">
+        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Age" [(ngModel)]="this.teacher.age">
+      </mat-form-field>
+    </ion-col>
+    <!-- Phone Number -->
+    <ion-col col-6>
+      <mat-form-field class="m-full-width">
+        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Phone Number" [(ngModel)]="this.teacher.phone">
+      </mat-form-field>
+    </ion-col>
   </ion-row>
+
 </ion-content>

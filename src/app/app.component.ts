@@ -43,16 +43,27 @@ export class MyApp {
 
     });
   }
+  //#endregion
 
+  //#region Public Methods
+  /**
+   * Sets the components to be root of the page.
+   */
   public openPage(page) {
     this.nav.setRoot(page.component);
   }
 
+  /**
+   * Signed out from auth Service from NPM Package and from provier of Profile.
+   */
   public signOut(): void {
     this.authService.signOut()
       .then(() => this.profileProvider.SetUserLoggedOut());
   }
 
+  /**
+   * Switches to use details page and close the menu.
+   */
   public goToUserDetailsPage() {
     this.nav.setRoot(TeacherPersonalDetailsPage);
     this.menuCtrl.close();

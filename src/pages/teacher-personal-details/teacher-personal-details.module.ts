@@ -4,7 +4,7 @@ import { TeacherPersonalDetailsPage } from './teacher-personal-details';
 
 @NgModule({
   declarations: [
-    TeacherPersonalDetailsPage,
+    // TeacherPersonalDetailsPage,
   ],
   imports: [
     IonicPageModule.forChild(TeacherPersonalDetailsPage),

@@ -539,9 +539,11 @@ SingleteacherPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_api_api__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_PageType_Enum__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_Navigationer__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular4_social_login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular4_social_login__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_PageType_Enum__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_Navigationer__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_profile_profile__ = __webpack_require__(30);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -557,37 +559,127 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var TeacherPersonalDetailsPage = (function () {
     //#endregion
     //#region Constructor
-    function TeacherPersonalDetailsPage(navCtrl, profileProvider, apiProvider) {
+    function TeacherPersonalDetailsPage(navCtrl, authService, apiProvider, alertCtrl, profileProvider) {
         this.navCtrl = navCtrl;
-        this.profileProvider = profileProvider;
+        this.authService = authService;
         this.apiProvider = apiProvider;
+        this.alertCtrl = alertCtrl;
+        this.profileProvider = profileProvider;
         //#region Members
-        this.pageEnum = __WEBPACK_IMPORTED_MODULE_3__common_PageType_Enum__["a" /* PageType */];
+        this.pageEnum = __WEBPACK_IMPORTED_MODULE_4__common_PageType_Enum__["a" /* PageType */];
         this.currentChosenTab = "1";
-        this.navigationer = new __WEBPACK_IMPORTED_MODULE_4__common_Navigationer__["a" /* Navigationer */](this.navCtrl, this.profileProvider);
-        this.GetTeacherInformationOfUser();
+        this.authDisabledBoolean = true;
+        this.teacherDisabledBoolean = true;
+        this.navigationer = new __WEBPACK_IMPORTED_MODULE_5__common_Navigationer__["a" /* Navigationer */](this.navCtrl, this.profileProvider);
+        this.getTeacherInformationOfUser();
     }
     //#endregion
     //#region Public Methods
-    TeacherPersonalDetailsPage.prototype.GetTeacherInformationOfUser = function () {
+    /**
+     * Receives teacher model according to given user token.
+    */
+    TeacherPersonalDetailsPage.prototype.getTeacherInformationOfUser = function () {
         var _this = this;
         this.apiProvider.httpGet('teacher/getteacherbytoken')
-            .subscribe(function (success) { _this.teacher = success; console.log(_this.teacher); }, function (failure) { console.log(failure); });
+            .subscribe(function (success) { _this.teacher = success; }, function (failure) { _this.failureGetDataExecution(); });
+    };
+    /**
+     * Toggles the boolean field, and in case it switches from false to true we will execute changes saving to server.
+    */
+    TeacherPersonalDetailsPage.prototype.toggleDisabledAuth = function () {
+        if (this.authDisabledBoolean === false) {
+            this.SaveAuthModelChanges();
+        }
+        this.authDisabledBoolean = !this.authDisabledBoolean;
+    };
+    /**
+     * Toggles the boolean field, and in case it switches from false to true we will execute changes saving to server.
+    */
+    TeacherPersonalDetailsPage.prototype.toggleDisabledTeacher = function () {
+        if (this.teacherDisabledBoolean === false) {
+            this.SaveTeacherModelChanges();
+        }
+        this.teacherDisabledBoolean = !this.teacherDisabledBoolean;
+    };
+    //#endregion
+    //#region Private Methods
+    /**
+     * Error function when receiving the teacher information fails.
+    */
+    TeacherPersonalDetailsPage.prototype.failureGetDataExecution = function () {
+        this.authService.signOut();
+        this.navigationer.navigateToPage(this.pageEnum.Home);
+        var alert = this.alertCtrl.create({
+            title: 'Something went wrong!',
+            subTitle: 'While getting your teacher information something went wrong, please contact the developer, Sorry!',
+            buttons: ['OK']
+        });
+        alert.present();
+    };
+    /**
+     * Opens dialog and asks if the user wants to make the changes, in case he does a HTTP request with changes will occure.
+     */
+    TeacherPersonalDetailsPage.prototype.SaveAuthModelChanges = function () {
+        var alert = this.alertCtrl.create({
+            title: 'Confirm the changes',
+            message: 'Are you sure you want to save the user changes?  *You cannot restore your data after the change*',
+            buttons: [
+                {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('No clicked');
+                    }
+                },
+                {
+                    text: 'Yes',
+                    handler: function () {
+                        console.log('Yes clicked');
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    /**
+     * Opens dialog and asks if the user wants to make the changes, in case he does a HTTP request with changes will occure.
+     */
+    TeacherPersonalDetailsPage.prototype.SaveTeacherModelChanges = function () {
+        var alert = this.alertCtrl.create({
+            title: 'Confirm the changes',
+            message: 'Are you sure you want to save the teacher changes?  *You cannot restore your data after the change*',
+            buttons: [
+                {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('No clicked');
+                    }
+                },
+                {
+                    text: 'Yes',
+                    handler: function () {
+                        console.log('Yes clicked');
+                    }
+                }
+            ]
+        });
+        alert.present();
     };
     return TeacherPersonalDetailsPage;
 }());
 TeacherPersonalDetailsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-teacher-personal-details',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacher-personal-details\teacher-personal-details.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Hey {{this.profileProvider.profile.firstName}}</font>\n    </ion-title>\n    <ion-buttons *ngIf="this.profileProvider.profile.role === 2" end icon-only class="m-color-white">\n      <div (click)="navigationer.navigateToPage(pageEnum.Admin)">\n        <ion-icon name="ios-unlock-outline"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- User + Teacher Header of tabs -->\n  <ion-row>\n    <ion-col col-12>\n      <ion-segment [(ngModel)]="currentChosenTab">\n        <ion-segment-button value="1" class="m-font-size-10px-impo">\n          User\n        </ion-segment-button>\n        <ion-segment-button value="2" class="m-font-size-10px-impo">\n          Teacher\n        </ion-segment-button>\n      </ion-segment>\n    </ion-col>\n  </ion-row>\n\n  <!-- User data -->\n  <ion-row *ngIf="currentChosenTab === \'1\'">\n    <ion-col col-12>\n      {{this.profileProvider.profile | json}}\n    </ion-col>\n  </ion-row>\n\n  <!-- Teacher data -->\n  <ion-row *ngIf="currentChosenTab === \'2\'">\n    <ion-col col-12>\n      {{this.teacher | json}}\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacher-personal-details\teacher-personal-details.html"*/,
+        selector: 'page-teacher-personal-details',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacher-personal-details\teacher-personal-details.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Hey {{this.profileProvider.profile.firstName}}</font>\n    </ion-title>\n    <ion-buttons *ngIf="this.profileProvider.profile.role === 2" end icon-only class="m-color-white">\n      <div (click)="navigationer.navigateToPage(pageEnum.Admin)">\n        <ion-icon name="ios-unlock-outline"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- User + Teacher Header of tabs -->\n  <ion-row>\n    <ion-col col-12>\n      <ion-segment [(ngModel)]="currentChosenTab">\n        <ion-segment-button value="1" class="m-font-size-10px-impo">\n          User\n        </ion-segment-button>\n        <ion-segment-button value="2" class="m-font-size-10px-impo">\n          Teacher\n        </ion-segment-button>\n      </ion-segment>\n    </ion-col>\n  </ion-row>\n\n  <!-- User data -->\n  <ion-row *ngIf="currentChosenTab === \'1\'">\n    <!-- Edit and Save buttons -->\n    <ion-col col-12>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledAuth()" *ngIf="this.authDisabledBoolean === true">\n        <ion-icon name="ios-brush-outline"></ion-icon>\n        Edit\n      </button>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledAuth()" *ngIf="this.authDisabledBoolean === false">\n        <ion-icon name="md-checkmark"></ion-icon>\n        Save\n      </button>\n    </ion-col>\n    <!-- First Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="First Name" [(ngModel)]="this.profileProvider.profile.firstName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Last Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="Last Name" [(ngModel)]="this.profileProvider.profile.lastName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Email -->\n    <ion-col col-12>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="Email" [(ngModel)]="this.profileProvider.profile.email">\n      </mat-form-field>\n    </ion-col>\n  </ion-row>\n\n  <!-- Teacher data -->\n  <ion-row *ngIf="currentChosenTab === \'2\'">\n    <ion-col col-12>\n      {{this.teacher | json}}\n    </ion-col>\n    <!-- Edit and Save buttons -->\n    <ion-col col-12>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledTeacher()" *ngIf="this.teacherDisabledBoolean === true">\n        <ion-icon name="ios-brush-outline"></ion-icon>\n        Edit\n      </button>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledTeacher()" *ngIf="this.teacherDisabledBoolean === false">\n        <ion-icon name="md-checkmark"></ion-icon>\n        Save\n      </button>\n    </ion-col>\n    <!-- First Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="First Name" [(ngModel)]="this.teacher.firstName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Last Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Last Name" [(ngModel)]="this.teacher.lastName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Age -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Age" [(ngModel)]="this.teacher.age">\n      </mat-form-field>\n    </ion-col>\n    <!-- Phone Number -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Phone Number" [(ngModel)]="this.teacher.phone">\n      </mat-form-field>\n    </ion-col>\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacher-personal-details\teacher-personal-details.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__["a" /* ProfileProvider */],
-        __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__["AuthService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__["AuthService"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__providers_profile_profile__["a" /* ProfileProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_profile_profile__["a" /* ProfileProvider */]) === "function" && _e || Object])
 ], TeacherPersonalDetailsPage);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=teacher-personal-details.js.map
 
 /***/ }),
@@ -890,7 +982,7 @@ var ContactusPage = (function () {
 }());
 ContactusPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-contactus',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\contactus\contactus.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Contact Us</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-30px m-font-weight-300">\n            What is your opinion?\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          You can send us anything you wish, feedback, recommendation, new ideas, bugs you\'ve found, or even send message for fun,\n          we\'ll try to comment as soon as possible.\n        </ion-col>\n      </ion-row>\n\n      <!-- Direct contant -->\n      <ion-row text-left>\n        <ion-col col-12>\n          <font class="m-color-orange">You can contact the owner of this application by:</font>\n        </ion-col>\n        <ion-col col-12>\n          <font class="m-color-c2bbbb">Email: mmoshikoo@gmail.com</font>\n        </ion-col>\n        <ion-col col-12>\n          <font class="m-color-c2bbbb">Phone: 0542477052</font>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- Form -->\n      <form class="m-form">\n\n        <!-- Full name and Reason to contact -->\n        <ion-row>\n          <!-- Full name -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" maxlength="24" matInput placeholder="Full name" [formControl]="fullNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>First name and Last name</mat-hint>\n              <mat-error *ngIf="fullNameFormControl.hasError(\'required\')">\n                Full name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Reason to contact -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Reason to contact" [formControl]="contactReasonFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.reasonToContactArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>Why do you want to contact us?</mat-hint>\n              <mat-error *ngIf="contactReasonFormControl.hasError(\'required\')">You must make a selection.</mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Email -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <input type="email" maxlength="40" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput placeholder="Email" [formControl]="emailFormControl"\n                [errorStateMatcher]="matcher">\n              <mat-hint>Ex: Email@gmail.com</mat-hint>\n              <mat-error *ngIf="emailFormControl.hasError(\'email\') && !emailFormControl.hasError(\'required\')">\n                Please enter a valid email address.\n              </mat-error>\n              <mat-error *ngIf="emailFormControl.hasError(\'required\')">\n                Email is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Message -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <textarea matInput maxlength="200" rows="4" placeholder="Personal Message" [formControl]="messageFormControl" [errorStateMatcher]="matcher"></textarea>\n              <mat-hint align="start">Tell us your ideas, we will be happy to know.</mat-hint>\n              <mat-hint align="end">{{messageFormControl.value.length}} / 200</mat-hint>\n              <mat-error *ngIf="messageFormControl.hasError(\'minlength\') && !messageFormControl.hasError(\'required\')">\n                Minimum words are 10.\n              </mat-error>\n              <mat-error *ngIf="messageFormControl.hasError(\'maxlength\') && !messageFormControl.hasError(\'required\')">\n                Maximum words are 200.\n              </mat-error>\n              <mat-error *ngIf="messageFormControl.hasError(\'required\')">\n                Write down something.\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n          <ion-col col-12>\n            <font class="m-color-red">Please fill the requested fields.</font>\n          </ion-col>\n        </ion-row>\n\n        \n      <!-- Buttons -->\n      <ion-row>\n        <ion-col col-6>\n          <button ion-button outline icon-start color="primary" block (click)="sendContactUsForm();">\n            <ion-icon name="ios-send-outline"></ion-icon>\n            Send\n          </button>\n        </ion-col>\n        <ion-col col-6>\n          <button ion-button outline icon-start color="secondary" block (click)="openWhatsApp();">\n            <ion-icon name="logo-whatsapp"></ion-icon>\n            WhatsApp\n          </button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\contactus\contactus.html"*/,
+        selector: 'page-contactus',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\contactus\contactus.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Contact Us</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-30px m-font-weight-300">\n            What is your opinion?\n          </font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          You can send us anything you wish, feedback, recommendation, new ideas, bugs you\'ve found, or even send message for fun,\n          we\'ll try to comment as soon as possible.\n        </ion-col>\n      </ion-row>\n\n      <!-- Direct contant -->\n      <ion-row text-left>\n        <ion-col col-12>\n          <font class="m-color-orange">You can contact the owner of this application by:</font>\n        </ion-col>\n        <ion-col col-12>\n          <font class="m-color-c2bbbb">Email: mmoshikoo@gmail.com</font>\n        </ion-col>\n        <ion-col col-12>\n          <font class="m-color-c2bbbb">Phone: 0542477052</font>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <!-- Form -->\n      <form class="m-form">\n\n        <!-- Full name and Reason to contact -->\n        <ion-row>\n          <!-- Full name -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <input type="text" maxlength="24" matInput placeholder="Full name" [formControl]="fullNameFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>First name and Last name</mat-hint>\n              <mat-error *ngIf="fullNameFormControl.hasError(\'required\')">\n                Full name is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n          <!-- Reason to contact -->\n          <ion-col col-6>\n            <mat-form-field class="m-full-width">\n              <mat-select placeholder="Reason to contact" [formControl]="contactReasonFormControl" [errorStateMatcher]="matcher">\n                <mat-option *ngFor="let item of commonProvider.reasonToContactArray" [value]="item.value">\n                  {{ item.viewValue }}\n                </mat-option>\n              </mat-select>\n              <mat-hint>Why do you want to contact us?</mat-hint>\n              <mat-error *ngIf="contactReasonFormControl.hasError(\'required\')">You must make a selection.</mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Email -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <input type="email" maxlength="40" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" matInput\n                placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">\n              <mat-hint>Ex: Email@gmail.com</mat-hint>\n              <mat-error *ngIf="emailFormControl.hasError(\'email\') && !emailFormControl.hasError(\'required\')">\n                Please enter a valid email address.\n              </mat-error>\n              <mat-error *ngIf="emailFormControl.hasError(\'required\')">\n                Email is\n                <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n        <!-- Message -->\n        <ion-row>\n          <ion-col col-12>\n            <mat-form-field class="m-full-width">\n              <textarea matInput maxlength="200" rows="4" placeholder="Personal Message" [formControl]="messageFormControl" [errorStateMatcher]="matcher"></textarea>\n              <mat-hint align="start">Tell us your ideas, we will be happy to know.</mat-hint>\n              <mat-hint align="end">{{messageFormControl.value.length}} / 200</mat-hint>\n              <mat-error *ngIf="messageFormControl.hasError(\'minlength\') && !messageFormControl.hasError(\'required\')">\n                Minimum words are 10.\n              </mat-error>\n              <mat-error *ngIf="messageFormControl.hasError(\'maxlength\') && !messageFormControl.hasError(\'required\')">\n                Maximum words are 200.\n              </mat-error>\n              <mat-error *ngIf="messageFormControl.hasError(\'required\')">\n                Write down something.\n              </mat-error>\n            </mat-form-field>\n          </ion-col>\n        </ion-row>\n\n      </form>\n\n      <!-- Error message - Fields -->\n      <ion-row *ngIf="showErrorMessage" class="animated fadeInDown" text-center>\n        <ion-col col-12>\n          <font class="m-color-red">Please fill the requested fields.</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Buttons -->\n      <ion-row>\n        <ion-col col-6>\n          <button ion-button outline icon-start color="primary" block (click)="sendContactUsForm();">\n            <ion-icon name="ios-send-outline"></ion-icon>\n            Send\n          </button>\n        </ion-col>\n        <ion-col col-6>\n          <button ion-button outline icon-start color="secondary" block (click)="openWhatsApp();">\n            <ion-icon name="logo-whatsapp"></ion-icon>\n            WhatsApp\n          </button>\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\contactus\contactus.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],
         __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],

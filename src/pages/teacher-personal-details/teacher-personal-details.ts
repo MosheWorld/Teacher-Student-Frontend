@@ -181,7 +181,6 @@ export class TeacherPersonalDetailsPage {
    * Updates model at database.
    */
   private updateTeacherModelAtServer(): void {
-    console.log(this.teacher);
     if (!this.isTeacherModelValidToUpdate()) {
       this.showAlertDialog('Incorrect Data',
         'One or more values are not correct or doesn\'t match at User and Teacher, please fill them correctly.');
@@ -196,15 +195,15 @@ export class TeacherPersonalDetailsPage {
     loading.present();
 
     let model: any = {
-      age: parseInt(this.teacher.age.toString()),
-      userID: this.teacher.userID,
+      phone: this.teacher.phone,
       email: this.teacher.email,
-      priceTo: parseInt(this.teacher.priceTo.toString()),
+      userID: this.teacher.userID,
       lastName: this.teacher.lastName,
-      phoneNumber: this.teacher.phone,
-      priceFrom: parseInt(this.teacher.priceFrom.toString()),
       firstName: this.teacher.firstName,
-      personalMessage: this.teacher.personalMessage
+      personalMessage: this.teacher.personalMessage,
+      age: parseInt(this.teacher.age.toString()),
+      priceTo: parseInt(this.teacher.priceTo.toString()),
+      priceFrom: parseInt(this.teacher.priceFrom.toString())
     };
 
     this.apiProvider.httpPut('teacher/update', model)

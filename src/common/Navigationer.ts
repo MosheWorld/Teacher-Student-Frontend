@@ -36,7 +36,7 @@ export class Navigationer {
                 break;
 
             case PageType.JoinAsTeacher:
-                if (this.profileProvider.isLoggedIn == true) {
+                if (this.profileProvider.isLoggedIn === true) {
                     this.navCtrl.push(NewTeacherFormPage, params);
                 } else {
                     this.navCtrl.push(NewTeacherLoginPage, params);
@@ -56,7 +56,7 @@ export class Navigationer {
                 break;
 
             case PageType.TeacherDetails:
-                this.navCtrl.push(TeacherPersonalDetailsPage, params);
+                this.navCtrl.setRoot(TeacherPersonalDetailsPage, params);
                 break;
 
             case PageType.Admin:

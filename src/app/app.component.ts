@@ -58,7 +58,7 @@ export class MyApp {
    */
   public signOut(): void {
     this.authService.signOut()
-      .then(() => this.profileProvider.SetUserLoggedOut());
+      .then(() => this.profileProvider.setUserLoggedOut());
   }
 
   /**

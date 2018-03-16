@@ -76,6 +76,12 @@ export class NewTeacherFormPage {
 
     this.initInputs();
   }
+
+  public ionViewWillEnter() {
+    if (this.profileProvider.profile.filledTeacherForm === true) {
+      this.navigationer.navigateToPage(this.pageEnum.TeacherDetails);
+    }
+  }
   //#endregion
 
   //#region Public Methods

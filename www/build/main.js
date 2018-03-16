@@ -1794,6 +1794,11 @@ var NewTeacherFormPage = (function () {
         this.imageHeight = platform.width() - 20;
         this.initInputs();
     }
+    NewTeacherFormPage.prototype.ionViewWillEnter = function () {
+        if (this.profileProvider.profile.filledTeacherForm === true) {
+            this.navigationer.navigateToPage(this.pageEnum.TeacherDetails);
+        }
+    };
     //#endregion
     //#region Public Methods
     /**
@@ -2109,14 +2114,14 @@ var ProfileProvider = (function () {
      * Setting teacher status boolean to true and adding the new profile data.
      * @param newProfile New profile.
      */
-    ProfileProvider.prototype.SetUserLoggedIn = function (newProfile) {
+    ProfileProvider.prototype.setUserLoggedIn = function (newProfile) {
         this.profile = newProfile;
         this.isLoggedIn = true;
     };
     /**
      * Settings user as logged out.
      */
-    ProfileProvider.prototype.SetUserLoggedOut = function () {
+    ProfileProvider.prototype.setUserLoggedOut = function () {
         this.profile = null;
         this.isLoggedIn = false;
     };
@@ -2313,6 +2318,11 @@ var NewTeacherLoginPage = (function () {
         this.pageEnum = __WEBPACK_IMPORTED_MODULE_3__common_PageType_Enum__["a" /* PageType */];
         this.navigationer = new __WEBPACK_IMPORTED_MODULE_4__common_Navigationer__["a" /* Navigationer */](this.navCtrl, this.profileProvider);
     }
+    NewTeacherLoginPage.prototype.ionViewWillEnter = function () {
+        if (this.profileProvider.isLoggedIn === true) {
+            this.navigationer.navigateToPage(this.pageEnum.Home);
+        }
+    };
     //#endregion
     //#region Public Methods
     /**
@@ -2340,7 +2350,7 @@ var NewTeacherLoginPage = (function () {
             _this.apiProvider.httpPost('auth/doesuserexistbyid', isUserExistModel)
                 .subscribe(function (success) {
                 _this.resultFromUserExistEndpoint(signedInUser, success, loading);
-            }, function (failure) { console.log(failure); loading.dismiss(); _this.failureResponse(); });
+            }, function (failure) { loading.dismiss(); _this.failureResponse(); });
         }, function (error) {
             console.log("Error occured when signing in to " + signInProvider + ".");
             console.log(error);
@@ -2364,7 +2374,8 @@ var NewTeacherLoginPage = (function () {
             lastName: user.lastName,
             provider: user.provider,
             firstName: user.firstName,
-            authToken: user.authToken
+            authToken: user.authToken,
+            filledTeacherForm: false
         };
         return newUser;
     };
@@ -2423,12 +2434,13 @@ var NewTeacherLoginPage = (function () {
         // Exist is false, therefore we will be moved to create new teacher
         if (success.exist === true) {
             this.user.role = success.role;
-            this.profileProvider.SetUserLoggedIn(this.user);
+            this.user.filledTeacherForm = success.exist;
+            this.profileProvider.setUserLoggedIn(this.user);
             loading.dismiss();
             this.navigationer.navigateToPage(this.pageEnum.TeacherDetails);
         }
         else {
-            this.profileProvider.SetUserLoggedIn(this.user);
+            this.profileProvider.setUserLoggedIn(this.user);
             this.apiProvider.httpPost('auth/createnewuser', this.user)
                 .subscribe(function (success) { console.log(success); loading.dismiss(); _this.goToTeaherFormPage(); }, function (failure) { console.log(failure); loading.dismiss(); _this.failureResponse(); });
         }
@@ -2439,15 +2451,10 @@ NewTeacherLoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'page-new-teacher-login',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\new-teacher-login\new-teacher-login.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Login</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-35px m-font-weight-300">Hello teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          Please choose your login method and continue the process.\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <ion-row text-center>\n\n        <!-- Facebook authentication -->\n        <ion-col col-12>\n          <button (click)="signIn(\'FACEBOOK\')" class="loginBtn loginBtn--facebook">\n            Login with Facebook\n          </button>\n        </ion-col>\n\n        <!-- Google authentication -->\n        <ion-col col-12>\n          <button (click)="signIn(\'GOOGLE\')" class="loginBtn loginBtn--google">\n            Login with Google\n          </button>\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\new-teacher-login\new-teacher-login.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */],
-        __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["AuthService"],
-        __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__["a" /* LoadingController */],
-        __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__["a" /* ProfileProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["AuthService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["AuthService"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__["a" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__["a" /* LoadingController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__["a" /* ProfileProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__["a" /* ProfileProvider */]) === "function" && _g || Object])
 ], NewTeacherLoginPage);
 
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=new-teacher-login.js.map
 
 /***/ }),
@@ -2808,7 +2815,7 @@ var MyApp = (function () {
     MyApp.prototype.signOut = function () {
         var _this = this;
         this.authService.signOut()
-            .then(function () { return _this.profileProvider.SetUserLoggedOut(); });
+            .then(function () { return _this.profileProvider.setUserLoggedOut(); });
     };
     /**
      * Switches to use details page and close the menu.
@@ -2884,7 +2891,7 @@ var Navigationer = (function () {
                 this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__pages_contactus_contactus__["a" /* ContactusPage */], params);
                 break;
             case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].JoinAsTeacher:
-                if (this.profileProvider.isLoggedIn == true) {
+                if (this.profileProvider.isLoggedIn === true) {
                     this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__pages_new_teacher_form_new_teacher_form__["a" /* NewTeacherFormPage */], params);
                 }
                 else {
@@ -2901,7 +2908,7 @@ var Navigationer = (function () {
                 this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__pages_new_teacher_form_new_teacher_form__["a" /* NewTeacherFormPage */], params);
                 break;
             case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].TeacherDetails:
-                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__pages_teacher_personal_details_teacher_personal_details__["a" /* TeacherPersonalDetailsPage */], params);
+                this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_9__pages_teacher_personal_details_teacher_personal_details__["a" /* TeacherPersonalDetailsPage */], params);
                 break;
             case __WEBPACK_IMPORTED_MODULE_1__PageType_Enum__["a" /* PageType */].Admin:
                 this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__pages_admin_admin__["a" /* AdminPage */], params);

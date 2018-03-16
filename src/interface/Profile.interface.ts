@@ -8,4 +8,5 @@ export interface ProfileInterface {
     lastName: string;
     firstName: string;
     authToken: string;
+    filledTeacherForm: Boolean;
 }

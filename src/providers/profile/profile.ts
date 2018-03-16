@@ -18,7 +18,7 @@ export class ProfileProvider {
    * Setting teacher status boolean to true and adding the new profile data.
    * @param newProfile New profile.
    */
-  public SetUserLoggedIn(newProfile: ProfileInterface) {
+  public setUserLoggedIn(newProfile: ProfileInterface) {
     this.profile = newProfile;
     this.isLoggedIn = true;
   }
@@ -26,7 +26,7 @@ export class ProfileProvider {
   /**
    * Settings user as logged out.
    */
-  public SetUserLoggedOut() {
+  public setUserLoggedOut() {
     this.profile = null;
     this.isLoggedIn = false;
   }

@@ -38,6 +38,12 @@ export class NewTeacherLoginPage {
   ) {
     this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
   }
+
+  public ionViewWillEnter() {
+    if (this.profileProvider.isLoggedIn === true) {
+      this.navigationer.navigateToPage(this.pageEnum.Home);
+    }
+  }
   //#endregion
 
   //#region Public Methods
@@ -60,7 +66,7 @@ export class NewTeacherLoginPage {
     this.authService.signIn(providerSignInMethod)
       .then((signedInUser: SocialUser) => {
         loading.present();
-        
+
         let isUserExistModel = {
           id: signedInUser.id,
           token: signedInUser.authToken,
@@ -72,7 +78,7 @@ export class NewTeacherLoginPage {
             (success) => {
               this.resultFromUserExistEndpoint(signedInUser, success, loading);
             },
-            (failure) => { console.log(failure); loading.dismiss(); this.failureResponse(); }
+            (failure) => { loading.dismiss(); this.failureResponse(); }
           );
 
       }, (error) => {
@@ -99,7 +105,8 @@ export class NewTeacherLoginPage {
       lastName: user.lastName,
       provider: user.provider,
       firstName: user.firstName,
-      authToken: user.authToken
+      authToken: user.authToken,
+      filledTeacherForm: false
     };
 
     return newUser;
@@ -167,13 +174,14 @@ export class NewTeacherLoginPage {
     if (success.exist === true) {
 
       this.user.role = success.role;
-      this.profileProvider.SetUserLoggedIn(this.user);
+      this.user.filledTeacherForm = success.exist;
+      this.profileProvider.setUserLoggedIn(this.user);
       loading.dismiss();
       this.navigationer.navigateToPage(this.pageEnum.TeacherDetails);
 
     } else {
 
-      this.profileProvider.SetUserLoggedIn(this.user);
+      this.profileProvider.setUserLoggedIn(this.user);
 
       this.apiProvider.httpPost('auth/createnewuser', this.user)
         .subscribe(

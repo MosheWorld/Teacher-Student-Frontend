@@ -29,7 +29,7 @@ export class TeacherslistPage {
     let tempArray = this.navParams.get('teacherSearchList');
 
     for (let item of tempArray) {
-      this.GetImageForTeacher(item);
+      this.getImageForTeacher(item);
       if (this.favoritesManagerProvider.isIDExist(item._id)) {
         item.isTeacherFavorited = true;
       } else {
@@ -187,7 +187,7 @@ export class TeacherslistPage {
    * Receives image for the tacher.
    * @param teacher Teacher object.
    */
-  private async GetImageForTeacher(teacher): Promise<void> {
+  private async getImageForTeacher(teacher): Promise<void> {
     this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)
       .subscribe(
       (success) => { teacher.image = success.image; },

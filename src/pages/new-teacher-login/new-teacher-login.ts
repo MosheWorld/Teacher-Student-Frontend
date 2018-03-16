@@ -49,7 +49,6 @@ export class NewTeacherLoginPage {
       spinner: 'dots',
       content: 'Verifying, please wait...'
     });
-    loading.present();
 
     let providerSignInMethod = this.getProviderMethod(signInProvider);
 
@@ -60,7 +59,8 @@ export class NewTeacherLoginPage {
 
     this.authService.signIn(providerSignInMethod)
       .then((signedInUser: SocialUser) => {
-
+        loading.present();
+        
         let isUserExistModel = {
           id: signedInUser.id,
           token: signedInUser.authToken,
@@ -70,7 +70,7 @@ export class NewTeacherLoginPage {
         this.apiProvider.httpPost('auth/doesuserexistbyid', isUserExistModel)
           .subscribe(
             (success) => {
-              this.ResultFromUserExistEndpoint(signedInUser, success, loading);
+              this.resultFromUserExistEndpoint(signedInUser, success, loading);
             },
             (failure) => { console.log(failure); loading.dismiss(); this.failureResponse(); }
           );
@@ -159,7 +159,7 @@ export class NewTeacherLoginPage {
    * The function will be activated when result came from api of 'auth/doesuserexistbyid'.
    * @param success exist: {boolean} , role: {His role from database}
    */
-  private ResultFromUserExistEndpoint(signedInUser: SocialUser, success: any, loading: Loading): void {
+  private resultFromUserExistEndpoint(signedInUser: SocialUser, success: any, loading: Loading): void {
     this.user = this.createUser(signedInUser);
 
     // Exist is true, therefore we exist and we will be moved to details page.

@@ -1,6 +1,7 @@
+import { Loading } from 'ionic-angular/components/loading/loading';
 import { ApiProvider } from './../../providers/api/api';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
 
 import { AuthService } from 'angular4-social-login';
 import { PageType } from './../../common/PageType.Enum';
@@ -33,6 +34,7 @@ export class TeacherPersonalDetailsPage {
     public apiProvider: ApiProvider,
     public alertCtrl: AlertController,
     public commonProvider: CommonProvider,
+    public loadingCtrl: LoadingController,
     public profileProvider: ProfileProvider
   ) {
     this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
@@ -82,12 +84,8 @@ export class TeacherPersonalDetailsPage {
     this.authService.signOut();
     this.navigationer.navigateToPage(this.pageEnum.Home);
 
-    let alert = this.alertCtrl.create({
-      title: 'Something went wrong!',
-      subTitle: 'While getting your teacher information something went wrong, please contact the developer, Sorry!',
-      buttons: ['OK']
-    });
-    alert.present();
+    this.showAlertDialog('Something went wrong!',
+      'While getting your teacher information something went wrong, please contact the developer, Sorry!');
   }
 
   /**
@@ -147,25 +145,79 @@ export class TeacherPersonalDetailsPage {
    */
   private updateAuthModelAtServer(): void {
     if (!this.isAuthModelValidToUpdate()) {
-      this.errorAlertBadInputsAtUpdate();
+      this.showAlertDialog('Incorrect Data',
+        'One or more values are not correct or doesn\'t match at User and Teacher, please fill them correctly.');
       this.authDisabledBoolean = false;
       return;
     }
 
-    // Update
+    const loading: Loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Updating, please wait...'
+    });
+    loading.present();
+
+    let model: any = {
+      id: this.profileProvider.profile.id,
+      email: this.profileProvider.profile.email,
+      lastName: this.profileProvider.profile.lastName,
+      firstName: this.profileProvider.profile.firstName,
+    };
+
+    this.apiProvider.httpPut('auth/update', model)
+      .subscribe(
+        (success) => {
+          loading.dismiss();
+          this.showAlertDialog('Updated successfully', 'The user data has been updated successfully.');
+        },
+        (failure) => {
+          loading.dismiss();
+          this.showAlertDialog('Error', 'Something went wrong when updating your user data, please contact support team.');
+        }
+      );
   }
 
   /**
    * Updates model at database.
    */
   private updateTeacherModelAtServer(): void {
+    console.log(this.teacher);
     if (!this.isTeacherModelValidToUpdate()) {
-      this.errorAlertBadInputsAtUpdate();
+      this.showAlertDialog('Incorrect Data',
+        'One or more values are not correct or doesn\'t match at User and Teacher, please fill them correctly.');
       this.teacherDisabledBoolean = false;
       return;
     }
 
-    // Update
+    const loading: Loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Updating, please wait...'
+    });
+    loading.present();
+
+    let model: any = {
+      age: parseInt(this.teacher.age.toString()),
+      userID: this.teacher.userID,
+      email: this.teacher.email,
+      priceTo: parseInt(this.teacher.priceTo.toString()),
+      lastName: this.teacher.lastName,
+      phoneNumber: this.teacher.phone,
+      priceFrom: parseInt(this.teacher.priceFrom.toString()),
+      firstName: this.teacher.firstName,
+      personalMessage: this.teacher.personalMessage
+    };
+
+    this.apiProvider.httpPut('teacher/update', model)
+      .subscribe(
+        (success) => {
+          loading.dismiss();
+          this.showAlertDialog('Updated successfully', 'The teacher data has been updated successfully.');
+        },
+        (failure) => {
+          loading.dismiss();
+          this.showAlertDialog('Error', 'Something went wrong when updating your teacher data, please contact support team.');
+        }
+      );
   }
 
   /**
@@ -175,7 +227,10 @@ export class TeacherPersonalDetailsPage {
     if (this.isPropertyNullOrUndefined(this.profileProvider.profile)
       || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.email)
       || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.firstName)
-      || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.lastName)) {
+      || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.lastName)
+      || this.profileProvider.profile.email !== this.teacher.email
+      || this.profileProvider.profile.firstName !== this.teacher.firstName
+      || this.profileProvider.profile.lastName !== this.teacher.lastName) {
       return false;
     }
     else {
@@ -193,12 +248,16 @@ export class TeacherPersonalDetailsPage {
       || this.isPropertyNullOrUndefined(this.teacher.priceTo)
       || this.teacher.age < 18
       || this.teacher.priceFrom < 0 || this.teacher.priceFrom > 200
-      || this.teacher.priceTo > 0 || this.teacher.priceTo > 200
+      || this.teacher.priceTo < 0 || this.teacher.priceTo > 200
       || this.teacher.priceFrom > this.teacher.priceTo
       || this.isStringNullOrUndefinedOrEmpty(this.teacher.firstName)
       || this.isStringNullOrUndefinedOrEmpty(this.teacher.lastName)
       || this.isStringNullOrUndefinedOrEmpty(this.teacher.email)
-      || this.isStringNullOrUndefinedOrEmpty(this.teacher.personalMessage)) {
+      || this.isStringNullOrUndefinedOrEmpty(this.teacher.personalMessage)
+      || this.isStringNullOrUndefinedOrEmpty(this.teacher.phone)
+      || this.profileProvider.profile.email !== this.teacher.email
+      || this.profileProvider.profile.firstName !== this.teacher.firstName
+      || this.profileProvider.profile.lastName !== this.teacher.lastName) {
       return false;
     } else {
       return true;
@@ -210,10 +269,10 @@ export class TeacherPersonalDetailsPage {
    */
   private isPropertyNullOrUndefined(property: any): boolean {
     if (property === null || property === undefined) {
-      return false;
+      return true;
     }
     else {
-      return true;
+      return false;
     }
   }
 
@@ -222,24 +281,24 @@ export class TeacherPersonalDetailsPage {
    */
   private isStringNullOrUndefinedOrEmpty(property: string): boolean {
     if (property === null || property === undefined || property === "") {
-      return false;
+      console.log(property);
+      return true;
     }
     else {
-      return true;
+      return false;
     }
   }
 
   /** 
    * Alert for bad inputs at update.
   */
-  private errorAlertBadInputsAtUpdate() {
+  private showAlertDialog(title: string, body: string) {
     let alert = this.alertCtrl.create({
-      title: 'Incorrect Data',
-      subTitle: 'One or more values are not correct or doesn\'t match at User and Teacher, please fill them correctly.',
+      title: title,
+      subTitle: body,
       buttons: ['OK']
     });
     alert.present();
   }
-}
   //#endregion
 }

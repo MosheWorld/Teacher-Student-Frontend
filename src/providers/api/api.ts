@@ -41,6 +41,19 @@ export class ApiProvider {
     return this.http.post(url, JSON.stringify(data), { headers: headers })
       .map(res => this.checkResultModel(res));
   }
+
+  /**
+   * HTTP Put function.
+   * @param path What path to add to call.
+   * @param data Data to send.
+   */
+  public httpPut(path: string, data: any): any {
+    const url = this.endPoint + path;
+    let headers = this.buildHeader();
+
+    return this.http.put(url, JSON.stringify(data), { headers: headers })
+      .map(res => this.checkResultModel(res));
+  }
   //#endregion
 
   //#region Private Methods

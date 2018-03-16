@@ -99,7 +99,7 @@ HomePage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_api_api__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_PageType_Enum__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__common_Navigationer__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_common_common__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_common_common__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_profile_profile__ = __webpack_require__(30);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -381,7 +381,7 @@ SearchPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_api_api__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_toaster_toaster__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_favorites_manager_favorites_manager__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_favorites_manager_favorites_manager__ = __webpack_require__(73);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -626,7 +626,7 @@ SingleteacherPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular4_social_login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular4_social_login__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_PageType_Enum__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_Navigationer__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_common_common__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_common_common__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_profile_profile__ = __webpack_require__(30);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -648,12 +648,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var TeacherPersonalDetailsPage = (function () {
     //#endregion
     //#region Constructor
-    function TeacherPersonalDetailsPage(navCtrl, authService, apiProvider, alertCtrl, commonProvider, profileProvider) {
+    function TeacherPersonalDetailsPage(navCtrl, authService, apiProvider, alertCtrl, commonProvider, loadingCtrl, profileProvider) {
         this.navCtrl = navCtrl;
         this.authService = authService;
         this.apiProvider = apiProvider;
         this.alertCtrl = alertCtrl;
         this.commonProvider = commonProvider;
+        this.loadingCtrl = loadingCtrl;
         this.profileProvider = profileProvider;
         //#region Members
         this.pageEnum = __WEBPACK_IMPORTED_MODULE_4__common_PageType_Enum__["a" /* PageType */];
@@ -699,12 +700,7 @@ var TeacherPersonalDetailsPage = (function () {
     TeacherPersonalDetailsPage.prototype.failureGetDataExecution = function () {
         this.authService.signOut();
         this.navigationer.navigateToPage(this.pageEnum.Home);
-        var alert = this.alertCtrl.create({
-            title: 'Something went wrong!',
-            subTitle: 'While getting your teacher information something went wrong, please contact the developer, Sorry!',
-            buttons: ['OK']
-        });
-        alert.present();
+        this.showAlertDialog('Something went wrong!', 'While getting your teacher information something went wrong, please contact the developer, Sorry!');
     };
     /**
      * Opens dialog and asks if the user wants to make the changes, in case he does a HTTP request with changes will occure.
@@ -762,20 +758,67 @@ var TeacherPersonalDetailsPage = (function () {
      * Updates model at database.
      */
     TeacherPersonalDetailsPage.prototype.updateAuthModelAtServer = function () {
+        var _this = this;
         if (!this.isAuthModelValidToUpdate()) {
-            // Error Message
+            this.showAlertDialog('Incorrect Data', 'One or more values are not correct or doesn\'t match at User and Teacher, please fill them correctly.');
+            this.authDisabledBoolean = false;
             return;
         }
+        var loading = this.loadingCtrl.create({
+            spinner: 'dots',
+            content: 'Updating, please wait...'
+        });
+        loading.present();
+        var model = {
+            id: this.profileProvider.profile.id,
+            email: this.profileProvider.profile.email,
+            lastName: this.profileProvider.profile.lastName,
+            firstName: this.profileProvider.profile.firstName,
+        };
+        this.apiProvider.httpPut('auth/update', model)
+            .subscribe(function (success) {
+            loading.dismiss();
+            _this.showAlertDialog('Updated successfully', 'The user data has been updated successfully.');
+        }, function (failure) {
+            loading.dismiss();
+            _this.showAlertDialog('Error', 'Something went wrong when updating your user data, please contact support team.');
+        });
     };
     /**
      * Updates model at database.
      */
     TeacherPersonalDetailsPage.prototype.updateTeacherModelAtServer = function () {
+        var _this = this;
+        console.log(this.teacher);
         if (!this.isTeacherModelValidToUpdate()) {
-            // Error Message
+            this.showAlertDialog('Incorrect Data', 'One or more values are not correct or doesn\'t match at User and Teacher, please fill them correctly.');
+            this.teacherDisabledBoolean = false;
             return;
         }
-        // Update
+        var loading = this.loadingCtrl.create({
+            spinner: 'dots',
+            content: 'Updating, please wait...'
+        });
+        loading.present();
+        var model = {
+            age: parseInt(this.teacher.age.toString()),
+            userID: this.teacher.userID,
+            email: this.teacher.email,
+            priceTo: parseInt(this.teacher.priceTo.toString()),
+            lastName: this.teacher.lastName,
+            phoneNumber: this.teacher.phone,
+            priceFrom: parseInt(this.teacher.priceFrom.toString()),
+            firstName: this.teacher.firstName,
+            personalMessage: this.teacher.personalMessage
+        };
+        this.apiProvider.httpPut('teacher/update', model)
+            .subscribe(function (success) {
+            loading.dismiss();
+            _this.showAlertDialog('Updated successfully', 'The teacher data has been updated successfully.');
+        }, function (failure) {
+            loading.dismiss();
+            _this.showAlertDialog('Error', 'Something went wrong when updating your teacher data, please contact support team.');
+        });
     };
     /**
      * Validates whether the model can be updated and it's in correct format.
@@ -784,7 +827,10 @@ var TeacherPersonalDetailsPage = (function () {
         if (this.isPropertyNullOrUndefined(this.profileProvider.profile)
             || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.email)
             || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.firstName)
-            || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.lastName)) {
+            || this.isStringNullOrUndefinedOrEmpty(this.profileProvider.profile.lastName)
+            || this.profileProvider.profile.email !== this.teacher.email
+            || this.profileProvider.profile.firstName !== this.teacher.firstName
+            || this.profileProvider.profile.lastName !== this.teacher.lastName) {
             return false;
         }
         else {
@@ -801,12 +847,16 @@ var TeacherPersonalDetailsPage = (function () {
             || this.isPropertyNullOrUndefined(this.teacher.priceTo)
             || this.teacher.age < 18
             || this.teacher.priceFrom < 0 || this.teacher.priceFrom > 200
-            || this.teacher.priceTo > 0 || this.teacher.priceTo > 200
+            || this.teacher.priceTo < 0 || this.teacher.priceTo > 200
             || this.teacher.priceFrom > this.teacher.priceTo
             || this.isStringNullOrUndefinedOrEmpty(this.teacher.firstName)
             || this.isStringNullOrUndefinedOrEmpty(this.teacher.lastName)
             || this.isStringNullOrUndefinedOrEmpty(this.teacher.email)
-            || this.isStringNullOrUndefinedOrEmpty(this.teacher.personalMessage)) {
+            || this.isStringNullOrUndefinedOrEmpty(this.teacher.personalMessage)
+            || this.isStringNullOrUndefinedOrEmpty(this.teacher.phone)
+            || this.profileProvider.profile.email !== this.teacher.email
+            || this.profileProvider.profile.firstName !== this.teacher.firstName
+            || this.profileProvider.profile.lastName !== this.teacher.lastName) {
             return false;
         }
         else {
@@ -818,10 +868,10 @@ var TeacherPersonalDetailsPage = (function () {
      */
     TeacherPersonalDetailsPage.prototype.isPropertyNullOrUndefined = function (property) {
         if (property === null || property === undefined) {
-            return false;
+            return true;
         }
         else {
-            return true;
+            return false;
         }
     };
     /**
@@ -829,11 +879,23 @@ var TeacherPersonalDetailsPage = (function () {
      */
     TeacherPersonalDetailsPage.prototype.isStringNullOrUndefinedOrEmpty = function (property) {
         if (property === null || property === undefined || property === "") {
-            return false;
-        }
-        else {
+            console.log(property);
             return true;
         }
+        else {
+            return false;
+        }
+    };
+    /**
+     * Alert for bad inputs at update.
+    */
+    TeacherPersonalDetailsPage.prototype.showAlertDialog = function (title, body) {
+        var alert = this.alertCtrl.create({
+            title: title,
+            subTitle: body,
+            buttons: ['OK']
+        });
+        alert.present();
     };
     return TeacherPersonalDetailsPage;
 }());
@@ -841,10 +903,10 @@ TeacherPersonalDetailsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
         selector: 'page-teacher-personal-details',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacher-personal-details\teacher-personal-details.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle class="m-color-white">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title text-center>\n      <font class="m-color-white">Hey {{this.profileProvider.profile.firstName}}</font>\n    </ion-title>\n    <ion-buttons *ngIf="this.profileProvider.profile.role === 2" end icon-only class="m-color-white">\n      <div (click)="navigationer.navigateToPage(pageEnum.Admin)">\n        <ion-icon name="ios-unlock-outline"></ion-icon>\n      </div>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- User + Teacher Header of tabs -->\n  <ion-row>\n    <ion-col col-12>\n      <ion-segment [(ngModel)]="currentChosenTab">\n        <ion-segment-button value="1" class="m-font-size-10px-impo">\n          User\n        </ion-segment-button>\n        <ion-segment-button value="2" class="m-font-size-10px-impo">\n          Teacher\n        </ion-segment-button>\n      </ion-segment>\n    </ion-col>\n  </ion-row>\n\n  <!-- User data -->\n  <ion-row *ngIf="currentChosenTab === \'1\'">\n    <!-- Edit and Save buttons -->\n    <ion-col col-12>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledAuth()" *ngIf="this.authDisabledBoolean === true">\n        <ion-icon name="ios-brush-outline"></ion-icon>\n        Edit\n      </button>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledAuth()" *ngIf="this.authDisabledBoolean === false">\n        <ion-icon name="md-checkmark"></ion-icon>\n        Save\n      </button>\n    </ion-col>\n    <!-- First Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="First Name" [(ngModel)]="this.profileProvider.profile.firstName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Last Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="Last Name" [(ngModel)]="this.profileProvider.profile.lastName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Email -->\n    <ion-col col-12>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.authDisabledBoolean" matInput placeholder="Email" [(ngModel)]="this.profileProvider.profile.email">\n      </mat-form-field>\n    </ion-col>\n  </ion-row>\n\n  <!-- Teacher data -->\n  <ion-row *ngIf="currentChosenTab === \'2\'">\n    <!-- Edit and Save buttons -->\n    <ion-col col-12>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledTeacher()" *ngIf="this.teacherDisabledBoolean === true">\n        <ion-icon name="ios-brush-outline"></ion-icon>\n        Edit\n      </button>\n      <button ion-button outline icon-start small color="dark" (click)="toggleDisabledTeacher()" *ngIf="this.teacherDisabledBoolean === false">\n        <ion-icon name="md-checkmark"></ion-icon>\n        Save\n      </button>\n    </ion-col>\n    <!-- First Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="First Name" [(ngModel)]="this.teacher.firstName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Last Name -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Last Name" [(ngModel)]="this.teacher.lastName">\n      </mat-form-field>\n    </ion-col>\n    <!-- Age -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Age" [(ngModel)]="this.teacher.age">\n      </mat-form-field>\n    </ion-col>\n    <!-- Phone Number -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="Phone Number" [(ngModel)]="this.teacher.phone">\n      </mat-form-field>\n    </ion-col>\n    <!--From Price -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="From Price" [(ngModel)]="this.teacher.priceFrom">\n      </mat-form-field>\n    </ion-col>\n    <!-- To Price -->\n    <ion-col col-6>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="24" [disabled]="this.teacherDisabledBoolean" matInput placeholder="To Price" [(ngModel)]="this.teacher.priceTo">\n      </mat-form-field>\n    </ion-col>\n    <!-- Email -->\n    <ion-col col-12>\n      <mat-form-field class="m-full-width">\n        <input type="text" maxlength="40" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" [disabled]="this.teacherDisabledBoolean"\n          matInput placeholder="Email" [(ngModel)]="this.teacher.email">\n      </mat-form-field>\n    </ion-col>\n    <!-- Personal Message -->\n    <ion-col col-12>\n      <mat-form-field class="m-full-width">\n        <textarea matInput maxlength="200" [disabled]="this.teacherDisabledBoolean" rows="4" placeholder="Personal Message" [(ngModel)]="this.teacher.personalMessage"></textarea>\n      </mat-form-field>\n    </ion-col>\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacher-personal-details\teacher-personal-details.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__["AuthService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__["AuthService"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__providers_common_common__["a" /* CommonProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_common_common__["a" /* CommonProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__providers_profile_profile__["a" /* ProfileProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_profile_profile__["a" /* ProfileProvider */]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__["AuthService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular4_social_login__["AuthService"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__providers_common_common__["a" /* CommonProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_common_common__["a" /* CommonProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__providers_profile_profile__["a" /* ProfileProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_profile_profile__["a" /* ProfileProvider */]) === "function" && _g || Object])
 ], TeacherPersonalDetailsPage);
 
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=teacher-personal-details.js.map
 
 /***/ }),
@@ -945,7 +1007,7 @@ AdminPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_api_api__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_common_common__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_common_common__ = __webpack_require__(72);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1090,7 +1152,7 @@ ContactusPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_Navigationer__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__singleteacher_singleteacher__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_favorites_manager_favorites_manager__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_favorites_manager_favorites_manager__ = __webpack_require__(73);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1396,7 +1458,7 @@ LocalStorageProvider = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_api_api__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__singleteacher_singleteacher__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_favorites_manager_favorites_manager__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_favorites_manager_favorites_manager__ = __webpack_require__(73);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1462,7 +1524,7 @@ var TeacherslistPage = (function () {
         var tempArray = this.navParams.get('teacherSearchList');
         for (var _i = 0, tempArray_1 = tempArray; _i < tempArray_1.length; _i++) {
             var item = tempArray_1[_i];
-            this.GetImageForTeacher(item);
+            this.getImageForTeacher(item);
             if (this.favoritesManagerProvider.isIDExist(item._id)) {
                 item.isTeacherFavorited = true;
             }
@@ -1618,7 +1680,7 @@ var TeacherslistPage = (function () {
      * Receives image for the tacher.
      * @param teacher Teacher object.
      */
-    TeacherslistPage.prototype.GetImageForTeacher = function (teacher) {
+    TeacherslistPage.prototype.getImageForTeacher = function (teacher) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 this.apiProvider.httpGet("image/getimagebyid/" + teacher.image)
@@ -1633,13 +1695,10 @@ TeacherslistPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
         selector: 'page-teacherslist',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacherslist\teacherslist.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Teacher List</font>\n    </ion-title>\n    <ion-buttons end icon-only class="m-color-white">\n      <div [matMenuTriggerFor]="menu">\n        <ion-icon name="md-more"></ion-icon>\n      </div>\n    </ion-buttons>\n\n    <mat-menu #menu="matMenu">\n      <button mat-menu-item disabled>\n        <span>Sort By</span>\n      </button>\n      <button mat-menu-item (click)="sortByTeacherList(\'Name\')">\n        <span>Name</span>\n      </button>\n      <button mat-menu-item (click)="sortByTeacherList(\'Rate\')">\n        <span>Rate</span>\n      </button>\n      <button mat-menu-item (click)="sortByTeacherList(\'Recommendations\')">\n        <span>Recommendations</span>\n      </button>\n      <button mat-menu-item (click)="sortByTeacherList(\'RecommendationsRate\')">\n        <span>Recommendations + Rate</span>\n      </button>\n    </mat-menu>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- White area -->\n  <div>\n\n    <!-- Search bar -->\n    <ion-row class="m-sticky-search-bar">\n      <ion-col col-12 class="m-padding-0-impo">\n        <ion-toolbar color="m-darker">\n          <ion-searchbar [showCancelButton]="false" (ionInput)="onInput($event)" placeholder="Search for teacher name" type="text"\n            animated="true" debounce="100">\n          </ion-searchbar>\n        </ion-toolbar>\n      </ion-col>\n    </ion-row>\n\n    <ion-grid>\n\n      <!-- Teachers wasn\'t found -->\n      <ion-row text-center *ngIf="teachers.length == 0">\n        <ion-col col-12>\n          <b>Not even single teacher was found, sorry.</b>\n        </ion-col>\n      </ion-row>\n\n      <!-- List of teachers -->\n      <div *ngFor="let teacher of teachers; let i = index;">\n        <ion-card (click)="expandTeacherInformation(i);">\n\n          <!-- Image and Favorite and All Personal Details -->\n          <ion-row>\n            <ion-col col-6 class="m-padding-top-10px">\n              <!-- Name -->\n              <h1>\n                <b>{{teacher.firstName}} {{teacher.lastName}}</b>\n              </h1>\n              <!-- price -->\n              <h5 class="m-padding-top-3px">\n                <b>Price:</b>\n                <i>{{teacher.priceFrom}} - {{teacher.priceTo}}</i>\n                <font class="m-font-size-10px">ILS</font>\n              </h5>\n              <!-- Rate -->\n              <h5 class="m-padding-top-3px">\n                <b>Rating:</b>\n                <font *ngIf="teacher.recommendations.length === 1">\n                  <i>( {{teacher.recommendations.length}} person )</i>\n                </font>\n                <font *ngIf="teacher.recommendations.length !== 1">\n                  <i>( {{teacher.recommendations.length}} people )</i>\n                </font>\n              </h5>\n              <!-- Stars -->\n              <h6 class="m-padding-top-3px m-font-size-0-impo">\n                <rating [(ngModel)]="teachers[i].rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"\n                  starIconName="star" nullable="false"></rating>\n              </h6>\n            </ion-col>\n            <ion-col *ngIf="teacher.image == null" col-5 text-right>\n              <img class="m-default-image-cards-teacherlist" src="assets\\imgs\\imageNotFound.jpg" />\n            </ion-col>\n            <ion-col *ngIf="teacher.image != null" col-5 text-right>\n              <img class="m-default-image-cards-teacherlist" src="{{teacher.image}}" />\n            </ion-col>\n            <ion-col *ngIf="teacher.isTeacherFavorited" col-1 text-right>\n              <ion-icon name="ios-bookmark-outline" class="m-font-size-35px"></ion-icon>\n            </ion-col>\n          </ion-row>\n\n          <!-- Message -->\n          <ion-row>\n            <ion-col col-12>\n              <b>Message:</b>\n              {{teacher.personalMessage}}\n            </ion-col>\n          </ion-row>\n\n          <!-- Click to see more details -->\n          <ion-row text-center>\n            <ion-col col-12>\n              <font class="m-color-midnightblue m-font-size-13px">\n                <i>* Click on the card to see more details *</i>\n              </font>\n            </ion-col>\n          </ion-row>\n\n        </ion-card>\n      </div>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\teacherslist\teacherslist.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_3__providers_api_api__["a" /* ApiProvider */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */],
-        __WEBPACK_IMPORTED_MODULE_5__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_api_api__["a" /* ApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_favorites_manager_favorites_manager__["a" /* FavoritesManagerProvider */]) === "function" && _e || Object])
 ], TeacherslistPage);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=teacherslist.js.map
 
 /***/ }),
@@ -1658,7 +1717,7 @@ TeacherslistPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_api_api__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_common_common__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_common_common__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_profile_profile__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_Navigationer__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__common_PageType_Enum__ = __webpack_require__(37);
@@ -2123,6 +2182,18 @@ var ApiProvider = (function () {
         return this.http.post(url, JSON.stringify(data), { headers: headers })
             .map(function (res) { return _this.checkResultModel(res); });
     };
+    /**
+     * HTTP Put function.
+     * @param path What path to add to call.
+     * @param data Data to send.
+     */
+    ApiProvider.prototype.httpPut = function (path, data) {
+        var _this = this;
+        var url = this.endPoint + path;
+        var headers = this.buildHeader();
+        return this.http.put(url, JSON.stringify(data), { headers: headers })
+            .map(function (res) { return _this.checkResultModel(res); });
+    };
     //#endregion
     //#region Private Methods
     /**
@@ -2158,10 +2229,10 @@ var ApiProvider = (function () {
 }());
 ApiProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */],
-        __WEBPACK_IMPORTED_MODULE_0__profile_profile__["a" /* ProfileProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__profile_profile__["a" /* ProfileProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__profile_profile__["a" /* ProfileProvider */]) === "function" && _b || Object])
 ], ApiProvider);
 
+var _a, _b;
 //# sourceMappingURL=api.js.map
 
 /***/ }),
@@ -2246,7 +2317,6 @@ var NewTeacherLoginPage = (function () {
             spinner: 'dots',
             content: 'Verifying, please wait...'
         });
-        loading.present();
         var providerSignInMethod = this.getProviderMethod(signInProvider);
         if (providerSignInMethod === null) {
             console.log("Bad provider has been passed, aborting.");
@@ -2254,6 +2324,7 @@ var NewTeacherLoginPage = (function () {
         }
         this.authService.signIn(providerSignInMethod)
             .then(function (signedInUser) {
+            loading.present();
             var isUserExistModel = {
                 id: signedInUser.id,
                 token: signedInUser.authToken,
@@ -2261,7 +2332,7 @@ var NewTeacherLoginPage = (function () {
             };
             _this.apiProvider.httpPost('auth/doesuserexistbyid', isUserExistModel)
                 .subscribe(function (success) {
-                _this.ResultFromUserExistEndpoint(signedInUser, success, loading);
+                _this.resultFromUserExistEndpoint(signedInUser, success, loading);
             }, function (failure) { console.log(failure); loading.dismiss(); _this.failureResponse(); });
         }, function (error) {
             console.log("Error occured when signing in to " + signInProvider + ".");
@@ -2338,7 +2409,7 @@ var NewTeacherLoginPage = (function () {
      * The function will be activated when result came from api of 'auth/doesuserexistbyid'.
      * @param success exist: {boolean} , role: {His role from database}
      */
-    NewTeacherLoginPage.prototype.ResultFromUserExistEndpoint = function (signedInUser, success, loading) {
+    NewTeacherLoginPage.prototype.resultFromUserExistEndpoint = function (signedInUser, success, loading) {
         var _this = this;
         this.user = this.createUser(signedInUser);
         // Exist is true, therefore we exist and we will be moved to details page.
@@ -2361,15 +2432,10 @@ NewTeacherLoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'page-new-teacher-login',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\new-teacher-login\new-teacher-login.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>\n      <font class="m-color-white">Login</font>\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <!-- Gray area -->\n  <div padding text-center class="m-background-2b3137 m-margin-top0 m-color-white">\n\n    <ion-grid>\n\n      <!-- Title -->\n      <ion-row text-center>\n        <ion-col col-12>\n          <font class="m-color-white m-font-size-35px m-font-weight-300">Hello teacher</font>\n        </ion-col>\n      </ion-row>\n\n      <!-- Subtitle -->\n      <ion-row>\n        <ion-col col-12>\n          Please choose your login method and continue the process.\n        </ion-col>\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <!-- White area -->\n  <div>\n\n    <ion-grid>\n\n      <ion-row text-center>\n\n        <!-- Facebook authentication -->\n        <ion-col col-12>\n          <button (click)="signIn(\'FACEBOOK\')" class="loginBtn loginBtn--facebook">\n            Login with Facebook\n          </button>\n        </ion-col>\n\n        <!-- Google authentication -->\n        <ion-col col-12>\n          <button (click)="signIn(\'GOOGLE\')" class="loginBtn loginBtn--google">\n            Login with Google\n          </button>\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\pages\new-teacher-login\new-teacher-login.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */],
-        __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["AuthService"],
-        __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__["a" /* LoadingController */],
-        __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__["a" /* ProfileProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["AuthService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8_angular4_social_login__["AuthService"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__["a" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_ionic_angular_components_loading_loading_controller__["a" /* LoadingController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__["a" /* ProfileProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__["a" /* ProfileProvider */]) === "function" && _g || Object])
 ], NewTeacherLoginPage);
 
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=new-teacher-login.js.map
 
 /***/ }),
@@ -2385,7 +2451,7 @@ NewTeacherLoginPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_PageType_Enum__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_Navigationer__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_profile_profile__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_favorites_manager_favorites_manager__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_favorites_manager_favorites_manager__ = __webpack_require__(73);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2483,7 +2549,7 @@ Object(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_search_search__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__ = __webpack_require__(281);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_settings_settings__ = __webpack_require__(381);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_common_common__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_common_common__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_favorites_favorites__ = __webpack_require__(289);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_toaster_toaster__ = __webpack_require__(290);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_contactus_contactus__ = __webpack_require__(287);
@@ -2495,7 +2561,7 @@ Object(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_new_teacher_form_new_teacher_form__ = __webpack_require__(296);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pipes_teaches_subjects_teaches_subjects__ = __webpack_require__(719);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_new_teacher_login_new_teacher_login__ = __webpack_require__(380);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_favorites_manager_favorites_manager__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_favorites_manager_favorites_manager__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pipes_teaches_institutions_teaches_institutions__ = __webpack_require__(720);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_teacher_personal_details_teacher_personal_details__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__angular_material_menu__ = __webpack_require__(721);
@@ -3290,325 +3356,6 @@ TeachesSubjectsPipe = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FavoritesManagerProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_local_storage_local_storage__ = __webpack_require__(291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var FavoritesManagerProvider = (function () {
-    //#region Constructor
-    function FavoritesManagerProvider(localStorage) {
-        this.localStorage = localStorage;
-    }
-    //#endregion
-    //#region Public Methods
-    /**
-     * Adding new teacher ID at local storage.
-     * @param id Teacher ID.
-     */
-    FavoritesManagerProvider.prototype.addID = function (id) {
-        if (id == null || id === "") {
-            return false;
-        }
-        if (this.isIDExist(id)) {
-            return false;
-        }
-        var favoritesList = this.getFavorites();
-        if (favoritesList == null) {
-            favoritesList = [];
-        }
-        favoritesList.push(id);
-        this.setFavorites(favoritesList);
-    };
-    /**
-     * Checks whether some ID exists in favorites list.
-     * @param id What ID to check.
-     * @returns {boolean}
-     */
-    FavoritesManagerProvider.prototype.isIDExist = function (id) {
-        var favoritesList = this.getFavorites();
-        if (favoritesList == null) {
-            return false;
-        }
-        for (var _i = 0, favoritesList_1 = favoritesList; _i < favoritesList_1.length; _i++) {
-            var favorite = favoritesList_1[_i];
-            if (favorite === id) {
-                return true;
-            }
-        }
-        return false;
-    };
-    /**
-     * Remove specific ID from local storage.
-     */
-    FavoritesManagerProvider.prototype.removeID = function (id) {
-        var favoritesList = this.getFavorites();
-        if (favoritesList == null) {
-            return false;
-        }
-        for (var i = 0; i < favoritesList.length; i++) {
-            if (favoritesList[i] == id) {
-                favoritesList.splice(i, 1);
-                this.setFavorites(favoritesList);
-                break;
-            }
-        }
-    };
-    /**
-     * Receives favorites from local storage.
-     * @returns Favorites
-     */
-    FavoritesManagerProvider.prototype.getFavorites = function () {
-        var favoritesID = this.localStorage.Get('FavoritesIDs');
-        return favoritesID;
-    };
-    /**
-     *
-     */
-    FavoritesManagerProvider.prototype.removeAll = function () {
-        this.setFavorites([]);
-    };
-    //#endregion
-    //#region Private Methods
-    /**
-     * Settings favorite at local storage.
-     * @param value The new value to set.
-     */
-    FavoritesManagerProvider.prototype.setFavorites = function (value) {
-        this.localStorage.Set('FavoritesIDs', value);
-    };
-    return FavoritesManagerProvider;
-}());
-FavoritesManagerProvider = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_local_storage_local_storage__["a" /* LocalStorageProvider */]])
-], FavoritesManagerProvider);
-
-//# sourceMappingURL=favorites-manager.js.map
-
-/***/ }),
-
-/***/ 720:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeachesInstitutionsPipe; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var TeachesInstitutionsPipe = (function () {
-    function TeachesInstitutionsPipe() {
-    }
-    TeachesInstitutionsPipe.prototype.transform = function (value) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        var teachesInstitutionsValue = "";
-        switch (value) {
-            case 1:
-                teachesInstitutionsValue = 'Holon Institute Of Technology';
-                break;
-            case 2:
-                teachesInstitutionsValue = 'Technion';
-                break;
-            case 3:
-                teachesInstitutionsValue = 'Ariel University';
-                break;
-            case 4:
-                teachesInstitutionsValue = 'Bar-Ilan University';
-                break;
-            case 5:
-                teachesInstitutionsValue = 'Ben Gurion University';
-                break;
-            case 6:
-                teachesInstitutionsValue = 'Ben-Gurion University of the Negev';
-                break;
-            case 7:
-                teachesInstitutionsValue = 'Hebrew University';
-                break;
-            case 8:
-                teachesInstitutionsValue = 'Open University of Israel';
-                break;
-            case 9:
-                teachesInstitutionsValue = 'Tel-Aviv University';
-                break;
-            case 10:
-                teachesInstitutionsValue = 'Weizmann Institute of Science';
-                break;
-            case 11:
-                teachesInstitutionsValue = 'Academic College of Tel Aviv-Yafo';
-                break;
-            case 12:
-                teachesInstitutionsValue = 'Afeka College of Engineering';
-                break;
-            case 13:
-                teachesInstitutionsValue = 'Ashkelon Academic College';
-                break;
-            case 14:
-                teachesInstitutionsValue = 'Beersheba Tehni School';
-                break;
-            case 15:
-                teachesInstitutionsValue = 'Beit Zvi School of the Performing Arts';
-                break;
-            case 16:
-                teachesInstitutionsValue = 'Bezalel Academy of Art and Design';
-                break;
-            case 17:
-                teachesInstitutionsValue = 'Carmel Academic Center';
-                break;
-            case 18:
-                teachesInstitutionsValue = 'Center for Academic Studies';
-                break;
-            case 19:
-                teachesInstitutionsValue = 'College of Law and Business';
-                break;
-            case 20:
-                teachesInstitutionsValue = 'COMAS';
-                break;
-            case 21:
-                teachesInstitutionsValue = 'Dan Academic Center';
-                break;
-            case 22:
-                teachesInstitutionsValue = 'Hadassah Academic College';
-                break;
-            case 23:
-                teachesInstitutionsValue = 'Haredi College of Jerusalem';
-                break;
-            case 24:
-                teachesInstitutionsValue = 'Interdisciplinary Center Herzliya';
-                break;
-            case 25:
-                teachesInstitutionsValue = 'Israel College of the Bible';
-                break;
-            case 26:
-                teachesInstitutionsValue = 'Jerusalem Academy of Music and Dance';
-                break;
-            case 27:
-                teachesInstitutionsValue = 'Jerusalem College of Engineering';
-                break;
-            case 28:
-                teachesInstitutionsValue = 'Jerusalem College of Technology';
-                break;
-            case 29:
-                teachesInstitutionsValue = 'Jerusalem University College';
-                break;
-            case 30:
-                teachesInstitutionsValue = 'Kfar-Avraham Technology College';
-                break;
-            case 31:
-                teachesInstitutionsValue = 'Kinneret Academic College';
-                break;
-            case 32:
-                teachesInstitutionsValue = 'Lander Institute';
-                break;
-            case 33:
-                teachesInstitutionsValue = 'Netanya Academic College';
-                break;
-            case 34:
-                teachesInstitutionsValue = 'Ono Academi College';
-                break;
-            case 35:
-                teachesInstitutionsValue = 'ORT Braude College of Engineering';
-                break;
-            case 36:
-                teachesInstitutionsValue = 'Peres Academic Center';
-                break;
-            case 37:
-                teachesInstitutionsValue = 'Reidman College';
-                break;
-            case 38:
-                teachesInstitutionsValue = 'Ruppin Academic Center';
-                break;
-            case 39:
-                teachesInstitutionsValue = 'Sami Shamoon College of Engineering';
-                break;
-            case 40:
-                teachesInstitutionsValue = 'Sapir Academic College';
-                break;
-            case 41:
-                teachesInstitutionsValue = 'Shenkar College of Engineering and Design';
-                break;
-            case 42:
-                teachesInstitutionsValue = 'Tel-Hai Academic College';
-                break;
-            default:
-                console.log("Bad pipe value.");
-                break;
-        }
-        return teachesInstitutionsValue;
-    };
-    return TeachesInstitutionsPipe;
-}());
-TeachesInstitutionsPipe = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Pipe"])({
-        name: 'teachesInstitutions',
-    })
-], TeachesInstitutionsPipe);
-
-//# sourceMappingURL=teaches-institutions.js.map
-
-/***/ }),
-
-/***/ 727:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RateShowComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var RateShowComponent = (function () {
-    //#endregion
-    //#region Constructor
-    function RateShowComponent() {
-    }
-    return RateShowComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Number)
-], RateShowComponent.prototype, "stars", void 0);
-RateShowComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'rate-show',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\components\rate-show\rate-show.html"*/'<div style="display: inline-block">\n    <rating [(ngModel)]="stars" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"\n        nullable="false"></rating>\n</div>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\components\rate-show\rate-show.html"*/
-    }),
-    __metadata("design:paramtypes", [])
-], RateShowComponent);
-
-//# sourceMappingURL=rate-show.js.map
-
-/***/ }),
-
-/***/ 96:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommonProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -4005,6 +3752,325 @@ CommonProvider = __decorate([
 ], CommonProvider);
 
 //# sourceMappingURL=common.js.map
+
+/***/ }),
+
+/***/ 720:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeachesInstitutionsPipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var TeachesInstitutionsPipe = (function () {
+    function TeachesInstitutionsPipe() {
+    }
+    TeachesInstitutionsPipe.prototype.transform = function (value) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var teachesInstitutionsValue = "";
+        switch (value) {
+            case 1:
+                teachesInstitutionsValue = 'Holon Institute Of Technology';
+                break;
+            case 2:
+                teachesInstitutionsValue = 'Technion';
+                break;
+            case 3:
+                teachesInstitutionsValue = 'Ariel University';
+                break;
+            case 4:
+                teachesInstitutionsValue = 'Bar-Ilan University';
+                break;
+            case 5:
+                teachesInstitutionsValue = 'Ben Gurion University';
+                break;
+            case 6:
+                teachesInstitutionsValue = 'Ben-Gurion University of the Negev';
+                break;
+            case 7:
+                teachesInstitutionsValue = 'Hebrew University';
+                break;
+            case 8:
+                teachesInstitutionsValue = 'Open University of Israel';
+                break;
+            case 9:
+                teachesInstitutionsValue = 'Tel-Aviv University';
+                break;
+            case 10:
+                teachesInstitutionsValue = 'Weizmann Institute of Science';
+                break;
+            case 11:
+                teachesInstitutionsValue = 'Academic College of Tel Aviv-Yafo';
+                break;
+            case 12:
+                teachesInstitutionsValue = 'Afeka College of Engineering';
+                break;
+            case 13:
+                teachesInstitutionsValue = 'Ashkelon Academic College';
+                break;
+            case 14:
+                teachesInstitutionsValue = 'Beersheba Tehni School';
+                break;
+            case 15:
+                teachesInstitutionsValue = 'Beit Zvi School of the Performing Arts';
+                break;
+            case 16:
+                teachesInstitutionsValue = 'Bezalel Academy of Art and Design';
+                break;
+            case 17:
+                teachesInstitutionsValue = 'Carmel Academic Center';
+                break;
+            case 18:
+                teachesInstitutionsValue = 'Center for Academic Studies';
+                break;
+            case 19:
+                teachesInstitutionsValue = 'College of Law and Business';
+                break;
+            case 20:
+                teachesInstitutionsValue = 'COMAS';
+                break;
+            case 21:
+                teachesInstitutionsValue = 'Dan Academic Center';
+                break;
+            case 22:
+                teachesInstitutionsValue = 'Hadassah Academic College';
+                break;
+            case 23:
+                teachesInstitutionsValue = 'Haredi College of Jerusalem';
+                break;
+            case 24:
+                teachesInstitutionsValue = 'Interdisciplinary Center Herzliya';
+                break;
+            case 25:
+                teachesInstitutionsValue = 'Israel College of the Bible';
+                break;
+            case 26:
+                teachesInstitutionsValue = 'Jerusalem Academy of Music and Dance';
+                break;
+            case 27:
+                teachesInstitutionsValue = 'Jerusalem College of Engineering';
+                break;
+            case 28:
+                teachesInstitutionsValue = 'Jerusalem College of Technology';
+                break;
+            case 29:
+                teachesInstitutionsValue = 'Jerusalem University College';
+                break;
+            case 30:
+                teachesInstitutionsValue = 'Kfar-Avraham Technology College';
+                break;
+            case 31:
+                teachesInstitutionsValue = 'Kinneret Academic College';
+                break;
+            case 32:
+                teachesInstitutionsValue = 'Lander Institute';
+                break;
+            case 33:
+                teachesInstitutionsValue = 'Netanya Academic College';
+                break;
+            case 34:
+                teachesInstitutionsValue = 'Ono Academi College';
+                break;
+            case 35:
+                teachesInstitutionsValue = 'ORT Braude College of Engineering';
+                break;
+            case 36:
+                teachesInstitutionsValue = 'Peres Academic Center';
+                break;
+            case 37:
+                teachesInstitutionsValue = 'Reidman College';
+                break;
+            case 38:
+                teachesInstitutionsValue = 'Ruppin Academic Center';
+                break;
+            case 39:
+                teachesInstitutionsValue = 'Sami Shamoon College of Engineering';
+                break;
+            case 40:
+                teachesInstitutionsValue = 'Sapir Academic College';
+                break;
+            case 41:
+                teachesInstitutionsValue = 'Shenkar College of Engineering and Design';
+                break;
+            case 42:
+                teachesInstitutionsValue = 'Tel-Hai Academic College';
+                break;
+            default:
+                console.log("Bad pipe value.");
+                break;
+        }
+        return teachesInstitutionsValue;
+    };
+    return TeachesInstitutionsPipe;
+}());
+TeachesInstitutionsPipe = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Pipe"])({
+        name: 'teachesInstitutions',
+    })
+], TeachesInstitutionsPipe);
+
+//# sourceMappingURL=teaches-institutions.js.map
+
+/***/ }),
+
+/***/ 727:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RateShowComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var RateShowComponent = (function () {
+    //#endregion
+    //#region Constructor
+    function RateShowComponent() {
+    }
+    return RateShowComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Number)
+], RateShowComponent.prototype, "stars", void 0);
+RateShowComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'rate-show',template:/*ion-inline-start:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\components\rate-show\rate-show.html"*/'<div style="display: inline-block">\n    <rating [(ngModel)]="stars" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"\n        nullable="false"></rating>\n</div>'/*ion-inline-end:"C:\Users\mmosh\Desktop\Moshe Files\Teacher student Project\Frontend\src\components\rate-show\rate-show.html"*/
+    }),
+    __metadata("design:paramtypes", [])
+], RateShowComponent);
+
+//# sourceMappingURL=rate-show.js.map
+
+/***/ }),
+
+/***/ 73:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FavoritesManagerProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_local_storage_local_storage__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var FavoritesManagerProvider = (function () {
+    //#region Constructor
+    function FavoritesManagerProvider(localStorage) {
+        this.localStorage = localStorage;
+    }
+    //#endregion
+    //#region Public Methods
+    /**
+     * Adding new teacher ID at local storage.
+     * @param id Teacher ID.
+     */
+    FavoritesManagerProvider.prototype.addID = function (id) {
+        if (id == null || id === "") {
+            return false;
+        }
+        if (this.isIDExist(id)) {
+            return false;
+        }
+        var favoritesList = this.getFavorites();
+        if (favoritesList == null) {
+            favoritesList = [];
+        }
+        favoritesList.push(id);
+        this.setFavorites(favoritesList);
+    };
+    /**
+     * Checks whether some ID exists in favorites list.
+     * @param id What ID to check.
+     * @returns {boolean}
+     */
+    FavoritesManagerProvider.prototype.isIDExist = function (id) {
+        var favoritesList = this.getFavorites();
+        if (favoritesList == null) {
+            return false;
+        }
+        for (var _i = 0, favoritesList_1 = favoritesList; _i < favoritesList_1.length; _i++) {
+            var favorite = favoritesList_1[_i];
+            if (favorite === id) {
+                return true;
+            }
+        }
+        return false;
+    };
+    /**
+     * Remove specific ID from local storage.
+     */
+    FavoritesManagerProvider.prototype.removeID = function (id) {
+        var favoritesList = this.getFavorites();
+        if (favoritesList == null) {
+            return false;
+        }
+        for (var i = 0; i < favoritesList.length; i++) {
+            if (favoritesList[i] == id) {
+                favoritesList.splice(i, 1);
+                this.setFavorites(favoritesList);
+                break;
+            }
+        }
+    };
+    /**
+     * Receives favorites from local storage.
+     * @returns Favorites
+     */
+    FavoritesManagerProvider.prototype.getFavorites = function () {
+        var favoritesID = this.localStorage.Get('FavoritesIDs');
+        return favoritesID;
+    };
+    /**
+     *
+     */
+    FavoritesManagerProvider.prototype.removeAll = function () {
+        this.setFavorites([]);
+    };
+    //#endregion
+    //#region Private Methods
+    /**
+     * Settings favorite at local storage.
+     * @param value The new value to set.
+     */
+    FavoritesManagerProvider.prototype.setFavorites = function (value) {
+        this.localStorage.Set('FavoritesIDs', value);
+    };
+    return FavoritesManagerProvider;
+}());
+FavoritesManagerProvider = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_local_storage_local_storage__["a" /* LocalStorageProvider */]])
+], FavoritesManagerProvider);
+
+//# sourceMappingURL=favorites-manager.js.map
 
 /***/ })
 

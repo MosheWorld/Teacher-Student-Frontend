@@ -10,6 +10,10 @@ import { ToasterProvider } from './../../providers/toaster/toaster';
 import { RecommendInterface } from './../../interface/Recommend.interface';
 import { FavoritesManagerProvider } from './../../providers/favorites-manager/favorites-manager';
 
+import { PageType } from './../../common/PageType.Enum';
+import { Navigationer } from './../../common/Navigationer';
+import { ProfileProvider } from './../../providers/profile/profile';
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -25,7 +29,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class SingleteacherPage {
   //#region Members
-  public teacher: any;
+  public pageEnum = PageType;
+  public navigationer: Navigationer;
+
+  public teacher;
 
   public fullNameFormControl = new FormControl('', [Validators.required]);
   public emailFormControl = new FormControl('', [Validators.required, Validators.email]);
@@ -58,8 +65,11 @@ export class SingleteacherPage {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public toasterProvider: ToasterProvider,
+    public profileProvider: ProfileProvider,
     public favoritesManagerProvider: FavoritesManagerProvider
   ) {
+    this.navigationer = new Navigationer(this.navCtrl, this.profileProvider);
+
     this.teacher = this.navParams.get('teacher');
     this.searchedSubject = this.navParams.get('subject');
     this.searchedInstitute = this.navParams.get('institute');
@@ -163,6 +173,58 @@ export class SingleteacherPage {
 
     }
   }
+
+  /** 
+   * Dialog opens and ask if to remove teacher from database.
+  */
+  public deleteTeacherDialog(): void {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm teacher removal',
+      message: 'Are you sure you want to delete the teacher from database?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('No clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.deleteTeacher();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  /** 
+   * Dialog opens and asks if to remove user & teacher from database.
+  */
+  public deleteUserAndTeacherDialog(): void {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm user and teacher removal',
+      message: 'Are you sure you want to remove user and teacher from database?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('No clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.deleteUserAndTeacher();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
   //#endregion
 
   //#region Private Methods
@@ -226,7 +288,7 @@ export class SingleteacherPage {
   /** 
    * Gets recommendations from backend by list of ID's of recommendations.
   */
-  private getRecommendationsForTeacher() {
+  private getRecommendationsForTeacher(): void {
     this.apiProvider.httpGet('recommendation/getrecommendationbyid/' + this.teacher._id)
       .subscribe(
         (recommendationsList) => {
@@ -234,6 +296,43 @@ export class SingleteacherPage {
         }, (failure) => {
           this.teacher.recommendations = null;
         });
+  }
+
+  /** 
+   * Remove teacher from database.
+  */
+  private deleteTeacher(showAlert: boolean = true): void {
+    this.apiProvider.httpDelete("teacher/deletebyuserid/" + this.teacher.userID + "")
+      .subscribe(
+        (success) => {
+          const alert: Alert = this.createAlert("Deleted successfully.", "Teacher and Image has been deleted successfully.");
+          if (showAlert === true) {
+            alert.present();
+          }
+        },
+        (failure) => {
+          const alert: Alert = this.createAlert("Error", "Error occurred, something might get wrong OR the teacher is already deleted.");
+          alert.present();
+        }
+      );
+  }
+
+  /** 
+   * Remove user & teacher from database.
+  */
+  private deleteUserAndTeacher(): void {
+    this.deleteTeacher(false);
+    this.apiProvider.httpDelete("auth/deletebyuserid/" + this.teacher.userID + "")
+      .subscribe(
+        (success) => {
+          const alert: Alert = this.createAlert("Deleted successfully.", "User and Teacher and Image has been deleted successfully.");
+          alert.present();
+        },
+        (failure) => {
+          const alert: Alert = this.createAlert("Error", "Something went wrong when removing teacher from database.");
+          alert.present();
+        }
+      );
   }
   //#endregion
 }

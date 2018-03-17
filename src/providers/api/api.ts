@@ -54,6 +54,19 @@ export class ApiProvider {
     return this.http.put(url, JSON.stringify(data), { headers: headers })
       .map(res => this.checkResultModel(res));
   }
+
+  /**
+ * HTTP Delete function.
+ * @param path What path to add to call.
+ * @param data Data to send.
+ */
+  public httpDelete(path: string): any {
+    const url = this.endPoint + path;
+    let headers = this.buildHeader();
+
+    return this.http.delete(url, { headers: headers })
+      .map(res => this.checkResultModel(res));
+  }
   //#endregion
 
   //#region Private Methods

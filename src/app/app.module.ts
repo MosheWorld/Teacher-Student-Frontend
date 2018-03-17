@@ -9,7 +9,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { HomePage } from '../pages/home/home';
 import { ApiProvider } from '../providers/api/api';
-import { AdminPage } from './../pages/admin/admin';
 import { StatusBar } from '@ionic-native/status-bar';
 import { GenderPipe } from './../pipes/gender/gender';
 import { SearchPage } from './../pages/search/search';
@@ -55,7 +54,6 @@ let config = new AuthServiceConfig([
   declarations: [
     MyApp,
     HomePage,
-    AdminPage,
     SearchPage,
     GenderPipe,
     SettingsPage,
@@ -81,7 +79,6 @@ let config = new AuthServiceConfig([
     }, {
         links: [
           { component: HomePage, name: 'Home', segment: 'home' },
-          { component: AdminPage, name: 'Admin', segment: 'admin' },
           { component: SearchPage, name: 'Search', segment: 'search' },
           { component: SettingsPage, name: 'Settings', segment: 'settings' },
           { component: ContactusPage, name: 'Contactus', segment: 'contactus' },
@@ -109,7 +106,6 @@ let config = new AuthServiceConfig([
     MyApp,
     HomePage,
     SearchPage,
-    AdminPage,
     SettingsPage,
     FavoritesPage,
     ContactusPage,

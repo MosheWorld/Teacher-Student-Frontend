@@ -2,7 +2,6 @@ import { HomePage } from './../pages/home/home';
 import { NavController } from "ionic-angular/navigation/nav-controller";
 
 import { PageType } from "./PageType.Enum";
-import { AdminPage } from './../pages/admin/admin';
 import { SearchPage } from "../pages/search/search";
 import { ContactusPage } from "../pages/contactus/contactus";
 import { FavoritesPage } from "../pages/favorites/favorites";
@@ -59,9 +58,6 @@ export class Navigationer {
                 this.navCtrl.setRoot(TeacherPersonalDetailsPage, params);
                 break;
 
-            case PageType.Admin:
-                this.navCtrl.push(AdminPage, params);
-                break;
 
             default:
                 console.log('Not found the requested page ' + page);

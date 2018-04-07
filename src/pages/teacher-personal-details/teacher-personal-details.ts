@@ -29,7 +29,8 @@ export class TeacherPersonalDetailsPage {
   //#endregion
 
   //#region Constructor
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public authService: AuthService,
     public apiProvider: ApiProvider,
     public alertCtrl: AlertController,

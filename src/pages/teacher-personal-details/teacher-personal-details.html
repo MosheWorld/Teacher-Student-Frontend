@@ -6,7 +6,9 @@
     <ion-title text-center>
       <font class="m-color-white">Hey {{this.profileProvider.profile.firstName}}</font>
     </ion-title>
-    <ion-buttons end icon-only class="m-color-white">
+    <ion-buttons end icon-only class="m-color-white" *ngIf="this.profileProvider !== null
+    && this.profileProvider !== undefined
+    && this.profileProvider.profile.role === 2">
       <div (click)="navigationer.navigateToPage(pageEnum.Admin)">
         <ion-icon name="ios-build-outline"></ion-icon>
       </div>

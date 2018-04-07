@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      <font class="m-color-white">Admin Page</font>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row>
+    <ion-col col-12>
+      <ion-segment [(ngModel)]="currentChosenType">
+        <ion-segment-button value="1" class="m-font-size-10px-impo">
+          Logs
+        </ion-segment-button>
+        <ion-segment-button value="2" class="m-font-size-10px-impo">
+          Contact Us
+        </ion-segment-button>
+      </ion-segment>
+    </ion-col>
+  </ion-row>
+
+  <!-- Logs + Contact Us -->
+  <div>
+
+    <!-- Logs -->
+    <ion-row *ngIf="currentChosenType === '1'">
+      <ion-col col-12>
+
+        <admin-logs></admin-logs>
+
+      </ion-col>
+    </ion-row>
+
+    <!-- Contact Us -->
+    <ion-row *ngIf="currentChosenType === '2'">
+      <ion-col col-12>
+
+        <admin-contact-us></admin-contact-us>
+        
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+
+
+</ion-content>

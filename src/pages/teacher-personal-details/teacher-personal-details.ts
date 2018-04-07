@@ -1,6 +1,6 @@
-import { Loading } from 'ionic-angular/components/loading/loading';
-import { ApiProvider } from './../../providers/api/api';
 import { Component } from '@angular/core';
+import { ApiProvider } from './../../providers/api/api';
+import { Loading } from 'ionic-angular/components/loading/loading';
 import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
 
 import { AuthService } from 'angular4-social-login';

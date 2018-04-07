@@ -1,11 +1,16 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle class="m-color-white">
+    <button ion-button menuToggle icon-start class="m-color-white">
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title text-center>
       <font class="m-color-white">Hey {{this.profileProvider.profile.firstName}}</font>
     </ion-title>
+    <ion-buttons end icon-only class="m-color-white">
+      <div (click)="navigationer.navigateToPage(pageEnum.Admin)">
+        <ion-icon name="ios-build-outline"></ion-icon>
+      </div>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

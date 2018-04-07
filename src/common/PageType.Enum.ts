@@ -6,5 +6,6 @@ export enum PageType {
     TeacherList = 16,
     NewTeacherForm = 32,
     TeacherDetails = 64,
-    Home = 128
+    Home = 128,
+    Admin = 256
 }

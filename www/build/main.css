@@ -30618,6 +30618,24 @@ ul.rating li ion-icon {
   text-align: center;
 }
 
+admin-logs .example-headers-align .mat-expansion-panel-header-title,
+admin-logs .example-headers-align .mat-expansion-panel-header-description {
+  -webkit-flex-basis: 0;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+}
+
+admin-logs .example-headers-align .mat-expansion-panel-header-description {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 rate-show ul {
   padding: 0px;
 }

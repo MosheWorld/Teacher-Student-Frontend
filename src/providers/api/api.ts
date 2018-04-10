@@ -6,8 +6,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ApiProvider {
   //#region Members
-  // public endPoint: string = "http://localhost:8000/";
-  public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
+  public endPoint: string = "http://localhost:8000/";
+  // public endPoint: string = "https://teacher-student-backend.herokuapp.com/";
   //#endregion
 
   //#region Constructor

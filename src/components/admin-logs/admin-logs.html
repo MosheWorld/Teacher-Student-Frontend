@@ -1,7 +1,7 @@
 <section class="example-section" style="display: flex; justify-content: space-around; padding: 12px 0;">
-  <mat-checkbox class="example-margin" [(ngModel)]="debugCheckBox">Debug</mat-checkbox>
-  <mat-checkbox class="example-margin" [(ngModel)]="infoCheckBox">Info</mat-checkbox>
-  <mat-checkbox class="example-margin" [(ngModel)]="errorCheckBox">Error</mat-checkbox>
+  <mat-checkbox class="example-margin" [(ngModel)]="debugCheckBox" (click)="checkBoxChanged()">Debug</mat-checkbox>
+  <mat-checkbox class="example-margin" [(ngModel)]="infoCheckBox" (click)="checkBoxChanged()">Info</mat-checkbox>
+  <mat-checkbox class="example-margin" [(ngModel)]="errorCheckBox" (click)="checkBoxChanged()">Error</mat-checkbox>
 </section>
 
 <mat-accordion class="example-headers-align">

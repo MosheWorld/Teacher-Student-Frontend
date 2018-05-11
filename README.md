@@ -10,3 +10,9 @@ Written in:
 
 More information:
 * Added angular material and using npm packages to make the application look good and work fast.
+
+
+Development tools versions:
+NodeJS 8.9.1
+NPM 5.5.1
+Ionic 3.20.0

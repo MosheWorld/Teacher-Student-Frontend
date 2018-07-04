@@ -175,35 +175,9 @@ export class SingleteacherPage {
   }
 
   /** 
-   * Dialog opens and ask if to remove teacher from database.
-  */
-  public deleteTeacherDialog(): void {
-    let alert = this.alertCtrl.create({
-      title: 'Confirm teacher removal',
-      message: 'Are you sure you want to delete the teacher from database?',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          handler: () => {
-            console.log('No clicked');
-          }
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            this.deleteTeacher();
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
-  /** 
    * Dialog opens and asks if to remove user & teacher from database.
   */
-  public deleteUserAndTeacherDialog(): void {
+  public deleteUserDialog(): void {
     let alert = this.alertCtrl.create({
       title: 'Confirm user and teacher removal',
       message: 'Are you sure you want to remove user and teacher from database?',
@@ -218,7 +192,7 @@ export class SingleteacherPage {
         {
           text: 'Yes',
           handler: () => {
-            this.deleteUserAndTeacher();
+            this.deleteUser();
           }
         }
       ]
@@ -299,37 +273,17 @@ export class SingleteacherPage {
   }
 
   /** 
-   * Remove teacher from database.
-  */
-  private deleteTeacher(showAlert: boolean = true): void {
-    this.apiProvider.httpDelete("teacher/deletebyuserid/" + this.teacher.userID + "")
-      .subscribe(
-        (success) => {
-          const alert: Alert = this.createAlert("Deleted successfully.", "Teacher and Image has been deleted successfully.");
-          if (showAlert === true) {
-            alert.present();
-          }
-        },
-        (failure) => {
-          const alert: Alert = this.createAlert("Error", "Error occurred, something might get wrong OR the teacher is already deleted.");
-          alert.present();
-        }
-      );
-  }
-
-  /** 
    * Remove user & teacher from database.
   */
-  private deleteUserAndTeacher(): void {
-    this.deleteTeacher(false);
+  private deleteUser(): void {
     this.apiProvider.httpDelete("auth/deletebyuserid/" + this.teacher.userID + "")
       .subscribe(
         (success) => {
-          const alert: Alert = this.createAlert("Deleted successfully.", "User and Teacher and Image has been deleted successfully.");
+          const alert: Alert = this.createAlert("Deleted successfully.", "User has been deleted successfully.");
           alert.present();
         },
         (failure) => {
-          const alert: Alert = this.createAlert("Error", "Something went wrong when removing teacher from database.");
+          const alert: Alert = this.createAlert("Error", "Something went wrong when removing user from database.");
           alert.present();
         }
       );

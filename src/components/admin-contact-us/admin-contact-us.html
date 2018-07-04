@@ -1,3 +1,31 @@
-<section>
-  Contact Us
-</section>
+<mat-accordion class="example-headers-align">
+
+  <mat-expansion-panel *ngFor="let item of this.contactUsList; let i = index;" [expanded]="step === i" (opened)="setStep(i)"
+    hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ item.fullName }}
+      </mat-panel-title>
+      <mat-panel-description>
+        <b> {{ item.contactReason }}</b>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ion-row>
+
+      <ion-col col-12>
+        <b>Email:</b> {{ item.email }}
+      </ion-col>
+
+      <ion-col col-12>
+        <b>Message:</b> {{ item.message }}
+      </ion-col>
+    </ion-row>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>

@@ -185,8 +185,14 @@ export class NewTeacherLoginPage {
 
       this.apiProvider.httpPost('auth/createnewuser', this.user)
         .subscribe(
-          (success) => { console.log(success); loading.dismiss(); this.goToTeaherFormPage(); },
-          (failure) => { console.log(failure); loading.dismiss(); this.failureResponse(); }
+          (success) => {
+            loading.dismiss();
+            this.goToTeaherFormPage();
+          },
+          (failure) => {
+            loading.dismiss();
+            this.failureResponse();
+          }
         );
 
     }

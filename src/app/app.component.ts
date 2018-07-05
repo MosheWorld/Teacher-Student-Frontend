@@ -56,9 +56,9 @@ export class MyApp {
   /**
    * Signed out from auth Service from NPM Package and from provier of Profile.
    */
-  public signOut(): void {
-    this.authService.signOut()
-      .then(() => this.profileProvider.setUserLoggedOut());
+  public signOut() {
+    this.authService.signOut();
+    this.profileProvider.setUserLoggedOut();
   }
 
   /**

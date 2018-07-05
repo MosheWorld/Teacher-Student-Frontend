@@ -55,5 +55,16 @@ export class HomePage {
     this.rd.removeClass(this.subtitleAnimation.nativeElement, "animated");
     this.rd.removeClass(this.buttonuAnimation.nativeElement, "animated");
   }
+
+  /**
+   * Action when teacher clicks on join as teacher.
+   */
+  public joinAsTeacherButton() {
+    if (this.profileProvider.isLoggedIn === true) {
+      this.navigationer.navigateToPage(this.pageEnum.TeacherDetails);
+    } else {
+      this.navigationer.navigateToPage(this.pageEnum.JoinAsTeacher);
+    }
+  }
   //#endregion
 }

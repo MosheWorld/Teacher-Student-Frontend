@@ -35,7 +35,6 @@ export class AdminContactUsComponent {
 
   //#region Private Methods
   private getContactUsist(): void {
-    debugger;
     this.apiProvider.httpGet("contactus/getall")
       .subscribe(
         (response: any) => {
